@@ -16,15 +16,15 @@
   <meta name="author" content="枫泽">
   <meta name="keywords" content="">
   
-    <meta name="description" content="&#x2F;* 只设置 markdown 字体 *&#x2F;   .markdown-body {     font-family: KaiTi,&quot;Microsoft YaHei&quot;,Georgia, sans, serif;     font-size: 18px;   }  单调栈 原理 作用：从N个数中取出若干个数，组成单调栈并且遵循其原来的排列顺序。（一定会选取最后一个加入的数） 假">
+    <meta name="description" content="&#x2F;* 只设置 markdown 字体 *&#x2F;   .markdown-body {     font-family: KaiTi,&quot;Microsoft YaHei&quot;,Georgia, sans, serif;     font-size: 18px;   }  单调栈 原理 作用：从N个数中取出若干个数，组成单调栈（在栈中的元素是单调的）并且遵循其原来的排列顺序。（一定会选取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单调栈（c 语言）">
 <meta property="og:url" content="http://example.com/2022/11/12/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/c%20%E8%AF%AD%E8%A8%80/%E5%8D%95%E8%B0%83%E6%A0%88%EF%BC%88c%20%E8%AF%AD%E8%A8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="枫泽的博客">
-<meta property="og:description" content="&#x2F;* 只设置 markdown 字体 *&#x2F;   .markdown-body {     font-family: KaiTi,&quot;Microsoft YaHei&quot;,Georgia, sans, serif;     font-size: 18px;   }  单调栈 原理 作用：从N个数中取出若干个数，组成单调栈并且遵循其原来的排列顺序。（一定会选取最后一个加入的数） 假">
+<meta property="og:description" content="&#x2F;* 只设置 markdown 字体 *&#x2F;   .markdown-body {     font-family: KaiTi,&quot;Microsoft YaHei&quot;,Georgia, sans, serif;     font-size: 18px;   }  单调栈 原理 作用：从N个数中取出若干个数，组成单调栈（在栈中的元素是单调的）并且遵循其原来的排列顺序。（一定会选取">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-12T14:25:15.000Z">
-<meta property="article:modified_time" content="2022-11-14T04:57:43.929Z">
+<meta property="article:modified_time" content="2022-11-15T09:41:13.739Z">
 <meta property="article:author" content="枫泽">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="c 语言">
@@ -139,19 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -175,9 +163,21 @@
           
           
             <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                联系我
               </a>
             </li>
           
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          666 字
+          2.1k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          6 分钟
+          18 分钟
         
       </span>
     
@@ -296,7 +296,7 @@
 </style>
 <h1 id="单调栈">单调栈</h1>
 <h2 id="原理">原理</h2>
-<p>作用：从N个数中取出若干个数，组成单调栈并且遵循其原来的排列顺序。（一定会选取最后一个加入的数）</p>
+<p>作用：从N个数中取出若干个数，组成单调栈（在栈中的元素是单调的）并且遵循其原来的排列顺序。（一定会选取最后一个加入的数）</p>
 <p>假设有如下数组：</p>
 <figure>
 <img
@@ -304,17 +304,75 @@ src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAigAAAGdCAYAAAA44ojeAAAAOXRFW
 alt="原数据" />
 <figcaption aria-hidden="true">原数据</figcaption>
 </figure>
-<p>从右往左之后的单调栈如下：</p>
+<p>最左侧单调栈如下：</p>
 <figure>
 <img
 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAigAAAGdCAYAAAA44ojeAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjYuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/av/WaAAAACXBIWXMAAA9hAAAPYQGoP6dpAAAZQ0lEQVR4nO3df2zddb3H8VfHoJtj7ViFdo2dFC/JhuPi+HFnB/HHpXGikOw60ZlplMtl3utQt4HIEjeDolNQxPlrjqCQXLgoRvBHdAZrMu691gFDjIpOVMx2me28F3cOTNchPfcP4omF8WPb6frpeDySb7J+f/XdP77tc9+e821TrVarBQCgIBPGegAAgCcTKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRn4lgPcCCGh4ezY8eOTJ06NU1NTWM9DgDwHNRqtTzyyCPp7OzMhAnPfI9kXAbKjh070tXVNdZjAAAHYPv27XnRi170jPuMy0CZOnVqkie+wJaWljGeBgB4LqrVarq6uuo/x5/JuAyUv/5ap6WlRaAAwDjzXF6e4UWyAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQnP0OlDvvvDPnnXdeOjs709TUlNtvv33E9lqtljVr1mTGjBmZPHlyent788ADD4zY5+GHH86SJUvS0tKSadOm5cILL8yjjz56UF8IAHD42O9A2b17d0455ZR87nOf2+f2q666KuvWrcv69euzefPmTJkyJQsWLMiePXvq+yxZsiQ///nPc8cdd+Tb3/527rzzzixduvTAvwoA4LDSVKvVagd8cFNTbrvttixcuDDJE3dPOjs7c8kll+TSSy9NklQqlbS3t+eGG27I4sWL84tf/CInnXRS7r777px++ulJko0bN+Z1r3td/ud//iednZ3P+nmr1WpaW1tTqVT8sUAAGCf25+d3Q1+D8uCDD2ZgYCC9vb31da2trZk3b176+/uTJP39/Zk2bVo9TpKkt7c3EyZMyObNm/d53qGhoVSr1RELAHD4mtjIkw0MDCRJ2tvbR6xvb2+vbxsYGMhxxx03coiJEzN9+vT6Pk+2du3aXHHFFY0cFXieew5/7R2e1w789yuNMS7exbNq1apUKpX6sn379rEeCQAYRQ0NlI6OjiTJ4ODgiPWDg4P1bR0dHdm5c+eI7X/5y1/y8MMP1/d5subm5rS0tIxYAIDDV0MDpbu7Ox0dHenr66uvq1ar2bx5c3p6epIkPT092bVrV7Zs2VLf5wc/+EGGh4czb968Ro4DAIxT+/0alEcffTS//vWv6x8/+OCDue+++zJ9+vTMnDkzy5cvz5VXXpkTTzwx3d3dWb16dTo7O+vv9Jk9e3Ze+9rX5qKLLsr69evz2GOP5eKLL87ixYuf0zt4AIDD334Hyj333JNXv/rV9Y9XrlyZJHn729+eG264IZdddll2796dpUuXZteuXTnrrLOycePGTJo0qX7MTTfdlIsvvjhnn312JkyYkEWLFmXdunUN+HIAgMPBQT0HZax4DgpwsLyLB57ZaNTBmD0HBQCgEQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUp+GB8vjjj2f16tXp7u7O5MmT85KXvCQf/vCHU6vV6vvUarWsWbMmM2bMyOTJk9Pb25sHHnig0aMAAONUwwPl4x//eL7whS/ks5/9bH7xi1/k4x//eK666qp85jOfqe9z1VVXZd26dVm/fn02b96cKVOmZMGCBdmzZ0+jxwEAxqGm2t/e2miAc889N+3t7bn++uvr6xYtWpTJkyfn3//931Or1dLZ2ZlLLrkkl156aZKkUqmkvb09N9xwQxYvXvysn6Naraa1tTWVSiUtLS2NHB94nmhqGusJoGyNrYMn7M/P74bfQZk/f376+vryq1/9Kknyk5/8JP/1X/+Vc845J0ny4IMPZmBgIL29vfVjWltbM2/evPT39zd6HABgHJrY6BNefvnlqVarmTVrVo444og8/vjj+chHPpIlS5YkSQYGBpIk7e3tI45rb2+vb3uyoaGhDA0N1T+uVquNHhsAKEjD76B89atfzU033ZSbb7459957b2688cZ84hOfyI033njA51y7dm1aW1vrS1dXVwMnBgBK0/BAed/73pfLL788ixcvzsknn5y3ve1tWbFiRdauXZsk6ejoSJIMDg6OOG5wcLC+7clWrVqVSqVSX7Zv397osQGAgjQ8UP70pz9lwoSRpz3iiCMyPDycJOnu7k5HR0f6+vrq26vVajZv3pyenp59nrO5uTktLS0jFgDg8NXw16Ccd955+chHPpKZM2fmpS99aX784x/nmmuuyT//8z8nSZqamrJ8+fJceeWVOfHEE9Pd3Z3Vq1ens7MzCxcubPQ4AMA41PBA+cxnPpPVq1fnXe96V3bu3JnOzs68853vzJo1a+r7XHbZZdm9e3eWLl2aXbt25ayzzsrGjRszadKkRo8DAIxDDX8OyqHgOSjAwfIcFHhmh91zUAAADpZAAQCKI1AAgOIIFACgOAIFACiOQAEAiiNQAIDiCBQAoDgCBQAojkABAIojUACA4ggUAKA4AgUAKI5AAQCKI1AAgOIIFACgOAIFACiOQAEAiiNQAIDiCBQAoDgCBQAojkABAIojUACA4ggUAKA4AgUAKI5AAQCKI1AAgOIIFACgOAIFACiOQAEAiiNQAIDiCBQAoDgCBQAojkABAIojUACA4ggUAKA4AgUAKI5AAQCKI1AAgOIIFACgOAIFACiOQAEAiiNQAIDiCBQAoDgCBQAojkABAIojUACA4ggUAKA4AgUAKI5AAQCKI1AAgOIIFACgOAIFACiOQAEAiiNQAIDiCBQAoDgCBQAojkABAIojUACA4ggUAKA4oxIoDz30UN761remra0tkydPzsknn5x77rmnvr1Wq2XNmjWZMWNGJk+enN7e3jzwwAOjMQoAMA41PFD++Mc/5swzz8yRRx6Z7373u7n//vvzyU9+Msccc0x9n6uuuirr1q3L+vXrs3nz5kyZMiULFizInj17Gj0OADAONdVqtVojT3j55Zfnv//7v/Of//mf+9xeq9XS2dmZSy65JJdeemmSpFKppL29PTfccEMWL178rJ+jWq2mtbU1lUolLS0tjRwfeJ5oahrrCaBsja2DJ+zPz++G30H55je/mdNPPz3nn39+jjvuuMydOzfXXXddffuDDz6YgYGB9Pb21te1trZm3rx56e/v3+c5h4aGUq1WRywAwOGr4YHy29/+Nl/4whdy4okn5nvf+17+7d/+Le95z3ty4403JkkGBgaSJO3t7SOOa29vr297srVr16a1tbW+dHV1NXpsAKAgDQ+U4eHhnHrqqfnoRz+auXPnZunSpbnooouyfv36Az7nqlWrUqlU6sv27dsbODEAUJqGB8qMGTNy0kknjVg3e/bsbNu2LUnS0dGRJBkcHByxz+DgYH3bkzU3N6elpWXEAgAcvhoeKGeeeWa2bt06Yt2vfvWrvPjFL06SdHd3p6OjI319ffXt1Wo1mzdvTk9PT6PHAQDGoYmNPuGKFSsyf/78fPSjH82b3vSm3HXXXdmwYUM2bNiQJGlqasry5ctz5ZVX5sQTT0x3d3dWr16dzs7OLFy4sNHjAADjUMMD5Ywzzshtt92WVatW5UMf+lC6u7tz7bXXZsmSJfV9LrvssuzevTtLly7Nrl27ctZZZ2Xjxo2ZNGlSo8cBAMahhj8H5VDwHBTgYHkOCjyzw+45KAAAB0ugAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcUY9UD72sY+lqakpy5cvr6/bs2dPli1blra2thx99NFZtGhRBgcHR3sUAGCcGNVAufvuu/PFL34xf//3fz9i/YoVK/Ktb30rt956azZt2pQdO3bkDW94w2iOAgCMI6MWKI8++miWLFmS6667Lsccc0x9faVSyfXXX59rrrkm//iP/5jTTjstX/7yl/PDH/4wP/rRj0ZrHABgHBm1QFm2bFle//rXp7e3d8T6LVu25LHHHhuxftasWZk5c2b6+/v3ea6hoaFUq9URCwBw+Jo4Gie95ZZbcu+99+buu+9+yraBgYEcddRRmTZt2oj17e3tGRgY2Of51q5dmyuuuGI0Rt2npqZD9qlg3KnVxnoC4Pmg4XdQtm/fnve+97256aabMmnSpIacc9WqValUKvVl+/btDTkvAFCmhgfKli1bsnPnzpx66qmZOHFiJk6cmE2bNmXdunWZOHFi2tvbs3fv3uzatWvEcYODg+no6NjnOZubm9PS0jJiAQAOXw3/Fc/ZZ5+dn/70pyPWXXDBBZk1a1be//73p6urK0ceeWT6+vqyaNGiJMnWrVuzbdu29PT0NHocAGAcanigTJ06NXPmzBmxbsqUKWlra6uvv/DCC7Ny5cpMnz49LS0tefe7352enp68/OUvb/Q4AMA4NCovkn02n/rUpzJhwoQsWrQoQ0NDWbBgQT7/+c+PxSgAQIGaarXx95r8arWa1tbWVCqVUXk9infxwNMbf98x9s11Ds9sNK71/fn57W/xAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFKfhgbJ27dqcccYZmTp1ao477rgsXLgwW7duHbHPnj17smzZsrS1teXoo4/OokWLMjg42OhRAIBxquGBsmnTpixbtiw/+tGPcscdd+Sxxx7La17zmuzevbu+z4oVK/Ktb30rt956azZt2pQdO3bkDW94Q6NHAQDGqaZarVYbzU/whz/8Iccdd1w2bdqUV7ziFalUKjn22GNz8803541vfGOS5Je//GVmz56d/v7+vPzlL3/Wc1ar1bS2tqZSqaSlpaXhMzc1NfyUcNgY3e8Yh47rHJ7ZaFzr+/Pze9Rfg1KpVJIk06dPT5Js2bIljz32WHp7e+v7zJo1KzNnzkx/f/8+zzE0NJRqtTpiAQAOX6MaKMPDw1m+fHnOPPPMzJkzJ0kyMDCQo446KtOmTRuxb3t7ewYGBvZ5nrVr16a1tbW+dHV1jebYAMAYG9VAWbZsWX72s5/llltuOajzrFq1KpVKpb5s3769QRMCACWaOFonvvjii/Ptb387d955Z170ohfV13d0dGTv3r3ZtWvXiLsog4OD6ejo2Oe5mpub09zcPFqjAgCFafgdlFqtlosvvji33XZbfvCDH6S7u3vE9tNOOy1HHnlk+vr66uu2bt2abdu2paenp9HjAADjUMPvoCxbtiw333xzvvGNb2Tq1Kn115W0trZm8uTJaW1tzYUXXpiVK1dm+vTpaWlpybvf/e709PQ8p3fwAACHv4a/zbjpad679+UvfznveMc7kjzxoLZLLrkk//Ef/5GhoaEsWLAgn//855/2VzxP5m3GMHa8zRieH8b6bcaj/hyU0SBQYOyMv+8Y++Y6h2c21oHib/EAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQHIECABRHoAAAxREoAEBxBAoAUJwxDZTPfe5zOf744zNp0qTMmzcvd91111iOAwAUYswC5Stf+UpWrlyZD37wg7n33ntzyimnZMGCBdm5c+dYjQQAFGLMAuWaa67JRRddlAsuuCAnnXRS1q9fnxe84AX50pe+NFYjAQCFmDgWn3Tv3r3ZsmVLVq1aVV83YcKE9Pb2pr+//yn7Dw0NZWhoqP5xpVJJklSr1dEfFhjBZQfPD6Nxrf/153atVnvWfcckUP73f/83jz/+eNrb20esb29vzy9/+cun7L927dpcccUVT1nf1dU1ajMC+9baOtYTAIfCaF7rjzzySFqf5ROMSaDsr1WrVmXlypX1j4eHh/Pwww+nra0tTU1NYzgZo61araarqyvbt29PS0vLWI8DjALX+fNHrVbLI488ks7Ozmfdd0wC5YUvfGGOOOKIDA4Ojlg/ODiYjo6Op+zf3Nyc5ubmEeumTZs2miNSmJaWFt+44DDnOn9+eLY7J381Ji+SPeqoo3Laaaelr6+vvm54eDh9fX3p6ekZi5EAgIKM2a94Vq5cmbe//e05/fTT8w//8A+59tprs3v37lxwwQVjNRIAUIgxC5Q3v/nN+cMf/pA1a9ZkYGAgL3vZy7Jx48anvHCW57fm5uZ88IMffMqv+IDDh+ucfWmqPZf3+gAAHEL+Fg8AUByBAgAUR6AAAMURKBTld7/7XZqamtLU1JSXvexl+3Xsq171qvqx991336jMBxy8g7nO3/GOd9SPvf3220dlPsogUCjS97///RHPyUmSW2+9NbNmzcqkSZNy8skn5zvf+c6I7V//+tdz1113HcoxgYPw5Ov85z//eRYtWpTjjz8+TU1Nufbaa59yzKc//en8/ve/P4RTMlYECkVqa2tLW1tb/eMf/vCHectb3pILL7wwP/7xj7Nw4cIsXLgwP/vZz+r7TJ8+Pccee+xYjAscgCdf53/6059ywgkn5GMf+9g+nyqePPEU0qfbxuFFoHDIbdy4MWeddVamTZuWtra2nHvuufnNb37zjMd8+tOfzmtf+9q8733vy+zZs/PhD384p556aj772c8eoqmB/XEg1/kZZ5yRq6++OosXL/ZMFAQKh97u3buzcuXK3HPPPenr68uECRPyT//0TxkeHn7aY/r7+9Pb2zti3YIFC9Lf3z/a4wIH4ECuc/hb4+KvGXN4WbRo0YiPv/SlL+XYY4/N/fffn6OPPnqfxwwMDDzlKcPt7e0ZGBgYtTmBA3cg1zn8LXdQOOQeeOCBvOUtb8kJJ5yQlpaWHH/88UmSbdu2je1gQMO4zjlY7qBwyJ133nl58YtfnOuuuy6dnZ0ZHh7OnDlzsnfv3qc9pqOjI4ODgyPWDQ4OerEcFOpArnP4W+6gcEj93//9X7Zu3ZoPfOADOfvsszN79uz88Y9/fNbjenp6nvK24zvuuCM9PT2jNSpwgA70Ooe/5Q4Kh9QxxxyTtra2bNiwITNmzMi2bdty+eWXP+tx733ve/PKV74yn/zkJ/P6178+t9xyS+65555s2LDhEEwN7I8Dvc737t2b+++/v/7vhx56KPfdd1+OPvro/N3f/d1oj01h3EHhkJowYUJuueWWbNmyJXPmzMmKFSty9dVXP+tx8+fPz80335wNGzbklFNOyde+9rXcfvvtmTNnziGYGtgfB3qd79ixI3Pnzs3cuXPz+9//Pp/4xCcyd+7c/Mu//MshmJrSuIPCIdfb21v/X9Jf1Wq1JE88AvvpnH/++Tn//PNHczSgQQ7kOj/++OPr+4A7KBRp/vz5mT9//n4dc8455+SlL33pKE0ENNqBXOf/+q//6m3KzxNNNblKQf7yl7/U/3fV3Nycrq6u53zsQw89lD//+c9JkpkzZ+aoo44ajRGBg3Qw1/nOnTtTrVaTJDNmzMiUKVNGY0QKIFAAgOL4FQ8AUByBAgAUR6AAAMURKABAcQQKAFAcgQIAFEegAADFESgAQHEECgBQnP8HT0txg3AgpWgAAAAASUVORK5CYII=" srcset="/img/loading.gif" lazyload
 alt="结果" />
 <figcaption aria-hidden="true">结果</figcaption>
 </figure>
-<p>单调栈是变化的重要的是</p>
-<p>代码如下： <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>    </span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 3000006  </span><br><span class="hljs-type">int</span> n,top;  <br><span class="hljs-type">int</span> a[N],r[N],sta[N];<span class="hljs-comment">//栈的初始化为0  </span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i]);  <br>    &#125;    <span class="hljs-type">double</span> start,finish;   <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=n;i;--i)&#123;<span class="hljs-comment">// 从后往前  </span><br>        <span class="hljs-comment">// 退栈直到找到“a[i]&lt;a[sta[top]]”在栈中查找右边第一个比a[i]大的数  </span><br>        <span class="hljs-keyword">while</span>(top&gt;<span class="hljs-number">0</span>&amp;&amp;a[sta[top]]&lt;=a[i])--top;<br>        r[i]=sta[top];<span class="hljs-comment">// 记录栈  </span><br>        sta[++top]=i;<span class="hljs-comment">// 进栈  </span><br>    &#125;  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,r[i]);    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>为了更好地说明单调栈的原理，引入（题目<a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5788">P5788 【模板】单调栈 -
+洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a>）。</p>
+<p>分析：对于每一个数据都会有一个单调栈，而单调栈中上一个元素的下标就是在这个元素之后的比这个元素大的最近的元素下标。</p>
+<p>代码如下： <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>    </span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 3000006  </span><br><span class="hljs-type">int</span> n,top;  <br><span class="hljs-type">int</span> a[N],r[N],sta[N];<span class="hljs-comment">//栈的初始化为0  </span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i]);  <br>    &#125;    <span class="hljs-type">double</span> start,finish;   <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=n;i;--i)&#123;<span class="hljs-comment">// 从后往前  </span><br>        <span class="hljs-comment">// 退栈直到找到“a[i]&lt;a[sta[top]]”</span><br>        <span class="hljs-comment">//在栈中查找右边第一个比a[i]大的数  </span><br>        <span class="hljs-keyword">while</span>(top&gt;<span class="hljs-number">0</span>&amp;&amp;a[sta[top]]&lt;=a[i])--top;<br>        r[i]=sta[top];<span class="hljs-comment">// 记录栈  </span><br>        sta[++top]=i;<span class="hljs-comment">// 进栈  </span><br>    &#125;  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,r[i]);    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <br>&#125;<br></code></pre></td></tr></table></figure></p>
 <hr />
-<h2 id="应用">应用</h2>
+<h1 id="应用">应用</h1>
+<h2
+id="题目1b3666-求数列所有后缀最大值的位置---洛谷-计算机科学教育新生态-luogu.com.cn">题目1：<a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B3666">B3666
+求数列所有后缀最大值的位置 - 洛谷 | 计算机科学教育新生态
+(luogu.com.cn)</a></h2>
+<h3 id="题目描述">题目描述</h3>
+<p>给定一个数列 <span class="math inline">\(a\)</span>，初始为空。有
+<span class="math inline">\(n\)</span> 次操作，每次在 <span
+class="math inline">\(a\)</span> 的末尾添加一个正整数 <span
+class="math inline">\(x\)</span>。</p>
+<p>每次操作结束后，请你找到当前 <span class="math inline">\(a\)</span>
+所有的后缀最大值的下标（下标从 1 开始）。一个下标 <span
+class="math inline">\(i\)</span> 是当前 <span
+class="math inline">\(a\)</span> 的后缀最大值下标当且仅当：对于所有的
+<span class="math inline">\(i &lt; j \leq |a|\)</span>，都有 <span
+class="math inline">\(a_i &gt; a_j\)</span>，其中 <span
+class="math inline">\(|a|\)</span> 表示当前 <span
+class="math inline">\(a\)</span> 的元素个数。</p>
+<p>为了避免输出过大，请你<strong>每次操作结束后都输出一个整数</strong>，表示<strong>当前数列</strong>所有后缀最大值的下标的按位异或和。</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行是一个整数，表示操作次数 <span
+class="math inline">\(n\)</span>。<br />
+第二行有 <span class="math inline">\(n\)</span> 个整数，依次表示 <span
+class="math inline">\(n\)</span> 次操作所添加的整数 <span
+class="math inline">\(x_i\)</span>。</p>
+<h3 id="输出格式">输出格式</h3>
+<p>每次操作后请输出一行一个整数，表示当前数列所有后缀最大值下标的按位异或和。</p>
+<h3 id="样例-1">样例 #1</h3>
+<h3 id="样例输入-1">样例输入 #1</h3>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-number">5</span><br><span class="hljs-symbol">2 </span><span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+<h3 id="样例输出-1">样例输出 #1</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs">1<br>3<br>3<br>4<br>1<br></code></pre></td></tr></table></figure>
+<h3 id="提示">提示</h3>
+<h3 id="数据规模与约定">数据规模与约定</h3>
+<p>对于全部的测试点，保证 <span class="math inline">\(1 \leq n \leq
+10^6\)</span>，<span class="math inline">\(1 \leq x_i \lt
+2^{64}\)</span>。</p>
+<h3 id="解析">解析</h3>
+<p>这里本人认为这个题目描述的有点不严谨<del>（也有可能是本人语言理解能力不行）</del>，我换一种描述来表达题主的意思。</p>
+<p>对于一个数列<span
+class="math inline">\(\{a_n\}\)</span>,下标由’1‘开始，数列初始为空，每次加入一个数，并且输出所有下标
+i 的异或和。</p>
+<p>给出样例的解析：</p>
+<p>只有第一个数，数列为<span
+class="math inline">\(\{2\}\)</span>时，满足条件的下标为1，故输出1。</p>
+<p>加入第二个数，数列为<span
+class="math inline">\(\{2,1\}\)</span>时，满足条件的下标为1，2，故输出1^2=3。</p>
+<p>加入第三个数，数列为<span
+class="math inline">\(\{2,1,3\}\)</span>时，满足条件的下标为3，故输出3。</p>
+<p>加入第四个数，数列为<span
+class="math inline">\(\{2,1,3,5\}\)</span>，满足条件的下标为4，故输出4。</p>
+<p>加入第四个数，数列为<span
+class="math inline">\(\{2,1,3,5,4\}\)</span>，满足条件的下标为4,5，故输出4^5=1。</p>
+<p>代码如下： <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span>  </span><br><span class="hljs-type">int</span> stm[<span class="hljs-number">10000007</span>];  <br><span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">int</span> n,top=<span class="hljs-number">1</span>;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> *p;  <br>    p=<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span>)*(n+<span class="hljs-number">1</span>));  <br>    p[<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;<span class="hljs-comment">//初始化  </span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++) &#123;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%llu&quot;</span>, &amp;p[i]);  <br>        <span class="hljs-keyword">while</span> (top &gt; <span class="hljs-number">0</span> &amp;&amp; p[i] &gt; p[stm[top]]) &#123;  <br>            result^=stm[top];  <br>            top--;  <br>        &#125;  <br>        stm[++top] = i;  <br>        result^=stm[top];  <br>        <span class="hljs-keyword">if</span>(i!=n)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, result);  <br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,result);  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <br>&#125;<br></code></pre></td></tr></table></figure></p>
+<hr />
 
                 
               </div>
