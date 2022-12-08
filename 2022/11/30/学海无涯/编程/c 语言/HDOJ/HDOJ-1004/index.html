@@ -16,24 +16,26 @@
   <meta name="author" content="枫泽">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="深度优先搜索-DFS">
-<meta property="og:url" content="http://example.com/2022/11/13/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2-DFS/index.html">
+    <meta name="description" content="HDOJ 1004 题目 Problem Description Contest time again! How excited it is to see balloons floating around. But to tell you a secret, the judges&#39; favorite time is guessing the most popular problem. W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDOJ-1004">
+<meta property="og:url" content="http://example.com/2022/11/30/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/HDOJ/HDOJ-1004/index.html">
 <meta property="og:site_name" content="枫泽的博客">
+<meta property="og:description" content="HDOJ 1004 题目 Problem Description Contest time again! How excited it is to see balloons floating around. But to tell you a secret, the judges&#39; favorite time is guessing the most popular problem. W">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-13T14:52:35.000Z">
-<meta property="article:modified_time" content="2022-11-30T04:41:46.510Z">
+<meta property="article:published_time" content="2022-11-30T04:24:31.000Z">
+<meta property="article:modified_time" content="2022-12-07T02:06:40.060Z">
 <meta property="article:author" content="枫泽">
 <meta property="article:tag" content="c 语言">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="哈希">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>深度优先搜索-DFS - 枫泽的博客</title>
+  <title>HDOJ-1004 - 枫泽的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -103,7 +105,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 70vh;">
+<div class="header-inner" style="height: 75vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -202,13 +204,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/bg/3.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="深度优先搜索-DFS"></span>
+            <span id="subtitle" data-typed-text="HDOJ-1004"></span>
           
         </div>
 
@@ -219,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-13 22:52" pubdate>
-          2022年11月13日 晚上
+        <time datetime="2022-11-30 12:24" pubdate>
+          2022年11月30日 中午
         </time>
       </span>
     
@@ -231,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.7k 字
         
       </span>
     
@@ -242,7 +244,7 @@
         
         
         
-          1 分钟
+          15 分钟
         
       </span>
     
@@ -280,12 +282,37 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">深度优先搜索-DFS</h1>
+            <h1 style="display: none">HDOJ-1004</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="hdoj-1004">HDOJ 1004</h1>
+<h2 id="题目">题目</h2>
+<h3 id="problem-description">Problem Description</h3>
+<p>Contest time again! How excited it is to see balloons floating
+around. But to tell you a secret, the judges' favorite time is guessing
+the most popular problem. When the contest is over, they will count the
+balloons of each color and find the result.</p>
+<p>This year, they decide to leave this lovely job to you.</p>
+<h3 id="input">Input</h3>
+<p>Input contains multiple test cases. Each test case starts with a
+number N (0 &lt; N &lt;= 1000) -- the total number of balloons
+distributed. The next N lines contain one color each. The color of a
+balloon is a string of up to 15 lower-case letters.</p>
+<p>A test case with N = 0 terminates the input and this test case is not
+to be processed.</p>
+<h3 id="output">Output</h3>
+<p>For each case, print the color of balloon for the most popular
+problem on a single line. It is guaranteed that there is a unique
+solution for each test case.</p>
+<h3 id="sample-input">Sample Input</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs input">5<br>green<br>red<br>blue<br>red<br>red<br>3<br>pink<br>orange<br>pink<br>0<br></code></pre></td></tr></table></figure>
+<h3 id="sample-output">Sample Output</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs output">red<br>pink<br></code></pre></td></tr></table></figure>
+<h2 id="题解">题解</h2>
+<p>哈希算法可以到我另一个帖子上查看[[哈希算法]] <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> m;  <br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;  <br>        <span class="hljs-type">int</span> n;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);  <br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> &#123;</span>  <br>            <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> sum;  <br>            <span class="hljs-type">int</span> count;  <br>            <span class="hljs-type">char</span> arr1[<span class="hljs-number">16</span>];  <br>        &#125;;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> <span class="hljs-title">color</span>[1003];</span><br>        <span class="hljs-comment">//初始化结构体  </span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">1001</span>;i++)&#123;  <br>            color[i].sum=<span class="hljs-number">0</span>;  <br>            color[i].count=<span class="hljs-number">0</span>;  <br>        &#125;  <br>        <span class="hljs-type">int</span> st=<span class="hljs-number">0</span>,max1=<span class="hljs-number">1</span>;  <br>        <span class="hljs-type">char</span> arr[<span class="hljs-number">16</span>];  <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;  <br>            m = <span class="hljs-number">0</span>;  <br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, arr);  <br>            <span class="hljs-type">char</span> *t = arr;  <br>            <span class="hljs-comment">//将不同的颜色转化为长整型进行计数（哈希）</span><br>            <span class="hljs-keyword">while</span> (*t != <span class="hljs-string">&#x27;\0&#x27;</span>) &#123;  <br>                m = m*<span class="hljs-number">1331</span> + *t;  <br>                t++;  <br>            &#125;  <br>            <span class="hljs-type">int</span> j;  <br>            <span class="hljs-keyword">for</span> (j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].sum == m) &#123;  <br>                    color[j].count++;  <br>                &#125;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span> (j == st + <span class="hljs-number">1</span>) &#123;  <br>                st++;  <br>                <span class="hljs-built_in">strcpy</span>(color[st].arr1, arr);  <br>                color[st].count++;  <br>                color[st].sum = m;  <br>            &#125;  <br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].count &gt; color[max1].count)max1 = j;  <br>            &#125;  <br>        &#125;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, color[max1].arr1);  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <br>&#125;<br></code></pre></td></tr></table></figure></p>
+<hr />
 
                 
               </div>
@@ -319,7 +346,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c-%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c-%E8%AF%AD%E8%A8%80/HDOJ/" class="category-chain-item">HDOJ</a>
   
   
 
@@ -344,7 +371,7 @@
       
         <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
       
-        <a href="/tags/DFS/">#DFS</a>
+        <a href="/tags/%E5%93%88%E5%B8%8C/">#哈希</a>
       
     </div>
   
@@ -356,8 +383,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>深度优先搜索-DFS</div>
-      <div>http://example.com/2022/11/13/学海无涯/编程/c 语言/算法/深度优先搜索-DFS/</div>
+      <div>HDOJ-1004</div>
+      <div>http://example.com/2022/11/30/学海无涯/编程/c 语言/HDOJ/HDOJ-1004/</div>
     </div>
     <div class="license-meta">
       
@@ -369,7 +396,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月13日</div>
+          <div>2022年11月30日</div>
         </div>
       
       
@@ -396,6 +423,29 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/30/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/" title="哈希算法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">哈希算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/30/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/HDOJ/HDOJ-1002/" title="HDOJ-1002">
+                        <span class="hidden-mobile">HDOJ-1002</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
