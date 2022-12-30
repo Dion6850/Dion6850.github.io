@@ -16,26 +16,25 @@
   <meta name="author" content="枫泽">
   <meta name="keywords" content="">
   
-    <meta name="description" content="队列 特点 队列是先进先出（First In First Out）的线性表，简称FIFO表。 [[Snipaste_2022-12-13_15-08-12.png]] 在C++中有库函数帮助实现，但为了更加直观，我用c语言进行说明。 例子 快速排序非递归算法实现 快速排序的了解可以到我另一个帖子[[排序算法]]中看看。 这里本质上是通过在队列中用入队列和出队列来模拟函数递归中的参数">
+    <meta name="description" content="linux 二级目录结构  &#x2F;boot:存放Linux启动所需内核文件和镜像文件 &#x2F;root:管理用户的主目录 &#x2F;home:每一个用户都有自己的目录 &#x2F;bin:存放最经常使用的命令 &#x2F;dev:存放linux的外部设备 &#x2F;etc:存放所有的系统管理所需要的配置文件和子目录  passwd:用户信息 shadow:用户密码(root) group:用户组信息 gshadow:密">
 <meta property="og:type" content="article">
-<meta property="og:title" content="队宽度优先搜素-BFS">
-<meta property="og:url" content="http://example.com/2022/12/13/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A0-BFS/index.html">
+<meta property="og:title" content="linux基础">
+<meta property="og:url" content="http://example.com/2022/12/17/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/linux(Ubuntu)/linux%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="枫泽的博客">
-<meta property="og:description" content="队列 特点 队列是先进先出（First In First Out）的线性表，简称FIFO表。 [[Snipaste_2022-12-13_15-08-12.png]] 在C++中有库函数帮助实现，但为了更加直观，我用c语言进行说明。 例子 快速排序非递归算法实现 快速排序的了解可以到我另一个帖子[[排序算法]]中看看。 这里本质上是通过在队列中用入队列和出队列来模拟函数递归中的参数">
+<meta property="og:description" content="linux 二级目录结构  &#x2F;boot:存放Linux启动所需内核文件和镜像文件 &#x2F;root:管理用户的主目录 &#x2F;home:每一个用户都有自己的目录 &#x2F;bin:存放最经常使用的命令 &#x2F;dev:存放linux的外部设备 &#x2F;etc:存放所有的系统管理所需要的配置文件和子目录  passwd:用户信息 shadow:用户密码(root) group:用户组信息 gshadow:密">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-13T07:05:06.000Z">
-<meta property="article:modified_time" content="2022-12-14T03:18:30.623Z">
+<meta property="article:published_time" content="2022-12-17T11:24:40.000Z">
+<meta property="article:modified_time" content="2022-12-28T08:53:02.472Z">
 <meta property="article:author" content="枫泽">
-<meta property="article:tag" content="c 语言">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="CentOS">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>队宽度优先搜素-BFS - 枫泽的博客</title>
+  <title>linux基础 - 枫泽的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -105,7 +104,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 75vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -216,13 +215,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg/3.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="队宽度优先搜素-BFS"></span>
+            <span id="subtitle" data-typed-text="linux基础"></span>
           
         </div>
 
@@ -233,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-13 15:05" pubdate>
-          2022年12月13日 下午
+        <time datetime="2022-12-17 19:24" pubdate>
+          2022年12月17日 晚上
         </time>
       </span>
     
@@ -245,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          2.2k 字
         
       </span>
     
@@ -256,7 +255,7 @@
         
         
         
-          14 分钟
+          18 分钟
         
       </span>
     
@@ -294,24 +293,167 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">队宽度优先搜素-BFS</h1>
+            <h1 style="display: none">linux基础</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="队列">队列</h1>
-<h2 id="特点">特点</h2>
-<p>队列是先进先出（First In First Out）的线性表，简称FIFO表。</p>
-<p>[[Snipaste_2022-12-13_15-08-12.png]]</p>
-<p>在C++中有库函数帮助实现，但为了更加直观，我用c语言进行说明。</p>
-<h2 id="例子">例子</h2>
-<h3 id="快速排序非递归算法实现">快速排序非递归算法实现</h3>
-<p>快速排序的了解可以到我另一个帖子[[排序算法]]中看看。</p>
-<p>这里本质上是通过在队列中用入队列和出队列来模拟函数递归中的参数传递，每次传入的参数包括需要排序区间的头和尾。</p>
-<p>我是通过线性表来实现队列操作，当然选择用数组也是可以实现的。</p>
-<h4 id="代码">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-type">int</span> p[<span class="hljs-number">10000009</span>];  <br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>&#123;</span>  <br>    <span class="hljs-type">int</span>*head;  <br>    <span class="hljs-type">int</span>*tail;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>* <span class="hljs-title">next</span>;</span>  <br>&#125;;  <br><span class="hljs-comment">//随机数生成</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">random</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span>  <br>&#123;  <br>	srand(time(<span class="hljs-literal">NULL</span>));<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123; <br>        p[i<span class="hljs-number">-1</span>] = rand() % <span class="hljs-number">100</span>;  <br>    &#125;  <br>&#125; <br><span class="hljs-comment">//入队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls,<span class="hljs-type">int</span>*h,<span class="hljs-type">int</span>*t)</span>&#123;  <br>    <span class="hljs-keyword">if</span>(t-h&lt;<span class="hljs-number">1</span>)<span class="hljs-keyword">return</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">addin</span>;</span>  <br>    addin=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    (*ls)-&gt;next=addin;  <br>    addin-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    addin-&gt;head=h;  <br>    addin-&gt;tail=t;  <br>    *ls=addin;  <br>&#125;  <br><span class="hljs-comment">//出队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">del</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls)</span>&#123;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">tmp</span>=</span>(*ls)-&gt;next;  <br>    <span class="hljs-built_in">free</span>(*ls);  <br>    *ls=tmp;  <br>&#125;  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    random(n);  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">ltail</span>;</span>  <br>    ltail=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    ltail-&gt;head=p;  <br>    ltail-&gt;tail=p+n<span class="hljs-number">-1</span>;  <br>    ltail-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">lhead</span>=</span>ltail;  <br>    <span class="hljs-comment">//判断队列是否为空</span><br>    <span class="hljs-keyword">while</span>(lhead!=<span class="hljs-literal">NULL</span>) &#123;  <br>        <span class="hljs-type">int</span> *i = lhead-&gt;head, *j = lhead-&gt;tail;  <br>        <span class="hljs-type">int</span> <span class="hljs-built_in">std</span> = *i;  <br>        i++;  <br>        <span class="hljs-keyword">while</span> (i &lt;= j) &#123;  <br>            <span class="hljs-type">int</span> f=<span class="hljs-number">1</span>;  <br>            <span class="hljs-keyword">while</span> (f &amp;&amp; *i &lt; <span class="hljs-built_in">std</span>) &#123;  <br>                i++;  <br>                <span class="hljs-keyword">if</span> (i &gt; j)f = <span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">while</span> (f&amp;&amp;*j&gt;=<span class="hljs-built_in">std</span>)&#123;  <br>                j--;  <br>                <span class="hljs-keyword">if</span>(i &gt; j)f=<span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span>(f)&#123;  <br>                <span class="hljs-type">int</span> tmp=*i;*i=*j;*j=tmp;  <br>            &#125;  <br>            <span class="hljs-keyword">else</span> &#123;  <br>                <span class="hljs-type">int</span> tmp=*j;*j=<span class="hljs-built_in">std</span>;*lhead-&gt;head=tmp;  <br>            &#125;  <br>        &#125;  <br>        add(&amp;ltail,lhead-&gt;head,j);  <br>        add(&amp;ltail,i,lhead-&gt;tail);  <br>        del(&amp;lhead);  <br>    &#125;  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,p[i]);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
-<hr />
+                <h1 id="linux-二级目录结构">linux 二级目录结构</h1>
+<ul>
+<li>/boot:存放Linux启动所需内核文件和镜像文件</li>
+<li>/root:管理用户的主目录</li>
+<li>/home:每一个用户都有自己的目录</li>
+<li>/bin:存放最经常使用的命令</li>
+<li>/dev:存放linux的外部设备</li>
+<li>/etc:存放所有的系统管理所需要的配置文件和子目录
+<ul>
+<li>passwd:用户信息</li>
+<li>shadow:用户密码(root)</li>
+<li>group:用户组信息</li>
+<li>gshadow:密码维护信息(root)</li>
+</ul></li>
+</ul>
+<h1 id="linux基本范式">linux基本范式</h1>
+<ul>
+<li>命令关键字</li>
+<li>选项</li>
+<li>命令参数 格式：命令关键字[选项][命令参数]</li>
+</ul>
+<p><strong>可以通过输入</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">命令关键字 --help <br>//或者 help 命令关键字<br></code></pre></td></tr></table></figure>
+<p><strong>查看命令格式</strong></p>
+<h1 id="目录命令">目录命令</h1>
+<ul>
+<li>pwd:打印当前工作目录</li>
+<li>cd:
+<ul>
+<li>访问绝对路径：cd /home/.../dev</li>
+<li>访问相对路径：cd dev</li>
+<li>返回上一个所在目录：cd -</li>
+<li>返回当前目录的父一级目录：cd ../</li>
+<li>切换到用户家目录：cd ~</li>
+</ul></li>
+<li>ls[选项][目录路径]:
+<ul>
+<li>查看当前目录内容</li>
+<li>l：长格式显示</li>
+<li>a：显示所有内容（包括隐藏文件）</li>
+<li>无选项：仅显示非隐藏文件</li>
+</ul></li>
+<li>mkdir [目录名]：新建目录</li>
+</ul>
+<h1 id="文件">文件</h1>
+<h2 id="查看编辑">查看/编辑</h2>
+<ul>
+<li>vi/vim [文件名]：
+<ul>
+<li>文件存在-编辑文件</li>
+<li>文件不存在-新建并编辑文件</li>
+<li>vi编辑规则[[]]</li>
+</ul></li>
+<li>cat [文件路径]:查看文件所有信息（内容长度有限）</li>
+<li>less [文件路径]: 分页查看文件内容</li>
+<li>echo "内容" [命令] [文件名]：
+<ul>
+<li>命令：&gt; 清空文件并写入内容</li>
+<li>命令：&gt;&gt; 追加写入内容</li>
+</ul></li>
+<li>cp[选项][源文件路径][目标文件路径]:
+<ul>
+<li>-a 保留复制前目录和文件的所有属性</li>
+<li>-r 若给出的源文件是一个目录文件，复制该目录下的所有子目录和文件</li>
+</ul></li>
+<li>mv[选项][源文件][目标文件]：
+<ul>
+<li>-i 若指定文件夹有同名文件先询问是否覆盖</li>
+<li>-f 直接覆盖已有的文件</li>
+<li>在移动时可以进行重命名操作</li>
+</ul></li>
+<li>rm[选项][文件访问目录]：
+<ul>
+<li>-f 强制删除文件且不提示信息</li>
+<li>-r 用于删除目录</li>
+</ul></li>
+<li>rmdir 文件访问路径：
+<ul>
+<li>仅删除空目录，有提示信息</li>
+</ul></li>
+</ul>
+<h2 id="权限">权限</h2>
+<ul>
+<li>用户身份：所有者，所属组，其他人</li>
+<li>访问权限：可读，可写，可执行</li>
+<li>权限编码：
+<ul>
+<li>第1个字母，文件类型</li>
+<li>第2，3，4分别表示所有者的可读，可写，可执行文件</li>
+<li>第5，6，7分别表示所属组的可读，可写，可执行文件</li>
+<li>第8，9，10分别表示其他人的可读，可写，可执行文件</li>
+</ul></li>
+<li>sudo
+<ul>
+<li>路径：/ect/sudoers</li>
+<li>root用户用visudo或vi /ect/sudoers修改可用sudo命令的用户</li>
+<li></li>
+</ul></li>
+</ul>
+<h2 id="设置不同用户的权限">设置不同用户的权限</h2>
+<ul>
+<li>权限掩码
+<ul>
+<li>由三个数字组成</li>
+<li>计算方式为6.6.6-x.x.x=y.y.y,分别转化为二进制表示三个用户身份的权限</li>
+<li>对于文件来说现有存取权限最大为6，无执行权限</li>
+<li>对于目录来说现有存取权限最大为7</li>
+<li>用法：umask [-S][权限掩码]</li>
+</ul></li>
+<li>永久设置
+<ul>
+<li>修改.bash_profile文件</li>
+</ul></li>
+<li>chomd文件分配权限 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">ll  参看文件权限<br>chmod  o=rwx  a1   将a1的其他人其他人权限设置为满权限  // 属主用u表示，属组用g表示<br>chmode o-x a1  在a1其他人权限中去掉可执行权限   //增加权限是用<br>chmod 747  a1   权限用数字表式<br>chmod o-x,u-x  a1   同时对属主和其他人做减权限<br>[root@localhost home]# chmod -R 777 . 给所有权限<br>chown root a1   将a1的属主改成root<br>chgrp root a1   将a1的属组改成root    chown :root   a1<br> chown root:root  a1   属主和属组一起改   chown a1.root  a1  //中间一个冒号和一个点都可以  chown .a1 a1 只改属组一个  a1下面的属性或目录没有改<br>chown -R  root:root  a1/  将a下面的文件或目录属主和属组全部改成root,-R表示递归修改<br></code></pre></td></tr></table></figure></li>
+<li>chown [user][file]:
+<ul>
+<li>修改文件所有者</li>
+</ul></li>
+<li>chgrp [user][file]:
+<ul>
+<li>修改文件所属组</li>
+</ul></li>
+</ul>
+<h1 id="设置快捷方式">设置快捷方式</h1>
+<ul>
+<li>创建文件xxx.desktop(一定要在Desktop文件夹或usr/share/application文件夹中)
+<ul>
+<li>通过vim写入设置 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell">[Desktop Entry]<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序名称</span><br>Name=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">描述信息</span><br>Comment=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序的执行命令(可执行文件路径)</span><br>Exec=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">快捷图标位置</span><br>Icon=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">是否在终端中运行</span><br>Terminal=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">desktop的类型,常见值有“Application”和“Link”。</span><br>Type=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">菜单所属分类</span><br>Categories=<br></code></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h1 id="用户和用户组">用户和用户组</h1>
+<ul>
+<li>groupadd[选项][参数][组名]
+<ul>
+<li>-g 指定组的GID</li>
+<li>-f 若指定组已经存在则以成功状态退出</li>
+</ul></li>
+<li>groupmod[选项][修改后的新参数]
+<ul>
+<li>-g 修改组GID</li>
+<li>-n 修改组名称</li>
+</ul></li>
+<li>groupdel [待删除组的名称]</li>
+<li>useradd</li>
+<li>usermod</li>
+<li>userdel</li>
+</ul>
+<h1 id="shell编程">shell编程</h1>
+<h2 id="类型">类型</h2>
+<ul>
+<li>bash,zsh,csh,sh等</li>
+<li>查看环境：cat /etc/shells</li>
+</ul>
+<p>自动补全命令，参数：双击tab 用<span
+class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名:
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim ~/.bashrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>alias desktop=&#x27;cd /home/user/Desktop&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.bashrc<br></code></pre></td></tr></table></figure> 设置环境变量： <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim ~/.porfile<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>export PATH=$PATH:$Home/usr...<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.profile<br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -335,22 +477,8 @@
   
     <span>></span>
     
-  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
+  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/linux/" class="category-chain-item">linux</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c-%E8%AF%AD%E8%A8%80/" class="category-chain-item">c 语言</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c-%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
-  
-  
-
-  
-
   
 
   
@@ -366,11 +494,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c-%E8%AF%AD%E8%A8%80/">#c 语言</a>
+        <a href="/tags/CentOS/">#CentOS</a>
       
-        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
-      
-        <a href="/tags/BFS/">#BFS</a>
+        <a href="/tags/linux/">#linux</a>
       
     </div>
   
@@ -382,8 +508,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>队宽度优先搜素-BFS</div>
-      <div>http://example.com/2022/12/13/学海无涯/编程/c 语言/算法/宽度优先搜素-BFS/</div>
+      <div>linux基础</div>
+      <div>http://example.com/2022/12/17/学海无涯/linux(Ubuntu)/linux基础/</div>
     </div>
     <div class="license-meta">
       
@@ -395,7 +521,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月13日</div>
+          <div>2022年12月17日</div>
         </div>
       
       
@@ -427,9 +553,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/17/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/linux(Ubuntu)/linux%E5%9F%BA%E7%A1%80/" title="linux基础">
+                      <a href="/2022/12/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/CMake/%E8%BF%9E%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/" title="连接第三方库">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">linux基础</span>
+                        <span class="hidden-mobile">连接第三方库</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -437,8 +563,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/07/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/HDOJ/HDOJ-1005/" title="HDOJ-1005">
-                        <span class="hidden-mobile">HDOJ-1005</span>
+                      <a href="/2022/12/13/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A0-BFS/" title="队宽度优先搜素-BFS">
+                        <span class="hidden-mobile">队宽度优先搜素-BFS</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

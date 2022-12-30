@@ -16,26 +16,24 @@
   <meta name="author" content="枫泽">
   <meta name="keywords" content="">
   
-    <meta name="description" content="队列 特点 队列是先进先出（First In First Out）的线性表，简称FIFO表。 [[Snipaste_2022-12-13_15-08-12.png]] 在C++中有库函数帮助实现，但为了更加直观，我用c语言进行说明。 例子 快速排序非递归算法实现 快速排序的了解可以到我另一个帖子[[排序算法]]中看看。 这里本质上是通过在队列中用入队列和出队列来模拟函数递归中的参数">
+    <meta name="description" content="连接第三方库 cpp引用 对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令 12#cmake为project的名称add_executable(cmake main.cpp longint.cpp) 即可建立连接，这时只需在main.cpp添加 1include&quot;longint.cpp&quot; 就可以使用“longint.cpp”中定义的函数和全局">
 <meta property="og:type" content="article">
-<meta property="og:title" content="队宽度优先搜素-BFS">
-<meta property="og:url" content="http://example.com/2022/12/13/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A0-BFS/index.html">
+<meta property="og:title" content="连接第三方库">
+<meta property="og:url" content="http://example.com/2022/12/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/CMake/%E8%BF%9E%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/index.html">
 <meta property="og:site_name" content="枫泽的博客">
-<meta property="og:description" content="队列 特点 队列是先进先出（First In First Out）的线性表，简称FIFO表。 [[Snipaste_2022-12-13_15-08-12.png]] 在C++中有库函数帮助实现，但为了更加直观，我用c语言进行说明。 例子 快速排序非递归算法实现 快速排序的了解可以到我另一个帖子[[排序算法]]中看看。 这里本质上是通过在队列中用入队列和出队列来模拟函数递归中的参数">
+<meta property="og:description" content="连接第三方库 cpp引用 对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令 12#cmake为project的名称add_executable(cmake main.cpp longint.cpp) 即可建立连接，这时只需在main.cpp添加 1include&quot;longint.cpp&quot; 就可以使用“longint.cpp”中定义的函数和全局">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-13T07:05:06.000Z">
-<meta property="article:modified_time" content="2022-12-14T03:18:30.623Z">
+<meta property="article:published_time" content="2022-12-24T10:10:15.000Z">
+<meta property="article:modified_time" content="2022-12-28T08:54:27.645Z">
 <meta property="article:author" content="枫泽">
-<meta property="article:tag" content="c 语言">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>队宽度优先搜素-BFS - 枫泽的博客</title>
+  <title>连接第三方库 - 枫泽的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,7 +220,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="队宽度优先搜素-BFS"></span>
+            <span id="subtitle" data-typed-text="连接第三方库"></span>
           
         </div>
 
@@ -233,8 +231,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-13 15:05" pubdate>
-          2022年12月13日 下午
+        <time datetime="2022-12-24 18:10" pubdate>
+          2022年12月24日 晚上
         </time>
       </span>
     
@@ -245,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          519 字
         
       </span>
     
@@ -256,7 +254,7 @@
         
         
         
-          14 分钟
+          5 分钟
         
       </span>
     
@@ -294,24 +292,23 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">队宽度优先搜素-BFS</h1>
+            <h1 style="display: none">连接第三方库</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="队列">队列</h1>
-<h2 id="特点">特点</h2>
-<p>队列是先进先出（First In First Out）的线性表，简称FIFO表。</p>
-<p>[[Snipaste_2022-12-13_15-08-12.png]]</p>
-<p>在C++中有库函数帮助实现，但为了更加直观，我用c语言进行说明。</p>
-<h2 id="例子">例子</h2>
-<h3 id="快速排序非递归算法实现">快速排序非递归算法实现</h3>
-<p>快速排序的了解可以到我另一个帖子[[排序算法]]中看看。</p>
-<p>这里本质上是通过在队列中用入队列和出队列来模拟函数递归中的参数传递，每次传入的参数包括需要排序区间的头和尾。</p>
-<p>我是通过线性表来实现队列操作，当然选择用数组也是可以实现的。</p>
-<h4 id="代码">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-type">int</span> p[<span class="hljs-number">10000009</span>];  <br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>&#123;</span>  <br>    <span class="hljs-type">int</span>*head;  <br>    <span class="hljs-type">int</span>*tail;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>* <span class="hljs-title">next</span>;</span>  <br>&#125;;  <br><span class="hljs-comment">//随机数生成</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">random</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span>  <br>&#123;  <br>	srand(time(<span class="hljs-literal">NULL</span>));<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123; <br>        p[i<span class="hljs-number">-1</span>] = rand() % <span class="hljs-number">100</span>;  <br>    &#125;  <br>&#125; <br><span class="hljs-comment">//入队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls,<span class="hljs-type">int</span>*h,<span class="hljs-type">int</span>*t)</span>&#123;  <br>    <span class="hljs-keyword">if</span>(t-h&lt;<span class="hljs-number">1</span>)<span class="hljs-keyword">return</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">addin</span>;</span>  <br>    addin=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    (*ls)-&gt;next=addin;  <br>    addin-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    addin-&gt;head=h;  <br>    addin-&gt;tail=t;  <br>    *ls=addin;  <br>&#125;  <br><span class="hljs-comment">//出队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">del</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls)</span>&#123;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">tmp</span>=</span>(*ls)-&gt;next;  <br>    <span class="hljs-built_in">free</span>(*ls);  <br>    *ls=tmp;  <br>&#125;  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    random(n);  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">ltail</span>;</span>  <br>    ltail=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    ltail-&gt;head=p;  <br>    ltail-&gt;tail=p+n<span class="hljs-number">-1</span>;  <br>    ltail-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">lhead</span>=</span>ltail;  <br>    <span class="hljs-comment">//判断队列是否为空</span><br>    <span class="hljs-keyword">while</span>(lhead!=<span class="hljs-literal">NULL</span>) &#123;  <br>        <span class="hljs-type">int</span> *i = lhead-&gt;head, *j = lhead-&gt;tail;  <br>        <span class="hljs-type">int</span> <span class="hljs-built_in">std</span> = *i;  <br>        i++;  <br>        <span class="hljs-keyword">while</span> (i &lt;= j) &#123;  <br>            <span class="hljs-type">int</span> f=<span class="hljs-number">1</span>;  <br>            <span class="hljs-keyword">while</span> (f &amp;&amp; *i &lt; <span class="hljs-built_in">std</span>) &#123;  <br>                i++;  <br>                <span class="hljs-keyword">if</span> (i &gt; j)f = <span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">while</span> (f&amp;&amp;*j&gt;=<span class="hljs-built_in">std</span>)&#123;  <br>                j--;  <br>                <span class="hljs-keyword">if</span>(i &gt; j)f=<span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span>(f)&#123;  <br>                <span class="hljs-type">int</span> tmp=*i;*i=*j;*j=tmp;  <br>            &#125;  <br>            <span class="hljs-keyword">else</span> &#123;  <br>                <span class="hljs-type">int</span> tmp=*j;*j=<span class="hljs-built_in">std</span>;*lhead-&gt;head=tmp;  <br>            &#125;  <br>        &#125;  <br>        add(&amp;ltail,lhead-&gt;head,j);  <br>        add(&amp;ltail,i,lhead-&gt;tail);  <br>        del(&amp;lhead);  <br>    &#125;  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,p[i]);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
-<hr />
+                <h1 id="连接第三方库">连接第三方库</h1>
+<h2 id="cpp引用">cpp引用</h2>
+<p>对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#cmake为project的名称</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br></code></pre></td></tr></table></figure>
+<p>即可建立连接，这时只需在main.cpp添加</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">include<span class="hljs-string">&quot;longint.cpp&quot;</span><br></code></pre></td></tr></table></figure>
+<p>就可以使用“longint.cpp”中定义的函数和全局变量</p>
+<h2 id="头文件引用">头文件引用</h2>
+<p>头文件引用我们需要准备“longint.h”的头文件，并确保“longint.cpp”中的函数都在“longint.h”中声明。
+注意：如果声明全局变量请在longint.h中声明。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#先生成可执行文件</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br><span class="hljs-comment">#引入库</span><br><span class="hljs-keyword">include_directories</span>(<span class="hljs-keyword">include</span>)<br><span class="hljs-comment">#创建静态库(生成在build文件下)</span><br><span class="hljs-keyword">add_library</span>(TEST_LIBRARY longint.cpp)<br><span class="hljs-comment">#连接文件</span><br><span class="hljs-keyword">target_link_libraries</span>(cmake LINK_PUBLIC TEST_LIBRARY)<br></code></pre></td></tr></table></figure>
+<p>在"main.cpp"引入“longint.h”就可以使用其中的函数了。</p>
 
                 
               </div>
@@ -340,15 +337,8 @@
   
     <span>></span>
     
-  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c-%E8%AF%AD%E8%A8%80/" class="category-chain-item">c 语言</a>
+  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/CMake/" class="category-chain-item">CMake</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c-%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
-  
-  
-
   
 
   
@@ -366,11 +356,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c-%E8%AF%AD%E8%A8%80/">#c 语言</a>
-      
-        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
-      
-        <a href="/tags/BFS/">#BFS</a>
+        <a href="/tags/CMake/">#CMake</a>
       
     </div>
   
@@ -382,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>队宽度优先搜素-BFS</div>
-      <div>http://example.com/2022/12/13/学海无涯/编程/c 语言/算法/宽度优先搜素-BFS/</div>
+      <div>连接第三方库</div>
+      <div>http://example.com/2022/12/24/学海无涯/编程/CMake/连接第三方库/</div>
     </div>
     <div class="license-meta">
       
@@ -395,7 +381,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月13日</div>
+          <div>2022年12月24日</div>
         </div>
       
       
@@ -427,18 +413,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/17/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/linux(Ubuntu)/linux%E5%9F%BA%E7%A1%80/" title="linux基础">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">linux基础</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/07/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/%E7%BC%96%E7%A8%8B/c%20%E8%AF%AD%E8%A8%80/HDOJ/HDOJ-1005/" title="HDOJ-1005">
-                        <span class="hidden-mobile">HDOJ-1005</span>
+                      <a href="/2022/12/17/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/linux(Ubuntu)/linux%E5%9F%BA%E7%A1%80/" title="linux基础">
+                        <span class="hidden-mobile">linux基础</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
