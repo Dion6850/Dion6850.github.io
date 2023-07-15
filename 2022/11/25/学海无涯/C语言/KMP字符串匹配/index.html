@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="晓寒">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2022/11/25/学海无涯/c语言/kmp字符串匹配/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="&#x2F;* 只设置 markdown 字体 *&#x2F;   .markdown-body {     font-family: KaiTi,&quot;Microsoft YaHei&quot;,Georgia, sans, serif;     font-size: 18px;   }  KMP字符串匹配 模板&amp;原理 记border:既是\(s\)的前缀又是\(s\)的后缀，且长度小于\(|s|">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP字符串匹配">
+<meta property="og:url" content="http://example.com/2022/11/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/index.html">
+<meta property="og:site_name" content="晓寒的博客">
+<meta property="og:description" content="&#x2F;* 只设置 markdown 字体 *&#x2F;   .markdown-body {     font-family: KaiTi,&quot;Microsoft YaHei&quot;,Georgia, sans, serif;     font-size: 18px;   }  KMP字符串匹配 模板&amp;原理 记border:既是\(s\)的前缀又是\(s\)的后缀，且长度小于\(|s|">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/pic/2257.png">
+<meta property="og:image" content="http://example.com/2022/11/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/Snipaste_2022-11-25_22-44-31.png">
+<meta property="og:image" content="http://example.com/2022/11/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/Snipaste_2022-11-25_22-54-03.png">
+<meta property="og:image" content="http://example.com/2022/11/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/Snipaste_2022-11-25_22-57-10.png">
+<meta property="og:image" content="http://example.com/2022/11/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/Snipaste_2022-11-27_22-53-05.png">
+<meta property="og:image" content="http://example.com/2022/11/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/Snipaste_2022-11-27_22-54-58.png">
+<meta property="article:published_time" content="2022-11-25T14:22:30.000Z">
+<meta property="article:modified_time" content="2023-04-29T16:46:57.640Z">
+<meta property="article:author" content="晓寒">
+<meta property="article:tag" content="c 语言">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="KMP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/pic/2257.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/img/icon/favicon1.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/icon/favicon1.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/img/icon/favicon1.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            KMP字符串匹配 -
+        
+        Xiaohan&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":"guochao","url":"/css/fonts.css"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Xiaohan","subtitle":{"text":[],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":false,"smart_backspace":false},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/Dion6850","instagram":null,"zhihu":null,"twitter":null,"email":"1079894021@qq.com"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.2","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"},"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/EvanNotFound/hexo-theme-redefine","Blog":"https://ohevan.com"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"info","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Xiaohan&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/tags/"  >
+                                    
+                                        
+                                            <i class="fa-solid fa-tags"></i>
+                                        
+                                        标签
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/"  >
+                                    
+                                        
+                                            <i class="fa-solid fa-folder"></i>
+                                        
+                                        分类
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://github.com/EvanNotFound/hexo-theme-redefine">GITHUB
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://ohevan.com">BLOG
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/tags/"  >
+                             
+                                
+                                    <i class="fa-solid fa-tags"></i>
+                                
+                                标签
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/"  >
+                             
+                                
+                                    <i class="fa-solid fa-folder"></i>
+                                
+                                分类
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://github.com/EvanNotFound/hexo-theme-redefine">GITHUB</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://ohevan.com">BLOG</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                
+                  <h1 class="article-title-regular">KMP字符串匹配</h1>
+                
+              </div>
+              
+                     
+            
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/Head_portrait/1.jpg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">晓寒</span>
+                            
+                                <span class="author-label">Lv2</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2022-11-25 22:22:30</span>
+        <span class="mobile">2022-11-25 22:22:30</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-04-30 00:46:57</span>
+            <span class="mobile">2023-04-30 00:46:57</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/">学海无涯</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/c-%E8%AF%AD%E8%A8%80/">c 语言</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/c-%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/c-%E8%AF%AD%E8%A8%80/">c 语言</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/KMP/">KMP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <style>
+  /* 只设置 markdown 字体 */
+  .markdown-body {
+    font-family: KaiTi,"Microsoft YaHei",Georgia, sans, serif;
+    font-size: 18px;
+  }
+</style>
+<h1 id="kmp字符串匹配">KMP字符串匹配</h1>
+<h2 id="模板原理">模板&amp;原理</h2>
+<p>记border:既是<span class="math inline">\(s\)</span>的前缀又是<span
+class="math inline">\(s\)</span>的后缀，且长度小于<span
+class="math inline">\(|s|\)</span>的字符串为<span
+class="math inline">\(s\)</span>的border next数组：next[i]=s[1,2,<span
+class="math inline">\(\dots\)</span>,i]的最长border长度。</p>
+<p>对于一个字符串的匹配，最容易想到的是从头开始逐个判断，但是这样的时间复杂度就远超预期了，而通过标记的next数组，我们可以减少一定不能成立的情况。</p>
+<hr />
+<h2
+id="模板题p3375-模板kmp字符串匹配---洛谷-计算机科学教育新生态-luogu.com.cn">模板题：<a class="link" 
+ target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3375" >P3375
+【模板】KMP字符串匹配 - 洛谷 | 计算机科学教育新生态
+(luogu.com.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></h2>
+<h3 id="题目描述">题目描述</h3>
+<p>给出两个字符串 <span class="math inline">\(s_1\)</span> 和 <span
+class="math inline">\(s_2\)</span>，若 <span
+class="math inline">\(s_1\)</span> 的区间 <span
+class="math inline">\([l, r]\)</span> 子串与 <span
+class="math inline">\(s_2\)</span> 完全相同，则称 <span
+class="math inline">\(s_2\)</span> 在 <span
+class="math inline">\(s_1\)</span> 中出现了，其出现位置为 <span
+class="math inline">\(l\)</span>。<br />
+现在请你求出 <span class="math inline">\(s_2\)</span> 在 <span
+class="math inline">\(s_1\)</span> 中所有出现的位置。</p>
+<p>定义一个字符串 <span class="math inline">\(s\)</span> 的 border 为
+<span class="math inline">\(s\)</span> 的一个<strong>非 <span
+class="math inline">\(s\)</span> 本身</strong>的子串 <span
+class="math inline">\(t\)</span>，满足 <span
+class="math inline">\(t\)</span> 既是 <span
+class="math inline">\(s\)</span> 的前缀，又是 <span
+class="math inline">\(s\)</span> 的后缀。<br />
+对于 <span
+class="math inline">\(s_2\)</span>，你还需要求出对于其每个前缀 <span
+class="math inline">\(s&#39;\)</span> 的最长 border <span
+class="math inline">\(t&#39;\)</span> 的长度。</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行为一个字符串，即为 <span
+class="math inline">\(s_1\)</span>。<br />
+第二行为一个字符串，即为 <span class="math inline">\(s_2\)</span>。</p>
+<h3 id="输出格式">输出格式</h3>
+<p>首先输出若干行，每行一个整数，<strong>按从小到大的顺序</strong>输出
+<span class="math inline">\(s_2\)</span> 在 <span
+class="math inline">\(s_1\)</span> 中出现的位置。<br />
+最后一行输出 <span class="math inline">\(|s_2|\)</span> 个整数，第 <span
+class="math inline">\(i\)</span> 个整数表示 <span
+class="math inline">\(s_2\)</span> 的长度为 <span
+class="math inline">\(i\)</span> 的前缀的最长 border 长度。</p>
+<h3 id="样例-1">样例 #1</h3>
+<h4 id="样例输入-1">样例输入 #1</h4>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ABABABC</span><br><span class="line">ABA</span><br></pre></td></tr></table></figure></div>
+<h4 id="样例输出-1">样例输出 #1</h4>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">3</span><br><span class="line">0 0 1</span><br></pre></td></tr></table></figure></div>
+<h3 id="提示">提示</h3>
+<h4 id="样例-1-解释">样例 1 解释</h4>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.luogu.com.cn/upload/pic/2257.png"
+                      
+                >。</p>
+<p>对于 <span class="math inline">\(s_2\)</span> 长度为 <span
+class="math inline">\(3\)</span> 的前缀 <code>ABA</code>，字符串
+<code>A</code> 既是其后缀也是其前缀，且是最长的，因此最长 border 长度为
+<span class="math inline">\(1\)</span>。</p>
+<h4 id="数据规模与约定">数据规模与约定</h4>
+<p><strong>本题采用多测试点捆绑测试，共有 3 个子任务</strong>。</p>
+<ul>
+<li>Subtask 1（30 points）：<span class="math inline">\(|s_1| \leq
+15\)</span>，<span class="math inline">\(|s_2| \leq 5\)</span>。</li>
+<li>Subtask 2（40 points）：<span class="math inline">\(|s_1| \leq
+10^4\)</span>，<span class="math inline">\(|s_2| \leq
+10^2\)</span>。</li>
+<li>Subtask 3（30 points）：无特殊约定。</li>
+</ul>
+<p>对于全部的测试点，保证 <span class="math inline">\(1 \leq |s_1|,|s_2|
+\leq 10^6\)</span>，<span class="math inline">\(s_1, s_2\)</span>
+中均只含大写英文字母。</p>
+<h2 id="题解">题解</h2>
+<p>这里的提示图十分清楚，红色框的情况才是我们需要检测是否匹配的。而真正有思维难度的不是知道next数组后对数组的检测，而是如何得到next数组，这里借助样例来解释。</p>
+<p>首先对需要匹配的字符串进行预处理。</p>
+<figure>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="Snipaste_2022-11-25_22-44-31.png"
+                      alt="预处理" 
+                >
+<figcaption aria-hidden="true">预处理</figcaption>
+</figure>
+<p>只有结尾处的后缀与前缀相同，且相同的最大长度为1。这里要注意的是判断border最大长度时要忽略自身（第一个元素）否则会进入死循环。</p>
+<p>于是上述提示红色框的取法是不是就有些眉目了呢。上面给出的是找到全部匹配的情况，这里再给出只有部分匹配的情况（与题目不同）。</p>
+<figure>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="Snipaste_2022-11-25_22-54-03.png"
+                      alt="部分匹配" 
+                >
+<figcaption aria-hidden="true">部分匹配</figcaption>
+</figure>
+<p>这里到B之后就不匹配了，那么由于next[2]=0即border的最大长度为零，我们就从B的下一个开始继续检测。</p>
+<figure>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="Snipaste_2022-11-25_22-57-10.png"
+                      alt="下一步" 
+                >
+<figcaption aria-hidden="true">下一步</figcaption>
+</figure>
+<p>于是KMP的完整逻辑就完成了。</p>
+<p>代码如下： <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span>  </span></span><br><span class="line"><span class="type">char</span> s1[<span class="number">1000006</span>];  </span><br><span class="line"><span class="type">char</span> s2[<span class="number">1000006</span>];  </span><br><span class="line"><span class="type">int</span> next[<span class="number">1000006</span>];  </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s%s&quot;</span>,s1+<span class="number">1</span>,s2+<span class="number">1</span>);  <span class="comment">//让数组的下标从1开始</span></span><br><span class="line">    <span class="type">int</span> n=<span class="built_in">strlen</span>(s1+<span class="number">1</span>),m=<span class="built_in">strlen</span>(s2+<span class="number">1</span>);  </span><br><span class="line">    <span class="type">int</span> j=<span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=m;i++)&#123;  <span class="comment">//从2开始，忽略第一个数</span></span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;s2[i]!=s2[j+<span class="number">1</span>])j=p[j];  <span class="comment">//从最大border处开始</span></span><br><span class="line">        <span class="keyword">if</span>(s2[i]==s2[j+<span class="number">1</span>])j++;  <span class="comment">//逐个检测，排除j=0</span></span><br><span class="line">        next[i]=j;  <span class="comment">//记录next数组</span></span><br><span class="line">    &#125;  </span><br><span class="line">    j=<span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;  </span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;s1[i]!=s2[j+<span class="number">1</span>])j=next[j];  </span><br><span class="line">        <span class="keyword">if</span>(s1[i]==s2[j+<span class="number">1</span>])j++;  </span><br><span class="line">        <span class="keyword">if</span>(j==m)&#123;  </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i-m+<span class="number">1</span>);  </span><br><span class="line">            j=next[j];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,next[i]);  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></p>
+<hr />
+<h1 id="应用">应用</h1>
+<h2
+id="题目1p4391-boi2009radio-transmission-无线传输---洛谷-计算机科学教育新生态-luogu.com.cn">题目1：<a class="link" 
+ target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4391" >P4391 [BOI2009]Radio
+Transmission 无线传输 - 洛谷 | 计算机科学教育新生态
+(luogu.com.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></h2>
+<h3 id="题目描述-1">题目描述</h3>
+<p>给你一个字符串 <span
+class="math inline">\(s_1\)</span>，它是由某个字符串 <span
+class="math inline">\(s_2\)</span> 不断自我连接形成的。但是字符串 <span
+class="math inline">\(s_2\)</span>
+是不确定的，现在只想知道它的最短长度是多少。</p>
+<h3 id="输入格式-1">输入格式</h3>
+<p>第一行一个整数 <span
+class="math inline">\(L\)</span>，表示给出字符串的长度。</p>
+<p>第二行给出字符串 <span class="math inline">\(s_1\)</span>
+的一个子串，全由小写字母组成。</p>
+<h3 id="输出格式-1">输出格式</h3>
+<p>仅一行，表示 <span class="math inline">\(s_2\)</span>
+的最短长度。</p>
+<h3 id="样例-1-1">样例 #1</h3>
+<h4 id="样例输入-1-1">样例输入 #1</h4>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">cabcabca</span><br></pre></td></tr></table></figure></div>
+<h4 id="样例输出-1-1">样例输出 #1</h4>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3</span><br></pre></td></tr></table></figure></div>
+<h3 id="提示-1">提示</h3>
+<h4 id="样例输入输出-1-解释">样例输入输出 1 解释</h4>
+<p>对于样例，我们可以利用 <span
+class="math inline">\(\texttt{abc}\)</span> 不断自我连接得到 <span
+class="math inline">\(\texttt{abcabcabc}\)</span>，读入的 <span
+class="math inline">\(\texttt{cabcabca}\)</span>，是它的子串。</p>
+<h4 id="规模与约定">规模与约定</h4>
+<p>对于全部的测试点，保证 <span class="math inline">\(1 &lt; L \le
+10^6\)</span>。</p>
+<h3 id="解析">解析</h3>
+<p>对于这个我们可以从最后的位置入手，因为最后一次一定要输出结尾，所以对于最短的<span
+class="math inline">\(s_2\)</span>长度即是总能长度减去最后一个数的最大border。
+如果给出字符串是没有循环的：</p>
+<figure>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="Snipaste_2022-11-27_22-53-05.png"
+                      alt="没有循环" 
+                >
+<figcaption aria-hidden="true">没有循环</figcaption>
+</figure>
+<p>字符串有循环：</p>
+<figure>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="Snipaste_2022-11-27_22-54-58.png"
+                      alt="有循环" 
+                >
+<figcaption aria-hidden="true">有循环</figcaption>
+</figure>
+<p>代码如下： <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">char</span> s2[<span class="number">1000006</span>];</span><br><span class="line"><span class="type">int</span> p[<span class="number">1000006</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%s&quot;</span>,&amp;m,s2+<span class="number">1</span>);</span><br><span class="line">    <span class="type">int</span> j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;s2[i]!=s2[j+<span class="number">1</span>])j=p[j];</span><br><span class="line">        <span class="keyword">if</span>(s2[i]==s2[j+<span class="number">1</span>])j++;</span><br><span class="line">        p[i]=j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,m-p[m]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> KMP字符串匹配</li>
+        <li><strong>作者:</strong> 晓寒</li>
+        <li><strong>创建于:</strong> 2022-11-25 22:22:30</li>
+        
+            <li>
+                <strong>更新于:</strong> 2023-04-30 00:46:57
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://dion6850.github.io/2022/11/25/学海无涯/C语言/KMP字符串匹配/
+        </li>
+        <li>
+            <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/c-%E8%AF%AD%E8%A8%80/">#c 语言</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/KMP/">#KMP</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/11/30/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">哈希算法</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2022/11/13/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">深度优先搜索-DFS</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+    <div id="gitalk-container"></div>
+    <script data-pjax
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script data-pjax>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: 'e03d3f5b1d8af756253b',
+                    clientSecret: '9fdd80082796e745b2ed82fba981e50597716688',
+                    repo: 'Dion6850.github.io',
+                    owner: 'Dion6850',
+                    admin: ['Dion6850'],
+                    id: __gitalk__pathname,
+                    language: 'zh-CN'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">KMP字符串匹配</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kmp%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D"><span class="nav-text">KMP字符串匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%8E%9F%E7%90%86"><span class="nav-text">模板&amp;原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98p3375-%E6%A8%A1%E6%9D%BFkmp%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D---%E6%B4%9B%E8%B0%B7-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E6%95%99%E8%82%B2%E6%96%B0%E7%94%9F%E6%80%81-luogu.com.cn"><span class="nav-text">模板题：P3375
+【模板】KMP字符串匹配 - 洛谷 | 计算机科学教育新生态
+(luogu.com.cn) </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B-1"><span class="nav-text">样例 #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA"><span class="nav-text">提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE1p4391-boi2009radio-transmission-%E6%97%A0%E7%BA%BF%E4%BC%A0%E8%BE%93---%E6%B4%9B%E8%B0%B7-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E6%95%99%E8%82%B2%E6%96%B0%E7%94%9F%E6%80%81-luogu.com.cn"><span class="nav-text">题目1：P4391 [BOI2009]Radio
+Transmission 无线传输 - 洛谷 | 计算机科学教育新生态
+(luogu.com.cn) </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-1"><span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-1"><span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B-1-1"><span class="nav-text">样例 #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA-1"><span class="nav-text">提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-text">解析</span></a></li></ol></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">晓寒</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.2</a>
+        </div>
+        
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
