@@ -231,345 +231,6 @@ C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
       </tags>
   </entry>
   <entry>
-    <title>git</title>
-    <url>/2023/04/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/Git/git/</url>
-    <content><![CDATA[<h1 id="git-flow-的常用分支">Git Flow 的常用分支</h1>
-<h2 id="生产分支master">生产分支（master）‌</h2>
-<p>Master分支是仓库的主分支，这个分支包含最近发布到生产环境的代码，最近发布的Release，
-这个分支只能从其他分支合并，不能在这个分支直接修改‌</p>
-<h2 id="补丁分支hotfix">补丁分支（hotfix）</h2>
-<p>当我们在生产环境发现新的Bug时候，我们需要基于master分支创建一个Hotfix分支，然后在Hotfix分支上修复bug，完成Hotfix后，我们要把hotfix分支合并回Master和Develop分支‌</p>
-<h2 id="发布分支release">发布分支（release)‌</h2>
-<p>当你需要发布一个新功能的时候，要基于Develop分支创建一个Release分支，在Release分支测试并修复bug，完成release后，把release合并到master和develop分支‌
-## 开发分支（develop）‌</p>
-<p>这个分支是我们的主开发分支，包含所有要发布到下一个Release的代码，这个主要合并与其他分支，比如Feature分支‌</p>
-<h2 id="功能分支feature">功能分支（feature）‌</h2>
-<p>feature分支主要是用来开发一个新的功能，一旦开发完成，我们合并回Develop分支进入下一个Release‌</p>
-<h1 id="文件">文件</h1>
-<p>这里一部分与linux终端下的命令相同。</p>
-<h2 id="创建文件">创建文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 单个创建</span><br><span class="hljs-built_in">touch</span> File1Name File2Name <br><span class="hljs-comment"># 批量创建（touch 文件名&#123;最小数值…最大数值&#125;.扩展名）</span><br><span class="hljs-built_in">touch</span> text&#123; 0001..2000 &#125;.txt <br></code></pre></td></tr></table></figure>
-<h2 id="删除文件">删除文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 删除当前文件</span><br><span class="hljs-built_in">rm</span> &lt;文件名&gt;<br><span class="hljs-comment"># 删除版本库中的文件</span><br>git <span class="hljs-built_in">rm</span> &lt;文件名&gt;<br><span class="hljs-comment"># 删除文件夹（可不为空）</span><br><span class="hljs-built_in">rm</span> -r &lt;目录名&gt;<br><span class="hljs-comment"># 删除文件夹（必须为空)</span><br><span class="hljs-built_in">rmdir</span> &lt;目录名&gt;<br></code></pre></td></tr></table></figure>
-<h1 id="git文件状态">git文件状态</h1>
-<h2 id="显示当前状态">显示当前状态</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git status<br></code></pre></td></tr></table></figure>
-<h2 id="加入文件到缓存区">加入文件到缓存区</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git add &lt;文件名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="将版本更迭">将版本更迭</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -m 后面是这个版本的相关信息</span><br>git commit -m <span class="hljs-string">&quot;&lt;相关信息&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<h2 id="查看日志">查看日志</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这个命令实则是git reflog show HEAD 的简化写法</span><br>git reflog<br><span class="hljs-comment"># 查看所有日志</span><br>git reflog show --all<br><span class="hljs-comment"># 查看特定的分支</span><br>git reflog show &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-<h1 id="分支管理">分支管理</h1>
-<h2 id="创建分支命令">创建分支命令</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git checkout &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="切换分支命令">切换分支命令</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git switch &lt;分支名&gt;<br>git checkout &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="查看分支">查看分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git banch<br></code></pre></td></tr></table></figure>
-<h2 id="合并分支">合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这里要注意在主分支</span><br>git merge &lt;副分支名&gt;<br><span class="hljs-comment"># 合并没有历史记录相同的分支</span><br>git merge &lt;副分支名&gt; --allow-unrelated-histories<br></code></pre></td></tr></table></figure>
-<h2 id="删除分支">删除分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git branch -d &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-<h1 id="标签管理">标签管理</h1>
-<h2 id="增加本地标签">增加本地标签</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 不带说明的标签</span><br>git tag <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br><span class="hljs-comment"># 带说明的标签</span><br>git tag -a &lt;标签名&gt; -m <span class="hljs-string">&quot;&lt;说明信息&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<h2 id="增加远程标签">增加远程标签</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git push origin <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<p>因为这个用的少，就不深入说明了。</p>
-<h2 id="查看标签">查看标签</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出所有标签（字母顺序）</span><br>git tag<br><span class="hljs-comment"># 查看标签信息</span><br>git show &lt;标签名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="删除标签">删除标签</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git tag -d <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<h1 id="暂存栈管理">暂存栈管理</h1>
-<h2 id="创建暂存栈">创建暂存栈</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 直接创建</span><br>git stash<br><span class="hljs-comment"># 加注释创建</span><br>git stash save <span class="hljs-string">&quot;&lt;注释&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<p>这个命令会将所有未递交的修改保存起来。</p>
-<h2 id="重新应用缓存">重新应用缓存</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git stash pop<br></code></pre></td></tr></table></figure>
-<p>这个指令将缓存堆栈中的第一个stash删除，并将对应修改应用到当前的工作目录下。</p>
-<h2 id="查看现有stash">查看现有stash</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git stash list<br></code></pre></td></tr></table></figure>
-<p>在使用<code>git stash apply</code>命令时可以通过名字指定使用哪个stash，默认使用最近的stash（即stash@{0}）。</p>
-<h2 id="移除stash">移除stash</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这里的下标是从0开始由第一个向下递增的</span><br>git stash drop stash@&#123;&lt;下标&gt;&#125;<br><span class="hljs-comment"># 利用注释删除指定栈</span><br>git stash drop <span class="hljs-string">&quot;&lt;注释&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<h2 id="查看指定stash的diff">查看指定stash的diff</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git stash show<br></code></pre></td></tr></table></figure>
-<h1 id="版本管理">版本管理</h1>
-<h2 id="还原">还原</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使某个文件回到add缓存区的版本</span><br>git checkout &lt;文件名&gt;<br><span class="hljs-comment"># 回退指定版本</span><br>git reset [--soft | --mixed | --hard] &lt;指定版本编号&gt;<br></code></pre></td></tr></table></figure>
-<p>下面说明参数的意义：</p>
-<ul>
-<li>--soft:将HEAD指向指定的版本上。但是工作区的文件和暂存区的文件都不改变，仅仅退回commit的信息。</li>
-<li>--mixed:git
-reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也改变，但是工作区的文件不改变。</li>
-<li>--hard:彻底回退到指定的版本。</li>
-</ul>
-<h1 id="远程库github">远程库（github）</h1>
-<h2 id="创建远程仓库">创建远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 添加远程仓库</span><br>git remote add &lt;远程仓库名&gt; &lt;地址&gt;<br><span class="hljs-comment"># 第一次推送</span><br>git push -u &lt;远程仓库名&gt; &lt;地址&gt;  <br><span class="hljs-comment"># 之后推送</span><br>git push &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="查看远程仓库">查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git remote -v<br></code></pre></td></tr></table></figure>
-<h2 id="修改远程仓库">修改远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git remote set-url &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="克隆远程库">克隆远程库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 克隆</span><br>git <span class="hljs-built_in">clone</span> &lt;地址&gt;<br><span class="hljs-comment"># 拉取最新递交</span><br>git pull<br></code></pre></td></tr></table></figure>
-<h2 id="删除远程仓库">删除远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git remote <span class="hljs-built_in">rm</span> &lt;仓库名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="初始化本地项目">初始化本地项目</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;&lt;你的名字或昵称&gt;&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;&lt;你的邮箱&gt;&quot;</span><br>git init <br>git remote add &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="创建分支到本地">创建分支到本地</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git checkout -b &lt;本地仓库名&gt; &lt;远程仓库名&gt;/&lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>学海无涯</category>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STM32流水灯</title>
-    <url>/2023/10/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/</url>
-    <content><![CDATA[<h2 id="stm32cubemx的配置">STM32CubeMX的配置</h2>
-<ul>
-<li>创建STM32CubeMX工程</li>
-</ul>
-<p><img src="img20230913152634.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li><p>打开外部晶振 <img src="img20230913152746.png" srcset="/img/loading.gif" lazyload></p></li>
-<li><p>时钟树设置
-注意外部晶振的频率是由硬件决定的，选择与硬件相匹配的频率 <img src="img20230913152822.png" srcset="/img/loading.gif" lazyload></p></li>
-<li><p>配置IO引脚 <img src="img20230913152948.png" srcset="/img/loading.gif" lazyload></p></li>
-<li><p>配置文件路径和代码生成 <img src="img20230913153027.png" srcset="/img/loading.gif" lazyload></p></li>
-</ul>
-<p><img src="img20230913153117.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li>生成代码 <img src="img20230913153155.png" srcset="/img/loading.gif" lazyload></li>
-</ul>
-<h2 id="keil配置">KEIL配置</h2>
-<p>下面的工具栏在页面的左上角</p>
-<p><img src="img20230913153352.png" srcset="/img/loading.gif" lazyload></p>
-<p>点击红色方框中的按钮</p>
-<p><img src="img20230913153428.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="img20230913153449.png" srcset="/img/loading.gif" lazyload></p>
-<p>选择你用的烧录器，点击右边的setting后可以看到芯片是否连接成功</p>
-<p><img src="img20230913153556.png" srcset="/img/loading.gif" lazyload></p>
-<p>由于hal库函数中HAL_Delay()函数使用的是系统时钟的中断来实现的，容易进入死循环或者程序卡死，因此使用非中断实现延时，在工程中加入delay.c和delay.h定义了函数Delay_ms()和Delay_us()来实现。下面是在工程中加入文件的指南。</p>
-<p>将Delay文件夹加入文件目录</p>
-<p><img src="img20230913154550.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="img20230913154136.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="img20230913154209.png" srcset="/img/loading.gif" lazyload></p>
-<p>点击add file将delay.c文件加入，并将delay文件夹加入include路径</p>
-<p><img src="img20230913154759.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="img20230913154818.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li>编写程序</li>
-</ul>
-<p>注意自己的代码都要写在USER_CODE_BEGIN...和USER_CODE_END...注释之间，否则使用STM32CubeMX重新generate的时候自己的代码会被清除。</p>
-<p>自己定义的端口名称会在main.h中生成(STM32CubeMX自动生成)，这里是我定义的端口</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* Private defines -----------------------------------------------------------*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED1_Pin GPIO_PIN_6</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED1_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED2_Pin GPIO_PIN_7</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED2_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED3_Pin GPIO_PIN_8</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED3_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED4_Pin GPIO_PIN_9</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED4_GPIO_Port GPIOB</span><br></code></pre></td></tr></table></figure>
-<p>为了方便找到位置这里将main.c都列出，加上的代码边上都有注释</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Header */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  * @file           : main.c</span><br><span class="hljs-comment">  * @brief          : Main program body</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  * @attention</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  * Copyright (c) 2023 STMicroelectronics.</span><br><span class="hljs-comment">  * All rights reserved.</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  * This software is licensed under terms that can be found in the LICENSE file</span><br><span class="hljs-comment">  * in the root directory of this software component.</span><br><span class="hljs-comment">  * If no LICENSE file comes with this software, it is provided AS-IS.</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  */</span><br><span class="hljs-comment">/* USER CODE END Header */</span><br><span class="hljs-comment">/* Includes ------------------------------------------------------------------*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"main.h"</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"gpio.h"</span></span><br><br><span class="hljs-comment">/* Private includes ----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN Includes */</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"delay.h"</span></span><br><span class="hljs-comment">/* USER CODE END Includes */</span><br><br><span class="hljs-comment">/* Private typedef -----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PTD */</span><br><br><span class="hljs-comment">/* USER CODE END PTD */</span><br><br><span class="hljs-comment">/* Private define ------------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PD */</span><br><span class="hljs-comment">/* USER CODE END PD */</span><br><br><span class="hljs-comment">/* Private macro -------------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PM */</span><br><br><span class="hljs-comment">/* USER CODE END PM */</span><br><br><span class="hljs-comment">/* Private variables ---------------------------------------------------------*/</span><br><br><span class="hljs-comment">/* USER CODE BEGIN PV */</span><br><br><span class="hljs-comment">/* USER CODE END PV */</span><br><br><span class="hljs-comment">/* Private function prototypes -----------------------------------------------*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SystemClock_Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br><span class="hljs-comment">/* USER CODE BEGIN PFP */</span><br><br><span class="hljs-comment">/* USER CODE END PFP */</span><br><br><span class="hljs-comment">/* Private user code ---------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN 0 */</span><br><br><span class="hljs-comment">/* USER CODE END 0 */</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  The application entry point.</span><br><span class="hljs-comment">  * @retval int</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN 1 */</span><br><br>  <span class="hljs-comment">/* USER CODE END 1 */</span><br><br>  <span class="hljs-comment">/* MCU Configuration--------------------------------------------------------*/</span><br><br>  <span class="hljs-comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span><br>  HAL_Init();<br><br>  <span class="hljs-comment">/* USER CODE BEGIN Init */</span><br>	delay_init(<span class="hljs-number">180</span>);<span class="hljs-comment">// 配置延时函数，参数是系统时钟频率</span><br>  <span class="hljs-comment">/* USER CODE END Init */</span><br><br>  <span class="hljs-comment">/* Configure the system clock */</span><br>  SystemClock_Config();<br><br>  <span class="hljs-comment">/* USER CODE BEGIN SysInit */</span><br><br>  <span class="hljs-comment">/* USER CODE END SysInit */</span><br><br>  <span class="hljs-comment">/* Initialize all configured peripherals */</span><br>  MX_GPIO_Init();<br>  <span class="hljs-comment">/* USER CODE BEGIN 2 */</span><br>  <span class="hljs-comment">// 在测试板中IO引脚输出高电平LED不亮，其他板子请参照原理图</span><br>  HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);<br>  <span class="hljs-comment">/* USER CODE END 2 */</span><br><br>  <span class="hljs-comment">/* Infinite loop */</span><br>  <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span><br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  {<br>	  <span class="hljs-comment">//流水灯begin</span><br>	  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);<br>	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  <span class="hljs-comment">//流水灯end</span><br>    <span class="hljs-comment">/* USER CODE END WHILE */</span><br>	  <br>    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span><br>  }<br>  <span class="hljs-comment">/* USER CODE END 3 */</span><br>}<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief System Clock Configuration</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SystemClock_Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  RCC_OscInitTypeDef RCC_OscInitStruct = {<span class="hljs-number">0</span>};<br>  RCC_ClkInitTypeDef RCC_ClkInitStruct = {<span class="hljs-number">0</span>};<br><br>  <span class="hljs-comment">/** Configure the main internal regulator output voltage</span><br><span class="hljs-comment">  */</span><br>  __HAL_RCC_PWR_CLK_ENABLE();<br>  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);<br><br>  <span class="hljs-comment">/** Initializes the RCC Oscillators according to the specified parameters</span><br><span class="hljs-comment">  * in the RCC_OscInitTypeDef structure.</span><br><span class="hljs-comment">  */</span><br>  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;<br>  RCC_OscInitStruct.HSIState = RCC_HSI_ON;<br>  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;<br>  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;<br>  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;<br>  RCC_OscInitStruct.PLL.PLLM = <span class="hljs-number">8</span>;<br>  RCC_OscInitStruct.PLL.PLLN = <span class="hljs-number">180</span>;<br>  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;<br>  RCC_OscInitStruct.PLL.PLLQ = <span class="hljs-number">2</span>;<br>  RCC_OscInitStruct.PLL.PLLR = <span class="hljs-number">2</span>;<br>  <span class="hljs-keyword">if</span> (HAL_RCC_OscConfig(&amp;RCC_OscInitStruct) != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br><br>  <span class="hljs-comment">/** Activate the Over-Drive mode</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-keyword">if</span> (HAL_PWREx_EnableOverDrive() != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br><br>  <span class="hljs-comment">/** Initializes the CPU, AHB and APB buses clocks</span><br><span class="hljs-comment">  */</span><br>  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK<br>                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;<br>  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;<br>  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;<br>  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;<br>  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;<br><br>  <span class="hljs-keyword">if</span> (HAL_RCC_ClockConfig(&amp;RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br>}<br><br><span class="hljs-comment">/* USER CODE BEGIN 4 */</span><br><br><span class="hljs-comment">/* USER CODE END 4 */</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  This function is executed in case of error occurrence.</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">Error_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN Error_Handler_Debug */</span><br>  <span class="hljs-comment">/* User can add his own implementation to report the HAL error return state */</span><br>  __disable_irq();<br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  {<br>  }<br>  <span class="hljs-comment">/* USER CODE END Error_Handler_Debug */</span><br>}<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span>  USE_FULL_ASSERT</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  Reports the name of the source file and the source line number</span><br><span class="hljs-comment">  *         where the assert_param error has occurred.</span><br><span class="hljs-comment">  * @param  file: pointer to the source file name</span><br><span class="hljs-comment">  * @param  line: assert_param error line source number</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">assert_failed</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> *file, <span class="hljs-type">uint32_t</span> line)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN 6 */</span><br>  <span class="hljs-comment">/* User can add his own implementation to report the file name and line number,</span><br><span class="hljs-comment">     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */</span><br>  <span class="hljs-comment">/* USER CODE END 6 */</span><br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">/* USE_FULL_ASSERT */</span></span><br><br></code></pre></td></tr></table></figure>
-<p>编译通过后烧录即可。</p>
-<p>delay的实现参考正点原子的例程。</p>
-<p>delay.c</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"delay.h"</span></span><br><span class="hljs-comment">////////////////////////////////////////////////////////////////////////////////// 	 </span><br><span class="hljs-comment">//如果使用ucos,则包括下面的头文件即可.</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"includes.h"</span>					<span class="hljs-comment">//ucos 使用	  </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-comment">//////////////////////////////////////////////////////////////////////////////////  </span><br><span class="hljs-comment">//本程序只供学习使用，未经作者许可，不得用于其它任何用途</span><br><span class="hljs-comment">//ALIENTEK STM32F407开发板</span><br><span class="hljs-comment">//使用SysTick的普通计数模式对延迟进行管理(支持ucosii/ucosiii)</span><br><span class="hljs-comment">//包括delay_us,delay_ms</span><br><span class="hljs-comment">//正点原子@ALIENTEK</span><br><span class="hljs-comment">//技术论坛:www.openedv.com</span><br><span class="hljs-comment">//创建日期:2017/4/6</span><br><span class="hljs-comment">//版本：V1.1</span><br><span class="hljs-comment">//版权所有，盗版必究。</span><br><span class="hljs-comment">//Copyright(C) 广州市星翼电子科技有限公司 2014-2024</span><br><span class="hljs-comment">//All rights reserved</span><br><span class="hljs-comment">//********************************************************************************</span><br><span class="hljs-comment">//修改说明</span><br><span class="hljs-comment">////////////////////////////////////////////////////////////////////////////////// </span><br><br><span class="hljs-type">static</span> <span class="hljs-type">uint32_t</span> fac_us=<span class="hljs-number">0</span>;							<span class="hljs-comment">//us延时倍乘数</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS		</span><br>    <span class="hljs-type">static</span> <span class="hljs-type">uint16_t</span> fac_ms=<span class="hljs-number">0</span>;				        <span class="hljs-comment">//ms延时倍乘数,在os下,代表每个节拍的ms数</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS							<span class="hljs-comment">//如果SYSTEM_SUPPORT_OS定义了,说明要支持OS了(不限于UCOS).</span></span><br><span class="hljs-comment">//当delay_us/delay_ms需要支持OS的时候需要三个与OS相关的宏定义和函数来支持</span><br><span class="hljs-comment">//首先是3个宏定义:</span><br><span class="hljs-comment">//delay_osrunning:用于表示OS当前是否正在运行,以决定是否可以使用相关函数</span><br><span class="hljs-comment">//delay_ostickspersec:用于表示OS设定的时钟节拍,delay_init将根据这个参数来初始哈systick</span><br><span class="hljs-comment">//delay_osintnesting:用于表示OS中断嵌套级别,因为中断里面不可以调度,delay_ms使用该参数来决定如何运行</span><br><span class="hljs-comment">//然后是3个函数:</span><br><span class="hljs-comment">//delay_osschedlock:用于锁定OS任务调度,禁止调度</span><br><span class="hljs-comment">//delay_osschedunlock:用于解锁OS任务调度,重新开启调度</span><br><span class="hljs-comment">//delay_ostimedly:用于OS延时,可以引起任务调度.</span><br><br><span class="hljs-comment">//本例程仅作UCOSII和UCOSIII的支持,其他OS,请自行参考着移植</span><br><span class="hljs-comment">//支持UCOSII</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 	OS_CRITICAL_METHOD						<span class="hljs-comment">//OS_CRITICAL_METHOD定义了,说明要支持UCOSII				</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osrunning		OSRunning			<span class="hljs-comment">//OS是否运行标记,0,不运行;1,在运行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_ostickspersec	OS_TICKS_PER_SEC	<span class="hljs-comment">//OS时钟节拍,即每秒调度次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osintnesting 	OSIntNesting		<span class="hljs-comment">//中断嵌套级别,即中断嵌套次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-comment">//支持UCOSIII</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 	CPU_CFG_CRITICAL_METHOD					<span class="hljs-comment">//CPU_CFG_CRITICAL_METHOD定义了,说明要支持UCOSIII	</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osrunning		OSRunning			<span class="hljs-comment">//OS是否运行标记,0,不运行;1,在运行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_ostickspersec	OSCfg_TickRate_Hz	<span class="hljs-comment">//OS时钟节拍,即每秒调度次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osintnesting 	OSIntNestingCtr		<span class="hljs-comment">//中断嵌套级别,即中断嵌套次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br><span class="hljs-comment">//us级延时时,关闭任务调度(防止打断us级延迟)</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_osschedlock</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD   			<span class="hljs-comment">//使用UCOSIII</span></span><br>	OS_ERR err; <br>	OSSchedLock(&amp;err);						<span class="hljs-comment">//UCOSIII的方式,禁止调度，防止打断us延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>										<span class="hljs-comment">//否则UCOSII</span></span><br>	OSSchedLock();							<span class="hljs-comment">//UCOSII的方式,禁止调度，防止打断us延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}<br><br><span class="hljs-comment">//us级延时时,恢复任务调度</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_osschedunlock</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{	<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD   			<span class="hljs-comment">//使用UCOSIII</span></span><br>	OS_ERR err; <br>	OSSchedUnlock(&amp;err);					<span class="hljs-comment">//UCOSIII的方式,恢复调度</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>										<span class="hljs-comment">//否则UCOSII</span></span><br>	OSSchedUnlock();						<span class="hljs-comment">//UCOSII的方式,恢复调度</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}<br><br><span class="hljs-comment">//调用OS自带的延时函数延时</span><br><span class="hljs-comment">//ticks:延时的节拍数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ostimedly</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> ticks)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD</span><br>	OS_ERR err; <br>	OSTimeDly(ticks,OS_OPT_TIME_PERIODIC,&amp;err); <span class="hljs-comment">//UCOSIII延时采用周期模式</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>	OSTimeDly(ticks);						    <span class="hljs-comment">//UCOSII延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> </span><br>}<br> <br><span class="hljs-comment">//systick中断服务函数,使用OS时用到</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SysTick_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{	<br>    HAL_IncTick();<br>	<span class="hljs-keyword">if</span>(delay_osrunning==<span class="hljs-number">1</span>)					<span class="hljs-comment">//OS开始跑了,才执行正常的调度处理</span><br>	{<br>		OSIntEnter();						<span class="hljs-comment">//进入中断</span><br>		OSTimeTick();       				<span class="hljs-comment">//调用ucos的时钟服务程序               </span><br>		OSIntExit();       	 				<span class="hljs-comment">//触发任务切换软中断</span><br>	}<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>			   <br><span class="hljs-comment">//初始化延迟函数</span><br><span class="hljs-comment">//当使用ucos的时候,此函数会初始化ucos的时钟节拍</span><br><span class="hljs-comment">//SYSTICK的时钟固定为AHB时钟</span><br><span class="hljs-comment">//SYSCLK:系统时钟频率</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_init</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> SYSCLK)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br>	<span class="hljs-type">uint32_t</span> reload;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>    HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);<span class="hljs-comment">//SysTick频率为HCLK</span><br>	fac_us=SYSCLK;						<span class="hljs-comment">//不论是否使用OS,fac_us都需要使用</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br>	reload=SYSCLK;					    <span class="hljs-comment">//每秒钟的计数次数 单位为K	   </span><br>	reload*=<span class="hljs-number">1000000</span>/delay_ostickspersec;	<span class="hljs-comment">//根据delay_ostickspersec设定溢出时间</span><br>											<span class="hljs-comment">//reload为24位寄存器,最大值:16777216,在180M下,约合0.745s左右	</span><br>	fac_ms=<span class="hljs-number">1000</span>/delay_ostickspersec;		<span class="hljs-comment">//代表OS可以延时的最少单位	   </span><br>	SysTick-&gt;CTRL|=SysTick_CTRL_TICKINT_Msk;<span class="hljs-comment">//开启SYSTICK中断</span><br>	SysTick-&gt;LOAD=reload; 					<span class="hljs-comment">//每1/OS_TICKS_PER_SEC秒中断一次	</span><br>	SysTick-&gt;CTRL|=SysTick_CTRL_ENABLE_Msk; <span class="hljs-comment">//开启SYSTICK</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}								    <br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br><span class="hljs-comment">//延时nus</span><br><span class="hljs-comment">//nus:要延时的us数.	</span><br><span class="hljs-comment">//nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	    								   </span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span><br>{		<br>	<span class="hljs-type">uint32_t</span> ticks;<br>	<span class="hljs-type">uint32_t</span> told,tnow,tcnt=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">uint32_t</span> reload=SysTick-&gt;LOAD;				<span class="hljs-comment">//LOAD的值	    	 </span><br>	ticks=nus*fac_us; 						<span class="hljs-comment">//需要的节拍数 </span><br>	delay_osschedlock();					<span class="hljs-comment">//阻止OS调度，防止打断us延时</span><br>	told=SysTick-&gt;VAL;        				<span class="hljs-comment">//刚进入时的计数器值</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	{<br>		tnow=SysTick-&gt;VAL;	<br>		<span class="hljs-keyword">if</span>(tnow!=told)<br>		{	    <br>			<span class="hljs-keyword">if</span>(tnow&lt;told)tcnt+=told-tnow;	<span class="hljs-comment">//这里注意一下SYSTICK是一个递减的计数器就可以了.</span><br>			<span class="hljs-keyword">else</span> tcnt+=reload-tnow+told;	    <br>			told=tnow;<br>			<span class="hljs-keyword">if</span>(tcnt&gt;=ticks)<span class="hljs-keyword">break</span>;			<span class="hljs-comment">//时间超过/等于要延迟的时间,则退出.</span><br>		}  <br>	};<br>	delay_osschedunlock();					<span class="hljs-comment">//恢复OS调度											    </span><br>}  <br><span class="hljs-comment">//延时nms</span><br><span class="hljs-comment">//nms:要延时的ms数</span><br><span class="hljs-comment">//nms:0~65535</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span><br>{	<br>	<span class="hljs-keyword">if</span>(delay_osrunning&amp;&amp;delay_osintnesting==<span class="hljs-number">0</span>)<span class="hljs-comment">//如果OS已经在跑了,并且不是在中断里面(中断里面不能任务调度)	    </span><br>	{		 <br>		<span class="hljs-keyword">if</span>(nms&gt;=fac_ms)						<span class="hljs-comment">//延时的时间大于OS的最少时间周期 </span><br>		{ <br>   			delay_ostimedly(nms/fac_ms);	<span class="hljs-comment">//OS延时</span><br>		}<br>		nms%=fac_ms;						<span class="hljs-comment">//OS已经无法提供这么小的延时了,采用普通方式延时    </span><br>	}<br>	delay_us((<span class="hljs-type">uint32_t</span>)(nms*<span class="hljs-number">1000</span>));				<span class="hljs-comment">//普通方式延时</span><br>}<br><span class="hljs-meta">#<span class="hljs-keyword">else</span>  <span class="hljs-comment">//不用ucos时</span></span><br><br><span class="hljs-comment">//延时nus</span><br><span class="hljs-comment">//nus为要延时的us数.	</span><br><span class="hljs-comment">//nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	 </span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span><br>{		<br>	<span class="hljs-type">uint32_t</span> ticks;<br>	<span class="hljs-type">uint32_t</span> told,tnow,tcnt=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">uint32_t</span> reload=SysTick-&gt;LOAD;				<span class="hljs-comment">//LOAD的值	    	 </span><br>	ticks=nus*fac_us; 						<span class="hljs-comment">//需要的节拍数 </span><br>	told=SysTick-&gt;VAL;        				<span class="hljs-comment">//刚进入时的计数器值</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	{<br>		tnow=SysTick-&gt;VAL;	<br>		<span class="hljs-keyword">if</span>(tnow!=told)<br>		{	    <br>			<span class="hljs-keyword">if</span>(tnow&lt;told)tcnt+=told-tnow;	<span class="hljs-comment">//这里注意一下SYSTICK是一个递减的计数器就可以了.</span><br>			<span class="hljs-keyword">else</span> tcnt+=reload-tnow+told;	    <br>			told=tnow;<br>			<span class="hljs-keyword">if</span>(tcnt&gt;=ticks)<span class="hljs-keyword">break</span>;			<span class="hljs-comment">//时间超过/等于要延迟的时间,则退出.</span><br>		}  <br>	};<br>}<br><br><span class="hljs-comment">//延时nms</span><br><span class="hljs-comment">//nms:要延时的ms数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span><br>{<br>	<span class="hljs-type">uint32_t</span> i;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;nms;i++) delay_us(<span class="hljs-number">1000</span>);<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
-<p>delay.h</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> _DELAY_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _DELAY_H	  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"main.h"</span></span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_init</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> SYSCLK)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span>;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br></code></pre></td></tr></table></figure>
-<h2 id="实践任务">实践任务</h2>
-<ol type="1">
-<li>在源代码的基础上使得流水灯来回流动而不是单向流动</li>
-<li>通过控制灯亮与灭的持续时间来控制灯的亮度，实现四个不同亮度的灯（原理与PWM相同）</li>
-<li>(拓展)使用定时器中断来实现流水灯的效果</li>
-</ol>
-]]></content>
-      <categories>
-        <category>学海无涯</category>
-        <category>STM32</category>
-      </categories>
-      <tags>
-        <tag>单片机</tag>
-        <tag>STM32</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux基础</title>
-    <url>/2022/12/17/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/linux/linux%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="linux-二级目录结构">linux 二级目录结构</h1>
-<ul>
-<li>/boot:存放Linux启动所需内核文件和镜像文件</li>
-<li>/root:管理用户的主目录</li>
-<li>/home:每一个用户都有自己的目录</li>
-<li>/bin:存放最经常使用的命令</li>
-<li>/dev:存放linux的外部设备</li>
-<li>/etc:存放所有的系统管理所需要的配置文件和子目录
-<ul>
-<li>passwd:用户信息</li>
-<li>shadow:用户密码(root)</li>
-<li>group:用户组信息</li>
-<li>gshadow:密码维护信息(root)</li>
-</ul></li>
-</ul>
-<h1 id="linux基本范式">linux基本范式</h1>
-<ul>
-<li>命令关键字</li>
-<li>选项</li>
-<li>命令参数 格式：命令关键字[选项][命令参数]</li>
-</ul>
-<p><strong>可以通过输入</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">命令关键字 --help <br>//或者 help 命令关键字<br></code></pre></td></tr></table></figure>
-<p><strong>查看命令格式</strong></p>
-<h1 id="目录命令">目录命令</h1>
-<ul>
-<li>pwd:打印当前工作目录</li>
-<li>cd:
-<ul>
-<li>访问绝对路径：cd /home/.../dev</li>
-<li>访问相对路径：cd dev</li>
-<li>返回上一个所在目录：cd -</li>
-<li>返回当前目录的父一级目录：cd ../</li>
-<li>切换到用户家目录：cd ~</li>
-</ul></li>
-<li>ls[选项][目录路径]:
-<ul>
-<li>查看当前目录内容</li>
-<li>l：长格式显示</li>
-<li>a：显示所有内容（包括隐藏文件）</li>
-<li>无选项：仅显示非隐藏文件</li>
-</ul></li>
-<li>mkdir [目录名]：新建目录</li>
-</ul>
-<h1 id="文件">文件</h1>
-<h2 id="查看编辑">查看/编辑</h2>
-<ul>
-<li>vi/vim [文件名]：
-<ul>
-<li>文件存在-编辑文件</li>
-<li>文件不存在-新建并编辑文件</li>
-<li>vi编辑规则[[]]</li>
-</ul></li>
-<li>cat [文件路径]:查看文件所有信息（内容长度有限）</li>
-<li>less [文件路径]: 分页查看文件内容</li>
-<li>echo "内容" [命令] [文件名]：
-<ul>
-<li>命令：&gt; 清空文件并写入内容</li>
-<li>命令：&gt;&gt; 追加写入内容</li>
-</ul></li>
-<li>cp[选项][源文件路径][目标文件路径]:
-<ul>
-<li>-a 保留复制前目录和文件的所有属性</li>
-<li>-r 若给出的源文件是一个目录文件，复制该目录下的所有子目录和文件</li>
-</ul></li>
-<li>mv[选项][源文件][目标文件]：
-<ul>
-<li>-i 若指定文件夹有同名文件先询问是否覆盖</li>
-<li>-f 直接覆盖已有的文件</li>
-<li>在移动时可以进行重命名操作</li>
-</ul></li>
-<li>rm[选项][文件访问目录]：
-<ul>
-<li>-f 强制删除文件且不提示信息</li>
-<li>-r 用于删除目录</li>
-</ul></li>
-<li>rmdir 文件访问路径：
-<ul>
-<li>仅删除空目录，有提示信息</li>
-</ul></li>
-</ul>
-<h2 id="权限">权限</h2>
-<ul>
-<li>用户身份：所有者，所属组，其他人</li>
-<li>访问权限：可读，可写，可执行</li>
-<li>权限编码：
-<ul>
-<li>第1个字母，文件类型</li>
-<li>第2，3，4分别表示所有者的可读，可写，可执行文件</li>
-<li>第5，6，7分别表示所属组的可读，可写，可执行文件</li>
-<li>第8，9，10分别表示其他人的可读，可写，可执行文件</li>
-</ul></li>
-<li>sudo
-<ul>
-<li>路径：/ect/sudoers</li>
-<li>root用户用visudo或vi /ect/sudoers修改可用sudo命令的用户</li>
-<li></li>
-</ul></li>
-</ul>
-<h2 id="设置不同用户的权限">设置不同用户的权限</h2>
-<ul>
-<li>权限掩码
-<ul>
-<li>由三个数字组成</li>
-<li>计算方式为6.6.6-x.x.x=y.y.y,分别转化为二进制表示三个用户身份的权限</li>
-<li>对于文件来说现有存取权限最大为6，无执行权限</li>
-<li>对于目录来说现有存取权限最大为7</li>
-<li>用法：umask [-S][权限掩码]</li>
-</ul></li>
-<li>永久设置
-<ul>
-<li>修改.bash_profile文件</li>
-</ul></li>
-<li>chomd文件分配权限 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ll  参看文件权限<br>chmod  o=rwx  a1   将a1的其他人其他人权限设置为满权限  // 属主用u表示，属组用g表示<br>chmode o-x a1  在a1其他人权限中去掉可执行权限   //增加权限是用<br>chmod 747  a1   权限用数字表式<br>chmod o-x,u-x  a1   同时对属主和其他人做减权限<br>[root@localhost home]# chmod -R 777 . 给所有权限<br>chown root a1   将a1的属主改成root<br>chgrp root a1   将a1的属组改成root    chown :root   a1<br> chown root:root  a1   属主和属组一起改   chown a1.root  a1  //中间一个冒号和一个点都可以  chown .a1 a1 只改属组一个  a1下面的属性或目录没有改<br>chown -R  root:root  a1/  将a下面的文件或目录属主和属组全部改成root,-R表示递归修改<br></code></pre></td></tr></table></figure></li>
-<li>chown [user][file]:
-<ul>
-<li>修改文件所有者</li>
-</ul></li>
-<li>chgrp [user][file]:
-<ul>
-<li>修改文件所属组</li>
-</ul></li>
-</ul>
-<h1 id="设置快捷方式">设置快捷方式</h1>
-<ul>
-<li>创建文件xxx.desktop(一定要在Desktop文件夹或usr/share/application文件夹中)
-<ul>
-<li>通过vim写入设置 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[Desktop Entry]<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序名称</span><br>Name=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">描述信息</span><br>Comment=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序的执行命令(可执行文件路径)</span><br>Exec=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">快捷图标位置</span><br>Icon=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">是否在终端中运行</span><br>Terminal=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">desktop的类型,常见值有“Application”和“Link”。</span><br>Type=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">菜单所属分类</span><br>Categories=<br></code></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h1 id="用户和用户组">用户和用户组</h1>
-<ul>
-<li>groupadd[选项][参数][组名]
-<ul>
-<li>-g 指定组的GID</li>
-<li>-f 若指定组已经存在则以成功状态退出</li>
-</ul></li>
-<li>groupmod[选项][修改后的新参数]
-<ul>
-<li>-g 修改组GID</li>
-<li>-n 修改组名称</li>
-</ul></li>
-<li>groupdel [待删除组的名称]</li>
-<li>useradd</li>
-<li>usermod</li>
-<li>userdel</li>
-</ul>
-<h1 id="shell编程">shell编程</h1>
-<h2 id="类型">类型</h2>
-<ul>
-<li>bash,zsh,csh,sh等</li>
-<li>查看环境：cat /etc/shells</li>
-</ul>
-<p>自动补全命令，参数：双击tab 用<span
-class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名:
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.bashrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>alias desktop=&#x27;cd /home/user/Desktop&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.bashrc<br></code></pre></td></tr></table></figure> 设置环境变量： <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.porfile<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>export PATH=$PATH:$Home/usr...<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.profile<br></code></pre></td></tr></table></figure></p>
-<h1 id="命令集合">命令集合</h1>
-<p>ctrl+z:<strong>将一个正在前台执行的命令放在后台并暂停</strong>。</p>
-<p>用jobs命令可将所有在后台运行的程序列出来。 fg + 进程号 打开进程</p>
-<h1 id="查看ip端口">查看IP，端口</h1>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">nmap 127.0.0.1<span class="hljs-comment"># 本地端口</span><br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><figcaption><span>ubuntu</span></figcaption><table><tr><td class="code"><pre><code class="hljs bash">sudo ufw allow 1077<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>学海无涯</category>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>CentOS</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>KMP字符串匹配</title>
     <url>/2022/11/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/</url>
     <content><![CDATA[<h1 id="kmp字符串匹配">KMP字符串匹配</h1>
@@ -671,6 +332,123 @@ Transmission 无线传输 - 洛谷 | 计算机科学教育新生态
 <figcaption aria-hidden="true">有循环</figcaption>
 </figure>
 <p>代码如下： <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-type">char</span> s2[<span class="hljs-number">1000006</span>];<br><span class="hljs-type">int</span> p[<span class="hljs-number">1000006</span>];<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>{<br>    <span class="hljs-type">int</span> m;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%s"</span>,&amp;m,s2+<span class="hljs-number">1</span>);<br>    <span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i&lt;=m;i++){<br>        <span class="hljs-keyword">while</span>(j&amp;&amp;s2[i]!=s2[j+<span class="hljs-number">1</span>])j=p[j];<br>        <span class="hljs-keyword">if</span>(s2[i]==s2[j+<span class="hljs-number">1</span>])j++;<br>        p[i]=j;<br>    }<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,m-p[m]);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>学海无涯</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>c 语言</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>哈希算法</title>
+    <url>/2022/11/30/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="前言">前言</h1>
+<p>对于字符串的比较，如果我们想要判断这两个字符串是否相同，我们需要对字符串的每一个字符进行比较，但这实在是太费时了。那么有没有一种方法能让字符串的比较和数字的比较一样容易呢？哈希算法我为我们提供了思路。</p>
+<hr />
+<h1 id="单模哈希">单模哈希</h1>
+<h2 id="原理">原理</h2>
+<p>将字符串的ASCII码分别乘上a求和后再对b取模，最后得出Hash值，我们比较这两个字符串只需要比较它们的Hash值即可。
+说明：a,b是任意设置的数，不过我们一般让b尽量大，因为b越大Hash值的情况越多，出现两个不同字符串的Hash值越小，而a是为了防止不同位数的字符串Hash值相同。</p>
+<h2 id="缺点">缺点</h2>
+<p>看完原理我们就会发现哈希算法其实并不算完全严谨的算法，它是通过使不同字符串Hash值相同的概率趋近于0来保证字符串比较的正确性。</p>
+<h2 id="例题1hdoj-1004">例题1：HDOJ 1004</h2>
+<h3 id="题目">题目</h3>
+<h4 id="problem-description">Problem Description</h4>
+<p>Contest time again! How excited it is to see balloons floating
+around. But to tell you a secret, the judges' favorite time is guessing
+the most popular problem. When the contest is over, they will count the
+balloons of each color and find the result.</p>
+<p>This year, they decide to leave this lovely job to you.</p>
+<h4 id="input">Input</h4>
+<p>Input contains multiple test cases. Each test case starts with a
+number N (0 &lt; N &lt;= 1000) -- the total number of balloons
+distributed. The next N lines contain one color each. The color of a
+balloon is a string of up to 15 lower-case letters.</p>
+<p>A test case with N = 0 terminates the input and this test case is not
+to be processed.</p>
+<h4 id="output">Output</h4>
+<p>For each case, print the color of balloon for the most popular
+problem on a single line. It is guaranteed that there is a unique
+solution for each test case.</p>
+<h4 id="sample-input">Sample Input</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs input">5<br>green<br>red<br>blue<br>red<br>red<br>3<br>pink<br>orange<br>pink<br>0<br></code></pre></td></tr></table></figure>
+<h4 id="sample-output">Sample Output</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs output">red<br>pink<br></code></pre></td></tr></table></figure>
+<h3 id="题解">题解</h3>
+<p>哈希算法可以到我另一个帖子上查看[[哈希算法]] <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> m;  <br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;  <br>        <span class="hljs-type">int</span> n;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);  <br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> &#123;</span>  <br>            <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> sum;  <br>            <span class="hljs-type">int</span> count;  <br>            <span class="hljs-type">char</span> arr1[<span class="hljs-number">16</span>];  <br>        &#125;;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> <span class="hljs-title">color</span>[1003];</span><br>        <span class="hljs-comment">//初始化结构体  </span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">1001</span>;i++)&#123;  <br>            color[i].sum=<span class="hljs-number">0</span>;  <br>            color[i].count=<span class="hljs-number">0</span>;  <br>        &#125;  <br>        <span class="hljs-type">int</span> st=<span class="hljs-number">0</span>,max1=<span class="hljs-number">1</span>;  <br>        <span class="hljs-type">char</span> arr[<span class="hljs-number">16</span>];  <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;  <br>            m = <span class="hljs-number">0</span>;  <br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, arr);  <br>            <span class="hljs-type">char</span> *t = arr;  <br>            <span class="hljs-comment">//将不同的颜色转化为长整型进行计数（哈希）</span><br>            <span class="hljs-keyword">while</span> (*t != <span class="hljs-string">&#x27;\0&#x27;</span>) &#123;  <br>                m += *t + <span class="hljs-number">133331</span>;  <br>                t++;  <br>            &#125;  <br>            <span class="hljs-type">int</span> j;  <br>            <span class="hljs-keyword">for</span> (j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].sum == m) &#123;  <br>                    color[j].count++;  <br>                &#125;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span> (j == st + <span class="hljs-number">1</span>) &#123;  <br>                st++;  <br>                <span class="hljs-built_in">strcpy</span>(color[st].arr1, arr);  <br>                color[st].count++;  <br>                color[st].sum = m;  <br>            &#125;  <br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].count &gt; color[max1].count)max1 = j;  <br>            &#125;  <br>        &#125;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, color[max1].arr1);  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <br>&#125;<br></code></pre></td></tr></table></figure></p>
+<hr />
+<h2
+id="例题2p3370-模板字符串哈希---洛谷-计算机科学教育新生态-luogu.com.cn">例题2：<a
+href="https://www.luogu.com.cn/problem/P3370">P3370 【模板】字符串哈希 -
+洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></h2>
+<h3 id="题目描述">题目描述</h3>
+<p>如题，给定 <span class="math inline">\(N\)</span> 个字符串（第 <span
+class="math inline">\(i\)</span> 个字符串长度为 <span
+class="math inline">\(M_i\)</span>，字符串内包含数字、大小写字母，大小写敏感），请求出
+<span class="math inline">\(N\)</span>
+个字符串中共有多少个不同的字符串。</p>
+<p><strong>友情提醒：如果真的想好好练习哈希的话，请自觉。</strong></p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行包含一个整数 <span
+class="math inline">\(N\)</span>，为字符串的个数。</p>
+<p>接下来 <span class="math inline">\(N\)</span>
+行每行包含一个字符串，为所提供的字符串。</p>
+<h3 id="输出格式">输出格式</h3>
+<p>输出包含一行，包含一个整数，为不同的字符串个数。</p>
+<h3 id="样例-1">样例 #1</h3>
+<h4 id="样例输入-1">样例输入 #1</h4>
+<figure class="highlight vim"><table><tr><td class="code"><pre><code class="hljs vim"><span class="hljs-number">5</span><br><span class="hljs-keyword">abc</span><br>aaaa<br><span class="hljs-keyword">abc</span><br>abcc<br><span class="hljs-number">12345</span><br></code></pre></td></tr></table></figure>
+<h4 id="样例输出-1">样例输出 #1</h4>
+<figure class="highlight"><table><tr><td class="code"><pre><code class="hljs">4<br></code></pre></td></tr></table></figure>
+<h3 id="提示">提示</h3>
+<p>对于 <span class="math inline">\(30\%\)</span> 的数据：<span
+class="math inline">\(N\leq 10\)</span>，<span
+class="math inline">\(M_i≈6\)</span>，<span
+class="math inline">\(Mmax\leq 15\)</span>。</p>
+<p>对于 <span class="math inline">\(70\%\)</span> 的数据：<span
+class="math inline">\(N\leq 1000\)</span>，<span
+class="math inline">\(M_i≈100\)</span>，<span
+class="math inline">\(Mmax\leq 150\)</span>。</p>
+<p>对于 <span class="math inline">\(100\%\)</span> 的数据：<span
+class="math inline">\(N\leq 10000\)</span>，<span
+class="math inline">\(M_i≈1000\)</span>，<span
+class="math inline">\(Mmax\leq 1500\)</span>。</p>
+<p>样例说明：</p>
+<p>样例中第一个字符串(abc)和第三个字符串(abc)是一样的，所以所提供字符串的集合为{aaaa,abc,abcc,12345}，故共计4个不同的字符串。</p>
+<h3 id="题解-1">题解</h3>
+<p>根据哈希算法的原理构建代码。不过要注意的是，因为无符号长整型在数值溢出时会自动对<span
+class="math inline">\(2^{64}\)</span>取模，因此就不手动取模了。</p>
+<p>代码如下： <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> arr[<span class="hljs-number">10003</span>];  <br><span class="hljs-type">char</span> ch[<span class="hljs-number">10003</span>];  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-type">int</span> count=<span class="hljs-number">0</span>;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,ch);  <br>        <span class="hljs-type">int</span> len=<span class="hljs-built_in">strlen</span>(ch);  <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;len;j++)&#123;  <br>            arr[i]=arr[i]*<span class="hljs-number">13331</span>+ch[j];  <br>        &#125;  <br>        count++;  <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">1</span>;k&lt;i;k++)&#123;  <br>            <span class="hljs-keyword">if</span>(arr[k]==arr[i])&#123;  <br>                count--;  <br>                <span class="hljs-keyword">break</span>;  <br>            &#125;  <br>        &#125;  <br>    &#125;  <br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,count);  <br>&#125;<br></code></pre></td></tr></table></figure></p>
+<hr />
+<h1 id="双模哈希">双模哈希</h1>
+<p>即使我们减少了两个不同字符串Hash值大小相同的概率，但是不排除偶然出现的情况，为了进一步使哈希算法能够达到我们的预期，我们可以分别对两个数取模，并认定同时满足的时候两个字符串是相等的，这样及基本上不会出现问题。</p>
+<p>因为没有找到适合的题目，这里就用C++给出示范代码。（看懂就行，代码没有实际意义）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">using</span> ll=<span class="hljs-type">long</span> <span class="hljs-type">long</span>;<br><span class="hljs-keyword">using</span> ull=<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">1e6</span>+<span class="hljs-number">6</span>,mod=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>ull kpow1[N],hs1[N];<span class="hljs-comment">//% 2^64</span><br>ll kpow2[N],hs2[N];<span class="hljs-comment">//% mod</span><br><span class="hljs-type">char</span> s[N];<span class="hljs-type">int</span> n;<br>pair&lt;ull,ll&gt;<span class="hljs-built_in">gethash</span>(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)&#123;<br>	ull a=hs1[r]-hs1[l<span class="hljs-number">-1</span>]*kpow1[r-l+<span class="hljs-number">1</span>];<br>	ll b=hs2[r]-hs2[l<span class="hljs-number">-1</span>]*kpow2[r-l+<span class="hljs-number">1</span>];<br>	b=(b%mod+mod)%mod;<br>	<span class="hljs-keyword">return</span> &#123;a,b&#125;;<br>&#125;<span class="hljs-comment">//pair是C++中的配对，可以类比C语言中的结构体</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	kpow1[<span class="hljs-number">0</span>]=kpow2[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;N;++i)&#123;<br>		kpow1[i]=kpow1[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>;<br>		kpow2[i]=kpow2[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>%mod;<br>	&#125;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,s+<span class="hljs-number">1</span>);n=<span class="hljs-built_in">strlen</span>(s+<span class="hljs-number">1</span>);<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)&#123;<br>		hs1[i]=hs1[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>+s[i];<br>		hs2[i]=(hs2[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>+s[i])%mod;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<hr />
+<h1 id="开阔视野哈希算法在密码学中">开阔视野（哈希算法在密码学中）</h1>
+<p><strong>Hash的特点</strong></p>
+<p>易压缩：对于任意大小的输入x，Hash值的长度很小，在实际应用中，函数H产生的Hash值其长度是固定的。</p>
+<p>易计算：对于任意给定的消息，计算其Hash值比较容易。</p>
+<p>单向性：对于给定的Hash值，要找到使得在计算上是不可行的，即求Hash的逆很困难。在给定某个哈希函数H和哈希值H（M）的情况下，得出M在计算上是不可行的。即从哈希输出无法倒推输入的原始数值。这是哈希函数安全性的基础。</p>
+<p>抗碰撞性：理想的Hash函数是无碰撞的，但在实际算法的设计中很难做到这一点。</p>
+<p>有两种抗碰撞性：一种是弱抗碰撞性，即对于给定的消息，要发现另一个消息，满足在计算上是不可行的；另一种是强抗碰撞性，即对于任意一对不同的消息，使得在计算上也是不可行的。</p>
+<p>高灵敏性：这是从比特位角度出发的，指的是1比特位的输入变化会造成1/2的比特位发生变化。消息M的任何改变都会导致哈希值H（M）发生改变。即如果输入有微小不同，哈希运算后的输出一定不同。</p>
+<p><strong>哈希算法有什么用途？</strong></p>
+<p>哈希算法可以检验信息是否是相同的，这样的优势可以节省重复文件传送的时间。</p>
+<p>举一个生活中很平常的例子，我们在生活工作中会使用一些软件给别人传送文件数据，如果有人传送了一份文件给一个人，然后又有一个人传送了相同的文件给了另外一个人，那么这个社交软件在第二次传送文件的时候会对比两次传送的哈希值，发现是相同的，该软件就不会再次上传文件给服务器了。</p>
+<p>除此之外，哈希算法还可以检验信息的拥有者是否真实。</p>
+<p>比如，我们在一个网站注册一个账号，如果网站把密码保存起来，那这个网站不论有多安全，也会有被盗取的风险。但是如果用保存密码的哈希值代替保存密码，就没有这个风险了，因为哈希值加密过程是不不可逆的。</p>
+<p><strong>哈希算法会不会被破解？</strong></p>
+<p>从理论上说，哈希值是可以被获得的，但是对应的用户密码很难获得。</p>
+<p>假设一个网站被攻破，黑客获得了哈希值，但仅仅只有哈希值还不能登录网站，他还必须算出相应的账号密码。</p>
+<p>计算密码的工作量是非常庞大且繁琐的，严格来讲，密码是有可能被破译的，但破译成本太大，被成功破译的几率很小，所以基本是不用担心密码泄露的。</p>
+<p>当然，黑客们还可以采用一种物理方法，那就是猜密码。他可以随机一个一个的试密码，如果猜的密码算出的哈希值正好与真正的密码哈希值相同，那么就说明这个密码猜对了。</p>
+<p>密码的长度越长，密码越复杂，就越难以猜正确。如果有一种方法能够提高猜中密码的可能，那么可以算是哈希算法被破解了。</p>
+<p>开阔视野内容转载自<a
+href="https://www.cnblogs.com/zfss/p/11065234.html">紫天峰的博客</a></p>
 ]]></content>
       <categories>
         <category>学海无涯</category>
@@ -867,40 +645,6 @@ int，因为在后面的计算可能会超出int范围。</p>
       </tags>
   </entry>
   <entry>
-    <title>keil和STM32的部署</title>
-    <url>/2023/10/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h1 id="keil的部署">keil的部署</h1>
-<h2 id="软件下载">软件下载</h2>
-<p>百度网盘</p>
-<p>链接：https://pan.baidu.com/s/18IuTqzBIFJONlUo6LtuCWw?pwd=9e6n
-提取码：9e6n</p>
-<h2 id="使用说明">使用说明</h2>
-<p>先安装keil本体，基本上选个安装路径，一路下一步就行。</p>
-<p>使用管理员模式打开keil，点击file-&gt;license
-Management,看到如下界面（这是已经激活成功的）</p>
-<p>[[Pasted image 20231025203844.png]]</p>
-<p>打开Keygen.exe,将CID填入，将target设置为ARM,点击Generate，获得License
-Code。</p>
-<p>[[Pasted image 20231025203008.png]]</p>
-<p>回到keil的License Management界面，把License Code 填入，点击Add
-License，Product下面有MDK-ARM Plus为激活成功。</p>
-<h1 id="stm32cubemx的部署">STM32CubeMX的部署</h1>
-<h2 id="软件下载-1">软件下载</h2>
-<p>理论上来说STM32CubeMX为免费软件，但是官网下载是要求注册的，我这里给出我的镜像地址，官网可以直接在网上下载，请自行选择。</p>
-<p>百度网盘</p>
-<p>链接：https://pan.baidu.com/s/1vChvLd9r6J1ioNnKridX5g?pwd=dqsu
-提取码：dqsu</p>
-]]></content>
-      <categories>
-        <category>学海无涯</category>
-        <category>STM32</category>
-      </categories>
-      <tags>
-        <tag>单片机</tag>
-        <tag>STM32</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>宽度优先搜素-BFS</title>
     <url>/2022/12/13/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
     <content><![CDATA[<h1 id="队列">队列</h1>
@@ -924,123 +668,6 @@ License，Product下面有MDK-ARM Plus为激活成功。</p>
         <tag>c 语言</tag>
         <tag>算法</tag>
         <tag>BFS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>哈希算法</title>
-    <url>/2022/11/30/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/C%E8%AF%AD%E8%A8%80/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="前言">前言</h1>
-<p>对于字符串的比较，如果我们想要判断这两个字符串是否相同，我们需要对字符串的每一个字符进行比较，但这实在是太费时了。那么有没有一种方法能让字符串的比较和数字的比较一样容易呢？哈希算法我为我们提供了思路。</p>
-<hr />
-<h1 id="单模哈希">单模哈希</h1>
-<h2 id="原理">原理</h2>
-<p>将字符串的ASCII码分别乘上a求和后再对b取模，最后得出Hash值，我们比较这两个字符串只需要比较它们的Hash值即可。
-说明：a,b是任意设置的数，不过我们一般让b尽量大，因为b越大Hash值的情况越多，出现两个不同字符串的Hash值越小，而a是为了防止不同位数的字符串Hash值相同。</p>
-<h2 id="缺点">缺点</h2>
-<p>看完原理我们就会发现哈希算法其实并不算完全严谨的算法，它是通过使不同字符串Hash值相同的概率趋近于0来保证字符串比较的正确性。</p>
-<h2 id="例题1hdoj-1004">例题1：HDOJ 1004</h2>
-<h3 id="题目">题目</h3>
-<h4 id="problem-description">Problem Description</h4>
-<p>Contest time again! How excited it is to see balloons floating
-around. But to tell you a secret, the judges' favorite time is guessing
-the most popular problem. When the contest is over, they will count the
-balloons of each color and find the result.</p>
-<p>This year, they decide to leave this lovely job to you.</p>
-<h4 id="input">Input</h4>
-<p>Input contains multiple test cases. Each test case starts with a
-number N (0 &lt; N &lt;= 1000) -- the total number of balloons
-distributed. The next N lines contain one color each. The color of a
-balloon is a string of up to 15 lower-case letters.</p>
-<p>A test case with N = 0 terminates the input and this test case is not
-to be processed.</p>
-<h4 id="output">Output</h4>
-<p>For each case, print the color of balloon for the most popular
-problem on a single line. It is guaranteed that there is a unique
-solution for each test case.</p>
-<h4 id="sample-input">Sample Input</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs input">5<br>green<br>red<br>blue<br>red<br>red<br>3<br>pink<br>orange<br>pink<br>0<br></code></pre></td></tr></table></figure>
-<h4 id="sample-output">Sample Output</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs output">red<br>pink<br></code></pre></td></tr></table></figure>
-<h3 id="题解">题解</h3>
-<p>哈希算法可以到我另一个帖子上查看[[哈希算法]] <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> m;  <br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;  <br>        <span class="hljs-type">int</span> n;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);  <br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> &#123;</span>  <br>            <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> sum;  <br>            <span class="hljs-type">int</span> count;  <br>            <span class="hljs-type">char</span> arr1[<span class="hljs-number">16</span>];  <br>        &#125;;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> <span class="hljs-title">color</span>[1003];</span><br>        <span class="hljs-comment">//初始化结构体  </span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">1001</span>;i++)&#123;  <br>            color[i].sum=<span class="hljs-number">0</span>;  <br>            color[i].count=<span class="hljs-number">0</span>;  <br>        &#125;  <br>        <span class="hljs-type">int</span> st=<span class="hljs-number">0</span>,max1=<span class="hljs-number">1</span>;  <br>        <span class="hljs-type">char</span> arr[<span class="hljs-number">16</span>];  <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;  <br>            m = <span class="hljs-number">0</span>;  <br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, arr);  <br>            <span class="hljs-type">char</span> *t = arr;  <br>            <span class="hljs-comment">//将不同的颜色转化为长整型进行计数（哈希）</span><br>            <span class="hljs-keyword">while</span> (*t != <span class="hljs-string">&#x27;\0&#x27;</span>) &#123;  <br>                m += *t + <span class="hljs-number">133331</span>;  <br>                t++;  <br>            &#125;  <br>            <span class="hljs-type">int</span> j;  <br>            <span class="hljs-keyword">for</span> (j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].sum == m) &#123;  <br>                    color[j].count++;  <br>                &#125;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span> (j == st + <span class="hljs-number">1</span>) &#123;  <br>                st++;  <br>                <span class="hljs-built_in">strcpy</span>(color[st].arr1, arr);  <br>                color[st].count++;  <br>                color[st].sum = m;  <br>            &#125;  <br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].count &gt; color[max1].count)max1 = j;  <br>            &#125;  <br>        &#125;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, color[max1].arr1);  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <br>&#125;<br></code></pre></td></tr></table></figure></p>
-<hr />
-<h2
-id="例题2p3370-模板字符串哈希---洛谷-计算机科学教育新生态-luogu.com.cn">例题2：<a
-href="https://www.luogu.com.cn/problem/P3370">P3370 【模板】字符串哈希 -
-洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></h2>
-<h3 id="题目描述">题目描述</h3>
-<p>如题，给定 <span class="math inline">\(N\)</span> 个字符串（第 <span
-class="math inline">\(i\)</span> 个字符串长度为 <span
-class="math inline">\(M_i\)</span>，字符串内包含数字、大小写字母，大小写敏感），请求出
-<span class="math inline">\(N\)</span>
-个字符串中共有多少个不同的字符串。</p>
-<p><strong>友情提醒：如果真的想好好练习哈希的话，请自觉。</strong></p>
-<h3 id="输入格式">输入格式</h3>
-<p>第一行包含一个整数 <span
-class="math inline">\(N\)</span>，为字符串的个数。</p>
-<p>接下来 <span class="math inline">\(N\)</span>
-行每行包含一个字符串，为所提供的字符串。</p>
-<h3 id="输出格式">输出格式</h3>
-<p>输出包含一行，包含一个整数，为不同的字符串个数。</p>
-<h3 id="样例-1">样例 #1</h3>
-<h4 id="样例输入-1">样例输入 #1</h4>
-<figure class="highlight vim"><table><tr><td class="code"><pre><code class="hljs vim"><span class="hljs-number">5</span><br><span class="hljs-keyword">abc</span><br>aaaa<br><span class="hljs-keyword">abc</span><br>abcc<br><span class="hljs-number">12345</span><br></code></pre></td></tr></table></figure>
-<h4 id="样例输出-1">样例输出 #1</h4>
-<figure class="highlight"><table><tr><td class="code"><pre><code class="hljs">4<br></code></pre></td></tr></table></figure>
-<h3 id="提示">提示</h3>
-<p>对于 <span class="math inline">\(30\%\)</span> 的数据：<span
-class="math inline">\(N\leq 10\)</span>，<span
-class="math inline">\(M_i≈6\)</span>，<span
-class="math inline">\(Mmax\leq 15\)</span>。</p>
-<p>对于 <span class="math inline">\(70\%\)</span> 的数据：<span
-class="math inline">\(N\leq 1000\)</span>，<span
-class="math inline">\(M_i≈100\)</span>，<span
-class="math inline">\(Mmax\leq 150\)</span>。</p>
-<p>对于 <span class="math inline">\(100\%\)</span> 的数据：<span
-class="math inline">\(N\leq 10000\)</span>，<span
-class="math inline">\(M_i≈1000\)</span>，<span
-class="math inline">\(Mmax\leq 1500\)</span>。</p>
-<p>样例说明：</p>
-<p>样例中第一个字符串(abc)和第三个字符串(abc)是一样的，所以所提供字符串的集合为{aaaa,abc,abcc,12345}，故共计4个不同的字符串。</p>
-<h3 id="题解-1">题解</h3>
-<p>根据哈希算法的原理构建代码。不过要注意的是，因为无符号长整型在数值溢出时会自动对<span
-class="math inline">\(2^{64}\)</span>取模，因此就不手动取模了。</p>
-<p>代码如下： <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> arr[<span class="hljs-number">10003</span>];  <br><span class="hljs-type">char</span> ch[<span class="hljs-number">10003</span>];  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-type">int</span> count=<span class="hljs-number">0</span>;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,ch);  <br>        <span class="hljs-type">int</span> len=<span class="hljs-built_in">strlen</span>(ch);  <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;len;j++)&#123;  <br>            arr[i]=arr[i]*<span class="hljs-number">13331</span>+ch[j];  <br>        &#125;  <br>        count++;  <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">1</span>;k&lt;i;k++)&#123;  <br>            <span class="hljs-keyword">if</span>(arr[k]==arr[i])&#123;  <br>                count--;  <br>                <span class="hljs-keyword">break</span>;  <br>            &#125;  <br>        &#125;  <br>    &#125;  <br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,count);  <br>&#125;<br></code></pre></td></tr></table></figure></p>
-<hr />
-<h1 id="双模哈希">双模哈希</h1>
-<p>即使我们减少了两个不同字符串Hash值大小相同的概率，但是不排除偶然出现的情况，为了进一步使哈希算法能够达到我们的预期，我们可以分别对两个数取模，并认定同时满足的时候两个字符串是相等的，这样及基本上不会出现问题。</p>
-<p>因为没有找到适合的题目，这里就用C++给出示范代码。（看懂就行，代码没有实际意义）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">using</span> ll=<span class="hljs-type">long</span> <span class="hljs-type">long</span>;<br><span class="hljs-keyword">using</span> ull=<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">1e6</span>+<span class="hljs-number">6</span>,mod=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>ull kpow1[N],hs1[N];<span class="hljs-comment">//% 2^64</span><br>ll kpow2[N],hs2[N];<span class="hljs-comment">//% mod</span><br><span class="hljs-type">char</span> s[N];<span class="hljs-type">int</span> n;<br>pair&lt;ull,ll&gt;<span class="hljs-built_in">gethash</span>(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)&#123;<br>	ull a=hs1[r]-hs1[l<span class="hljs-number">-1</span>]*kpow1[r-l+<span class="hljs-number">1</span>];<br>	ll b=hs2[r]-hs2[l<span class="hljs-number">-1</span>]*kpow2[r-l+<span class="hljs-number">1</span>];<br>	b=(b%mod+mod)%mod;<br>	<span class="hljs-keyword">return</span> &#123;a,b&#125;;<br>&#125;<span class="hljs-comment">//pair是C++中的配对，可以类比C语言中的结构体</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	kpow1[<span class="hljs-number">0</span>]=kpow2[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;N;++i)&#123;<br>		kpow1[i]=kpow1[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>;<br>		kpow2[i]=kpow2[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>%mod;<br>	&#125;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,s+<span class="hljs-number">1</span>);n=<span class="hljs-built_in">strlen</span>(s+<span class="hljs-number">1</span>);<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)&#123;<br>		hs1[i]=hs1[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>+s[i];<br>		hs2[i]=(hs2[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>+s[i])%mod;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<hr />
-<h1 id="开阔视野哈希算法在密码学中">开阔视野（哈希算法在密码学中）</h1>
-<p><strong>Hash的特点</strong></p>
-<p>易压缩：对于任意大小的输入x，Hash值的长度很小，在实际应用中，函数H产生的Hash值其长度是固定的。</p>
-<p>易计算：对于任意给定的消息，计算其Hash值比较容易。</p>
-<p>单向性：对于给定的Hash值，要找到使得在计算上是不可行的，即求Hash的逆很困难。在给定某个哈希函数H和哈希值H（M）的情况下，得出M在计算上是不可行的。即从哈希输出无法倒推输入的原始数值。这是哈希函数安全性的基础。</p>
-<p>抗碰撞性：理想的Hash函数是无碰撞的，但在实际算法的设计中很难做到这一点。</p>
-<p>有两种抗碰撞性：一种是弱抗碰撞性，即对于给定的消息，要发现另一个消息，满足在计算上是不可行的；另一种是强抗碰撞性，即对于任意一对不同的消息，使得在计算上也是不可行的。</p>
-<p>高灵敏性：这是从比特位角度出发的，指的是1比特位的输入变化会造成1/2的比特位发生变化。消息M的任何改变都会导致哈希值H（M）发生改变。即如果输入有微小不同，哈希运算后的输出一定不同。</p>
-<p><strong>哈希算法有什么用途？</strong></p>
-<p>哈希算法可以检验信息是否是相同的，这样的优势可以节省重复文件传送的时间。</p>
-<p>举一个生活中很平常的例子，我们在生活工作中会使用一些软件给别人传送文件数据，如果有人传送了一份文件给一个人，然后又有一个人传送了相同的文件给了另外一个人，那么这个社交软件在第二次传送文件的时候会对比两次传送的哈希值，发现是相同的，该软件就不会再次上传文件给服务器了。</p>
-<p>除此之外，哈希算法还可以检验信息的拥有者是否真实。</p>
-<p>比如，我们在一个网站注册一个账号，如果网站把密码保存起来，那这个网站不论有多安全，也会有被盗取的风险。但是如果用保存密码的哈希值代替保存密码，就没有这个风险了，因为哈希值加密过程是不不可逆的。</p>
-<p><strong>哈希算法会不会被破解？</strong></p>
-<p>从理论上说，哈希值是可以被获得的，但是对应的用户密码很难获得。</p>
-<p>假设一个网站被攻破，黑客获得了哈希值，但仅仅只有哈希值还不能登录网站，他还必须算出相应的账号密码。</p>
-<p>计算密码的工作量是非常庞大且繁琐的，严格来讲，密码是有可能被破译的，但破译成本太大，被成功破译的几率很小，所以基本是不用担心密码泄露的。</p>
-<p>当然，黑客们还可以采用一种物理方法，那就是猜密码。他可以随机一个一个的试密码，如果猜的密码算出的哈希值正好与真正的密码哈希值相同，那么就说明这个密码猜对了。</p>
-<p>密码的长度越长，密码越复杂，就越难以猜正确。如果有一种方法能够提高猜中密码的可能，那么可以算是哈希算法被破解了。</p>
-<p>开阔视野内容转载自<a
-href="https://www.cnblogs.com/zfss/p/11065234.html">紫天峰的博客</a></p>
-]]></content>
-      <categories>
-        <category>学海无涯</category>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>c 语言</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1156,6 +783,379 @@ class="math inline">\(\dots\)</span>+数字+回车； <figure class="highlight c
       <tags>
         <tag>c 语言</tag>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git</title>
+    <url>/2023/04/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/Git/git/</url>
+    <content><![CDATA[<h1 id="git-flow-的常用分支">Git Flow 的常用分支</h1>
+<h2 id="生产分支master">生产分支（master）‌</h2>
+<p>Master分支是仓库的主分支，这个分支包含最近发布到生产环境的代码，最近发布的Release，
+这个分支只能从其他分支合并，不能在这个分支直接修改‌</p>
+<h2 id="补丁分支hotfix">补丁分支（hotfix）</h2>
+<p>当我们在生产环境发现新的Bug时候，我们需要基于master分支创建一个Hotfix分支，然后在Hotfix分支上修复bug，完成Hotfix后，我们要把hotfix分支合并回Master和Develop分支‌</p>
+<h2 id="发布分支release">发布分支（release)‌</h2>
+<p>当你需要发布一个新功能的时候，要基于Develop分支创建一个Release分支，在Release分支测试并修复bug，完成release后，把release合并到master和develop分支‌
+## 开发分支（develop）‌</p>
+<p>这个分支是我们的主开发分支，包含所有要发布到下一个Release的代码，这个主要合并与其他分支，比如Feature分支‌</p>
+<h2 id="功能分支feature">功能分支（feature）‌</h2>
+<p>feature分支主要是用来开发一个新的功能，一旦开发完成，我们合并回Develop分支进入下一个Release‌</p>
+<h1 id="文件">文件</h1>
+<p>这里一部分与linux终端下的命令相同。</p>
+<h2 id="创建文件">创建文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 单个创建</span><br><span class="hljs-built_in">touch</span> File1Name File2Name <br><span class="hljs-comment"># 批量创建（touch 文件名&#123;最小数值…最大数值&#125;.扩展名）</span><br><span class="hljs-built_in">touch</span> text&#123; 0001..2000 &#125;.txt <br></code></pre></td></tr></table></figure>
+<h2 id="删除文件">删除文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 删除当前文件</span><br><span class="hljs-built_in">rm</span> &lt;文件名&gt;<br><span class="hljs-comment"># 删除版本库中的文件</span><br>git <span class="hljs-built_in">rm</span> &lt;文件名&gt;<br><span class="hljs-comment"># 删除文件夹（可不为空）</span><br><span class="hljs-built_in">rm</span> -r &lt;目录名&gt;<br><span class="hljs-comment"># 删除文件夹（必须为空)</span><br><span class="hljs-built_in">rmdir</span> &lt;目录名&gt;<br></code></pre></td></tr></table></figure>
+<h1 id="git文件状态">git文件状态</h1>
+<h2 id="显示当前状态">显示当前状态</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git status<br></code></pre></td></tr></table></figure>
+<h2 id="加入文件到缓存区">加入文件到缓存区</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git add &lt;文件名&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="将版本更迭">将版本更迭</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -m 后面是这个版本的相关信息</span><br>git commit -m <span class="hljs-string">&quot;&lt;相关信息&gt;&quot;</span><br></code></pre></td></tr></table></figure>
+<h2 id="查看日志">查看日志</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这个命令实则是git reflog show HEAD 的简化写法</span><br>git reflog<br><span class="hljs-comment"># 查看所有日志</span><br>git reflog show --all<br><span class="hljs-comment"># 查看特定的分支</span><br>git reflog show &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
+<h1 id="分支管理">分支管理</h1>
+<h2 id="创建分支命令">创建分支命令</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git checkout &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="切换分支命令">切换分支命令</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git switch &lt;分支名&gt;<br>git checkout &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="查看分支">查看分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git banch<br></code></pre></td></tr></table></figure>
+<h2 id="合并分支">合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这里要注意在主分支</span><br>git merge &lt;副分支名&gt;<br><span class="hljs-comment"># 合并没有历史记录相同的分支</span><br>git merge &lt;副分支名&gt; --allow-unrelated-histories<br></code></pre></td></tr></table></figure>
+<h2 id="删除分支">删除分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git branch -d &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
+<h1 id="标签管理">标签管理</h1>
+<h2 id="增加本地标签">增加本地标签</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 不带说明的标签</span><br>git tag <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br><span class="hljs-comment"># 带说明的标签</span><br>git tag -a &lt;标签名&gt; -m <span class="hljs-string">&quot;&lt;说明信息&gt;&quot;</span><br></code></pre></td></tr></table></figure>
+<h2 id="增加远程标签">增加远程标签</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git push origin <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br></code></pre></td></tr></table></figure>
+<p>因为这个用的少，就不深入说明了。</p>
+<h2 id="查看标签">查看标签</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出所有标签（字母顺序）</span><br>git tag<br><span class="hljs-comment"># 查看标签信息</span><br>git show &lt;标签名&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="删除标签">删除标签</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git tag -d <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br></code></pre></td></tr></table></figure>
+<h1 id="暂存栈管理">暂存栈管理</h1>
+<h2 id="创建暂存栈">创建暂存栈</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 直接创建</span><br>git stash<br><span class="hljs-comment"># 加注释创建</span><br>git stash save <span class="hljs-string">&quot;&lt;注释&gt;&quot;</span><br></code></pre></td></tr></table></figure>
+<p>这个命令会将所有未递交的修改保存起来。</p>
+<h2 id="重新应用缓存">重新应用缓存</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git stash pop<br></code></pre></td></tr></table></figure>
+<p>这个指令将缓存堆栈中的第一个stash删除，并将对应修改应用到当前的工作目录下。</p>
+<h2 id="查看现有stash">查看现有stash</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git stash list<br></code></pre></td></tr></table></figure>
+<p>在使用<code>git stash apply</code>命令时可以通过名字指定使用哪个stash，默认使用最近的stash（即stash@{0}）。</p>
+<h2 id="移除stash">移除stash</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这里的下标是从0开始由第一个向下递增的</span><br>git stash drop stash@&#123;&lt;下标&gt;&#125;<br><span class="hljs-comment"># 利用注释删除指定栈</span><br>git stash drop <span class="hljs-string">&quot;&lt;注释&gt;&quot;</span><br></code></pre></td></tr></table></figure>
+<h2 id="查看指定stash的diff">查看指定stash的diff</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git stash show<br></code></pre></td></tr></table></figure>
+<h1 id="版本管理">版本管理</h1>
+<h2 id="还原">还原</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使某个文件回到add缓存区的版本</span><br>git checkout &lt;文件名&gt;<br><span class="hljs-comment"># 回退指定版本</span><br>git reset [--soft | --mixed | --hard] &lt;指定版本编号&gt;<br></code></pre></td></tr></table></figure>
+<p>下面说明参数的意义：</p>
+<ul>
+<li>--soft:将HEAD指向指定的版本上。但是工作区的文件和暂存区的文件都不改变，仅仅退回commit的信息。</li>
+<li>--mixed:git
+reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也改变，但是工作区的文件不改变。</li>
+<li>--hard:彻底回退到指定的版本。</li>
+</ul>
+<h1 id="远程库github">远程库（github）</h1>
+<h2 id="创建远程仓库">创建远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 添加远程仓库</span><br>git remote add &lt;远程仓库名&gt; &lt;地址&gt;<br><span class="hljs-comment"># 第一次推送</span><br>git push -u &lt;远程仓库名&gt; &lt;地址&gt;  <br><span class="hljs-comment"># 之后推送</span><br>git push &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="查看远程仓库">查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git remote -v<br></code></pre></td></tr></table></figure>
+<h2 id="修改远程仓库">修改远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git remote set-url &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="克隆远程库">克隆远程库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 克隆</span><br>git <span class="hljs-built_in">clone</span> &lt;地址&gt;<br><span class="hljs-comment"># 拉取最新递交</span><br>git pull<br></code></pre></td></tr></table></figure>
+<h2 id="删除远程仓库">删除远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git remote <span class="hljs-built_in">rm</span> &lt;仓库名&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="初始化本地项目">初始化本地项目</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;&lt;你的名字或昵称&gt;&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;&lt;你的邮箱&gt;&quot;</span><br>git init <br>git remote add &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="创建分支到本地">创建分支到本地</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git checkout -b &lt;本地仓库名&gt; &lt;远程仓库名&gt;/&lt;分支名&gt;<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>学海无涯</category>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux基础</title>
+    <url>/2022/12/17/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/linux/linux%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="linux-二级目录结构">linux 二级目录结构</h1>
+<ul>
+<li>/boot:存放Linux启动所需内核文件和镜像文件</li>
+<li>/root:管理用户的主目录</li>
+<li>/home:每一个用户都有自己的目录</li>
+<li>/bin:存放最经常使用的命令</li>
+<li>/dev:存放linux的外部设备</li>
+<li>/etc:存放所有的系统管理所需要的配置文件和子目录
+<ul>
+<li>passwd:用户信息</li>
+<li>shadow:用户密码(root)</li>
+<li>group:用户组信息</li>
+<li>gshadow:密码维护信息(root)</li>
+</ul></li>
+</ul>
+<h1 id="linux基本范式">linux基本范式</h1>
+<ul>
+<li>命令关键字</li>
+<li>选项</li>
+<li>命令参数 格式：命令关键字[选项][命令参数]</li>
+</ul>
+<p><strong>可以通过输入</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">命令关键字 --help <br>//或者 help 命令关键字<br></code></pre></td></tr></table></figure>
+<p><strong>查看命令格式</strong></p>
+<h1 id="目录命令">目录命令</h1>
+<ul>
+<li>pwd:打印当前工作目录</li>
+<li>cd:
+<ul>
+<li>访问绝对路径：cd /home/.../dev</li>
+<li>访问相对路径：cd dev</li>
+<li>返回上一个所在目录：cd -</li>
+<li>返回当前目录的父一级目录：cd ../</li>
+<li>切换到用户家目录：cd ~</li>
+</ul></li>
+<li>ls[选项][目录路径]:
+<ul>
+<li>查看当前目录内容</li>
+<li>l：长格式显示</li>
+<li>a：显示所有内容（包括隐藏文件）</li>
+<li>无选项：仅显示非隐藏文件</li>
+</ul></li>
+<li>mkdir [目录名]：新建目录</li>
+</ul>
+<h1 id="文件">文件</h1>
+<h2 id="查看编辑">查看/编辑</h2>
+<ul>
+<li>vi/vim [文件名]：
+<ul>
+<li>文件存在-编辑文件</li>
+<li>文件不存在-新建并编辑文件</li>
+<li>vi编辑规则[[]]</li>
+</ul></li>
+<li>cat [文件路径]:查看文件所有信息（内容长度有限）</li>
+<li>less [文件路径]: 分页查看文件内容</li>
+<li>echo "内容" [命令] [文件名]：
+<ul>
+<li>命令：&gt; 清空文件并写入内容</li>
+<li>命令：&gt;&gt; 追加写入内容</li>
+</ul></li>
+<li>cp[选项][源文件路径][目标文件路径]:
+<ul>
+<li>-a 保留复制前目录和文件的所有属性</li>
+<li>-r 若给出的源文件是一个目录文件，复制该目录下的所有子目录和文件</li>
+</ul></li>
+<li>mv[选项][源文件][目标文件]：
+<ul>
+<li>-i 若指定文件夹有同名文件先询问是否覆盖</li>
+<li>-f 直接覆盖已有的文件</li>
+<li>在移动时可以进行重命名操作</li>
+</ul></li>
+<li>rm[选项][文件访问目录]：
+<ul>
+<li>-f 强制删除文件且不提示信息</li>
+<li>-r 用于删除目录</li>
+</ul></li>
+<li>rmdir 文件访问路径：
+<ul>
+<li>仅删除空目录，有提示信息</li>
+</ul></li>
+</ul>
+<h2 id="权限">权限</h2>
+<ul>
+<li>用户身份：所有者，所属组，其他人</li>
+<li>访问权限：可读，可写，可执行</li>
+<li>权限编码：
+<ul>
+<li>第1个字母，文件类型</li>
+<li>第2，3，4分别表示所有者的可读，可写，可执行文件</li>
+<li>第5，6，7分别表示所属组的可读，可写，可执行文件</li>
+<li>第8，9，10分别表示其他人的可读，可写，可执行文件</li>
+</ul></li>
+<li>sudo
+<ul>
+<li>路径：/ect/sudoers</li>
+<li>root用户用visudo或vi /ect/sudoers修改可用sudo命令的用户</li>
+<li></li>
+</ul></li>
+</ul>
+<h2 id="设置不同用户的权限">设置不同用户的权限</h2>
+<ul>
+<li>权限掩码
+<ul>
+<li>由三个数字组成</li>
+<li>计算方式为6.6.6-x.x.x=y.y.y,分别转化为二进制表示三个用户身份的权限</li>
+<li>对于文件来说现有存取权限最大为6，无执行权限</li>
+<li>对于目录来说现有存取权限最大为7</li>
+<li>用法：umask [-S][权限掩码]</li>
+</ul></li>
+<li>永久设置
+<ul>
+<li>修改.bash_profile文件</li>
+</ul></li>
+<li>chomd文件分配权限 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ll  参看文件权限<br>chmod  o=rwx  a1   将a1的其他人其他人权限设置为满权限  // 属主用u表示，属组用g表示<br>chmode o-x a1  在a1其他人权限中去掉可执行权限   //增加权限是用<br>chmod 747  a1   权限用数字表式<br>chmod o-x,u-x  a1   同时对属主和其他人做减权限<br>[root@localhost home]# chmod -R 777 . 给所有权限<br>chown root a1   将a1的属主改成root<br>chgrp root a1   将a1的属组改成root    chown :root   a1<br> chown root:root  a1   属主和属组一起改   chown a1.root  a1  //中间一个冒号和一个点都可以  chown .a1 a1 只改属组一个  a1下面的属性或目录没有改<br>chown -R  root:root  a1/  将a下面的文件或目录属主和属组全部改成root,-R表示递归修改<br></code></pre></td></tr></table></figure></li>
+<li>chown [user][file]:
+<ul>
+<li>修改文件所有者</li>
+</ul></li>
+<li>chgrp [user][file]:
+<ul>
+<li>修改文件所属组</li>
+</ul></li>
+</ul>
+<h1 id="设置快捷方式">设置快捷方式</h1>
+<ul>
+<li>创建文件xxx.desktop(一定要在Desktop文件夹或usr/share/application文件夹中)
+<ul>
+<li>通过vim写入设置 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[Desktop Entry]<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序名称</span><br>Name=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">描述信息</span><br>Comment=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序的执行命令(可执行文件路径)</span><br>Exec=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">快捷图标位置</span><br>Icon=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">是否在终端中运行</span><br>Terminal=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">desktop的类型,常见值有“Application”和“Link”。</span><br>Type=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">菜单所属分类</span><br>Categories=<br></code></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h1 id="用户和用户组">用户和用户组</h1>
+<ul>
+<li>groupadd[选项][参数][组名]
+<ul>
+<li>-g 指定组的GID</li>
+<li>-f 若指定组已经存在则以成功状态退出</li>
+</ul></li>
+<li>groupmod[选项][修改后的新参数]
+<ul>
+<li>-g 修改组GID</li>
+<li>-n 修改组名称</li>
+</ul></li>
+<li>groupdel [待删除组的名称]</li>
+<li>useradd</li>
+<li>usermod</li>
+<li>userdel</li>
+</ul>
+<h1 id="shell编程">shell编程</h1>
+<h2 id="类型">类型</h2>
+<ul>
+<li>bash,zsh,csh,sh等</li>
+<li>查看环境：cat /etc/shells</li>
+</ul>
+<p>自动补全命令，参数：双击tab 用<span
+class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名:
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.bashrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>alias desktop=&#x27;cd /home/user/Desktop&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.bashrc<br></code></pre></td></tr></table></figure> 设置环境变量： <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.porfile<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>export PATH=$PATH:$Home/usr...<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.profile<br></code></pre></td></tr></table></figure></p>
+<h1 id="命令集合">命令集合</h1>
+<p>ctrl+z:<strong>将一个正在前台执行的命令放在后台并暂停</strong>。</p>
+<p>用jobs命令可将所有在后台运行的程序列出来。 fg + 进程号 打开进程</p>
+<h1 id="查看ip端口">查看IP，端口</h1>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">nmap 127.0.0.1<span class="hljs-comment"># 本地端口</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>ubuntu</span></figcaption><table><tr><td class="code"><pre><code class="hljs bash">sudo ufw allow 1077<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>学海无涯</category>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>CentOS</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32流水灯</title>
+    <url>/2023/10/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/</url>
+    <content><![CDATA[<h2 id="stm32cubemx的配置">STM32CubeMX的配置</h2>
+<ul>
+<li>创建STM32CubeMX工程</li>
+</ul>
+<p><img src="img20230913152634.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>打开外部晶振 <img src="img20230913152746.png" srcset="/img/loading.gif" lazyload></p></li>
+<li><p>时钟树设置
+注意外部晶振的频率是由硬件决定的，选择与硬件相匹配的频率 <img src="img20230913152822.png" srcset="/img/loading.gif" lazyload></p></li>
+<li><p>配置IO引脚 <img src="img20230913152948.png" srcset="/img/loading.gif" lazyload></p></li>
+<li><p>配置文件路径和代码生成 <img src="img20230913153027.png" srcset="/img/loading.gif" lazyload></p></li>
+</ul>
+<p><img src="img20230913153117.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>生成代码 <img src="img20230913153155.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+<h2 id="keil配置">KEIL配置</h2>
+<p>下面的工具栏在页面的左上角</p>
+<p><img src="img20230913153352.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击红色方框中的按钮</p>
+<p><img src="img20230913153428.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="img20230913153449.png" srcset="/img/loading.gif" lazyload></p>
+<p>选择你用的烧录器，点击右边的setting后可以看到芯片是否连接成功</p>
+<p><img src="img20230913153556.png" srcset="/img/loading.gif" lazyload></p>
+<p>由于hal库函数中HAL_Delay()函数使用的是系统时钟的中断来实现的，容易进入死循环或者程序卡死，因此使用非中断实现延时，在工程中加入delay.c和delay.h定义了函数Delay_ms()和Delay_us()来实现。下面是在工程中加入文件的指南。</p>
+<p>将Delay文件夹加入文件目录</p>
+<p><img src="img20230913154550.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="img20230913154136.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="img20230913154209.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击add file将delay.c文件加入，并将delay文件夹加入include路径</p>
+<p><img src="img20230913154759.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="img20230913154818.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>编写程序</li>
+</ul>
+<p>注意自己的代码都要写在USER_CODE_BEGIN...和USER_CODE_END...注释之间，否则使用STM32CubeMX重新generate的时候自己的代码会被清除。</p>
+<p>自己定义的端口名称会在main.h中生成(STM32CubeMX自动生成)，这里是我定义的端口</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* Private defines -----------------------------------------------------------*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED1_Pin GPIO_PIN_6</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED1_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED2_Pin GPIO_PIN_7</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED2_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED3_Pin GPIO_PIN_8</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED3_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED4_Pin GPIO_PIN_9</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED4_GPIO_Port GPIOB</span><br></code></pre></td></tr></table></figure>
+<p>为了方便找到位置这里将main.c都列出，加上的代码边上都有注释</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Header */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  * @file           : main.c</span><br><span class="hljs-comment">  * @brief          : Main program body</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  * @attention</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  * Copyright (c) 2023 STMicroelectronics.</span><br><span class="hljs-comment">  * All rights reserved.</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  * This software is licensed under terms that can be found in the LICENSE file</span><br><span class="hljs-comment">  * in the root directory of this software component.</span><br><span class="hljs-comment">  * If no LICENSE file comes with this software, it is provided AS-IS.</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  */</span><br><span class="hljs-comment">/* USER CODE END Header */</span><br><span class="hljs-comment">/* Includes ------------------------------------------------------------------*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"main.h"</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"gpio.h"</span></span><br><br><span class="hljs-comment">/* Private includes ----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN Includes */</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"delay.h"</span></span><br><span class="hljs-comment">/* USER CODE END Includes */</span><br><br><span class="hljs-comment">/* Private typedef -----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PTD */</span><br><br><span class="hljs-comment">/* USER CODE END PTD */</span><br><br><span class="hljs-comment">/* Private define ------------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PD */</span><br><span class="hljs-comment">/* USER CODE END PD */</span><br><br><span class="hljs-comment">/* Private macro -------------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PM */</span><br><br><span class="hljs-comment">/* USER CODE END PM */</span><br><br><span class="hljs-comment">/* Private variables ---------------------------------------------------------*/</span><br><br><span class="hljs-comment">/* USER CODE BEGIN PV */</span><br><br><span class="hljs-comment">/* USER CODE END PV */</span><br><br><span class="hljs-comment">/* Private function prototypes -----------------------------------------------*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SystemClock_Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br><span class="hljs-comment">/* USER CODE BEGIN PFP */</span><br><br><span class="hljs-comment">/* USER CODE END PFP */</span><br><br><span class="hljs-comment">/* Private user code ---------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN 0 */</span><br><br><span class="hljs-comment">/* USER CODE END 0 */</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  The application entry point.</span><br><span class="hljs-comment">  * @retval int</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN 1 */</span><br><br>  <span class="hljs-comment">/* USER CODE END 1 */</span><br><br>  <span class="hljs-comment">/* MCU Configuration--------------------------------------------------------*/</span><br><br>  <span class="hljs-comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span><br>  HAL_Init();<br><br>  <span class="hljs-comment">/* USER CODE BEGIN Init */</span><br>	delay_init(<span class="hljs-number">180</span>);<span class="hljs-comment">// 配置延时函数，参数是系统时钟频率</span><br>  <span class="hljs-comment">/* USER CODE END Init */</span><br><br>  <span class="hljs-comment">/* Configure the system clock */</span><br>  SystemClock_Config();<br><br>  <span class="hljs-comment">/* USER CODE BEGIN SysInit */</span><br><br>  <span class="hljs-comment">/* USER CODE END SysInit */</span><br><br>  <span class="hljs-comment">/* Initialize all configured peripherals */</span><br>  MX_GPIO_Init();<br>  <span class="hljs-comment">/* USER CODE BEGIN 2 */</span><br>  <span class="hljs-comment">// 在测试板中IO引脚输出高电平LED不亮，其他板子请参照原理图</span><br>  HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);<br>  <span class="hljs-comment">/* USER CODE END 2 */</span><br><br>  <span class="hljs-comment">/* Infinite loop */</span><br>  <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span><br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  {<br>	  <span class="hljs-comment">//流水灯begin</span><br>	  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);<br>	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  <span class="hljs-comment">//流水灯end</span><br>    <span class="hljs-comment">/* USER CODE END WHILE */</span><br>	  <br>    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span><br>  }<br>  <span class="hljs-comment">/* USER CODE END 3 */</span><br>}<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief System Clock Configuration</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SystemClock_Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  RCC_OscInitTypeDef RCC_OscInitStruct = {<span class="hljs-number">0</span>};<br>  RCC_ClkInitTypeDef RCC_ClkInitStruct = {<span class="hljs-number">0</span>};<br><br>  <span class="hljs-comment">/** Configure the main internal regulator output voltage</span><br><span class="hljs-comment">  */</span><br>  __HAL_RCC_PWR_CLK_ENABLE();<br>  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);<br><br>  <span class="hljs-comment">/** Initializes the RCC Oscillators according to the specified parameters</span><br><span class="hljs-comment">  * in the RCC_OscInitTypeDef structure.</span><br><span class="hljs-comment">  */</span><br>  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;<br>  RCC_OscInitStruct.HSIState = RCC_HSI_ON;<br>  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;<br>  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;<br>  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;<br>  RCC_OscInitStruct.PLL.PLLM = <span class="hljs-number">8</span>;<br>  RCC_OscInitStruct.PLL.PLLN = <span class="hljs-number">180</span>;<br>  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;<br>  RCC_OscInitStruct.PLL.PLLQ = <span class="hljs-number">2</span>;<br>  RCC_OscInitStruct.PLL.PLLR = <span class="hljs-number">2</span>;<br>  <span class="hljs-keyword">if</span> (HAL_RCC_OscConfig(&amp;RCC_OscInitStruct) != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br><br>  <span class="hljs-comment">/** Activate the Over-Drive mode</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-keyword">if</span> (HAL_PWREx_EnableOverDrive() != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br><br>  <span class="hljs-comment">/** Initializes the CPU, AHB and APB buses clocks</span><br><span class="hljs-comment">  */</span><br>  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK<br>                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;<br>  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;<br>  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;<br>  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;<br>  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;<br><br>  <span class="hljs-keyword">if</span> (HAL_RCC_ClockConfig(&amp;RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br>}<br><br><span class="hljs-comment">/* USER CODE BEGIN 4 */</span><br><br><span class="hljs-comment">/* USER CODE END 4 */</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  This function is executed in case of error occurrence.</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">Error_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN Error_Handler_Debug */</span><br>  <span class="hljs-comment">/* User can add his own implementation to report the HAL error return state */</span><br>  __disable_irq();<br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  {<br>  }<br>  <span class="hljs-comment">/* USER CODE END Error_Handler_Debug */</span><br>}<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span>  USE_FULL_ASSERT</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  Reports the name of the source file and the source line number</span><br><span class="hljs-comment">  *         where the assert_param error has occurred.</span><br><span class="hljs-comment">  * @param  file: pointer to the source file name</span><br><span class="hljs-comment">  * @param  line: assert_param error line source number</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">assert_failed</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> *file, <span class="hljs-type">uint32_t</span> line)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN 6 */</span><br>  <span class="hljs-comment">/* User can add his own implementation to report the file name and line number,</span><br><span class="hljs-comment">     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */</span><br>  <span class="hljs-comment">/* USER CODE END 6 */</span><br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">/* USE_FULL_ASSERT */</span></span><br><br></code></pre></td></tr></table></figure>
+<p>编译通过后烧录即可。</p>
+<p>delay的实现参考正点原子的例程。</p>
+<p>delay.c</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"delay.h"</span></span><br><span class="hljs-comment">////////////////////////////////////////////////////////////////////////////////// 	 </span><br><span class="hljs-comment">//如果使用ucos,则包括下面的头文件即可.</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"includes.h"</span>					<span class="hljs-comment">//ucos 使用	  </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-comment">//////////////////////////////////////////////////////////////////////////////////  </span><br><span class="hljs-comment">//本程序只供学习使用，未经作者许可，不得用于其它任何用途</span><br><span class="hljs-comment">//ALIENTEK STM32F407开发板</span><br><span class="hljs-comment">//使用SysTick的普通计数模式对延迟进行管理(支持ucosii/ucosiii)</span><br><span class="hljs-comment">//包括delay_us,delay_ms</span><br><span class="hljs-comment">//正点原子@ALIENTEK</span><br><span class="hljs-comment">//技术论坛:www.openedv.com</span><br><span class="hljs-comment">//创建日期:2017/4/6</span><br><span class="hljs-comment">//版本：V1.1</span><br><span class="hljs-comment">//版权所有，盗版必究。</span><br><span class="hljs-comment">//Copyright(C) 广州市星翼电子科技有限公司 2014-2024</span><br><span class="hljs-comment">//All rights reserved</span><br><span class="hljs-comment">//********************************************************************************</span><br><span class="hljs-comment">//修改说明</span><br><span class="hljs-comment">////////////////////////////////////////////////////////////////////////////////// </span><br><br><span class="hljs-type">static</span> <span class="hljs-type">uint32_t</span> fac_us=<span class="hljs-number">0</span>;							<span class="hljs-comment">//us延时倍乘数</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS		</span><br>    <span class="hljs-type">static</span> <span class="hljs-type">uint16_t</span> fac_ms=<span class="hljs-number">0</span>;				        <span class="hljs-comment">//ms延时倍乘数,在os下,代表每个节拍的ms数</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS							<span class="hljs-comment">//如果SYSTEM_SUPPORT_OS定义了,说明要支持OS了(不限于UCOS).</span></span><br><span class="hljs-comment">//当delay_us/delay_ms需要支持OS的时候需要三个与OS相关的宏定义和函数来支持</span><br><span class="hljs-comment">//首先是3个宏定义:</span><br><span class="hljs-comment">//delay_osrunning:用于表示OS当前是否正在运行,以决定是否可以使用相关函数</span><br><span class="hljs-comment">//delay_ostickspersec:用于表示OS设定的时钟节拍,delay_init将根据这个参数来初始哈systick</span><br><span class="hljs-comment">//delay_osintnesting:用于表示OS中断嵌套级别,因为中断里面不可以调度,delay_ms使用该参数来决定如何运行</span><br><span class="hljs-comment">//然后是3个函数:</span><br><span class="hljs-comment">//delay_osschedlock:用于锁定OS任务调度,禁止调度</span><br><span class="hljs-comment">//delay_osschedunlock:用于解锁OS任务调度,重新开启调度</span><br><span class="hljs-comment">//delay_ostimedly:用于OS延时,可以引起任务调度.</span><br><br><span class="hljs-comment">//本例程仅作UCOSII和UCOSIII的支持,其他OS,请自行参考着移植</span><br><span class="hljs-comment">//支持UCOSII</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 	OS_CRITICAL_METHOD						<span class="hljs-comment">//OS_CRITICAL_METHOD定义了,说明要支持UCOSII				</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osrunning		OSRunning			<span class="hljs-comment">//OS是否运行标记,0,不运行;1,在运行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_ostickspersec	OS_TICKS_PER_SEC	<span class="hljs-comment">//OS时钟节拍,即每秒调度次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osintnesting 	OSIntNesting		<span class="hljs-comment">//中断嵌套级别,即中断嵌套次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-comment">//支持UCOSIII</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 	CPU_CFG_CRITICAL_METHOD					<span class="hljs-comment">//CPU_CFG_CRITICAL_METHOD定义了,说明要支持UCOSIII	</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osrunning		OSRunning			<span class="hljs-comment">//OS是否运行标记,0,不运行;1,在运行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_ostickspersec	OSCfg_TickRate_Hz	<span class="hljs-comment">//OS时钟节拍,即每秒调度次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osintnesting 	OSIntNestingCtr		<span class="hljs-comment">//中断嵌套级别,即中断嵌套次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br><span class="hljs-comment">//us级延时时,关闭任务调度(防止打断us级延迟)</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_osschedlock</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD   			<span class="hljs-comment">//使用UCOSIII</span></span><br>	OS_ERR err; <br>	OSSchedLock(&amp;err);						<span class="hljs-comment">//UCOSIII的方式,禁止调度，防止打断us延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>										<span class="hljs-comment">//否则UCOSII</span></span><br>	OSSchedLock();							<span class="hljs-comment">//UCOSII的方式,禁止调度，防止打断us延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}<br><br><span class="hljs-comment">//us级延时时,恢复任务调度</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_osschedunlock</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{	<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD   			<span class="hljs-comment">//使用UCOSIII</span></span><br>	OS_ERR err; <br>	OSSchedUnlock(&amp;err);					<span class="hljs-comment">//UCOSIII的方式,恢复调度</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>										<span class="hljs-comment">//否则UCOSII</span></span><br>	OSSchedUnlock();						<span class="hljs-comment">//UCOSII的方式,恢复调度</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}<br><br><span class="hljs-comment">//调用OS自带的延时函数延时</span><br><span class="hljs-comment">//ticks:延时的节拍数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ostimedly</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> ticks)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD</span><br>	OS_ERR err; <br>	OSTimeDly(ticks,OS_OPT_TIME_PERIODIC,&amp;err); <span class="hljs-comment">//UCOSIII延时采用周期模式</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>	OSTimeDly(ticks);						    <span class="hljs-comment">//UCOSII延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> </span><br>}<br> <br><span class="hljs-comment">//systick中断服务函数,使用OS时用到</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SysTick_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{	<br>    HAL_IncTick();<br>	<span class="hljs-keyword">if</span>(delay_osrunning==<span class="hljs-number">1</span>)					<span class="hljs-comment">//OS开始跑了,才执行正常的调度处理</span><br>	{<br>		OSIntEnter();						<span class="hljs-comment">//进入中断</span><br>		OSTimeTick();       				<span class="hljs-comment">//调用ucos的时钟服务程序               </span><br>		OSIntExit();       	 				<span class="hljs-comment">//触发任务切换软中断</span><br>	}<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>			   <br><span class="hljs-comment">//初始化延迟函数</span><br><span class="hljs-comment">//当使用ucos的时候,此函数会初始化ucos的时钟节拍</span><br><span class="hljs-comment">//SYSTICK的时钟固定为AHB时钟</span><br><span class="hljs-comment">//SYSCLK:系统时钟频率</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_init</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> SYSCLK)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br>	<span class="hljs-type">uint32_t</span> reload;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>    HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);<span class="hljs-comment">//SysTick频率为HCLK</span><br>	fac_us=SYSCLK;						<span class="hljs-comment">//不论是否使用OS,fac_us都需要使用</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br>	reload=SYSCLK;					    <span class="hljs-comment">//每秒钟的计数次数 单位为K	   </span><br>	reload*=<span class="hljs-number">1000000</span>/delay_ostickspersec;	<span class="hljs-comment">//根据delay_ostickspersec设定溢出时间</span><br>											<span class="hljs-comment">//reload为24位寄存器,最大值:16777216,在180M下,约合0.745s左右	</span><br>	fac_ms=<span class="hljs-number">1000</span>/delay_ostickspersec;		<span class="hljs-comment">//代表OS可以延时的最少单位	   </span><br>	SysTick-&gt;CTRL|=SysTick_CTRL_TICKINT_Msk;<span class="hljs-comment">//开启SYSTICK中断</span><br>	SysTick-&gt;LOAD=reload; 					<span class="hljs-comment">//每1/OS_TICKS_PER_SEC秒中断一次	</span><br>	SysTick-&gt;CTRL|=SysTick_CTRL_ENABLE_Msk; <span class="hljs-comment">//开启SYSTICK</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}								    <br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br><span class="hljs-comment">//延时nus</span><br><span class="hljs-comment">//nus:要延时的us数.	</span><br><span class="hljs-comment">//nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	    								   </span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span><br>{		<br>	<span class="hljs-type">uint32_t</span> ticks;<br>	<span class="hljs-type">uint32_t</span> told,tnow,tcnt=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">uint32_t</span> reload=SysTick-&gt;LOAD;				<span class="hljs-comment">//LOAD的值	    	 </span><br>	ticks=nus*fac_us; 						<span class="hljs-comment">//需要的节拍数 </span><br>	delay_osschedlock();					<span class="hljs-comment">//阻止OS调度，防止打断us延时</span><br>	told=SysTick-&gt;VAL;        				<span class="hljs-comment">//刚进入时的计数器值</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	{<br>		tnow=SysTick-&gt;VAL;	<br>		<span class="hljs-keyword">if</span>(tnow!=told)<br>		{	    <br>			<span class="hljs-keyword">if</span>(tnow&lt;told)tcnt+=told-tnow;	<span class="hljs-comment">//这里注意一下SYSTICK是一个递减的计数器就可以了.</span><br>			<span class="hljs-keyword">else</span> tcnt+=reload-tnow+told;	    <br>			told=tnow;<br>			<span class="hljs-keyword">if</span>(tcnt&gt;=ticks)<span class="hljs-keyword">break</span>;			<span class="hljs-comment">//时间超过/等于要延迟的时间,则退出.</span><br>		}  <br>	};<br>	delay_osschedunlock();					<span class="hljs-comment">//恢复OS调度											    </span><br>}  <br><span class="hljs-comment">//延时nms</span><br><span class="hljs-comment">//nms:要延时的ms数</span><br><span class="hljs-comment">//nms:0~65535</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span><br>{	<br>	<span class="hljs-keyword">if</span>(delay_osrunning&amp;&amp;delay_osintnesting==<span class="hljs-number">0</span>)<span class="hljs-comment">//如果OS已经在跑了,并且不是在中断里面(中断里面不能任务调度)	    </span><br>	{		 <br>		<span class="hljs-keyword">if</span>(nms&gt;=fac_ms)						<span class="hljs-comment">//延时的时间大于OS的最少时间周期 </span><br>		{ <br>   			delay_ostimedly(nms/fac_ms);	<span class="hljs-comment">//OS延时</span><br>		}<br>		nms%=fac_ms;						<span class="hljs-comment">//OS已经无法提供这么小的延时了,采用普通方式延时    </span><br>	}<br>	delay_us((<span class="hljs-type">uint32_t</span>)(nms*<span class="hljs-number">1000</span>));				<span class="hljs-comment">//普通方式延时</span><br>}<br><span class="hljs-meta">#<span class="hljs-keyword">else</span>  <span class="hljs-comment">//不用ucos时</span></span><br><br><span class="hljs-comment">//延时nus</span><br><span class="hljs-comment">//nus为要延时的us数.	</span><br><span class="hljs-comment">//nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	 </span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span><br>{		<br>	<span class="hljs-type">uint32_t</span> ticks;<br>	<span class="hljs-type">uint32_t</span> told,tnow,tcnt=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">uint32_t</span> reload=SysTick-&gt;LOAD;				<span class="hljs-comment">//LOAD的值	    	 </span><br>	ticks=nus*fac_us; 						<span class="hljs-comment">//需要的节拍数 </span><br>	told=SysTick-&gt;VAL;        				<span class="hljs-comment">//刚进入时的计数器值</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	{<br>		tnow=SysTick-&gt;VAL;	<br>		<span class="hljs-keyword">if</span>(tnow!=told)<br>		{	    <br>			<span class="hljs-keyword">if</span>(tnow&lt;told)tcnt+=told-tnow;	<span class="hljs-comment">//这里注意一下SYSTICK是一个递减的计数器就可以了.</span><br>			<span class="hljs-keyword">else</span> tcnt+=reload-tnow+told;	    <br>			told=tnow;<br>			<span class="hljs-keyword">if</span>(tcnt&gt;=ticks)<span class="hljs-keyword">break</span>;			<span class="hljs-comment">//时间超过/等于要延迟的时间,则退出.</span><br>		}  <br>	};<br>}<br><br><span class="hljs-comment">//延时nms</span><br><span class="hljs-comment">//nms:要延时的ms数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span><br>{<br>	<span class="hljs-type">uint32_t</span> i;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;nms;i++) delay_us(<span class="hljs-number">1000</span>);<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+<p>delay.h</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> _DELAY_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _DELAY_H	  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"main.h"</span></span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_init</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> SYSCLK)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span>;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br></code></pre></td></tr></table></figure>
+<h2 id="实践任务">实践任务</h2>
+<ol type="1">
+<li>在源代码的基础上使得流水灯来回流动而不是单向流动</li>
+<li>通过控制灯亮与灭的持续时间来控制灯的亮度，实现四个不同亮度的灯（原理与PWM相同）</li>
+<li>(拓展)使用定时器中断来实现流水灯的效果</li>
+</ol>
+]]></content>
+      <categories>
+        <category>学海无涯</category>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>单片机</tag>
+        <tag>STM32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>keil和STM32的部署</title>
+    <url>/2023/10/25/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h1 id="keil的部署">keil的部署</h1>
+<h2 id="软件下载">软件下载</h2>
+<p>百度网盘</p>
+<p>链接：https://pan.baidu.com/s/18IuTqzBIFJONlUo6LtuCWw?pwd=9e6n
+提取码：9e6n</p>
+<h2 id="使用说明">使用说明</h2>
+<p>先安装keil本体，基本上选个安装路径，一路下一步就行。</p>
+<p>使用管理员模式打开keil，点击file-&gt;license
+Management,看到如下界面（这是已经激活成功的）</p>
+<p><img src="img20231025203844.png" srcset="/img/loading.gif" lazyload></p>
+<p>打开Keygen.exe,将CID填入，将target设置为ARM,点击Generate，获得License
+Code。</p>
+<p><img src="img20231025203008.png" srcset="/img/loading.gif" lazyload></p>
+<p>回到keil的License Management界面，把License Code 填入，点击Add
+License，Product下面有MDK-ARM Plus为激活成功。</p>
+<h1 id="stm32cubemx的部署">STM32CubeMX的部署</h1>
+<h2 id="软件下载-1">软件下载</h2>
+<p>理论上来说STM32CubeMX为免费软件，但是官网下载是要求注册的，我这里给出我的镜像地址，官网可以直接在网上下载，请自行选择。</p>
+<p>百度网盘</p>
+<p>链接：https://pan.baidu.com/s/1vChvLd9r6J1ioNnKridX5g?pwd=dqsu
+提取码：dqsu</p>
+]]></content>
+      <categories>
+        <category>学海无涯</category>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>单片机</tag>
+        <tag>STM32</tag>
       </tags>
   </entry>
   <entry>
