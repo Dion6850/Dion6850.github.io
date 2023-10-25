@@ -1,98 +1,98 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Hexo Theme Redefine">
-    
-    <meta name="author" content="晓寒">
-    <!-- preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    
-    <!--- Seo Part-->
-    
-    <link rel="canonical" href="http://example.com/2023/04/24/学海无涯/cmake/qt-cmake/"/>
-    <meta name="robots" content="index,follow">
-    <meta name="googlebot" content="index,follow">
-    <meta name="revisit-after" content="1 days">
-    
-        <meta name="description" content="使用I18N国际化支持 1234567891011121314151617181920212223242526272829303132333435363738394041# set是可以用前面的标识来表示后面的数据，可以类比一下c的defineset(QT_VERSION 5)  set(REQUIRED_LIBS Core Gui Widgets)  set(REQUIRED_LIBS_QUA">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/icon/block.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="晓寒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Qt-Cmake配置，设置用户构建目标，生成二进制动态资源，i18n国际化配置等">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qt-Cmake">
 <meta property="og:url" content="http://example.com/2023/04/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/Cmake/Qt-Cmake/index.html">
-<meta property="og:site_name" content="晓寒的博客">
-<meta property="og:description" content="使用I18N国际化支持 1234567891011121314151617181920212223242526272829303132333435363738394041# set是可以用前面的标识来表示后面的数据，可以类比一下c的defineset(QT_VERSION 5)  set(REQUIRED_LIBS Core Gui Widgets)  set(REQUIRED_LIBS_QUA">
+<meta property="og:site_name" content="Xiaohan&#96;s Blog">
+<meta property="og:description" content="Qt-Cmake配置，设置用户构建目标，生成二进制动态资源，i18n国际化配置等">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/04/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/Cmake/Qt-Cmake/Pasted_image_20230414155659.png">
+<meta property="og:image" content="http://example.com/img/cover/Cmake.png">
 <meta property="article:published_time" content="2023-04-24T10:10:15.000Z">
-<meta property="article:modified_time" content="2023-07-15T02:11:58.215Z">
+<meta property="article:modified_time" content="2023-10-25T11:46:49.936Z">
 <meta property="article:author" content="晓寒">
 <meta property="article:tag" content="CMake">
 <meta property="article:tag" content="Qt">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/04/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/Cmake/Qt-Cmake/Pasted_image_20230414155659.png">
-    
-    
-    <!--- Icon Part-->
-    <link rel="icon" type="image/png" href="/img/icon/favicon1.png" sizes="192x192">
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/icon/favicon1.png">
-    <meta name="theme-color" content="#A31F34">
-    <link rel="shortcut icon" href="/img/icon/favicon1.png">
-    <!--- Page Info-->
-    
-    <title>
-        
-            Qt-Cmake -
-        
-        Xiaohan&#39;s Blog
-    </title>
-    
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/cover/Cmake.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Qt-Cmake - Xiaohan`s Blog</title>
 
-    
-<link rel="stylesheet" href="/fonts/fonts.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
-    
-<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
 
-    
-<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
 
-    <!--- Font Part-->
-    
-    
-    
-    
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
-    <!--- Inject Part-->
-    
-    <script id="hexo-configurations">
-    let Global = window.Global || {};
-    Global.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
-    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":"guochao","url":"/css/fonts.css"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Xiaohan","subtitle":{"text":[],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":false,"smart_backspace":false},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/Dion6850","instagram":null,"zhihu":null,"twitter":null,"email":"1079894021@qq.com"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.2","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"},"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/EvanNotFound/hexo-theme-redefine"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"info","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
-    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
-    Global.data_config = {"masonry":false};
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/mac.css">
+<link rel="stylesheet" href="/css/shubiao.css">
+<link rel="stylesheet" href="/css/huadong.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
-    
-    <!--- Fontawesome Part-->
-    
-<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
-    
-<link rel="stylesheet" href="/fontawesome/brands.min.css">
 
-    
-<link rel="stylesheet" href="/fontawesome/solid.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/regular.min.css">
-
-    
-    
-    
-    
+  
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
@@ -100,371 +100,202 @@
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
-<body>
-<div class="progress-bar-container">
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
     
 
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Xiaohan`s blog</strong>
+    </a>
 
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-<main class="page-container">
-
-    
-
-    <div class="main-content-container">
-
-        <div class="main-content-header">
-            <header class="navbar-container">
-    
-    <div class="navbar-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                
-                Xiaohan&#39;s Blog
-                
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Category</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tag</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archive</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
             </a>
-        </div>
-
-        <div class="right">
-            <!-- PC -->
-            <div class="desktop">
-                <ul class="navbar-list">
-                    
-                        
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class="" 
-                                    href="/"  >
-                                    
-                                        
-                                            <i class="fa-regular fa-house"></i>
-                                        
-                                        首页
-                                    
-                                </a>
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class="" 
-                                    href="/archives"  >
-                                    
-                                        
-                                            <i class="fa-regular fa-archive"></i>
-                                        
-                                        归档
-                                    
-                                </a>
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class="" 
-                                    href="/tags/"  >
-                                    
-                                        
-                                            <i class="fa-solid fa-tags"></i>
-                                        
-                                        标签
-                                    
-                                </a>
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class="" 
-                                    href="/categories/"  >
-                                    
-                                        
-                                            <i class="fa-solid fa-folder"></i>
-                                        
-                                        分类
-                                    
-                                </a>
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class="has-dropdown" 
-                                    href="#" onClick="return false;">
-                                    
-                                        
-                                            <i class="fa-regular fa-user"></i>
-                                        
-                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
-                                    
-                                </a>
-                                <!-- Submenu -->
-                                
-                                    <ul class="sub-menu">
-                                    
-                                        <li>
-                                        <a href="/about">ME
-                                        </a>
-                                        </li>
-                                    
-                                        <li>
-                                        <a target="_blank" rel="noopener" href="https://github.com/EvanNotFound/hexo-theme-redefine">GITHUB
-                                        </a>
-                                        </li>
-                                    
-                                    </ul>
-                                
-                            </li>
-                    
-                    
-                        <li class="navbar-item search search-popup-trigger">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <!-- Mobile -->
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
-                
-                <div class="icon-item navbar-bar">
-                    <div class="navbar-bar-middle"></div>
-                </div>
-            </div>
-        </div>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
     </div>
+  </div>
+</nav>
 
-    <!-- Mobile drawer -->
-    <div class="navbar-drawer">
-        <ul class="drawer-navbar-list">
-            
-                
-                    <li class="drawer-navbar-item flex-center">
-                        <a class="" 
-                        href="/"  >
-                             
-                                
-                                    <i class="fa-regular fa-house"></i>
-                                
-                                首页
-                            
-                        </a>
-                    </li>
-                    <!-- Submenu -->
-                    
-            
-                
-                    <li class="drawer-navbar-item flex-center">
-                        <a class="" 
-                        href="/archives"  >
-                             
-                                
-                                    <i class="fa-regular fa-archive"></i>
-                                
-                                归档
-                            
-                        </a>
-                    </li>
-                    <!-- Submenu -->
-                    
-            
-                
-                    <li class="drawer-navbar-item flex-center">
-                        <a class="" 
-                        href="/tags/"  >
-                             
-                                
-                                    <i class="fa-solid fa-tags"></i>
-                                
-                                标签
-                            
-                        </a>
-                    </li>
-                    <!-- Submenu -->
-                    
-            
-                
-                    <li class="drawer-navbar-item flex-center">
-                        <a class="" 
-                        href="/categories/"  >
-                             
-                                
-                                    <i class="fa-solid fa-folder"></i>
-                                
-                                分类
-                            
-                        </a>
-                    </li>
-                    <!-- Submenu -->
-                    
-            
-                
-                    <li class="drawer-navbar-item flex-center">
-                        <a class="has-dropdown" 
-                        href="#" onClick="return false;">
-                            
-                                
-                                    <i class="fa-regular fa-user"></i>
-                                
-                                关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
-                            
-                        </a>
-                    </li>
-                    <!-- Submenu -->
-                              
-                        
-                            <li class="dropdown-item flex-center">
-                                <a class="dropdown-item" href="/about">ME</a>
-                            </li>
-                        
-                            <li class="dropdown-item flex-center">
-                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://github.com/EvanNotFound/hexo-theme-redefine">GITHUB</a>
-                            </li>
-                        
-                    
-            
+  
 
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/mountains.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Qt-Cmake"></span>
+          
         </div>
 
-        <div class="main-content-body">
-
-            
-
-            <div class="main-content">
-
-                
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-
-            <div class="article-title">
-                
-                  <h1 class="article-title-regular">Qt-Cmake</h1>
-                
-              </div>
-              
-                     
-            
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/img/Head_portrait/1.jpg">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">晓寒</span>
-                            
-                                <span class="author-label">Lv2</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-04-24 18:10:15</span>
-        <span class="mobile">2023-04-24 18:10:15</span>
-        <span class="hover-info">创建</span>
-    </span>
+        
+          
+  <div class="mt-3">
     
-        <span class="article-date article-meta-item">
-            <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-07-15 10:11:58</span>
-            <span class="mobile">2023-07-15 10:11:58</span>
-            <span class="hover-info">更新</span>
-        </span>
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-24 18:10" pubdate>
+          2023年4月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.1k 字
+        
+      </span>
     
 
     
-        <span class="article-categories article-meta-item">
-            <i class="fa-regular fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/">学海无涯</a>&nbsp;
-                        </li>
-                    
-                    
-                
-                    
-                        
-                            <li>></li>
-                        
-                        <li>
-                            <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/CMake/">CMake</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fa-regular fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/CMake/">CMake</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/Qt/">Qt</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          27 分钟
+        
+      </span>
     
 
     
     
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
 </div>
 
-                        </div>
-                    </div>
-                </div>
-            
+</div>
 
-            <div class="article-content markdown-body">
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Qt-Cmake</h1>
+            
+            
+              <div class="markdown-body">
+                
                 <h1 id="使用i18n国际化支持">使用I18N国际化支持</h1>
-<div class="highlight-container" data-rel="Cmake"><figure class="iseeu highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># set是可以用前面的标识来表示后面的数据，可以类比一下c的define</span></span><br><span class="line"><span class="keyword">set</span>(QT_VERSION <span class="number">5</span>)  </span><br><span class="line"><span class="keyword">set</span>(REQUIRED_LIBS Core Gui Widgets)  </span><br><span class="line"><span class="keyword">set</span>(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets) </span><br><span class="line"><span class="comment"># 填lupdate和lrelease的路径</span></span><br><span class="line"><span class="keyword">set</span>(LUPDATE_PATH <span class="string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lupdate.exe&quot;</span>)  </span><br><span class="line"><span class="keyword">set</span>(LRELEASE_PATH <span class="string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lrelease.exe&quot;</span>)  </span><br><span class="line"><span class="keyword">set</span>(TS_FILES  </span><br><span class="line">        <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/zh_CN.ts  </span><br><span class="line">        <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/ja_JP.ts)</span><br><span class="line"><span class="comment"># 这里不使用LinguistTools</span></span><br><span class="line"><span class="keyword">find_package</span>(Qt<span class="variable">$&#123;QT_VERSION&#125;</span> COMPONENTS <span class="variable">$&#123;REQUIRED_LIBS&#125;</span> REQUIRED)</span><br><span class="line"><span class="comment"># 创建生成ts文件和qm文件的目标  </span></span><br><span class="line"><span class="comment"># ALL指定加入make all  </span></span><br><span class="line"><span class="keyword">add_custom_target</span>(update_all_ts_files ALL)  </span><br><span class="line"><span class="keyword">add_custom_target</span>(create_all_qm_files ALL)</span><br><span class="line"><span class="comment"># 对每一个ts文件进行操作</span></span><br><span class="line"><span class="keyword">foreach</span>(TS_FILE <span class="variable">$&#123;TS_FILES&#125;</span>)  </span><br><span class="line">    <span class="comment"># 把zh_CN.ts中的zh_CN提取出来  </span></span><br><span class="line">    <span class="keyword">get_filename_component</span>(I18N_NAME <span class="variable">$&#123;TS_FILE&#125;</span> NAME_WE)  </span><br><span class="line">    <span class="keyword">set</span>(TS_TARGET_NAME <span class="string">&quot;update_ts_file_$&#123;I18N_NAME&#125;&quot;</span>)  </span><br><span class="line">    <span class="keyword">add_custom_target</span>(<span class="variable">$&#123;TS_TARGET_NAME&#125;</span>  </span><br><span class="line">            <span class="keyword">COMMAND</span> <span class="variable">$&#123;LUPDATE_PATH&#125;</span> <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span> -ts <span class="variable">$&#123;TS_FILE&#125;</span>  </span><br><span class="line">            VERBATIM)  </span><br><span class="line">    <span class="comment"># 将update_ts_file_&lt;NAME&gt;添加为update_all_ts_files的依赖，下同  </span></span><br><span class="line">    <span class="keyword">add_dependencies</span>(update_all_ts_files <span class="variable">$&#123;TS_TARGET_NAME&#125;</span>)  </span><br><span class="line">    <span class="keyword">set</span>(QM_TARGET_NAME <span class="string">&quot;create_qm_file_$&#123;I18N_NAME&#125;&quot;</span>)  </span><br><span class="line">    <span class="keyword">set</span>(QM_FILE <span class="string">&quot;$&#123;CMAKE_CURRENT_BINARY_DIR&#125;/$&#123;I18N_NAME&#125;.qm&quot;</span>)  </span><br><span class="line">    <span class="keyword">add_custom_target</span>(<span class="variable">$&#123;QM_TARGET_NAME&#125;</span>  </span><br><span class="line">            <span class="keyword">COMMAND</span> <span class="variable">$&#123;LRELEASE_PATH&#125;</span> <span class="variable">$&#123;TS_FILE&#125;</span> -qm <span class="variable">$&#123;QM_FILE&#125;</span>  </span><br><span class="line">            VERBATIM)  </span><br><span class="line">    <span class="comment"># 因为得先有ts文件才能生成qm文件，所以把构建ts文件的目标作为自己的依赖  </span></span><br><span class="line">    <span class="keyword">add_dependencies</span>(<span class="variable">$&#123;QM_TARGET_NAME&#125;</span> <span class="variable">$&#123;TS_TARGET_NAME&#125;</span>)  </span><br><span class="line">    <span class="keyword">add_dependencies</span>(create_all_qm_files <span class="variable">$&#123;QM_TARGET_NAME&#125;</span>)  </span><br><span class="line"><span class="keyword">endforeach</span>()</span><br><span class="line"><span class="comment"># 将.qrc文件拷贝到编译目录</span></span><br><span class="line"><span class="keyword">configure_file</span>(translations.qrc <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span> COPYONLY)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> main.cpp <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)</span><br><span class="line"><span class="comment"># 因为qrc依赖qm文件，所以需要先让qm文件创建完成</span></span><br><span class="line"><span class="keyword">add_dependencies</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> create_all_qm_files)</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs Cmake"><span class="hljs-comment"># set是可以用前面的标识来表示后面的数据，可以类比一下c的define</span><br><span class="hljs-keyword">set</span>(QT_VERSION <span class="hljs-number">5</span>)  <br><span class="hljs-keyword">set</span>(REQUIRED_LIBS Core Gui Widgets)  <br><span class="hljs-keyword">set</span>(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets) <br><span class="hljs-comment"># 填lupdate和lrelease的路径</span><br><span class="hljs-keyword">set</span>(LUPDATE_PATH <span class="hljs-string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lupdate.exe&quot;</span>)  <br><span class="hljs-keyword">set</span>(LRELEASE_PATH <span class="hljs-string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lrelease.exe&quot;</span>)  <br><span class="hljs-keyword">set</span>(TS_FILES  <br>        <span class="hljs-variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/zh_CN.ts  <br>        <span class="hljs-variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/ja_JP.ts)<br><span class="hljs-comment"># 这里不使用LinguistTools</span><br><span class="hljs-keyword">find_package</span>(Qt<span class="hljs-variable">$&#123;QT_VERSION&#125;</span> COMPONENTS <span class="hljs-variable">$&#123;REQUIRED_LIBS&#125;</span> REQUIRED)<br><span class="hljs-comment"># 创建生成ts文件和qm文件的目标  </span><br><span class="hljs-comment"># ALL指定加入make all  </span><br><span class="hljs-keyword">add_custom_target</span>(update_all_ts_files ALL)  <br><span class="hljs-keyword">add_custom_target</span>(create_all_qm_files ALL)<br><span class="hljs-comment"># 对每一个ts文件进行操作</span><br><span class="hljs-keyword">foreach</span>(TS_FILE <span class="hljs-variable">$&#123;TS_FILES&#125;</span>)  <br>    <span class="hljs-comment"># 把zh_CN.ts中的zh_CN提取出来  </span><br>    <span class="hljs-keyword">get_filename_component</span>(I18N_NAME <span class="hljs-variable">$&#123;TS_FILE&#125;</span> NAME_WE)  <br>    <span class="hljs-keyword">set</span>(TS_TARGET_NAME <span class="hljs-string">&quot;update_ts_file_$&#123;I18N_NAME&#125;&quot;</span>)  <br>    <span class="hljs-keyword">add_custom_target</span>(<span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>  <br>            <span class="hljs-keyword">COMMAND</span> <span class="hljs-variable">$&#123;LUPDATE_PATH&#125;</span> <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span> -ts <span class="hljs-variable">$&#123;TS_FILE&#125;</span>  <br>            VERBATIM)  <br>    <span class="hljs-comment"># 将update_ts_file_&lt;NAME&gt;添加为update_all_ts_files的依赖，下同  </span><br>    <span class="hljs-keyword">add_dependencies</span>(update_all_ts_files <span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>)  <br>    <span class="hljs-keyword">set</span>(QM_TARGET_NAME <span class="hljs-string">&quot;create_qm_file_$&#123;I18N_NAME&#125;&quot;</span>)  <br>    <span class="hljs-keyword">set</span>(QM_FILE <span class="hljs-string">&quot;$&#123;CMAKE_CURRENT_BINARY_DIR&#125;/$&#123;I18N_NAME&#125;.qm&quot;</span>)  <br>    <span class="hljs-keyword">add_custom_target</span>(<span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span>  <br>            <span class="hljs-keyword">COMMAND</span> <span class="hljs-variable">$&#123;LRELEASE_PATH&#125;</span> <span class="hljs-variable">$&#123;TS_FILE&#125;</span> -qm <span class="hljs-variable">$&#123;QM_FILE&#125;</span>  <br>            VERBATIM)  <br>    <span class="hljs-comment"># 因为得先有ts文件才能生成qm文件，所以把构建ts文件的目标作为自己的依赖  </span><br>    <span class="hljs-keyword">add_dependencies</span>(<span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span> <span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>)  <br>    <span class="hljs-keyword">add_dependencies</span>(create_all_qm_files <span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span>)  <br><span class="hljs-keyword">endforeach</span>()<br><span class="hljs-comment"># 将.qrc文件拷贝到编译目录</span><br><span class="hljs-keyword">configure_file</span>(translations.qrc <span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span> COPYONLY)<br> <br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp <span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br><span class="hljs-comment"># 因为qrc依赖qm文件，所以需要先让qm文件创建完成</span><br><span class="hljs-keyword">add_dependencies</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> create_all_qm_files)<br></code></pre></td></tr></table></figure>
 <p>这里的translations.qrc代码格式如下(也可使用rcc自动生成)：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;RCC&gt;  </span><br><span class="line">    &lt;qresource&gt;  </span><br><span class="line">        &lt;file&gt;zh_CN.qm&lt;/file&gt;  </span><br><span class="line">        &lt;file&gt;ja_JP.qm&lt;/file&gt;  </span><br><span class="line">    &lt;/qresource&gt;  </span><br><span class="line">&lt;/RCC&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs qrc">&lt;RCC&gt;  <br>    &lt;qresource&gt;  <br>        &lt;file&gt;zh_CN.qm&lt;/file&gt;  <br>        &lt;file&gt;ja_JP.qm&lt;/file&gt;  <br>    &lt;/qresource&gt;  <br>&lt;/RCC&gt;<br></code></pre></td></tr></table></figure>
 <p>以上代码可以更改lupdate和lrelease的路径后直接使用。</p>
-<div class="highlight-container" data-rel="Cmake"><figure class="iseeu highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(\<span class="variable">$&#123;PROJECT_NAME&#125;</span> main.cpp\<span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)</span><br><span class="line"><span class="comment"># 将上面代码改为下面代码可以去掉运行时的命令行</span></span><br><span class="line"><span class="keyword">add_executable</span>(\<span class="variable">$&#123;PROJECT_NAME&#125;</span> WIN32 main.cpp\<span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)</span><br></pre></td></tr></table></figure></div>
-<p>qt中的使用： <div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QTranslator trans;  </span><br><span class="line"><span class="keyword">if</span> (trans.<span class="built_in">load</span>(<span class="string">&quot;:/ja_JP.qm&quot;</span>)) &#123;  </span><br><span class="line">    QCoreApplication::<span class="built_in">installTranslator</span>(&amp;trans);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_executable</span>(\<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp\<span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br><span class="hljs-comment"># 将上面代码改为下面代码可以去掉运行时的命令行</span><br><span class="hljs-keyword">add_executable</span>(\<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> WIN32 main.cpp\<span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br></code></pre></td></tr></table></figure>
+<p>qt中的使用： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++">QTranslator trans;  <br><span class="hljs-keyword">if</span> (trans.<span class="hljs-built_in">load</span>(<span class="hljs-string">&quot;:/ja_JP.qm&quot;</span>)) &#123;  <br>    QCoreApplication::<span class="hljs-built_in">installTranslator</span>(&amp;trans);  <br>&#125;<br></code></pre></td></tr></table></figure></p>
 <p>也可以使用QT自带的翻译: 在Qt的安装目录
 C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
 中有名为qt_zh_CN.qm翻译文件，QLineEdit等通过加载该翻译文件就能实现右键中文菜单，如下所示：</p>
@@ -472,401 +303,215 @@ C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
  <br />
 //加载Qt中的资源文件，使Qt显示中文（包括QMessageBox、QLineEdit右键菜单等）<br />
  </p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QTranslator translator;	  translator.load(&quot;:/translations/qt_zh_CN.qm&quot;);</span><br><span class="line">a.installTranslator(&amp;translator);</span><br></pre></td></tr></table></figure></div>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="Pasted_image_20230414155659.png"
-                      
-                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cobol">QTranslator translator;	  translator.load(&quot;:/translations/qt_zh_CN.qm&quot;);<br>a.installTranslator(&amp;translator);<br></code></pre></td></tr></table></figure>
+<p><img src="Pasted_image_20230414155659.png" srcset="/img/loading.gif" lazyload /></p>
 <p>这个图很好地解释了使用qrc来实现实际上是将资源直接集成到exe中了，这里提供用rcc的外部动态库</p>
 <h1 id="add_coustom_command使用">add_coustom_command使用</h1>
-<div class="highlight-container" data-rel="Cmake"><figure class="iseeu highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_custom_command</span>(OUTPUT <span class="variable">$&#123;TEST_FILE&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COMMAND</span> touch <span class="variable">$&#123;TEST_FILE&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Display the given message before the commands are executed at build time</span></span><br><span class="line"></span><br><span class="line">COMMENT <span class="string">&quot;Creating $&#123;TEST_FILE&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># to make quotes printable,for example</span></span><br><span class="line"></span><br><span class="line">VERBATIM</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-
-            </div>
-
-            
-                <div class="post-copyright-info">
-                    <div class="article-copyright-info-container">
-    <ul>
-        <li><strong>标题:</strong> Qt-Cmake</li>
-        <li><strong>作者:</strong> 晓寒</li>
-        <li><strong>创建于:</strong> 2023-04-24 18:10:15</li>
-        
-            <li>
-                <strong>更新于:</strong> 2023-07-15 10:11:58
-            </li>
-        
-        <li>
-            <strong>链接:</strong> https://dion6850.github.io/2023/04/24/学海无涯/Cmake/Qt-Cmake/
-        </li>
-        <li>
-            <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
-        </li>
-    </ul>
-</div>
-
-                </div>
-            
-
-            
-                <ul class="post-tags-box">
-                    
-                        <li class="tag-item">
-                            <a href="/tags/CMake/">#CMake</a>&nbsp;
-                        </li>
-                    
-                        <li class="tag-item">
-                            <a href="/tags/Qt/">#Qt</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/05/28/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0/%E5%A4%A7%E5%AD%A6%E5%86%9B%E4%BA%8B%E6%99%BA%E6%85%A7%E6%A0%91%E7%AD%94%E6%A1%88/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">大学军事智慧树答案</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2023/04/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/Git/git/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">git</span>
-                                    <span class="post-nav-item">下一篇</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-
-            
-                <div class="comment-container">
-                    <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fa-solid fa-comments"></i>&nbsp;评论
-    </div>
-    
-
-        
-            
-    <div id="gitalk-container"></div>
-    <script data-pjax
-            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
-    <script data-pjax>
-
-        function loadGitalk() {
-            let __gitalk__pathname = decodeURI(location.pathname);
-            const __gitalk__pathnameLength = __gitalk__pathname.length;
-            const __gitalk__pathnameMaxLength = 50;
-            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
-                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
-            }
-
-            try {
-                Gitalk && new Gitalk({
-                    clientID: 'e03d3f5b1d8af756253b',
-                    clientSecret: '9fdd80082796e745b2ed82fba981e50597716688',
-                    repo: 'Dion6850.github.io',
-                    owner: 'Dion6850',
-                    admin: ['Dion6850'],
-                    id: __gitalk__pathname,
-                    language: 'zh-CN'
-                }).render('gitalk-container');
-
-            } catch (e) {
-                window.Gitalk = null;
-            }
-        }
-
-        if ('true') {
-            const loadGitalkTimeout = setTimeout(() => {
-                loadGitalk();
-                clearTimeout(loadGitalkTimeout);
-            }, 1000);
-        } else {
-            window.addEventListener('DOMContentLoaded', loadGitalk);
-        }
-    </script>
-
-
-
-        
-    
-</div>
-
-                </div>
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div class="toc-title">此页目录</div>
-        <div class="page-title">Qt-Cmake</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8i18n%E5%9B%BD%E9%99%85%E5%8C%96%E6%94%AF%E6%8C%81"><span class="nav-text">使用I18N国际化支持</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#add_coustom_command%E4%BD%BF%E7%94%A8"><span class="nav-text">add_coustom_command使用</span></a></li></ol>
-
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_custom_command</span>(OUTPUT <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-keyword">COMMAND</span> touch <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-comment"># Display the given message before the commands are executed at build time</span><br><br>COMMENT <span class="hljs-string">&quot;Creating $&#123;TEST_FILE&#125;&quot;</span><br><br><span class="hljs-comment"># to make quotes printable,for example</span><br><br>VERBATIM<br>)<br></code></pre></td></tr></table></figure>
 
                 
-
-            </div>
+              </div>
             
-            
-
-        </div>
-
-        <div class="main-content-footer">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info">
-            &copy;
-            
-              <span>2022</span>
-              -
-            
-            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">晓寒</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
-                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
-                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
-                <br>
-            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.2</a>
-        </div>
-        
-        
-        
+            <hr/>
             <div>
-                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
-            </div>
-        
-        
-        
-            <script async data-pjax>
-                try {
-                    function odometer_init() {
-                    const elements = document.querySelectorAll('.odometer');
-                    elements.forEach(el => {
-                        new Odometer({
-                            el,
-                            format: '( ddd).dd',
-                            duration: 200
-                        });
-                    });
-                    }
-                    odometer_init();
-                } catch (error) {}
-            </script>
-        
-        
-        
-    </div>  
-</footer>
-        </div>
-    </div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
 
+<span class="category-chains">
+  
+  
     
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="article-tools-list">
-        <!-- TOC aside toggle -->
+      <span class="category-chain">
         
-            <li class="right-bottom-tools page-aside-toggle">
-                <i class="fa-regular fa-outdent"></i>
-            </li>
-        
-
-        <!-- go comment -->
-        
-            <li class="go-comment">
-                <i class="fa-regular fa-comments"></i>
-            </li>
-        
-    </ul>
-</div>
-
-        </div>
+  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/" class="category-chain-item">学海无涯</a>
+  
+  
+    <span>></span>
     
+  <a href="/categories/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/CMake/" class="category-chain-item">CMake</a>
+  
+  
 
-    <div class="right-side-tools-container">
-        <div class="side-tools-container">
-    <ul class="hidden-tools-list">
-        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
-            <i class="fa-regular fa-magnifying-glass-plus"></i>
-        </li>
+  
 
-        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
-            <i class="fa-regular fa-magnifying-glass-minus"></i>
-        </li>
-
-        <li class="right-bottom-tools tool-expand-width flex-center">
-            <i class="fa-regular fa-expand"></i>
-        </li>
-
-        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
-            <i class="fa-regular fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-
-        
-
-        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
-            <i class="fa-regular fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="visible-tools-list">
-        <li class="right-bottom-tools toggle-tools-list flex-center">
-            <i class="fa-regular fa-cog fa-spin"></i>
-        </li>
-        
-            <li class="right-bottom-tools tool-scroll-to-top flex-center">
-                <i class="arrow-up fas fa-arrow-up"></i>
-                <span class="percent"></span>
-            </li>
-        
-        
-    </ul>
-</div>
+      </span>
+    
+  
+</span>
 
     </div>
-
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fa-solid fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="搜索..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fa-solid fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CMake/">#CMake</a>
+      
+        <a href="/tags/Qt/">#Qt</a>
+      
     </div>
+  
 </div>
 
-    
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Qt-Cmake</div>
+      <div>http://example.com/2023/04/24/学海无涯/Cmake/Qt-Cmake/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>晓寒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
 
 
-</main>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/28/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0/%E5%A4%A7%E5%AD%A6%E5%86%9B%E4%BA%8B%E6%99%BA%E6%85%A7%E6%A0%91%E7%AD%94%E6%A1%88/" title="大学军事智慧树答案">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">大学军事智慧树答案</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/24/%E5%AD%A6%E6%B5%B7%E6%97%A0%E6%B6%AF/Git/git/" title="git">
+                        <span class="hidden-mobile">git</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Dion6850/Dion6850.github.io');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
 
 
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/main.js"></script>
-
-<script src="/js/layouts/navbarShrink.js"></script>
-
-<script src="/js/tools/scrollTopBottom.js"></script>
-
-<script src="/js/tools/lightDarkSwitch.js"></script>
+  </aside>
 
 
+    </div>
+  </div>
+</div>
 
-    
-<script src="/js/tools/localSearch.js"></script>
-
-
-
-
-    
-<script src="/js/tools/codeBlock.js"></script>
-
-
-
-
-    
-<script src="/js/layouts/lazyload.js"></script>
-
-
-
-
-    
-<script src="/js/tools/runtime.js"></script>
-
-    
-<script src="/js/libs/odometer.min.js"></script>
-
-    
-<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
 
 
 
 
   
-<script src="/js/libs/Typed.min.js"></script>
+
+
 
   
-<script src="/js/plugins/typed.js"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
 
 
 
@@ -874,56 +519,286 @@ C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
 
 
 
-<div class="post-scripts pjax">
+
+
     
-        
-<script src="/js/tools/tocToggle.js"></script>
-
-<script src="/js/libs/anime.min.js"></script>
-
-<script src="/js/layouts/toc.js"></script>
-
-<script src="/js/plugins/tabs.js"></script>
 
     
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
+    
 
     
-<script src="/js/libs/pjax.min.js"></script>
+  </main>
 
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/css/time.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
 <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        window.pjax = new Pjax({
-            selectors: [
-                'head title',
-                '.page-container',
-                '.pjax',
-            ],
-            history: true,
-            debug: false,
-            cacheBust: false,
-            timeout: 0,
-            analytics: false,
-            currentUrlFullReload: false,
-            scrollRestoration: false,
-            // scrollTo: true,
-        });
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
 
-        document.addEventListener('pjax:send', () => {
-            Global.utils.pjaxProgressBarStart();
-        });
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
 
-        document.addEventListener('pjax:complete', () => {
-            Global.utils.pjaxProgressBarEnd();
-            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
-            Global.refresh();
-        });
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
     });
+  });
 </script>
 
 
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
 
 
-</body>
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/css/time.js"></script>
+<script src="/css/huadong.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
 </html>
