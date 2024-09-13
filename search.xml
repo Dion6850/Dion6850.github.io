@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>STM32定时器中断</title>
-    <url>/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/</url>
+    <url>/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/</url>
     <content><![CDATA[<h2 id="stm32cubemx配置">STM32CubeMX配置</h2>
 <p>时钟树，外部时钟，端口定义都采取与流水灯实践相同的配置，可以重新按照之前重新操作一遍也可以将上次的工程复制一份出来，在副本上操作。</p>
 <p>加上对TIM2的配置。（时钟挂载的总线请查阅相关文档或者直接看STM32CubeMX上的时钟树）</p>
@@ -76,7 +76,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
   </entry>
   <entry>
     <title>STM32流水灯</title>
-    <url>/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/</url>
+    <url>/blog/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/</url>
     <content><![CDATA[<h2 id="stm32cubemx的配置">STM32CubeMX的配置</h2>
 <ul>
 <li>创建STM32CubeMX工程</li>
@@ -144,7 +144,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
   </entry>
   <entry>
     <title>git</title>
-    <url>/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Git/git/</url>
+    <url>/blog/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Git/git/</url>
     <content><![CDATA[<h1 id="git-flow-的常用分支">Git Flow 的常用分支</h1>
 <h2 id="生产分支master">生产分支（master）‌</h2>
 <p>Master分支是仓库的主分支，这个分支包含最近发布到生产环境的代码，最近发布的Release，
@@ -243,7 +243,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
   </entry>
   <entry>
     <title>keil和STM32的部署</title>
-    <url>/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/</url>
+    <url>/blog/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/</url>
     <content><![CDATA[<h1 id="keil的部署">keil的部署</h1>
 <h2 id="软件下载">软件下载</h2>
 <p>百度网盘</p>
@@ -287,7 +287,7 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
   </entry>
   <entry>
     <title>Qt-Cmake</title>
-    <url>/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/Qt-Cmake/</url>
+    <url>/blog/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/Qt-Cmake/</url>
     <content><![CDATA[<h1 id="使用i18n国际化支持">使用I18N国际化支持</h1>
 <div class="highlight-container" data-rel="Cmake"><figure class="iseeu highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># set是可以用前面的标识来表示后面的数据，可以类比一下c的define</span></span><br><span class="line"><span class="keyword">set</span>(QT_VERSION <span class="number">5</span>)  </span><br><span class="line"><span class="keyword">set</span>(REQUIRED_LIBS Core Gui Widgets)  </span><br><span class="line"><span class="keyword">set</span>(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets) </span><br><span class="line"><span class="comment"># 填lupdate和lrelease的路径</span></span><br><span class="line"><span class="keyword">set</span>(LUPDATE_PATH <span class="string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lupdate.exe&quot;</span>)  </span><br><span class="line"><span class="keyword">set</span>(LRELEASE_PATH <span class="string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lrelease.exe&quot;</span>)  </span><br><span class="line"><span class="keyword">set</span>(TS_FILES  </span><br><span class="line">        <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/zh_CN.ts  </span><br><span class="line">        <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/ja_JP.ts)</span><br><span class="line"><span class="comment"># 这里不使用LinguistTools</span></span><br><span class="line"><span class="keyword">find_package</span>(Qt<span class="variable">$&#123;QT_VERSION&#125;</span> COMPONENTS <span class="variable">$&#123;REQUIRED_LIBS&#125;</span> REQUIRED)</span><br><span class="line"><span class="comment"># 创建生成ts文件和qm文件的目标  </span></span><br><span class="line"><span class="comment"># ALL指定加入make all  </span></span><br><span class="line"><span class="keyword">add_custom_target</span>(update_all_ts_files ALL)  </span><br><span class="line"><span class="keyword">add_custom_target</span>(create_all_qm_files ALL)</span><br><span class="line"><span class="comment"># 对每一个ts文件进行操作</span></span><br><span class="line"><span class="keyword">foreach</span>(TS_FILE <span class="variable">$&#123;TS_FILES&#125;</span>)  </span><br><span class="line">    <span class="comment"># 把zh_CN.ts中的zh_CN提取出来  </span></span><br><span class="line">    <span class="keyword">get_filename_component</span>(I18N_NAME <span class="variable">$&#123;TS_FILE&#125;</span> NAME_WE)  </span><br><span class="line">    <span class="keyword">set</span>(TS_TARGET_NAME <span class="string">&quot;update_ts_file_$&#123;I18N_NAME&#125;&quot;</span>)  </span><br><span class="line">    <span class="keyword">add_custom_target</span>(<span class="variable">$&#123;TS_TARGET_NAME&#125;</span>  </span><br><span class="line">            <span class="keyword">COMMAND</span> <span class="variable">$&#123;LUPDATE_PATH&#125;</span> <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span> -ts <span class="variable">$&#123;TS_FILE&#125;</span>  </span><br><span class="line">            VERBATIM)  </span><br><span class="line">    <span class="comment"># 将update_ts_file_&lt;NAME&gt;添加为update_all_ts_files的依赖，下同  </span></span><br><span class="line">    <span class="keyword">add_dependencies</span>(update_all_ts_files <span class="variable">$&#123;TS_TARGET_NAME&#125;</span>)  </span><br><span class="line">    <span class="keyword">set</span>(QM_TARGET_NAME <span class="string">&quot;create_qm_file_$&#123;I18N_NAME&#125;&quot;</span>)  </span><br><span class="line">    <span class="keyword">set</span>(QM_FILE <span class="string">&quot;$&#123;CMAKE_CURRENT_BINARY_DIR&#125;/$&#123;I18N_NAME&#125;.qm&quot;</span>)  </span><br><span class="line">    <span class="keyword">add_custom_target</span>(<span class="variable">$&#123;QM_TARGET_NAME&#125;</span>  </span><br><span class="line">            <span class="keyword">COMMAND</span> <span class="variable">$&#123;LRELEASE_PATH&#125;</span> <span class="variable">$&#123;TS_FILE&#125;</span> -qm <span class="variable">$&#123;QM_FILE&#125;</span>  </span><br><span class="line">            VERBATIM)  </span><br><span class="line">    <span class="comment"># 因为得先有ts文件才能生成qm文件，所以把构建ts文件的目标作为自己的依赖  </span></span><br><span class="line">    <span class="keyword">add_dependencies</span>(<span class="variable">$&#123;QM_TARGET_NAME&#125;</span> <span class="variable">$&#123;TS_TARGET_NAME&#125;</span>)  </span><br><span class="line">    <span class="keyword">add_dependencies</span>(create_all_qm_files <span class="variable">$&#123;QM_TARGET_NAME&#125;</span>)  </span><br><span class="line"><span class="keyword">endforeach</span>()</span><br><span class="line"><span class="comment"># 将.qrc文件拷贝到编译目录</span></span><br><span class="line"><span class="keyword">configure_file</span>(translations.qrc <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span> COPYONLY)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> main.cpp <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)</span><br><span class="line"><span class="comment"># 因为qrc依赖qm文件，所以需要先让qm文件创建完成</span></span><br><span class="line"><span class="keyword">add_dependencies</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> create_all_qm_files)</span><br></pre></td></tr></table></figure></div>
 <p>这里的translations.qrc代码格式如下(也可使用rcc自动生成)：</p>
@@ -324,7 +324,7 @@ C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
   </entry>
   <entry>
     <title>连接第三方库</title>
-    <url>/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</url>
+    <url>/blog/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</url>
     <content><![CDATA[<h1 id="连接第三方库">连接第三方库</h1>
 <h2 id="cpp引用">cpp引用</h2>
 <p>对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令</p>
@@ -355,7 +355,7 @@ C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
   </entry>
   <entry>
     <title>linux基础</title>
-    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/linux%E5%9F%BA%E7%A1%80/</url>
+    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/linux%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="linux-二级目录结构">linux 二级目录结构</h1>
 <ul>
 <li>/boot:存放Linux启动所需内核文件和镜像文件</li>
@@ -529,7 +529,7 @@ class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名
   </entry>
   <entry>
     <title>KMP字符串匹配</title>
-    <url>/2022/11/25/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/</url>
+    <url>/blog/2022/11/25/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/</url>
     <content><![CDATA[<h1 id="kmp字符串匹配">KMP字符串匹配</h1>
 <h2 id="模板原理">模板&amp;原理</h2>
 <p>记border:既是<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex;" xmlns="http://www.w3.org/2000/svg" width="1.061ex" height="1.023ex" role="img" focusable="false" viewBox="0 -442 469 452"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span>的前缀又是<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex;" xmlns="http://www.w3.org/2000/svg" width="1.061ex" height="1.023ex" role="img" focusable="false" viewBox="0 -442 469 452"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span>的后缀，且长度小于<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.564ex;" xmlns="http://www.w3.org/2000/svg" width="2.319ex" height="2.26ex" role="img" focusable="false" viewBox="0 -749.5 1025 999"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mi" transform="translate(278,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mo" transform="translate(747,0) translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g></g></g></svg></mjx-container></span>的字符串为<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex;" xmlns="http://www.w3.org/2000/svg" width="1.061ex" height="1.023ex" role="img" focusable="false" viewBox="0 -442 469 452"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span>的border next数组：next[i]=s[1,2,<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.652ex" height="0.271ex" role="img" focusable="false" viewBox="0 -120 1172 120"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2026" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60ZM525 60Q525 84 542 102T585 120Q609 120 627 104T646 61Q646 36 629 18T586 0T543 17T525 60ZM972 60Q972 84 989 102T1032 120Q1056 120 1074 104T1093 61Q1093 36 1076 18T1033 0T990 17T972 60Z"></path></g></g></g></svg></mjx-container></span>,i]的最长border长度。</p>
@@ -640,7 +640,7 @@ Transmission 无线传输 - 洛谷 | 计算机科学教育新生态
   </entry>
   <entry>
     <title>哈希算法</title>
-    <url>/2022/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</url>
+    <url>/blog/2022/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h1 id="前言">前言</h1>
 <p>对于字符串的比较，如果我们想要判断这两个字符串是否相同，我们需要对字符串的每一个字符进行比较，但这实在是太费时了。那么有没有一种方法能让字符串的比较和数字的比较一样容易呢？哈希算法我为我们提供了思路。</p>
 <hr />
@@ -756,7 +756,7 @@ class="math inline">\(2^{64}\)</span>取模，因此就不手动取模了。</p>
   </entry>
   <entry>
     <title>linux基础</title>
-    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
     <content><![CDATA[<h2 id="下载">下载</h2>
 <p><a class="link"   href="https://www.postgresql.org/download/" >官网下载 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>官网有详细的教程，这里就不多赘述。</p>
@@ -784,7 +784,7 @@ class="math inline">\(2^{64}\)</span>取模，因此就不手动取模了。</p>
   </entry>
   <entry>
     <title>单调栈</title>
-    <url>/2022/11/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%8D%95%E8%B0%83%E6%A0%88/</url>
+    <url>/blog/2022/11/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%8D%95%E8%B0%83%E6%A0%88/</url>
     <content><![CDATA[<h1 id="单调栈">单调栈</h1>
 <h2 id="原理">原理</h2>
 <p>作用：从N个数中取出若干个数，组成单调栈（在栈中的元素是单调的）并且遵循其原来的排列顺序。（一定会选取最后一个加入的数）</p>
@@ -968,7 +968,7 @@ int，因为在后面的计算可能会超出int范围。</p>
   </entry>
   <entry>
     <title>C++与postgres连接</title>
-    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/</url>
+    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/</url>
     <content><![CDATA[<h2 id="需要安装的库">需要安装的库</h2>
 <p><a class="link"   href="https://github.com/jtv/libpqxx/tree/master" >jtv/libpqxx: The
 official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
@@ -993,7 +993,7 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
   </entry>
   <entry>
     <title>宽度优先搜素-BFS</title>
-    <url>/2022/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
+    <url>/blog/2022/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
     <content><![CDATA[<h1 id="队列">队列</h1>
 <h2 id="特点">特点</h2>
 <p>队列是先进先出（First In First Out）的线性表，简称FIFO表。</p>
@@ -1022,7 +1022,7 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
   </entry>
   <entry>
     <title>深度优先搜索-DFS</title>
-    <url>/2022/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
+    <url>/blog/2022/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
     <content><![CDATA[<h1 id="栈">栈</h1>
 <h2 id="特点">特点</h2>
 <p>栈是后进先出（Last In First Out）的线性表，简称LIFO表</p>
@@ -1053,7 +1053,7 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
   </entry>
   <entry>
     <title>链表</title>
-    <url>/2022/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E9%93%BE%E8%A1%A8/</url>
+    <url>/blog/2022/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<h1 id="单链表">单链表</h1>
 <h2 id="原理">原理</h2>
 <p>定义一个结构体，里面包括data和next指针，其中，data表示的是这个单元存储的数据，而next则指向下一个结构体。于是，通过next的指针传递，组成一个单链。</p>
@@ -1144,7 +1144,7 @@ class="math inline">\(\dots\)</span>+数字+回车； <div class="highlight-cont
   </entry>
   <entry>
     <title>排序算法</title>
-    <url>/2022/11/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <url>/blog/2022/11/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<div class="note warning"><p><strong>Warning</strong></p>
 <p><strong>此处不对排序的空间和时间复杂度进行分析，关注排序原理和代码实现。</strong></p>
 </div>
