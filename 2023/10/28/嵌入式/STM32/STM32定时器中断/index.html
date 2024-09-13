@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../../../img/fluid.png">
-  <link rel="icon" href="../../../../../../img/icon/block.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/icon/block.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -68,20 +68,20 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="../../../../../../css/main.css" />
+<link  rel="stylesheet" href="/blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="../css/mac.css">
-<link rel="stylesheet" href="../css/shubiao.css">
-<link rel="stylesheet" href="../css/huadong.css">
+<link rel="stylesheet" href="/blog/css/mac.css">
+<link rel="stylesheet" href="/blog/css/shubiao.css">
+<link rel="stylesheet" href="/blog/css/huadong.css">
 
 
 
@@ -95,8 +95,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../../../js/utils.js" ></script>
-  <script  src="../../../../../../js/color-schema.js" ></script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
   
 
 
@@ -229,7 +229,7 @@ mjx-container[display="true"] + br {
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../../../index.html">
+    <a class="navbar-brand" href="/blog/">
       <strong>Xiaohan`s blog</strong>
     </a>
 
@@ -248,7 +248,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../index.html">
+              <a class="nav-link" href="/blog/">
                 <i class="iconfont icon-home-fill"></i>
                 <span>Home</span>
               </a>
@@ -260,7 +260,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../categories">
+              <a class="nav-link" href="/blog/categories">
                 <i class="iconfont icon-category-fill"></i>
                 <span>Category</span>
               </a>
@@ -272,7 +272,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../tags/">
+              <a class="nav-link" href="/blog/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>Tag</span>
               </a>
@@ -284,7 +284,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../archives/">
+              <a class="nav-link" href="/blog/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>Archive</span>
               </a>
@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../about/">
+              <a class="nav-link" href="/blog/about/">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
               </a>
@@ -326,7 +326,7 @@ mjx-container[display="true"] + br {
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../../../img/bg/mountains.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/img/bg/mountains.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -413,11 +413,11 @@ mjx-container[display="true"] + br {
 <p>时钟树，外部时钟，端口定义都采取与流水灯实践相同的配置，可以重新按照之前重新操作一遍也可以将上次的工程复制一份出来，在副本上操作。</p>
 <p>加上对TIM2的配置。（时钟挂载的总线请查阅相关文档或者直接看STM32CubeMX上的时钟树）</p>
 <p>这里给出STM32F446的时钟特征图（详细信息请查阅用户手册）</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027162506.png"></p>
+<p><img src="img20231027162506.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="时钟挂载">时钟挂载</h3>
 <p>F4的时钟挂载如下：</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027164326.png"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027164340.png"></p>
+<p><img src="img20231027164326.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027164340.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="时钟周期计算">时钟周期计算</h3>
 <p>当APB1和APB2分频数为1的时候，TIM1、TIM8~TIM11的时钟为APB2的时钟，TIM2~TIM7、TIM12~TIM14的时钟为APB1的时钟；</p>
 <p>而如果APB1和APB2分频数不为1，那么TIM1、TIM8~TIM11的时钟为APB2的时钟的两倍，TIM2~TIM7、TIM12~TIM14的时钟为APB1的时钟的两倍。</p>
@@ -430,37 +430,37 @@ mjx-container[display="true"] + br {
 <p>auto-reload preload
 是否启用自重载。即当你动态改变计数周期的时候，是在下一个中断触发之后修改还是立刻修改</p>
 <p>Triggle Event Selection 主模式下触发输出信号</p>
-<pre><code>- RESET:使用定时器复位信号作为TRGO的输出
+<pre><code class="hljs">- RESET:使用定时器复位信号作为TRGO的输出
 
 - Enable:使用计数器使能信号作为TRGO的输出
 
 - Update Event:使用定时器的UEV信号作为TRGO输出</code></pre>
 <h3 id="配置操作参考">配置操作参考</h3>
 <p>配置时钟源和时钟周期</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027174307.png"></p>
+<p><img src="img20231027174307.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>开启定时器中断</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027165419.png"></p>
+<p><img src="img20231027165419.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="代码">代码</h2>
 <h3 id="回调函数">回调函数</h3>
 <p>打开keil工程，找到stm32f4xx_it.c文件。这个文件是中断回调的处理文件，所有在CubeMX中打开的中断都可以在这里找到对应的函数。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027170150.png"></p>
+<p><img src="img20231027170150.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>我们可以在两段USER CODE BEGIN 和 USER CODE
 END之间写上我们想要在触发中断时要执行的操作。</p>
 <p>（关于为什么能够做到进入中断就调用相对应的函数，实际上涉及到汇编与硬件中固有的中断线路，这个在这里不细说，有兴趣自己可以去查相关资料。）</p>
 <p>但是这样要是我们要改变定义在其他文件中的参数就不得不将其他文件中的参数声明为外部变量，所以我更推荐使用相对应的回调函数。</p>
 <p>打开如图所示的信息检索</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027171130.png"></p>
+<p><img src="img20231027171130.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>编译后对HAL_TIM_IRQHandler()右键，转到HAL_TIM_IRQHandler()函数的定义</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027171422.png"></p>
+<p><img src="img20231027171422.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>可以看到HAL_TIM_IRQHandler()函数中调用了HAL_TIM_PeriodElapsedCallback()函数，然后再一步深究，发现HAL_TIM_PeriodElapsedCallback()函数的定义前有__weak关键词，这代表我们可以在其它文件中对它进行重定义。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027171953.png"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="img20231027172437.png"></p>
+<p><img src="img20231027171953.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027172437.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="代码编辑">代码编辑</h3>
 <p>以下代码都在main.c中。</p>
 <p>定义回调函数</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_TIM_PeriodElapsedCallback</span><span class="params">(TIM_HandleTypeDef *htim)</span>{</span><br><span class="line">	<span class="keyword">if</span>(htim-&gt;Instance == TIM2){</span><br><span class="line">		<span class="keyword">if</span>(count == <span class="number">0</span>){</span><br><span class="line">			HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);</span><br><span class="line">			HAL_GPIO_WritePin(LED0_GPIO_Port,LED0_Pin,GPIO_PIN_RESET);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(count == <span class="number">1</span>){</span><br><span class="line">			HAL_GPIO_WritePin(LED0_GPIO_Port,LED0_Pin,GPIO_PIN_SET);</span><br><span class="line">			HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(count == <span class="number">2</span>){</span><br><span class="line">			HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);</span><br><span class="line">			HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(count == <span class="number">3</span>){</span><br><span class="line">			HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);</span><br><span class="line">			HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);</span><br><span class="line">		}</span><br><span class="line">		count = (count + <span class="number">1</span>) % <span class="number">4</span>;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">HAL_TIM_PeriodElapsedCallback</span><span class="hljs-params">(TIM_HandleTypeDef *htim)</span>{<br>	<span class="hljs-keyword">if</span>(htim-&gt;Instance == TIM2){<br>		<span class="hljs-keyword">if</span>(count == <span class="hljs-number">0</span>){<br>			HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>			HAL_GPIO_WritePin(LED0_GPIO_Port,LED0_Pin,GPIO_PIN_RESET);<br>		}<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(count == <span class="hljs-number">1</span>){<br>			HAL_GPIO_WritePin(LED0_GPIO_Port,LED0_Pin,GPIO_PIN_SET);<br>			HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);<br>		}<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(count == <span class="hljs-number">2</span>){<br>			HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>			HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);<br>		}<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(count == <span class="hljs-number">3</span>){<br>			HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>			HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);<br>		}<br>		count = (count + <span class="hljs-number">1</span>) % <span class="hljs-number">4</span>;<br>	}<br>}<br></code></pre></td></tr></table></figure>
 <p>在main函数中加上如下代码</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HAL_TIM_Base_Start_IT(&amp;htim2);</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_TIM_Base_Start_IT(&amp;htim2);<br></code></pre></td></tr></table></figure>
 <p>表示打开TIM2外设时钟并且打开TIM2中断。</p>
 <h2 id="工程文件">工程文件</h2>
 <p>百度网盘</p>
@@ -489,12 +489,12 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
     
       <span class="category-chain">
         
-  <a href="../../../../../../categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="category-chain-item">嵌入式</a>
+  <a href="/blog/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="category-chain-item">嵌入式</a>
   
   
     <span>></span>
     
-  <a href="../../../../../../categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/" class="category-chain-item">STM32</a>
+  <a href="/blog/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/" class="category-chain-item">STM32</a>
   
   
 
@@ -511,7 +511,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="../../../../../../tags/%E5%8D%95%E7%89%87%E6%9C%BA%E5%85%A5%E9%97%A8/">#单片机入门</a>
+        <a href="/blog/tags/%E5%8D%95%E7%89%87%E6%9C%BA%E5%85%A5%E9%97%A8/">#单片机入门</a>
       
     </div>
   
@@ -572,7 +572,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="../../../../25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/" title="STM32流水灯">
+                      <a href="/blog/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/" title="STM32流水灯">
                         <span class="hidden-mobile">STM32流水灯</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -765,8 +765,8 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../../../js/events.js" ></script>
-<script  src="../../../../../../js/plugins.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -789,7 +789,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 
   
     
-      <script  src="../../../../../../js/img-lazyload.js" ></script>
+      <script  src="/blog/js/img-lazyload.js" ></script>
     
   
 
@@ -932,7 +932,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../../../js/local-search.js" ></script>
+  <script  src="/blog/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -940,14 +940,14 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 
 
   
-<script src="../css/time.js"></script>
-<script src="../css/huadong.js"></script>
+<script src="/blog/css/time.js"></script>
+<script src="/blog/css/huadong.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../../../js/boot.js" ></script>
+<script  src="/blog/js/boot.js" ></script>
 
 
   

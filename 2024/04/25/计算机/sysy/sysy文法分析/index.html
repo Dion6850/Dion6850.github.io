@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../../../img/fluid.png">
-  <link rel="icon" href="../../../../../../img/icon/block.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/icon/block.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -59,20 +59,20 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="../../../../../../css/main.css" />
+<link  rel="stylesheet" href="/blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="../css/mac.css">
-<link rel="stylesheet" href="../css/shubiao.css">
-<link rel="stylesheet" href="../css/huadong.css">
+<link rel="stylesheet" href="/blog/css/mac.css">
+<link rel="stylesheet" href="/blog/css/shubiao.css">
+<link rel="stylesheet" href="/blog/css/huadong.css">
 
 
 
@@ -86,8 +86,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../../../js/utils.js" ></script>
-  <script  src="../../../../../../js/color-schema.js" ></script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
   
 
 
@@ -220,7 +220,7 @@ mjx-container[display="true"] + br {
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../../../index.html">
+    <a class="navbar-brand" href="/blog/">
       <strong>Xiaohan`s blog</strong>
     </a>
 
@@ -239,7 +239,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../index.html">
+              <a class="nav-link" href="/blog/">
                 <i class="iconfont icon-home-fill"></i>
                 <span>Home</span>
               </a>
@@ -251,7 +251,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../categories">
+              <a class="nav-link" href="/blog/categories">
                 <i class="iconfont icon-category-fill"></i>
                 <span>Category</span>
               </a>
@@ -263,7 +263,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../tags/">
+              <a class="nav-link" href="/blog/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>Tag</span>
               </a>
@@ -275,7 +275,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../archives/">
+              <a class="nav-link" href="/blog/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>Archive</span>
               </a>
@@ -287,7 +287,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../about/">
+              <a class="nav-link" href="/blog/about/">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
               </a>
@@ -317,7 +317,7 @@ mjx-container[display="true"] + br {
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../../../img/bg/mountains.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/img/bg/mountains.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -406,38 +406,38 @@ mjx-container[display="true"] + br {
 <li>方括号内包含的为可选项</li>
 <li>花括号内包含的为可重复 0 次或多次的项</li>
 </ul>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">编译单元 -&gt; [编译单元](声明|函数定义)</span><br><span class="line">CompUnit -&gt; [ CompUnit ] ( Decl | FuncDef )</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 文法">编译单元 -&gt; [编译单元](声明|函数定义)<br>CompUnit -&gt; [ CompUnit ] ( Decl | FuncDef )<br></code></pre></td></tr></table></figure>
 <p>CompUnit为开始符号，在开始符号后面的只有函数和定义
 作用是限定最外层只有声明和函数</p>
 <p>可能产生的句子</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a = 10;</span><br><span class="line">int main(){</span><br><span class="line">	return 0;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sysy">int a = 10;<br>int main(){<br>	return 0;<br>}<br></code></pre></td></tr></table></figure>
 <h2 id="常数声明">常数声明</h2>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">声明 -&gt; 常量声明|变量生命滚</span><br><span class="line">Decl -&gt; ConstDecl | VarDecl</span><br><span class="line"></span><br><span class="line">常量声明 -&gt; 'const' 数据类型{,常量声明};</span><br><span class="line">ConstDecl -&gt; 'const' BType ConstDef { ',' ConstDef } ';'</span><br><span class="line"></span><br><span class="line">数据类型</span><br><span class="line">BType -&gt; 'int' | 'float'</span><br><span class="line"></span><br><span class="line">常量定义 -&gt; 常量名{'['常量表达式']'} '=' 常量初始化值</span><br><span class="line">ConstDef -&gt; Ident { '[' ConstExp ']' } '=' ConstInitVal</span><br><span class="line"></span><br><span class="line">常量初始化值 -&gt; 常量表达式 | '{' [ 常量初始化值{',' 常量初始化值}] '}'</span><br><span class="line">ConstInitVal -&gt; ConstExp | '{' [ ConstInitVal { ',' ConstInitVal } ] '}'</span><br></pre></td></tr></table></figure></div>
-<p>由声明可推出常数声明的格式 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const int a = 1,b = 2;</span><br></pre></td></tr></table></figure></div></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs 文法">声明 -&gt; 常量声明|变量生命滚<br>Decl -&gt; ConstDecl | VarDecl<br><br>常量声明 -&gt; 'const' 数据类型{,常量声明};<br>ConstDecl -&gt; 'const' BType ConstDef { ',' ConstDef } ';'<br><br>数据类型<br>BType -&gt; 'int' | 'float'<br><br>常量定义 -&gt; 常量名{'['常量表达式']'} '=' 常量初始化值<br>ConstDef -&gt; Ident { '[' ConstExp ']' } '=' ConstInitVal<br><br>常量初始化值 -&gt; 常量表达式 | '{' [ 常量初始化值{',' 常量初始化值}] '}'<br>ConstInitVal -&gt; ConstExp | '{' [ ConstInitVal { ',' ConstInitVal } ] '}'<br></code></pre></td></tr></table></figure>
+<p>由声明可推出常数声明的格式 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sysy">const int a = 1,b = 2;<br></code></pre></td></tr></table></figure></p>
 <h2 id="变量声明">变量声明</h2>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">声明 -&gt; 常量声明 | 变量声明</span><br><span class="line">Decl -&gt; ConstDecl | VarDecl</span><br><span class="line"></span><br><span class="line">变量声明 -&gt; 数据类型 变量定义 {',' 变量定义} ';'</span><br><span class="line">VarDecl → BType VarDef { ',' VarDef } ';'</span><br><span class="line"></span><br><span class="line">变量定义 -&gt; 变量名 {'['常量表达式']'} | 变量名 { '['常量表达式']'} '=' 初始化值</span><br><span class="line">VarDef -&gt; Ident { '[' ConstExp ']' } | Ident { '[' ConstExp ']' } '=' InitVal</span><br><span class="line"></span><br><span class="line">初始化值 -&gt; 表达式 | '{'[初始化值{',' 初始化值}']'} '}'</span><br><span class="line">InitVal -&gt; Exp | '{' [ InitVal { ',' InitVal } ] '}'</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs 文法">声明 -&gt; 常量声明 | 变量声明<br>Decl -&gt; ConstDecl | VarDecl<br><br>变量声明 -&gt; 数据类型 变量定义 {',' 变量定义} ';'<br>VarDecl → BType VarDef { ',' VarDef } ';'<br><br>变量定义 -&gt; 变量名 {'['常量表达式']'} | 变量名 { '['常量表达式']'} '=' 初始化值<br>VarDef -&gt; Ident { '[' ConstExp ']' } | Ident { '[' ConstExp ']' } '=' InitVal<br><br>初始化值 -&gt; 表达式 | '{'[初始化值{',' 初始化值}']'} '}'<br>InitVal -&gt; Exp | '{' [ InitVal { ',' InitVal } ] '}'<br></code></pre></td></tr></table></figure>
 <p>由声明可推出变量声明的格式</p>
 <p>其中要注意的是变量初值只能是由加减乘除组成的表达式，不能是函数的返回值
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int a,b = 2,c = 3,d = 1 + 2;</span><br></pre></td></tr></table></figure></div></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sysy">int a,b = 2,c = 3,d = 1 + 2;<br></code></pre></td></tr></table></figure></p>
 <h2 id="函数定义">函数定义</h2>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">函数定义 -&gt; 函数返回值类型 函数名 '(' [函数形参] ')' 语句块</span><br><span class="line">FuncDef -&gt; FuncType Ident '(' [FuncFParams] ')' Block</span><br><span class="line"></span><br><span class="line">函数返回值类型</span><br><span class="line">FuncType -&gt; 'void' | 'int' | 'float'</span><br><span class="line"></span><br><span class="line">函数形参 -&gt; 函数形参 { ',' 函数形参}</span><br><span class="line">FuncFParams → FuncFParam { ',' FuncFParam }</span><br><span class="line"></span><br><span class="line">函数形参 -&gt; 数据类型 参数名 ['[' ']'{ '[' 表达式 ']' }]</span><br><span class="line">FuncFParam -&gt; BType Ident ['[' ']' { '[' Exp ']' }]</span><br><span class="line"></span><br><span class="line">语句块 -&gt; '{'{ 语句块内容 }'}'</span><br><span class="line">Block -&gt; '{' { BlockItem } '}'</span><br><span class="line"></span><br><span class="line">语句块内容 -&gt; 声明 | 语句</span><br><span class="line">BlockItem -&gt; Decl | Stmt</span><br><span class="line"></span><br><span class="line">语句 -&gt; 左值表达式 '=' 表达式 ';' | 语句块 | 'if' '(' 条件表达式 ')' 语句 [ 'else' 语句] | ‘while' '(' 条件表达式 ')' 语句 | 'break' ';' | 'continue' ';' | 'return' [表达式] ';' </span><br><span class="line">Stmt -&gt; LVal '=' Exp ';' | [Exp] ';' | Block | 'if' '(' Cond ')' Stmt [ 'else' Stmt ] | 'while' '(' Cond ')' Stmt | 'break' ';' | 'continue' ';' | 'return' [Exp] ';'</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs 文法">函数定义 -&gt; 函数返回值类型 函数名 '(' [函数形参] ')' 语句块<br>FuncDef -&gt; FuncType Ident '(' [FuncFParams] ')' Block<br><br>函数返回值类型<br>FuncType -&gt; 'void' | 'int' | 'float'<br><br>函数形参 -&gt; 函数形参 { ',' 函数形参}<br>FuncFParams → FuncFParam { ',' FuncFParam }<br><br>函数形参 -&gt; 数据类型 参数名 ['[' ']'{ '[' 表达式 ']' }]<br>FuncFParam -&gt; BType Ident ['[' ']' { '[' Exp ']' }]<br><br>语句块 -&gt; '{'{ 语句块内容 }'}'<br>Block -&gt; '{' { BlockItem } '}'<br><br>语句块内容 -&gt; 声明 | 语句<br>BlockItem -&gt; Decl | Stmt<br><br>语句 -&gt; 左值表达式 '=' 表达式 ';' | 语句块 | 'if' '(' 条件表达式 ')' 语句 [ 'else' 语句] | ‘while' '(' 条件表达式 ')' 语句 | 'break' ';' | 'continue' ';' | 'return' [表达式] ';' <br>Stmt -&gt; LVal '=' Exp ';' | [Exp] ';' | Block | 'if' '(' Cond ')' Stmt [ 'else' Stmt ] | 'while' '(' Cond ')' Stmt | 'break' ';' | 'continue' ';' | 'return' [Exp] ';'<br></code></pre></td></tr></table></figure>
 <p>由函数定义可以推出函数定义的具体格式，函数定义包括函数类型，函数形参和语句块
-具体格式如下 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int myfunc(int a,float b，int c[]){</span><br><span class="line">	int c = 10;</span><br><span class="line">	if(a &gt; c) a = c[0];</span><br><span class="line">	if(a &lt; b) return 1;</span><br><span class="line">	return 0;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div></p>
+具体格式如下 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sysy">int myfunc(int a,float b，int c[]){<br>	int c = 10;<br>	if(a &gt; c) a = c[0];<br>	if(a &lt; b) return 1;<br>	return 0;<br>}<br></code></pre></td></tr></table></figure></p>
 <h2 id="表达式">表达式</h2>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">表达式 -&gt; 加减表达式</span><br><span class="line">Exp -&gt; AddExp </span><br><span class="line"></span><br><span class="line">条件表达式 -&gt; 逻辑表达式</span><br><span class="line">Cond -&gt; LOrExp</span><br><span class="line"></span><br><span class="line">左值表达式 -&gt; 变量名{'[' 表达式 ']'}</span><br><span class="line">LVal -&gt; Ident {'[' Exp ']'}</span><br><span class="line"></span><br><span class="line">基本表达式 -&gt; '(' 表达式 ')' | 左值表达式 | 数值</span><br><span class="line">PrimaryExp -&gt; '(' Exp ')' | LVal | Number</span><br><span class="line"></span><br><span class="line">数值 -&gt; 整型常数 | 浮点型常数</span><br><span class="line">Number -&gt; IntConst | floatConst</span><br><span class="line"></span><br><span class="line">一元表达式 -&gt; 基本表达式 | 变量名 '(' [函数实参] ')' | 单目运算符 一元表达式</span><br><span class="line">UnaryExp -&gt; PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp</span><br><span class="line"></span><br><span class="line">单目运算符</span><br><span class="line">UnaryOp -&gt; '+' | '−' | '!'</span><br><span class="line"></span><br><span class="line">函数实参 -&gt; 表达式 { ',' 表达式}</span><br><span class="line">FuncRParams -&gt; Exp { ',' Exp }</span><br><span class="line"></span><br><span class="line">乘除模表达式 -&gt; 一元表达式 | 乘除模表达式 ('*' | '/' | '%') 一元表达式</span><br><span class="line">MulExp -&gt; UnaryExp | MulExp ('*' | '/' | '%') UnaryExp</span><br><span class="line"></span><br><span class="line">加减表达式 -&gt; 乘除表达式 | 加减表达式 ('+' | '−') 乘除表达式</span><br><span class="line">AddExp -&gt; MulExp | AddExp ('+' | '−') MulExp</span><br><span class="line"></span><br><span class="line">关系表达式 -&gt; 加减表达式 | 关系表达式 ('&lt;' | '&gt;' | '&lt;=' | '&gt;=') 加减表达式</span><br><span class="line">RelExp -&gt; AddExp | RelExp ('&lt;' | '&gt;' | '&lt;=' | '&gt;=') AddExp</span><br><span class="line"></span><br><span class="line">相等性表达式 -&gt; 关系表达式 | 相等性表达式 ('==' | '!=') 关系表达式</span><br><span class="line">EqExp -&gt; RelExp | EqExp ('==' | '!=') RelExp</span><br><span class="line"></span><br><span class="line">逻辑与表达式 -&gt; 相等性表达式 | 逻辑与表达式 '&amp;&amp;' 相等性表达式</span><br><span class="line">LAndExp -&gt; EqExp | LAndExp '&amp;&amp;' EqExp</span><br><span class="line"></span><br><span class="line">逻辑或表达式 -&gt; 逻辑与表达式 | 逻辑或表达式 '||' 逻辑与表达式</span><br><span class="line">LOrExp -&gt; LAndExp | LOrExp '||' LAndExp</span><br><span class="line"></span><br><span class="line">常量表达式 -&gt; 加减表达式 注：使用的 Ident 必须是常量</span><br><span class="line">ConstExp -&gt; AddExp</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs 文法">表达式 -&gt; 加减表达式<br>Exp -&gt; AddExp <br><br>条件表达式 -&gt; 逻辑表达式<br>Cond -&gt; LOrExp<br><br>左值表达式 -&gt; 变量名{'[' 表达式 ']'}<br>LVal -&gt; Ident {'[' Exp ']'}<br><br>基本表达式 -&gt; '(' 表达式 ')' | 左值表达式 | 数值<br>PrimaryExp -&gt; '(' Exp ')' | LVal | Number<br><br>数值 -&gt; 整型常数 | 浮点型常数<br>Number -&gt; IntConst | floatConst<br><br>一元表达式 -&gt; 基本表达式 | 变量名 '(' [函数实参] ')' | 单目运算符 一元表达式<br>UnaryExp -&gt; PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp<br><br>单目运算符<br>UnaryOp -&gt; '+' | '−' | '!'<br><br>函数实参 -&gt; 表达式 { ',' 表达式}<br>FuncRParams -&gt; Exp { ',' Exp }<br><br>乘除模表达式 -&gt; 一元表达式 | 乘除模表达式 ('*' | '/' | '%') 一元表达式<br>MulExp -&gt; UnaryExp | MulExp ('*' | '/' | '%') UnaryExp<br><br>加减表达式 -&gt; 乘除表达式 | 加减表达式 ('+' | '−') 乘除表达式<br>AddExp -&gt; MulExp | AddExp ('+' | '−') MulExp<br><br>关系表达式 -&gt; 加减表达式 | 关系表达式 ('&lt;' | '&gt;' | '&lt;=' | '&gt;=') 加减表达式<br>RelExp -&gt; AddExp | RelExp ('&lt;' | '&gt;' | '&lt;=' | '&gt;=') AddExp<br><br>相等性表达式 -&gt; 关系表达式 | 相等性表达式 ('==' | '!=') 关系表达式<br>EqExp -&gt; RelExp | EqExp ('==' | '!=') RelExp<br><br>逻辑与表达式 -&gt; 相等性表达式 | 逻辑与表达式 '&amp;&amp;' 相等性表达式<br>LAndExp -&gt; EqExp | LAndExp '&amp;&amp;' EqExp<br><br>逻辑或表达式 -&gt; 逻辑与表达式 | 逻辑或表达式 '||' 逻辑与表达式<br>LOrExp -&gt; LAndExp | LOrExp '||' LAndExp<br><br>常量表达式 -&gt; 加减表达式 注：使用的 Ident 必须是常量<br>ConstExp -&gt; AddExp<br></code></pre></td></tr></table></figure>
 <p>最后一个常量表达式到加减表达式中标明了<strong>使用的Ident必须是常量</strong>，说明这对后后面的加减表达式加上了一个<strong>约束</strong>，不能使用变量也不能<strong>用函数返回值</strong></p>
 <p>这里的推导是表达式的格式，其中包括对于函数实参的传递，以及加减乘除的表达式，其中乘除表达式的优先级大于加减的表达式。并且包括逻辑表达式，逻辑表达式优先级小于加减乘除运算。
 这里例如关系表达式推出加减表达式<strong>没有语义上的意义</strong>而是表示加减表达式优先级高于关系表达式</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int max(int a,int b){</span><br><span class="line">	if(a &gt; b) return a;</span><br><span class="line">	return b;</span><br><span class="line">}</span><br><span class="line">int main{</span><br><span class="line">	int m = 10;</span><br><span class="line">	int n = 20;</span><br><span class="line">	n = n - m / 2;</span><br><span class="line">	int t;</span><br><span class="line">	t = max(m,n);</span><br><span class="line">	r = max(m + n, t);</span><br><span class="line">	retrun 0;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sysy">int max(int a,int b){<br>	if(a &gt; b) return a;<br>	return b;<br>}<br>int main{<br>	int m = 10;<br>	int n = 20;<br>	n = n - m / 2;<br>	int t;<br>	t = max(m,n);<br>	r = max(m + n, t);<br>	retrun 0;<br>}<br><br></code></pre></td></tr></table></figure>
 <h2 id="ident标识符">Ident标识符</h2>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">标识符 -&gt; 非数字字符 | 标识符 非数字字符 | 标识符 数字</span><br><span class="line">identifier -&gt; identifier-nondigit</span><br><span class="line">| identifier identifier-nondigit</span><br><span class="line">| identifier digit</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs 文法">标识符 -&gt; 非数字字符 | 标识符 非数字字符 | 标识符 数字<br>identifier -&gt; identifier-nondigit<br>| identifier identifier-nondigit<br>| identifier digit<br></code></pre></td></tr></table></figure>
 <p>标识符不能以数字开头，只能以字母或下划线开头</p>
 <h2 id="注释">注释</h2>
 <p>单行注释： 以序列 ‘//’ 开始， 直到换行符结束， 不包括换行符。
 多行注释： 以序列 ‘/<em>’ 开始， 直到第一次出现 ‘</em>/’ 时结束，
 包括结束处 ‘*/’。</p>
 <h2 id="数值常量">数值常量</h2>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">整型常量 -&gt; 十进制常量 | 八进制常量 | 十六进制常量</span><br><span class="line">integer-const -&gt; decimal-const | octal-const</span><br><span class="line">| hexadecimal-const</span><br><span class="line"></span><br><span class="line">十进制常量 -&gt; 非零数字 | 十进制常量 数字</span><br><span class="line">decimal-const -&gt; nonzero-digit | decimal-const digit</span><br><span class="line"></span><br><span class="line">八进制常量 -&gt; 0 | 八进制常量 八进制数字 </span><br><span class="line">octal-const -&gt; 0 | octal-const octal-digit</span><br><span class="line"></span><br><span class="line">十六进制常数 -&gt; 十六进制前缀 十六进制数字 | 十六进制常量 十六进制数字</span><br><span class="line">hexadecimal-const -&gt; hexadecimal-prefix hexadecimal-digit</span><br><span class="line">| hexadecimal-const hexadecimal-digit</span><br><span class="line"></span><br><span class="line">十六进制前缀</span><br><span class="line">hexadecimal-prefix -&gt; ‘0x’ | ‘0X’</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs 文法">整型常量 -&gt; 十进制常量 | 八进制常量 | 十六进制常量<br>integer-const -&gt; decimal-const | octal-const<br>| hexadecimal-const<br><br>十进制常量 -&gt; 非零数字 | 十进制常量 数字<br>decimal-const -&gt; nonzero-digit | decimal-const digit<br><br>八进制常量 -&gt; 0 | 八进制常量 八进制数字 <br>octal-const -&gt; 0 | octal-const octal-digit<br><br>十六进制常数 -&gt; 十六进制前缀 十六进制数字 | 十六进制常量 十六进制数字<br>hexadecimal-const -&gt; hexadecimal-prefix hexadecimal-digit<br>| hexadecimal-const hexadecimal-digit<br><br>十六进制前缀<br>hexadecimal-prefix -&gt; ‘0x’ | ‘0X’<br></code></pre></td></tr></table></figure>
 <p>可以输入10进制，8进制，16进制的数，分别以非零数字开头，以0开头，以0x或0X开头</p>
 <h2 id="容易忽略的注意点">容易忽略的注意点</h2>
 <ul>
@@ -470,7 +470,7 @@ mjx-container[display="true"] + br {
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="../../../../../../tags/sysy/">#sysy</a>
+        <a href="/blog/tags/sysy/">#sysy</a>
       
     </div>
   
@@ -707,8 +707,8 @@ mjx-container[display="true"] + br {
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../../../js/events.js" ></script>
-<script  src="../../../../../../js/plugins.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -731,7 +731,7 @@ mjx-container[display="true"] + br {
 
   
     
-      <script  src="../../../../../../js/img-lazyload.js" ></script>
+      <script  src="/blog/js/img-lazyload.js" ></script>
     
   
 
@@ -874,7 +874,7 @@ mjx-container[display="true"] + br {
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../../../js/local-search.js" ></script>
+  <script  src="/blog/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -882,14 +882,14 @@ mjx-container[display="true"] + br {
 
 
   
-<script src="../css/time.js"></script>
-<script src="../css/huadong.js"></script>
+<script src="/blog/css/time.js"></script>
+<script src="/blog/css/huadong.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../../../js/boot.js" ></script>
+<script  src="/blog/js/boot.js" ></script>
 
 
   

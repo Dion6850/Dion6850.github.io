@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../../../img/fluid.png">
-  <link rel="icon" href="../../../../../../img/icon/block.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/icon/block.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,12 +16,12 @@
   <meta name="author" content="晓寒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="需要安装的库 jtv&#x2F;libpqxx: The official C++ client API for PostgreSQL. (github.com)  libpqxx编译安装之前要求安装libpq 1sudo apt install libpq-dev 接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。 静态库 123.&#x2F;configure --pre">
+    <meta name="description" content="需要安装的库 jtv&#x2F;libpqxx: The official C++ client API for PostgreSQL. (github.com) libpqxx编译安装之前要求安装libpq 1sudo apt install libpq-dev 接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。 静态库 123.&#x2F;configure --pref">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++与postgres连接">
 <meta property="og:url" content="http://example.com/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
-<meta property="og:description" content="需要安装的库 jtv&#x2F;libpqxx: The official C++ client API for PostgreSQL. (github.com)  libpqxx编译安装之前要求安装libpq 1sudo apt install libpq-dev 接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。 静态库 123.&#x2F;configure --pre">
+<meta property="og:description" content="需要安装的库 jtv&#x2F;libpqxx: The official C++ client API for PostgreSQL. (github.com) libpqxx编译安装之前要求安装libpq 1sudo apt install libpq-dev 接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。 静态库 123.&#x2F;configure --pref">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-17T11:24:40.000Z">
 <meta property="article:modified_time" content="2024-09-12T15:51:46.929Z">
@@ -57,20 +57,20 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="../../../../../../css/main.css" />
+<link  rel="stylesheet" href="/blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="../css/mac.css">
-<link rel="stylesheet" href="../css/shubiao.css">
-<link rel="stylesheet" href="../css/huadong.css">
+<link rel="stylesheet" href="/blog/css/mac.css">
+<link rel="stylesheet" href="/blog/css/shubiao.css">
+<link rel="stylesheet" href="/blog/css/huadong.css">
 
 
 
@@ -84,8 +84,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../../../js/utils.js" ></script>
-  <script  src="../../../../../../js/color-schema.js" ></script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
   
 
 
@@ -106,7 +106,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../../../index.html">
+    <a class="navbar-brand" href="/blog/">
       <strong>Xiaohan`s blog</strong>
     </a>
 
@@ -125,7 +125,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../index.html">
+              <a class="nav-link" href="/blog/">
                 <i class="iconfont icon-home-fill"></i>
                 <span>Home</span>
               </a>
@@ -137,7 +137,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../categories">
+              <a class="nav-link" href="/blog/categories">
                 <i class="iconfont icon-category-fill"></i>
                 <span>Category</span>
               </a>
@@ -149,7 +149,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../tags/">
+              <a class="nav-link" href="/blog/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>Tag</span>
               </a>
@@ -161,7 +161,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../archives/">
+              <a class="nav-link" href="/blog/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>Archive</span>
               </a>
@@ -173,7 +173,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../about/">
+              <a class="nav-link" href="/blog/about/">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
               </a>
@@ -203,7 +203,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../../../img/bg/mountains.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/img/bg/mountains.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -287,18 +287,18 @@
               <div class="markdown-body">
                 
                 <h2 id="需要安装的库">需要安装的库</h2>
-<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/jtv/libpqxx/tree/master" >jtv/libpqxx: The
-official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jtv/libpqxx/tree/master">jtv/libpqxx: The
+official C++ client API for PostgreSQL. (github.com)</a></p>
 <p>libpqxx编译安装之前要求安装libpq</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install libpq-dev</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install libpq-dev<br></code></pre></td></tr></table></figure>
 <p>接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。</p>
 <h3 id="静态库">静态库</h3>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/home/... <span class="comment">#编译出的文件存放目录</span></span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
 <h3 id="动态库">动态库</h3>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DBUILD_SHARED_LIBS=ON ..</span><br><span class="line">sudo make install DESTDIR=/home/... <span class="comment">#编译出的文件存放目录</span></span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake -DBUILD_SHARED_LIBS=ON ..<br>sudo make install DESTDIR=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br></code></pre></td></tr></table></figure>
 <p>使用Cmake构建程序示例。其中要注意的是C++一定要使用17以上的版本，否则编译会报错。</p>
-<p>CMakeLists.txt <div class="highlight-container" data-rel="Cmake"><figure class="iseeu highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.22</span>)</span><br><span class="line"><span class="keyword">project</span>(template)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">17</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(PostgreSQL_ROOT /var/lib/postgresql/<span class="number">16</span>)</span><br><span class="line"><span class="keyword">include_directories</span> (<span class="variable">$&#123;PostgreSQL_INCLUDE_DIR&#125;</span> <span class="variable">$&#123;libpqxx_ROOT&#125;</span>/<span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(libpqxx_ROOT /home/zhang/libpqxx)</span><br><span class="line"><span class="keyword">link_directories</span>(<span class="variable">$&#123;PostgreSQL_LIBRARY_DIR&#125;</span> <span class="variable">$&#123;libpqxx_ROOT&#125;</span>/lib)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(PostgreSQL REQUIRED)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> pqxx <span class="variable">$&#123;PostgreSQL_LIBRARIES&#125;</span>)</span><br></pre></td></tr></table></figure></div></p>
-<p>main.c <div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;pqxx/pqxx&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;hello world&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::string conn_string = <span class="string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;</span><br><span class="line">        <span class="function">pqxx::connection <span class="title">conn</span><span class="params">(conn_string)</span></span>;</span><br><span class="line">        <span class="function">pqxx::work <span class="title">txn</span><span class="params">(conn)</span></span>;</span><br><span class="line">        txn.<span class="built_in">exec</span>(<span class="string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="comment">//进入schema</span></span><br><span class="line">        pqxx::result result = txn.<span class="built_in">exec</span>(<span class="string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);</span><br><span class="line">        txn.<span class="built_in">commit</span>();</span><br><span class="line"> <span class="comment">// Process results</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> row_it = result.<span class="built_in">begin</span>(); row_it != result.<span class="built_in">end</span>(); row_it++)&#123;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="number">0</span>].<span class="built_in">as</span>&lt;<span class="type">int</span>&gt;() &lt;&lt; std::endl;</span><br><span class="line">        &#125;</span><br><span class="line">        conn.<span class="built_in">close</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></p>
+<p>CMakeLists.txt <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.22</span>)<br><span class="hljs-keyword">project</span>(template)<br><br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD <span class="hljs-number">17</span>)<br><br><span class="hljs-keyword">set</span>(PostgreSQL_ROOT /var/lib/postgresql/<span class="hljs-number">16</span>)<br><span class="hljs-keyword">include_directories</span> (<span class="hljs-variable">$&#123;PostgreSQL_INCLUDE_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/<span class="hljs-keyword">include</span>)<br><br><br><span class="hljs-keyword">set</span>(libpqxx_ROOT /home/zhang/libpqxx)<br><span class="hljs-keyword">link_directories</span>(<span class="hljs-variable">$&#123;PostgreSQL_LIBRARY_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/lib)<br><br><span class="hljs-keyword">find_package</span>(PostgreSQL REQUIRED)<br><br><br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> pqxx <span class="hljs-variable">$&#123;PostgreSQL_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure></p>
+<p>main.c <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;pqxx/pqxx&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; std::endl;<br>        std::string conn_string = <span class="hljs-string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;<br>        <span class="hljs-function">pqxx::connection <span class="hljs-title">conn</span><span class="hljs-params">(conn_string)</span></span>;<br>        <span class="hljs-function">pqxx::work <span class="hljs-title">txn</span><span class="hljs-params">(conn)</span></span>;<br>        txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="hljs-comment">//进入schema</span><br>        pqxx::result result = txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);<br>        txn.<span class="hljs-built_in">commit</span>();<br> <span class="hljs-comment">// Process results</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> row_it = result.<span class="hljs-built_in">begin</span>(); row_it != result.<span class="hljs-built_in">end</span>(); row_it++)&#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="hljs-number">0</span>].<span class="hljs-built_in">as</span>&lt;<span class="hljs-type">int</span>&gt;() &lt;&lt; std::endl;<br>        &#125;<br>        conn.<span class="hljs-built_in">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -317,12 +317,12 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
     
       <span class="category-chain">
         
-  <a href="../../../../../../categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
+  <a href="/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
   
   
     <span>></span>
     
-  <a href="../../../../../../categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/" class="category-chain-item">linux</a>
+  <a href="/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/" class="category-chain-item">linux</a>
   
   
 
@@ -339,7 +339,7 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="../../../../../../tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">#技术文档</a>
+        <a href="/blog/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">#技术文档</a>
       
     </div>
   
@@ -396,9 +396,9 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
                   <article class="post-prev col-6">
                     
                     
-                      <a href="../Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/" title="linux基础">
+                      <a href="/blog/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/" title="连接第三方库">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">linux基础</span>
+                        <span class="hidden-mobile">连接第三方库</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -406,8 +406,8 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
                   <article class="post-next col-6">
                     
                     
-                      <a href="../../../../13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" title="宽度优先搜素-BFS">
-                        <span class="hidden-mobile">宽度优先搜素-BFS</span>
+                      <a href="/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/" title="linux基础">
+                        <span class="hidden-mobile">linux基础</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -599,8 +599,8 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../../../js/events.js" ></script>
-<script  src="../../../../../../js/plugins.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -623,7 +623,7 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
 
   
     
-      <script  src="../../../../../../js/img-lazyload.js" ></script>
+      <script  src="/blog/js/img-lazyload.js" ></script>
     
   
 
@@ -766,7 +766,7 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../../../js/local-search.js" ></script>
+  <script  src="/blog/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -774,14 +774,14 @@ official C++ client API for PostgreSQL. (github.com) <i class="fa-regular fa-arr
 
 
   
-<script src="../css/time.js"></script>
-<script src="../css/huadong.js"></script>
+<script src="/blog/css/time.js"></script>
+<script src="/blog/css/huadong.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../../../js/boot.js" ></script>
+<script  src="/blog/js/boot.js" ></script>
 
 
   

@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../../../img/fluid.png">
-  <link rel="icon" href="../../../../../../img/icon/block.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/icon/block.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -57,20 +57,20 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="../../../../../../css/main.css" />
+<link  rel="stylesheet" href="/blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="../css/mac.css">
-<link rel="stylesheet" href="../css/shubiao.css">
-<link rel="stylesheet" href="../css/huadong.css">
+<link rel="stylesheet" href="/blog/css/mac.css">
+<link rel="stylesheet" href="/blog/css/shubiao.css">
+<link rel="stylesheet" href="/blog/css/huadong.css">
 
 
 
@@ -84,8 +84,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../../../js/utils.js" ></script>
-  <script  src="../../../../../../js/color-schema.js" ></script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
   
 
 
@@ -106,7 +106,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../../../index.html">
+    <a class="navbar-brand" href="/blog/">
       <strong>Xiaohan`s blog</strong>
     </a>
 
@@ -125,7 +125,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../index.html">
+              <a class="nav-link" href="/blog/">
                 <i class="iconfont icon-home-fill"></i>
                 <span>Home</span>
               </a>
@@ -137,7 +137,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../categories">
+              <a class="nav-link" href="/blog/categories">
                 <i class="iconfont icon-category-fill"></i>
                 <span>Category</span>
               </a>
@@ -149,7 +149,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../tags/">
+              <a class="nav-link" href="/blog/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>Tag</span>
               </a>
@@ -161,7 +161,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../archives/">
+              <a class="nav-link" href="/blog/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>Archive</span>
               </a>
@@ -173,7 +173,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../../../about/">
+              <a class="nav-link" href="/blog/about/">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
               </a>
@@ -203,7 +203,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../../../img/bg/mountains.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/img/bg/mountains.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -301,56 +301,56 @@
 <h1 id="文件">文件</h1>
 <p>这里一部分与linux终端下的命令相同。</p>
 <h2 id="创建文件">创建文件</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单个创建</span></span><br><span class="line"><span class="built_in">touch</span> File1Name File2Name </span><br><span class="line"><span class="comment"># 批量创建（touch 文件名&#123;最小数值…最大数值&#125;.扩展名）</span></span><br><span class="line"><span class="built_in">touch</span> text&#123; 0001..2000 &#125;.txt </span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 单个创建</span><br><span class="hljs-built_in">touch</span> File1Name File2Name <br><span class="hljs-comment"># 批量创建（touch 文件名&#123;最小数值…最大数值&#125;.扩展名）</span><br><span class="hljs-built_in">touch</span> text&#123; 0001..2000 &#125;.txt <br></code></pre></td></tr></table></figure>
 <h2 id="删除文件">删除文件</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除当前文件</span></span><br><span class="line"><span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line"><span class="comment"># 删除版本库中的文件</span></span><br><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line"><span class="comment"># 删除文件夹（可不为空）</span></span><br><span class="line"><span class="built_in">rm</span> -r &lt;目录名&gt;</span><br><span class="line"><span class="comment"># 删除文件夹（必须为空)</span></span><br><span class="line"><span class="built_in">rmdir</span> &lt;目录名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 删除当前文件</span><br><span class="hljs-built_in">rm</span> &lt;文件名&gt;<br><span class="hljs-comment"># 删除版本库中的文件</span><br>git <span class="hljs-built_in">rm</span> &lt;文件名&gt;<br><span class="hljs-comment"># 删除文件夹（可不为空）</span><br><span class="hljs-built_in">rm</span> -r &lt;目录名&gt;<br><span class="hljs-comment"># 删除文件夹（必须为空)</span><br><span class="hljs-built_in">rmdir</span> &lt;目录名&gt;<br></code></pre></td></tr></table></figure>
 <h1 id="git文件状态">git文件状态</h1>
 <h2 id="显示当前状态">显示当前状态</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git status<br></code></pre></td></tr></table></figure>
 <h2 id="加入文件到缓存区">加入文件到缓存区</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;文件名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git add &lt;文件名&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="将版本更迭">将版本更迭</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -m 后面是这个版本的相关信息</span></span><br><span class="line">git commit -m <span class="string">&quot;&lt;相关信息&gt;&quot;</span></span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -m 后面是这个版本的相关信息</span><br>git commit -m <span class="hljs-string">&quot;&lt;相关信息&gt;&quot;</span><br></code></pre></td></tr></table></figure>
 <h2 id="查看日志">查看日志</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这个命令实则是git reflog show HEAD 的简化写法</span></span><br><span class="line">git reflog</span><br><span class="line"><span class="comment"># 查看所有日志</span></span><br><span class="line">git reflog show --all</span><br><span class="line"><span class="comment"># 查看特定的分支</span></span><br><span class="line">git reflog show &lt;分支名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这个命令实则是git reflog show HEAD 的简化写法</span><br>git reflog<br><span class="hljs-comment"># 查看所有日志</span><br>git reflog show --all<br><span class="hljs-comment"># 查看特定的分支</span><br>git reflog show &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
 <h1 id="分支管理">分支管理</h1>
 <h2 id="创建分支命令">创建分支命令</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="切换分支命令">切换分支命令</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git switch &lt;分支名&gt;<br>git checkout &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="查看分支">查看分支</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git banch</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git banch<br></code></pre></td></tr></table></figure>
 <h2 id="合并分支">合并分支</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里要注意在主分支</span></span><br><span class="line">git merge &lt;副分支名&gt;</span><br><span class="line"><span class="comment"># 合并没有历史记录相同的分支</span></span><br><span class="line">git merge &lt;副分支名&gt; --allow-unrelated-histories</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这里要注意在主分支</span><br>git merge &lt;副分支名&gt;<br><span class="hljs-comment"># 合并没有历史记录相同的分支</span><br>git merge &lt;副分支名&gt; --allow-unrelated-histories<br></code></pre></td></tr></table></figure>
 <h2 id="删除分支">删除分支</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -d &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
 <h1 id="标签管理">标签管理</h1>
 <h2 id="增加本地标签">增加本地标签</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不带说明的标签</span></span><br><span class="line">git tag <span class="string">&quot;&lt;标签名&gt;&quot;</span></span><br><span class="line"><span class="comment"># 带说明的标签</span></span><br><span class="line">git tag -a &lt;标签名&gt; -m <span class="string">&quot;&lt;说明信息&gt;&quot;</span></span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 不带说明的标签</span><br>git tag <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br><span class="hljs-comment"># 带说明的标签</span><br>git tag -a &lt;标签名&gt; -m <span class="hljs-string">&quot;&lt;说明信息&gt;&quot;</span><br></code></pre></td></tr></table></figure>
 <h2 id="增加远程标签">增加远程标签</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin <span class="string">&quot;&lt;标签名&gt;&quot;</span></span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push origin <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br></code></pre></td></tr></table></figure>
 <p>因为这个用的少，就不深入说明了。</p>
 <h2 id="查看标签">查看标签</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有标签（字母顺序）</span></span><br><span class="line">git tag</span><br><span class="line"><span class="comment"># 查看标签信息</span></span><br><span class="line">git show &lt;标签名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出所有标签（字母顺序）</span><br>git tag<br><span class="hljs-comment"># 查看标签信息</span><br>git show &lt;标签名&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="删除标签">删除标签</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d <span class="string">&quot;&lt;标签名&gt;&quot;</span></span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git tag -d <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br></code></pre></td></tr></table></figure>
 <h1 id="暂存栈管理">暂存栈管理</h1>
 <h2 id="创建暂存栈">创建暂存栈</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接创建</span></span><br><span class="line">git stash</span><br><span class="line"><span class="comment"># 加注释创建</span></span><br><span class="line">git stash save <span class="string">&quot;&lt;注释&gt;&quot;</span></span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 直接创建</span><br>git stash<br><span class="hljs-comment"># 加注释创建</span><br>git stash save <span class="hljs-string">&quot;&lt;注释&gt;&quot;</span><br></code></pre></td></tr></table></figure>
 <p>这个命令会将所有未递交的修改保存起来。</p>
 <h2 id="重新应用缓存">重新应用缓存</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash pop<br></code></pre></td></tr></table></figure>
 <p>这个指令将缓存堆栈中的第一个stash删除，并将对应修改应用到当前的工作目录下。</p>
 <h2 id="查看现有stash">查看现有stash</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash list<br></code></pre></td></tr></table></figure>
 <p>在使用<code>git stash apply</code>命令时可以通过名字指定使用哪个stash，默认使用最近的stash（即stash@{0}）。</p>
 <h2 id="移除stash">移除stash</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里的下标是从0开始由第一个向下递增的</span></span><br><span class="line">git stash drop stash@&#123;&lt;下标&gt;&#125;</span><br><span class="line"><span class="comment"># 利用注释删除指定栈</span></span><br><span class="line">git stash drop <span class="string">&quot;&lt;注释&gt;&quot;</span></span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这里的下标是从0开始由第一个向下递增的</span><br>git stash drop stash@&#123;&lt;下标&gt;&#125;<br><span class="hljs-comment"># 利用注释删除指定栈</span><br>git stash drop <span class="hljs-string">&quot;&lt;注释&gt;&quot;</span><br></code></pre></td></tr></table></figure>
 <h2 id="查看指定stash的diff">查看指定stash的diff</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash show</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash show<br></code></pre></td></tr></table></figure>
 <h1 id="版本管理">版本管理</h1>
 <h2 id="还原">还原</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使某个文件回到add缓存区的版本</span></span><br><span class="line">git checkout &lt;文件名&gt;</span><br><span class="line"><span class="comment"># 回退指定版本</span></span><br><span class="line">git reset [--soft | --mixed | --hard] &lt;指定版本编号&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使某个文件回到add缓存区的版本</span><br>git checkout &lt;文件名&gt;<br><span class="hljs-comment"># 回退指定版本</span><br>git reset [--soft | --mixed | --hard] &lt;指定版本编号&gt;<br></code></pre></td></tr></table></figure>
 <p>下面说明参数的意义：</p>
 <ul>
 <li>--soft:将HEAD指向指定的版本上。但是工作区的文件和暂存区的文件都不改变，仅仅退回commit的信息。</li>
@@ -360,19 +360,19 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
 </ul>
 <h1 id="远程库github">远程库（github）</h1>
 <h2 id="创建远程仓库">创建远程仓库</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加远程仓库</span></span><br><span class="line">git remote add &lt;远程仓库名&gt; &lt;地址&gt;</span><br><span class="line"><span class="comment"># 第一次推送</span></span><br><span class="line">git push -u &lt;远程仓库名&gt; &lt;地址&gt;  </span><br><span class="line"><span class="comment"># 之后推送</span></span><br><span class="line">git push &lt;远程仓库名&gt; &lt;地址&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 添加远程仓库</span><br>git remote add &lt;远程仓库名&gt; &lt;地址&gt;<br><span class="hljs-comment"># 第一次推送</span><br>git push -u &lt;远程仓库名&gt; &lt;地址&gt;  <br><span class="hljs-comment"># 之后推送</span><br>git push &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="查看远程仓库">查看远程仓库</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git remote -v<br></code></pre></td></tr></table></figure>
 <h2 id="修改远程仓库">修改远程仓库</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url &lt;远程仓库名&gt; &lt;地址&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git remote set-url &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="克隆远程库">克隆远程库</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;地址&gt;</span><br><span class="line"><span class="comment"># 拉取最新递交</span></span><br><span class="line">git pull</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 克隆</span><br>git <span class="hljs-built_in">clone</span> &lt;地址&gt;<br><span class="hljs-comment"># 拉取最新递交</span><br>git pull<br></code></pre></td></tr></table></figure>
 <h2 id="删除远程仓库">删除远程仓库</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">rm</span> &lt;仓库名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git remote <span class="hljs-built_in">rm</span> &lt;仓库名&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="初始化本地项目">初始化本地项目</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;&lt;你的名字或昵称&gt;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&lt;你的邮箱&gt;&quot;</span></span><br><span class="line">git init </span><br><span class="line">git remote add &lt;远程仓库名&gt; &lt;地址&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;&lt;你的名字或昵称&gt;&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;&lt;你的邮箱&gt;&quot;</span><br>git init <br>git remote add &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="创建分支到本地">创建分支到本地</h2>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;本地仓库名&gt; &lt;远程仓库名&gt;/&lt;分支名&gt;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b &lt;本地仓库名&gt; &lt;远程仓库名&gt;/&lt;分支名&gt;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -391,12 +391,12 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
     
       <span class="category-chain">
         
-  <a href="../../../../../../categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
+  <a href="/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
   
   
     <span>></span>
     
-  <a href="../../../../../../categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/git/" class="category-chain-item">git</a>
+  <a href="/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/git/" class="category-chain-item">git</a>
   
   
 
@@ -413,7 +413,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="../../../../../../tags/git/">#git</a>
+        <a href="/blog/tags/git/">#git</a>
       
     </div>
   
@@ -470,9 +470,9 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="../../../../../10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/" title="keil和STM32的部署">
+                      <a href="/blog/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/Qt-Cmake/" title="Qt-Cmake">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">keil和STM32的部署</span>
+                        <span class="hidden-mobile">Qt-Cmake</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -480,8 +480,8 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
                   <article class="post-next col-6">
                     
                     
-                      <a href="../../Cmake/Qt-Cmake/" title="Qt-Cmake">
-                        <span class="hidden-mobile">Qt-Cmake</span>
+                      <a href="/blog/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/" title="连接第三方库">
+                        <span class="hidden-mobile">连接第三方库</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -673,8 +673,8 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../../../js/events.js" ></script>
-<script  src="../../../../../../js/plugins.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -697,7 +697,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
 
   
     
-      <script  src="../../../../../../js/img-lazyload.js" ></script>
+      <script  src="/blog/js/img-lazyload.js" ></script>
     
   
 
@@ -840,7 +840,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../../../js/local-search.js" ></script>
+  <script  src="/blog/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -848,14 +848,14 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
 
 
   
-<script src="../css/time.js"></script>
-<script src="../css/huadong.js"></script>
+<script src="/blog/css/time.js"></script>
+<script src="/blog/css/huadong.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../../../js/boot.js" ></script>
+<script  src="/blog/js/boot.js" ></script>
 
 
   
