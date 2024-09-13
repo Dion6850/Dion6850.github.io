@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
-  <link rel="icon" href="/blog/img/icon/block.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/dion/img/fluid.png">
+  <link rel="icon" href="/blog/dion/img/icon/block.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="基础的Cmake编译c&#x2F;c++语言工程操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="连接第三方库">
-<meta property="og:url" content="http://example.com/blog/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/index.html">
+<meta property="og:url" content="http://example.com/blog/dion/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
 <meta property="og:description" content="基础的Cmake编译c&#x2F;c++语言工程操作">
 <meta property="og:locale" content="zh_CN">
@@ -57,35 +57,35 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/blog/css/main.css" />
+<link  rel="stylesheet" href="/blog/dion/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/dion/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/dion/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="/blog/css/mac.css">
-<link rel="stylesheet" href="/blog/css/shubiao.css">
-<link rel="stylesheet" href="/blog/css/huadong.css">
+<link rel="stylesheet" href="/blog/dion/css/mac.css">
+<link rel="stylesheet" href="/blog/dion/css/shubiao.css">
+<link rel="stylesheet" href="/blog/dion/css/huadong.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/blog/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/blog/dion/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/dion/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/blog/js/utils.js" ></script>
-  <script  src="/blog/js/color-schema.js" ></script>
+  <script  src="/blog/dion/js/utils.js" ></script>
+  <script  src="/blog/dion/js/color-schema.js" ></script>
   
 
 
@@ -106,7 +106,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/blog/">
+    <a class="navbar-brand" href="/blog/dion/">
       <strong>Xiaohan`s blog</strong>
     </a>
 
@@ -125,7 +125,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/">
+              <a class="nav-link" href="/blog/dion/">
                 <i class="iconfont icon-home-fill"></i>
                 <span>Home</span>
               </a>
@@ -137,7 +137,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/categories">
+              <a class="nav-link" href="/blog/dion/categories">
                 <i class="iconfont icon-category-fill"></i>
                 <span>Category</span>
               </a>
@@ -149,7 +149,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/tags/">
+              <a class="nav-link" href="/blog/dion/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>Tag</span>
               </a>
@@ -161,7 +161,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/archives/">
+              <a class="nav-link" href="/blog/dion/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>Archive</span>
               </a>
@@ -173,7 +173,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/about/">
+              <a class="nav-link" href="/blog/dion/about/">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
               </a>
@@ -203,7 +203,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/blog/img/bg/mountains.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/dion/img/bg/mountains.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -323,12 +323,12 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
+  <a href="/blog/dion/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
   
   
     <span>></span>
     
-  <a href="/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/CMake/" class="category-chain-item">CMake</a>
+  <a href="/blog/dion/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/CMake/" class="category-chain-item">CMake</a>
   
   
 
@@ -345,7 +345,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/blog/tags/CMake/">#CMake</a>
+        <a href="/blog/dion/tags/CMake/">#CMake</a>
       
     </div>
   
@@ -358,7 +358,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>连接第三方库</div>
-      <div>http://example.com/blog/2022/12/24/计算机/Cmake/链接第三方库/</div>
+      <div>http://example.com/blog/dion/2022/12/24/计算机/Cmake/链接第三方库/</div>
     </div>
     <div class="license-meta">
       
@@ -402,7 +402,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Git/git/" title="git">
+                      <a href="/blog/dion/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Git/git/" title="git">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">git</span>
                         <span class="visible-mobile">上一篇</span>
@@ -412,8 +412,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/linux%E5%9F%BA%E7%A1%80/" title="linux基础">
-                        <span class="hidden-mobile">linux基础</span>
+                      <a href="/blog/dion/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/" title="C++与postgres连接">
+                        <span class="hidden-mobile">C++与postgres连接</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -605,8 +605,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/blog/js/events.js" ></script>
-<script  src="/blog/js/plugins.js" ></script>
+<script  src="/blog/dion/js/events.js" ></script>
+<script  src="/blog/dion/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -629,7 +629,7 @@
 
   
     
-      <script  src="/blog/js/img-lazyload.js" ></script>
+      <script  src="/blog/dion/js/img-lazyload.js" ></script>
     
   
 
@@ -772,7 +772,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/blog/js/local-search.js" ></script>
+  <script  src="/blog/dion/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -780,14 +780,14 @@
 
 
   
-<script src="/blog/css/time.js"></script>
-<script src="/blog/css/huadong.js"></script>
+<script src="/blog/dion/css/time.js"></script>
+<script src="/blog/dion/css/huadong.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/blog/js/boot.js" ></script>
+<script  src="/blog/dion/js/boot.js" ></script>
 
 
   
@@ -795,5 +795,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/blog/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end start --><script src="/blog/dion/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
 </html>

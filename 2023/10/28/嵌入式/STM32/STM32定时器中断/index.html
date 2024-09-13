@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
-  <link rel="icon" href="/blog/img/icon/block.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/dion/img/fluid.png">
+  <link rel="icon" href="/blog/dion/img/icon/block.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,26 +19,26 @@
     <meta name="description" content="STM32定时器配置与使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32定时器中断">
-<meta property="og:url" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/index.html">
+<meta property="og:url" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
 <meta property="og:description" content="STM32定时器配置与使用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027162506.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027164326.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027164340.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027174307.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027165419.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027170150.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027171130.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027171422.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027171953.png">
-<meta property="og:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027172437.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027162506.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027164326.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027164340.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027174307.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027165419.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027170150.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027171130.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027171422.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027171953.png">
+<meta property="og:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027172437.png">
 <meta property="article:published_time" content="2023-10-28T02:32:48.000Z">
 <meta property="article:modified_time" content="2024-09-12T16:24:50.128Z">
 <meta property="article:author" content="晓寒">
 <meta property="article:tag" content="单片机入门">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/blog/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027162506.png">
+<meta name="twitter:image" content="http://example.com/blog/dion/2023/10/28/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/img20231027162506.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -68,35 +68,35 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/blog/css/main.css" />
+<link  rel="stylesheet" href="/blog/dion/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/dion/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/dion/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="/blog/css/mac.css">
-<link rel="stylesheet" href="/blog/css/shubiao.css">
-<link rel="stylesheet" href="/blog/css/huadong.css">
+<link rel="stylesheet" href="/blog/dion/css/mac.css">
+<link rel="stylesheet" href="/blog/dion/css/shubiao.css">
+<link rel="stylesheet" href="/blog/dion/css/huadong.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/blog/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/blog/dion/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/dion/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/blog/js/utils.js" ></script>
-  <script  src="/blog/js/color-schema.js" ></script>
+  <script  src="/blog/dion/js/utils.js" ></script>
+  <script  src="/blog/dion/js/color-schema.js" ></script>
   
 
 
@@ -229,7 +229,7 @@ mjx-container[display="true"] + br {
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/blog/">
+    <a class="navbar-brand" href="/blog/dion/">
       <strong>Xiaohan`s blog</strong>
     </a>
 
@@ -248,7 +248,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/">
+              <a class="nav-link" href="/blog/dion/">
                 <i class="iconfont icon-home-fill"></i>
                 <span>Home</span>
               </a>
@@ -260,7 +260,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/categories">
+              <a class="nav-link" href="/blog/dion/categories">
                 <i class="iconfont icon-category-fill"></i>
                 <span>Category</span>
               </a>
@@ -272,7 +272,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/tags/">
+              <a class="nav-link" href="/blog/dion/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>Tag</span>
               </a>
@@ -284,7 +284,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/archives/">
+              <a class="nav-link" href="/blog/dion/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>Archive</span>
               </a>
@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/blog/about/">
+              <a class="nav-link" href="/blog/dion/about/">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
               </a>
@@ -326,7 +326,7 @@ mjx-container[display="true"] + br {
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/blog/img/bg/mountains.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/dion/img/bg/mountains.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -413,11 +413,11 @@ mjx-container[display="true"] + br {
 <p>时钟树，外部时钟，端口定义都采取与流水灯实践相同的配置，可以重新按照之前重新操作一遍也可以将上次的工程复制一份出来，在副本上操作。</p>
 <p>加上对TIM2的配置。（时钟挂载的总线请查阅相关文档或者直接看STM32CubeMX上的时钟树）</p>
 <p>这里给出STM32F446的时钟特征图（详细信息请查阅用户手册）</p>
-<p><img src="img20231027162506.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027162506.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
 <h3 id="时钟挂载">时钟挂载</h3>
 <p>F4的时钟挂载如下：</p>
-<p><img src="img20231027164326.png" srcset="/blog/img/loading.gif" lazyload></p>
-<p><img src="img20231027164340.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027164326.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
+<p><img src="img20231027164340.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
 <h3 id="时钟周期计算">时钟周期计算</h3>
 <p>当APB1和APB2分频数为1的时候，TIM1、TIM8~TIM11的时钟为APB2的时钟，TIM2~TIM7、TIM12~TIM14的时钟为APB1的时钟；</p>
 <p>而如果APB1和APB2分频数不为1，那么TIM1、TIM8~TIM11的时钟为APB2的时钟的两倍，TIM2~TIM7、TIM12~TIM14的时钟为APB1的时钟的两倍。</p>
@@ -437,24 +437,24 @@ mjx-container[display="true"] + br {
 - Update Event:使用定时器的UEV信号作为TRGO输出</code></pre>
 <h3 id="配置操作参考">配置操作参考</h3>
 <p>配置时钟源和时钟周期</p>
-<p><img src="img20231027174307.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027174307.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
 <p>开启定时器中断</p>
-<p><img src="img20231027165419.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027165419.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
 <h2 id="代码">代码</h2>
 <h3 id="回调函数">回调函数</h3>
 <p>打开keil工程，找到stm32f4xx_it.c文件。这个文件是中断回调的处理文件，所有在CubeMX中打开的中断都可以在这里找到对应的函数。</p>
-<p><img src="img20231027170150.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027170150.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
 <p>我们可以在两段USER CODE BEGIN 和 USER CODE
 END之间写上我们想要在触发中断时要执行的操作。</p>
 <p>（关于为什么能够做到进入中断就调用相对应的函数，实际上涉及到汇编与硬件中固有的中断线路，这个在这里不细说，有兴趣自己可以去查相关资料。）</p>
 <p>但是这样要是我们要改变定义在其他文件中的参数就不得不将其他文件中的参数声明为外部变量，所以我更推荐使用相对应的回调函数。</p>
 <p>打开如图所示的信息检索</p>
-<p><img src="img20231027171130.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027171130.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
 <p>编译后对HAL_TIM_IRQHandler()右键，转到HAL_TIM_IRQHandler()函数的定义</p>
-<p><img src="img20231027171422.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027171422.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
 <p>可以看到HAL_TIM_IRQHandler()函数中调用了HAL_TIM_PeriodElapsedCallback()函数，然后再一步深究，发现HAL_TIM_PeriodElapsedCallback()函数的定义前有__weak关键词，这代表我们可以在其它文件中对它进行重定义。</p>
-<p><img src="img20231027171953.png" srcset="/blog/img/loading.gif" lazyload></p>
-<p><img src="img20231027172437.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="img20231027171953.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
+<p><img src="img20231027172437.png" srcset="/blog/dion/img/loading.gif" lazyload></p>
 <h3 id="代码编辑">代码编辑</h3>
 <p>以下代码都在main.c中。</p>
 <p>定义回调函数</p>
@@ -489,12 +489,12 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
     
       <span class="category-chain">
         
-  <a href="/blog/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="category-chain-item">嵌入式</a>
+  <a href="/blog/dion/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="category-chain-item">嵌入式</a>
   
   
     <span>></span>
     
-  <a href="/blog/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/" class="category-chain-item">STM32</a>
+  <a href="/blog/dion/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/" class="category-chain-item">STM32</a>
   
   
 
@@ -511,7 +511,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/blog/tags/%E5%8D%95%E7%89%87%E6%9C%BA%E5%85%A5%E9%97%A8/">#单片机入门</a>
+        <a href="/blog/dion/tags/%E5%8D%95%E7%89%87%E6%9C%BA%E5%85%A5%E9%97%A8/">#单片机入门</a>
       
     </div>
   
@@ -524,7 +524,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
   <div class="license-box my-3">
     <div class="license-title">
       <div>STM32定时器中断</div>
-      <div>http://example.com/blog/2023/10/28/嵌入式/STM32/STM32定时器中断/</div>
+      <div>http://example.com/blog/dion/2023/10/28/嵌入式/STM32/STM32定时器中断/</div>
     </div>
     <div class="license-meta">
       
@@ -572,7 +572,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/" title="STM32流水灯">
+                      <a href="/blog/dion/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/" title="STM32流水灯">
                         <span class="hidden-mobile">STM32流水灯</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -765,8 +765,8 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/blog/js/events.js" ></script>
-<script  src="/blog/js/plugins.js" ></script>
+<script  src="/blog/dion/js/events.js" ></script>
+<script  src="/blog/dion/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -789,7 +789,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 
   
     
-      <script  src="/blog/js/img-lazyload.js" ></script>
+      <script  src="/blog/dion/js/img-lazyload.js" ></script>
     
   
 
@@ -932,7 +932,7 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/blog/js/local-search.js" ></script>
+  <script  src="/blog/dion/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -940,14 +940,14 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 
 
   
-<script src="/blog/css/time.js"></script>
-<script src="/blog/css/huadong.js"></script>
+<script src="/blog/dion/css/time.js"></script>
+<script src="/blog/dion/css/huadong.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/blog/js/boot.js" ></script>
+<script  src="/blog/dion/js/boot.js" ></script>
 
 
   
@@ -955,5 +955,5 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/blog/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end start --><script src="/blog/dion/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
 </html>
