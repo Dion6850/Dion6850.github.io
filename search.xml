@@ -75,50 +75,6 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
       </tags>
   </entry>
   <entry>
-    <title>keil和STM32的部署</title>
-    <url>/blog/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h1 id="keil的部署">keil的部署</h1>
-<h2 id="软件下载">软件下载</h2>
-<p>百度网盘</p>
-<p>链接：https://pan.baidu.com/s/18IuTqzBIFJONlUo6LtuCWw?pwd=9e6n
-提取码：9e6n</p>
-<h2 id="使用说明">使用说明</h2>
-<p>先安装keil本体，基本上选个安装路径，一路下一步就行。</p>
-<p>使用管理员模式打开keil，点击file-&gt;license
-Management,看到如下界面（这是已经激活成功的）</p>
-<p><img src="img20231025203844.png" srcset="/blog/img/loading.gif" lazyload></p>
-<p>打开Keygen.exe,将CID填入，将target设置为ARM,点击Generate，获得License
-Code。</p>
-<p><img src="img20231025203008.png" srcset="/blog/img/loading.gif" lazyload></p>
-<p>回到keil的License Management界面，把License Code 填入，点击Add
-License，Product下面有MDK-ARM Plus为激活成功。</p>
-<h1 id="stm32cubemx的部署">STM32CubeMX的部署</h1>
-<h2 id="java环境安装">Java环境安装</h2>
-<p>1.安装jdk 由于STM32CubeMX是Java实现的，需要安装jdk环境。
-jdk官网下载链接：
-https://www.oracle.com/java/technologies/javase-downloads.html</p>
-<h2 id="软件下载-1">软件下载</h2>
-<p>理论上来说STM32CubeMX为免费软件，但是官网下载是要求注册的，我这里给出我的镜像地址，官网可以直接在网上下载，请自行选择。</p>
-<p>百度网盘</p>
-<p>V6.0.0</p>
-<p>链接：https://pan.baidu.com/s/1vChvLd9r6J1ioNnKridX5g?pwd=dqsu
-提取码：dqsu</p>
-<hr>
-<p>部分电脑无法兼容旧版，给出新版下载资源，但是新版部分配置和算法有BUG，旧版更稳定些。</p>
-<p>百度网盘</p>
-<p>V6.9.0</p>
-<p>链接：https://pan.baidu.com/s/1oLdQGMQ3ISI066AuKFmDBg?pwd=w27z
-提取码：w27z</p>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-        <category>STM32</category>
-      </categories>
-      <tags>
-        <tag>单片机入门</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>STM32流水灯</title>
     <url>/blog/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/</url>
     <content><![CDATA[<h2 id="stm32cubemx的配置">STM32CubeMX的配置</h2>
@@ -187,6 +143,81 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
       </tags>
   </entry>
   <entry>
+    <title>连接第三方库</title>
+    <url>/blog/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="连接第三方库">连接第三方库</h1>
+<h2 id="cpp引用">cpp引用</h2>
+<p>对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#cmake为project的名称</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br></code></pre></td></tr></table></figure>
+<p>即可建立连接，这时只需在main.cpp添加</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++">include<span class="hljs-string">&quot;longint.cpp&quot;</span><br></code></pre></td></tr></table></figure>
+<p>就可以使用“longint.cpp”中定义的函数和全局变量</p>
+<h2 id="头文件引用">头文件引用</h2>
+<p>头文件引用我们需要准备“longint.h”的头文件，并确保“longint.cpp”中的函数都在“longint.h”中声明。
+注意：如果声明全局变量请在longint.h中声明。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#先生成可执行文件</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br><span class="hljs-comment">#引入库</span><br><span class="hljs-keyword">include_directories</span>(<span class="hljs-keyword">include</span>)<br><span class="hljs-comment">#创建静态库(生成在build文件下)</span><br><span class="hljs-keyword">add_library</span>(TEST_LIBRARY longint.cpp)<br><span class="hljs-comment">#连接文件</span><br><span class="hljs-keyword">target_link_libraries</span>(cmake LINK_PUBLIC TEST_LIBRARY)<br></code></pre></td></tr></table></figure>
+<p>调用库</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(lib,<span class="hljs-string">&quot;xx.lib&quot;</span>)</span><br></code></pre></td></tr></table></figure>
+<p>在"main.cpp"引入“longint.h”就可以使用其中的函数了。</p>
+<h1 id="二进制文件位置">二进制文件位置</h1>
+<p>设置单独的.exe，.dll，.lib在bin,lib目录</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">set</span>(dir <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_ARCHIVE_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_LIBRARY_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/bin&quot;</span>)  <br></code></pre></td></tr></table></figure>
+<h1 id="一键连接">一键连接</h1>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">aux_source_directory</span>(./Src CPP_LIST) <span class="hljs-comment">#搜集所有在指定路径下的源文件的文件名，并将输出结果列表储存在指定的变量中。  </span><br><span class="hljs-keyword">aux_source_directory</span>(./Inc H_LIST)  <br><span class="hljs-comment"># FILE(GLOB SC_FILES &quot;./Src/*.cpp&quot; &quot;./Inc/*.h&quot;)  </span><br><span class="hljs-keyword">add_executable</span>(CIntCalculate <span class="hljs-variable">$&#123;CPP_LIST&#125;</span> <span class="hljs-variable">$&#123;H_LIST&#125;</span>)  <br><span class="hljs-keyword">include_directories</span>(./Inc)<br><span class="hljs-keyword">add_library</span>(LIB_TEXT <span class="hljs-variable">$&#123;CPP_LIST&#125;</span>)  <br><span class="hljs-keyword">target_link_libraries</span>(CIntCalculate LINK_PUBLIC <span class="hljs-variable">$&#123;LIB&#125;</span>)<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>CMake</category>
+      </categories>
+      <tags>
+        <tag>CMake</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>keil和STM32的部署</title>
+    <url>/blog/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h1 id="keil的部署">keil的部署</h1>
+<h2 id="软件下载">软件下载</h2>
+<p>百度网盘</p>
+<p>链接：https://pan.baidu.com/s/18IuTqzBIFJONlUo6LtuCWw?pwd=9e6n
+提取码：9e6n</p>
+<h2 id="使用说明">使用说明</h2>
+<p>先安装keil本体，基本上选个安装路径，一路下一步就行。</p>
+<p>使用管理员模式打开keil，点击file-&gt;license
+Management,看到如下界面（这是已经激活成功的）</p>
+<p><img src="img20231025203844.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>打开Keygen.exe,将CID填入，将target设置为ARM,点击Generate，获得License
+Code。</p>
+<p><img src="img20231025203008.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>回到keil的License Management界面，把License Code 填入，点击Add
+License，Product下面有MDK-ARM Plus为激活成功。</p>
+<h1 id="stm32cubemx的部署">STM32CubeMX的部署</h1>
+<h2 id="java环境安装">Java环境安装</h2>
+<p>1.安装jdk 由于STM32CubeMX是Java实现的，需要安装jdk环境。
+jdk官网下载链接：
+https://www.oracle.com/java/technologies/javase-downloads.html</p>
+<h2 id="软件下载-1">软件下载</h2>
+<p>理论上来说STM32CubeMX为免费软件，但是官网下载是要求注册的，我这里给出我的镜像地址，官网可以直接在网上下载，请自行选择。</p>
+<p>百度网盘</p>
+<p>V6.0.0</p>
+<p>链接：https://pan.baidu.com/s/1vChvLd9r6J1ioNnKridX5g?pwd=dqsu
+提取码：dqsu</p>
+<hr>
+<p>部分电脑无法兼容旧版，给出新版下载资源，但是新版部分配置和算法有BUG，旧版更稳定些。</p>
+<p>百度网盘</p>
+<p>V6.9.0</p>
+<p>链接：https://pan.baidu.com/s/1oLdQGMQ3ISI066AuKFmDBg?pwd=w27z
+提取码：w27z</p>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>单片机入门</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Qt-Cmake</title>
     <url>/blog/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/Qt-Cmake/</url>
     <content><![CDATA[<h1 id="使用i18n国际化支持">使用I18N国际化支持</h1>
@@ -216,37 +247,6 @@ C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
       <tags>
         <tag>CMake</tag>
         <tag>Qt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>连接第三方库</title>
-    <url>/blog/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="连接第三方库">连接第三方库</h1>
-<h2 id="cpp引用">cpp引用</h2>
-<p>对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#cmake为project的名称</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br></code></pre></td></tr></table></figure>
-<p>即可建立连接，这时只需在main.cpp添加</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++">include<span class="hljs-string">&quot;longint.cpp&quot;</span><br></code></pre></td></tr></table></figure>
-<p>就可以使用“longint.cpp”中定义的函数和全局变量</p>
-<h2 id="头文件引用">头文件引用</h2>
-<p>头文件引用我们需要准备“longint.h”的头文件，并确保“longint.cpp”中的函数都在“longint.h”中声明。
-注意：如果声明全局变量请在longint.h中声明。</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#先生成可执行文件</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br><span class="hljs-comment">#引入库</span><br><span class="hljs-keyword">include_directories</span>(<span class="hljs-keyword">include</span>)<br><span class="hljs-comment">#创建静态库(生成在build文件下)</span><br><span class="hljs-keyword">add_library</span>(TEST_LIBRARY longint.cpp)<br><span class="hljs-comment">#连接文件</span><br><span class="hljs-keyword">target_link_libraries</span>(cmake LINK_PUBLIC TEST_LIBRARY)<br></code></pre></td></tr></table></figure>
-<p>调用库</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(lib,<span class="hljs-string">&quot;xx.lib&quot;</span>)</span><br></code></pre></td></tr></table></figure>
-<p>在"main.cpp"引入“longint.h”就可以使用其中的函数了。</p>
-<h1 id="二进制文件位置">二进制文件位置</h1>
-<p>设置单独的.exe，.dll，.lib在bin,lib目录</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">set</span>(dir <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_ARCHIVE_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_LIBRARY_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/bin&quot;</span>)  <br></code></pre></td></tr></table></figure>
-<h1 id="一键连接">一键连接</h1>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">aux_source_directory</span>(./Src CPP_LIST) <span class="hljs-comment">#搜集所有在指定路径下的源文件的文件名，并将输出结果列表储存在指定的变量中。  </span><br><span class="hljs-keyword">aux_source_directory</span>(./Inc H_LIST)  <br><span class="hljs-comment"># FILE(GLOB SC_FILES &quot;./Src/*.cpp&quot; &quot;./Inc/*.h&quot;)  </span><br><span class="hljs-keyword">add_executable</span>(CIntCalculate <span class="hljs-variable">$&#123;CPP_LIST&#125;</span> <span class="hljs-variable">$&#123;H_LIST&#125;</span>)  <br><span class="hljs-keyword">include_directories</span>(./Inc)<br><span class="hljs-keyword">add_library</span>(LIB_TEXT <span class="hljs-variable">$&#123;CPP_LIST&#125;</span>)  <br><span class="hljs-keyword">target_link_libraries</span>(CIntCalculate LINK_PUBLIC <span class="hljs-variable">$&#123;LIB&#125;</span>)<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>CMake</category>
-      </categories>
-      <tags>
-        <tag>CMake</tag>
       </tags>
   </entry>
   <entry>
@@ -685,85 +685,6 @@ href="https://www.cnblogs.com/zfss/p/11065234.html">紫天峰的博客</a></p>
       </tags>
   </entry>
   <entry>
-    <title>C++与postgres连接</title>
-    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/</url>
-    <content><![CDATA[<h2 id="需要安装的库">需要安装的库</h2>
-<p><a href="https://github.com/jtv/libpqxx/tree/master">jtv/libpqxx: The
-official C++ client API for PostgreSQL. (github.com)</a></p>
-<p>libpqxx编译安装之前要求安装libpq</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo apt install libpq-dev<br></code></pre></td></tr></table></figure>
-<p>接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。</p>
-<h3 id="静态库">静态库</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">./configure --prefix=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
-<h3 id="动态库">动态库</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake -DBUILD_SHARED_LIBS=ON ..<br>sudo make install DESTDIR=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br></code></pre></td></tr></table></figure>
-<p>使用Cmake构建程序示例。其中要注意的是C++一定要使用17以上的版本，否则编译会报错。</p>
-<p>CMakeLists.txt <figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.22</span>)<br><span class="hljs-keyword">project</span>(template)<br><br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD <span class="hljs-number">17</span>)<br><br><span class="hljs-keyword">set</span>(PostgreSQL_ROOT /var/lib/postgresql/<span class="hljs-number">16</span>)<br><span class="hljs-keyword">include_directories</span> (<span class="hljs-variable">$&#123;PostgreSQL_INCLUDE_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/<span class="hljs-keyword">include</span>)<br><br><br><span class="hljs-keyword">set</span>(libpqxx_ROOT /home/zhang/libpqxx)<br><span class="hljs-keyword">link_directories</span>(<span class="hljs-variable">$&#123;PostgreSQL_LIBRARY_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/lib)<br><br><span class="hljs-keyword">find_package</span>(PostgreSQL REQUIRED)<br><br><br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> pqxx <span class="hljs-variable">$&#123;PostgreSQL_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure></p>
-<p>main.c <figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;pqxx/pqxx&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; std::endl;<br>        std::string conn_string = <span class="hljs-string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;<br>        <span class="hljs-function">pqxx::connection <span class="hljs-title">conn</span><span class="hljs-params">(conn_string)</span></span>;<br>        <span class="hljs-function">pqxx::work <span class="hljs-title">txn</span><span class="hljs-params">(conn)</span></span>;<br>        txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="hljs-comment">//进入schema</span><br>        pqxx::result result = txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);<br>        txn.<span class="hljs-built_in">commit</span>();<br> <span class="hljs-comment">// Process results</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> row_it = result.<span class="hljs-built_in">begin</span>(); row_it != result.<span class="hljs-built_in">end</span>(); row_it++)&#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="hljs-number">0</span>].<span class="hljs-built_in">as</span>&lt;<span class="hljs-type">int</span>&gt;() &lt;&lt; std::endl;<br>        &#125;<br>        conn.<span class="hljs-built_in">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>技术文档</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux基础</title>
-    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-    <content><![CDATA[<h2 id="下载">下载</h2>
-<p><a href="https://www.postgresql.org/download/">官网下载</a></p>
-<p>官网有详细的教程，这里就不多赘述。</p>
-<h2 id="创建用户分配权限">创建用户&amp;分配权限</h2>
-<p>部署完成后，登录postgres用户，并且进入数据库。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo -i -u postgres<br>psql<br></code></pre></td></tr></table></figure>
-<p>这里先创建一个管理员用户(超级用户)</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> password <span class="hljs-string">&#x27;&lt;password&gt;&#x27;</span>; <span class="hljs-comment">--创建用户</span><br>\du <span class="hljs-comment">--查看所有用户</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> superuser; <span class="hljs-comment">--分配权限</span><br></code></pre></td></tr></table></figure>
-<h2 id="数据库创建">数据库创建</h2>
-<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database <span class="hljs-operator">&lt;</span>database_name<span class="hljs-operator">&gt;</span> owner <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br>\q <span class="hljs-comment">--退出数据库</span><br></code></pre></td></tr></table></figure>
-<h2 id="用户登录">用户登录</h2>
-<p>注意postgres提供peer认证，当unix用户名和创建的用户名相同的时候才可以登录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">psql -U &lt;user_name&gt; -d &lt;database_name&gt;<span class="hljs-comment">#peer认证</span><br></code></pre></td></tr></table></figure>
-<h2 id="创建schema">创建schema</h2>
-<p>schema实际上可以认为是一个数据库中承载表，关系等对象的容器。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> schema <span class="hljs-operator">&lt;</span>schema_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">authorization</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>技术文档</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>深度优先搜索-DFS</title>
-    <url>/blog/2022/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
-    <content><![CDATA[<h1 id="栈">栈</h1>
-<h2 id="特点">特点</h2>
-<p>栈是后进先出（Last In First Out）的线性表，简称LIFO表</p>
-<p><img src="Snipaste_2022-12-13_23-49-18.png" srcset="/blog/img/loading.gif" lazyload /></p>
-<h2 id="例子">例子</h2>
-<h3 id="迷宫最短路问题">迷宫最短路问题</h3>
-<p>这个问题实际上使用DFS和BFS都可以实现,而且就找最短路来说，队列的时间复杂度更小，但是为了符合回溯这个主题，我们尝试使用DFS来做。</p>
-<h4 id="原理">原理</h4>
-<pre><code class="hljs">每走一次就入栈一次，每一次都走到无路可走或走到终点时退栈，找下一条路。</code></pre>
-<h4 id="代码">代码</h4>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;windows.h&gt;</span></span><br><span class="hljs-type">char</span> ch[<span class="hljs-number">10</span>][<span class="hljs-number">10</span>];<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pos</span>&#123;</span><br>    <span class="hljs-type">int</span> dir;<br>    <span class="hljs-type">int</span> row;<br>    <span class="hljs-type">int</span> col;<br>&#125;poss[<span class="hljs-number">101</span>];<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pos</span> <span class="hljs-title">res</span>[101];</span><br><span class="hljs-comment">//入栈</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">forward</span><span class="hljs-params">(<span class="hljs-type">int</span>* row, <span class="hljs-type">int</span>* col, <span class="hljs-type">int</span>* type)</span><br>&#123;<br>	<span class="hljs-comment">//这里运用了二进制减少变量</span><br>    <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">1</span>)ch[*row][++ * col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">2</span>)ch[++ * row][*col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">4</span>)ch[*row][-- * col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">4</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">8</span>)ch[-- * row][*col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">8</span>;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">print</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; j++) &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c &quot;</span>, ch[i][j]);<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">judge</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> col,<span class="hljs-type">int</span> tmp)</span><br>&#123;<br>    <span class="hljs-type">int</span> f = <span class="hljs-number">0</span>;<br>    poss[tmp].col = col;<br>    poss[tmp].row = row;<br>    <span class="hljs-keyword">if</span> (col + <span class="hljs-number">1</span> &lt; <span class="hljs-number">10</span> &amp;&amp; ch[row][col + <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">1</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (col - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; ch[row][col - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">4</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (row + <span class="hljs-number">1</span> &lt; <span class="hljs-number">10</span> &amp;&amp; ch[row + <span class="hljs-number">1</span>][col] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">2</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (row - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; ch[row - <span class="hljs-number">1</span>][col] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">8</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span> f;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-type">int</span> startr, startc;<br>    <span class="hljs-type">int</span> endr, endc;<br>    <span class="hljs-type">int</span> min=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; j++) &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%c%*c&quot;</span>, &amp;ch[i][j]);<br>            <span class="hljs-comment">//起点</span><br>            <span class="hljs-keyword">if</span> (ch[i][j] == <span class="hljs-string">&#x27;@&#x27;</span>) &#123;<br>                startr = i; startc = j;<br>            &#125;<br>            <span class="hljs-comment">//终点</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ch[i][j] == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                endr = i; endc = j;<br>                ch[i][j] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>    print();<br>    Sleep(<span class="hljs-number">500</span>);<br>    <span class="hljs-type">int</span> tmp = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-type">int</span> f = judge(startr, startc, tmp);<br>        system(<span class="hljs-string">&quot;cls&quot;</span>);<br>        forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>        print();<br>        Sleep(<span class="hljs-number">500</span>);<br>        <span class="hljs-keyword">if</span> (startr == endr &amp;&amp; startc == endc) &#123;<br>            <span class="hljs-comment">//记录最短路</span><br>            <span class="hljs-keyword">if</span> (min == <span class="hljs-number">0</span>) &#123;<br>                min = tmp + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>; k &lt; min; k++)res[k] = poss[k];<br>                res[min].row = endr;<br>                res[min].col = endc;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (min &gt; tmp)&#123;<br>	            min = tmp+<span class="hljs-number">1</span>;<br>	            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>; k &lt; min; k++)res[k] = poss[k];<br>                res[min].row = endr;<br>                res[min].col = endc;<br>            &#125;<br>            ch[endr][endc] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            <span class="hljs-keyword">while</span> (poss[tmp].dir == <span class="hljs-number">0</span> &amp;&amp; tmp &gt;= <span class="hljs-number">0</span>)&#123; <br>                ch[poss[tmp].row][poss[tmp].col] = <span class="hljs-string">&#x27; &#x27;</span>;<br>                tmp--;<br>                system(<span class="hljs-string">&quot;cls&quot;</span>);<br>                print();<br>                Sleep(<span class="hljs-number">100</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (tmp &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">//输出最短路</span><br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= min; i++) &#123;<br>			        ch[res[i].row][res[i].col] = <span class="hljs-string">&#x27;@&#x27;</span>;<br>			    &#125;<br>			    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>			    print();<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,min);<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            startr = poss[tmp].row;<br>            startc = poss[tmp].col;<br>            forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">500</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (f == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">while</span> (poss[tmp].dir == <span class="hljs-number">0</span> &amp;&amp; tmp &gt;= <span class="hljs-number">0</span>)&#123;<br>            ch[poss[tmp].row][poss[tmp].col] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            tmp--;<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">100</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (tmp &lt; <span class="hljs-number">0</span>) &#123;<br>	            <span class="hljs-comment">//输出最短路</span><br>	            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= min; i++) &#123;<br>			        ch[res[i].row][res[i].col] = <span class="hljs-string">&#x27;@&#x27;</span>;<br>			    &#125;<br>			    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>			    print();<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,min);<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            startr = poss[tmp].row;<br>            startc = poss[tmp].col;<br>            forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">500</span>);<br>        &#125;<br>        tmp++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h4 id="输入实例">输入实例</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs input"># # #   # #   # # #<br># @               #<br># #   # # # # #   #<br>#                 #<br># #   # # #   #   #<br># #   #   #   #   #<br># #   #   #   #   #<br># #       #   #   #<br># # # # # #   #   #<br># # # # # # * #   #<br></code></pre></td></tr></table></figure>
-<p>其实可以发现上面的很多代码都是重复的，主要是因为我们不是只要找到一条通向终点的路，而是要找到最短路，所以我们要将所有的路都走一遍。</p>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>C语言</category>
-      </categories>
-      <tags>
-        <tag>算法学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git</title>
     <url>/blog/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Git/git/</url>
     <content><![CDATA[<h1 id="git-flow-的常用分支">Git Flow 的常用分支</h1>
@@ -863,177 +784,29 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
       </tags>
   </entry>
   <entry>
-    <title>linux基础</title>
-    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/linux%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="linux-二级目录结构">linux 二级目录结构</h1>
-<ul>
-<li>/boot:存放Linux启动所需内核文件和镜像文件</li>
-<li>/root:管理用户的主目录</li>
-<li>/home:每一个用户都有自己的目录</li>
-<li>/bin:存放最经常使用的命令</li>
-<li>/dev:存放linux的外部设备</li>
-<li>/etc:存放所有的系统管理所需要的配置文件和子目录
-<ul>
-<li>passwd:用户信息</li>
-<li>shadow:用户密码(root)</li>
-<li>group:用户组信息</li>
-<li>gshadow:密码维护信息(root)</li>
-</ul></li>
-</ul>
-<h1 id="linux基本范式">linux基本范式</h1>
-<ul>
-<li>命令关键字</li>
-<li>选项</li>
-<li>命令参数 格式：命令关键字[选项][命令参数]</li>
-</ul>
-<p><strong>可以通过输入</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">命令关键字 --help <br>//或者 help 命令关键字<br></code></pre></td></tr></table></figure>
-<p><strong>查看命令格式</strong></p>
-<h1 id="目录命令">目录命令</h1>
-<ul>
-<li>pwd:打印当前工作目录</li>
-<li>cd:
-<ul>
-<li>访问绝对路径：cd /home/.../dev</li>
-<li>访问相对路径：cd dev</li>
-<li>返回上一个所在目录：cd -</li>
-<li>返回当前目录的父一级目录：cd ../</li>
-<li>切换到用户家目录：cd ~</li>
-</ul></li>
-<li>ls[选项][目录路径]:
-<ul>
-<li>查看当前目录内容</li>
-<li>l：长格式显示</li>
-<li>a：显示所有内容（包括隐藏文件）</li>
-<li>无选项：仅显示非隐藏文件</li>
-</ul></li>
-<li>mkdir [目录名]：新建目录</li>
-</ul>
-<h1 id="文件">文件</h1>
-<h2 id="查看编辑">查看/编辑</h2>
-<ul>
-<li>vi/vim [文件名]：
-<ul>
-<li>文件存在-编辑文件</li>
-<li>文件不存在-新建并编辑文件</li>
-<li>vi编辑规则[[]]</li>
-</ul></li>
-<li>cat [文件路径]:查看文件所有信息（内容长度有限）</li>
-<li>less [文件路径]: 分页查看文件内容</li>
-<li>echo "内容" [命令] [文件名]：
-<ul>
-<li>命令：&gt; 清空文件并写入内容</li>
-<li>命令：&gt;&gt; 追加写入内容</li>
-</ul></li>
-<li>cp[选项][源文件路径][目标文件路径]:
-<ul>
-<li>-a 保留复制前目录和文件的所有属性</li>
-<li>-r 若给出的源文件是一个目录文件，复制该目录下的所有子目录和文件</li>
-</ul></li>
-<li>mv[选项][源文件][目标文件]：
-<ul>
-<li>-i 若指定文件夹有同名文件先询问是否覆盖</li>
-<li>-f 直接覆盖已有的文件</li>
-<li>在移动时可以进行重命名操作</li>
-</ul></li>
-<li>rm[选项][文件访问目录]：
-<ul>
-<li>-f 强制删除文件且不提示信息</li>
-<li>-r 用于删除目录</li>
-</ul></li>
-<li>rmdir 文件访问路径：
-<ul>
-<li>仅删除空目录，有提示信息</li>
-</ul></li>
-</ul>
-<h2 id="权限">权限</h2>
-<ul>
-<li>用户身份：所有者，所属组，其他人</li>
-<li>访问权限：可读，可写，可执行</li>
-<li>权限编码：
-<ul>
-<li>第1个字母，文件类型</li>
-<li>第2，3，4分别表示所有者的可读，可写，可执行文件</li>
-<li>第5，6，7分别表示所属组的可读，可写，可执行文件</li>
-<li>第8，9，10分别表示其他人的可读，可写，可执行文件</li>
-</ul></li>
-<li>sudo
-<ul>
-<li>路径：/ect/sudoers</li>
-<li>root用户用visudo或vi /ect/sudoers修改可用sudo命令的用户</li>
-<li></li>
-</ul></li>
-</ul>
-<h2 id="设置不同用户的权限">设置不同用户的权限</h2>
-<ul>
-<li>权限掩码
-<ul>
-<li>由三个数字组成</li>
-<li>计算方式为6.6.6-x.x.x=y.y.y,分别转化为二进制表示三个用户身份的权限</li>
-<li>对于文件来说现有存取权限最大为6，无执行权限</li>
-<li>对于目录来说现有存取权限最大为7</li>
-<li>用法：umask [-S][权限掩码]</li>
-</ul></li>
-<li>永久设置
-<ul>
-<li>修改.bash_profile文件</li>
-</ul></li>
-<li>chomd文件分配权限 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ll  参看文件权限<br>chmod  o=rwx  a1   将a1的其他人其他人权限设置为满权限  // 属主用u表示，属组用g表示<br>chmode o-x a1  在a1其他人权限中去掉可执行权限   //增加权限是用<br>chmod 747  a1   权限用数字表式<br>chmod o-x,u-x  a1   同时对属主和其他人做减权限<br>[root@localhost home]# chmod -R 777 . 给所有权限<br>chown root a1   将a1的属主改成root<br>chgrp root a1   将a1的属组改成root    chown :root   a1<br> chown root:root  a1   属主和属组一起改   chown a1.root  a1  //中间一个冒号和一个点都可以  chown .a1 a1 只改属组一个  a1下面的属性或目录没有改<br>chown -R  root:root  a1/  将a下面的文件或目录属主和属组全部改成root,-R表示递归修改<br></code></pre></td></tr></table></figure></li>
-<li>chown [user][file]:
-<ul>
-<li>修改文件所有者</li>
-</ul></li>
-<li>chgrp [user][file]:
-<ul>
-<li>修改文件所属组</li>
-</ul></li>
-</ul>
-<h1 id="设置快捷方式">设置快捷方式</h1>
-<ul>
-<li>创建文件xxx.desktop(一定要在Desktop文件夹或usr/share/application文件夹中)
-<ul>
-<li>通过vim写入设置 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[Desktop Entry]<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序名称</span><br>Name=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">描述信息</span><br>Comment=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序的执行命令(可执行文件路径)</span><br>Exec=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">快捷图标位置</span><br>Icon=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">是否在终端中运行</span><br>Terminal=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">desktop的类型,常见值有“Application”和“Link”。</span><br>Type=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">菜单所属分类</span><br>Categories=<br></code></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h1 id="用户和用户组">用户和用户组</h1>
-<ul>
-<li>groupadd[选项][参数][组名]
-<ul>
-<li>-g 指定组的GID</li>
-<li>-f 若指定组已经存在则以成功状态退出</li>
-</ul></li>
-<li>groupmod[选项][修改后的新参数]
-<ul>
-<li>-g 修改组GID</li>
-<li>-n 修改组名称</li>
-</ul></li>
-<li>groupdel [待删除组的名称]</li>
-<li>useradd</li>
-<li>usermod</li>
-<li>userdel</li>
-</ul>
-<h1 id="shell编程">shell编程</h1>
-<h2 id="类型">类型</h2>
-<ul>
-<li>bash,zsh,csh,sh等</li>
-<li>查看环境：cat /etc/shells</li>
-</ul>
-<p>自动补全命令，参数：双击tab 用<span
-class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名:
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.bashrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>alias desktop=&#x27;cd /home/user/Desktop&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.bashrc<br></code></pre></td></tr></table></figure> 设置环境变量： <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.porfile<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>export PATH=$PATH:$Home/usr...<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.profile<br></code></pre></td></tr></table></figure></p>
-<h1 id="命令集合">命令集合</h1>
-<p>ctrl+z:<strong>将一个正在前台执行的命令放在后台并暂停</strong>。</p>
-<p>用jobs命令可将所有在后台运行的程序列出来。 fg + 进程号 打开进程</p>
-<h1 id="查看ip端口">查看IP，端口</h1>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">nmap 127.0.0.1<span class="hljs-comment"># 本地端口</span><br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><figcaption><span>ubuntu</span></figcaption><table><tr><td class="code"><pre><code class="hljs bash">sudo ufw allow 1077<br></code></pre></td></tr></table></figure>
+    <title>深度优先搜索-DFS</title>
+    <url>/blog/2022/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
+    <content><![CDATA[<h1 id="栈">栈</h1>
+<h2 id="特点">特点</h2>
+<p>栈是后进先出（Last In First Out）的线性表，简称LIFO表</p>
+<p><img src="Snipaste_2022-12-13_23-49-18.png" srcset="/blog/img/loading.gif" lazyload /></p>
+<h2 id="例子">例子</h2>
+<h3 id="迷宫最短路问题">迷宫最短路问题</h3>
+<p>这个问题实际上使用DFS和BFS都可以实现,而且就找最短路来说，队列的时间复杂度更小，但是为了符合回溯这个主题，我们尝试使用DFS来做。</p>
+<h4 id="原理">原理</h4>
+<pre><code class="hljs">每走一次就入栈一次，每一次都走到无路可走或走到终点时退栈，找下一条路。</code></pre>
+<h4 id="代码">代码</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;windows.h&gt;</span></span><br><span class="hljs-type">char</span> ch[<span class="hljs-number">10</span>][<span class="hljs-number">10</span>];<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pos</span>&#123;</span><br>    <span class="hljs-type">int</span> dir;<br>    <span class="hljs-type">int</span> row;<br>    <span class="hljs-type">int</span> col;<br>&#125;poss[<span class="hljs-number">101</span>];<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pos</span> <span class="hljs-title">res</span>[101];</span><br><span class="hljs-comment">//入栈</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">forward</span><span class="hljs-params">(<span class="hljs-type">int</span>* row, <span class="hljs-type">int</span>* col, <span class="hljs-type">int</span>* type)</span><br>&#123;<br>	<span class="hljs-comment">//这里运用了二进制减少变量</span><br>    <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">1</span>)ch[*row][++ * col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">2</span>)ch[++ * row][*col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">4</span>)ch[*row][-- * col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">4</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">8</span>)ch[-- * row][*col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">8</span>;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">print</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; j++) &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c &quot;</span>, ch[i][j]);<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">judge</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> col,<span class="hljs-type">int</span> tmp)</span><br>&#123;<br>    <span class="hljs-type">int</span> f = <span class="hljs-number">0</span>;<br>    poss[tmp].col = col;<br>    poss[tmp].row = row;<br>    <span class="hljs-keyword">if</span> (col + <span class="hljs-number">1</span> &lt; <span class="hljs-number">10</span> &amp;&amp; ch[row][col + <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">1</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (col - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; ch[row][col - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">4</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (row + <span class="hljs-number">1</span> &lt; <span class="hljs-number">10</span> &amp;&amp; ch[row + <span class="hljs-number">1</span>][col] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">2</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (row - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; ch[row - <span class="hljs-number">1</span>][col] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">8</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span> f;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-type">int</span> startr, startc;<br>    <span class="hljs-type">int</span> endr, endc;<br>    <span class="hljs-type">int</span> min=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; j++) &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%c%*c&quot;</span>, &amp;ch[i][j]);<br>            <span class="hljs-comment">//起点</span><br>            <span class="hljs-keyword">if</span> (ch[i][j] == <span class="hljs-string">&#x27;@&#x27;</span>) &#123;<br>                startr = i; startc = j;<br>            &#125;<br>            <span class="hljs-comment">//终点</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ch[i][j] == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                endr = i; endc = j;<br>                ch[i][j] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>    print();<br>    Sleep(<span class="hljs-number">500</span>);<br>    <span class="hljs-type">int</span> tmp = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-type">int</span> f = judge(startr, startc, tmp);<br>        system(<span class="hljs-string">&quot;cls&quot;</span>);<br>        forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>        print();<br>        Sleep(<span class="hljs-number">500</span>);<br>        <span class="hljs-keyword">if</span> (startr == endr &amp;&amp; startc == endc) &#123;<br>            <span class="hljs-comment">//记录最短路</span><br>            <span class="hljs-keyword">if</span> (min == <span class="hljs-number">0</span>) &#123;<br>                min = tmp + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>; k &lt; min; k++)res[k] = poss[k];<br>                res[min].row = endr;<br>                res[min].col = endc;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (min &gt; tmp)&#123;<br>	            min = tmp+<span class="hljs-number">1</span>;<br>	            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>; k &lt; min; k++)res[k] = poss[k];<br>                res[min].row = endr;<br>                res[min].col = endc;<br>            &#125;<br>            ch[endr][endc] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            <span class="hljs-keyword">while</span> (poss[tmp].dir == <span class="hljs-number">0</span> &amp;&amp; tmp &gt;= <span class="hljs-number">0</span>)&#123; <br>                ch[poss[tmp].row][poss[tmp].col] = <span class="hljs-string">&#x27; &#x27;</span>;<br>                tmp--;<br>                system(<span class="hljs-string">&quot;cls&quot;</span>);<br>                print();<br>                Sleep(<span class="hljs-number">100</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (tmp &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">//输出最短路</span><br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= min; i++) &#123;<br>			        ch[res[i].row][res[i].col] = <span class="hljs-string">&#x27;@&#x27;</span>;<br>			    &#125;<br>			    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>			    print();<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,min);<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            startr = poss[tmp].row;<br>            startc = poss[tmp].col;<br>            forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">500</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (f == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">while</span> (poss[tmp].dir == <span class="hljs-number">0</span> &amp;&amp; tmp &gt;= <span class="hljs-number">0</span>)&#123;<br>            ch[poss[tmp].row][poss[tmp].col] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            tmp--;<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">100</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (tmp &lt; <span class="hljs-number">0</span>) &#123;<br>	            <span class="hljs-comment">//输出最短路</span><br>	            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= min; i++) &#123;<br>			        ch[res[i].row][res[i].col] = <span class="hljs-string">&#x27;@&#x27;</span>;<br>			    &#125;<br>			    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>			    print();<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,min);<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            startr = poss[tmp].row;<br>            startc = poss[tmp].col;<br>            forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">500</span>);<br>        &#125;<br>        tmp++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="输入实例">输入实例</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs input"># # #   # #   # # #<br># @               #<br># #   # # # # #   #<br>#                 #<br># #   # # #   #   #<br># #   #   #   #   #<br># #   #   #   #   #<br># #       #   #   #<br># # # # # #   #   #<br># # # # # # * #   #<br></code></pre></td></tr></table></figure>
+<p>其实可以发现上面的很多代码都是重复的，主要是因为我们不是只要找到一条通向终点的路，而是要找到最短路，所以我们要将所有的路都走一遍。</p>
 ]]></content>
       <categories>
         <category>计算机</category>
-        <category>linux</category>
+        <category>C语言</category>
       </categories>
       <tags>
-        <tag>linux</tag>
+        <tag>算法学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1330,6 +1103,233 @@ alt="结果" />
       </categories>
       <tags>
         <tag>算法学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux基础</title>
+    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/linux%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="linux-二级目录结构">linux 二级目录结构</h1>
+<ul>
+<li>/boot:存放Linux启动所需内核文件和镜像文件</li>
+<li>/root:管理用户的主目录</li>
+<li>/home:每一个用户都有自己的目录</li>
+<li>/bin:存放最经常使用的命令</li>
+<li>/dev:存放linux的外部设备</li>
+<li>/etc:存放所有的系统管理所需要的配置文件和子目录
+<ul>
+<li>passwd:用户信息</li>
+<li>shadow:用户密码(root)</li>
+<li>group:用户组信息</li>
+<li>gshadow:密码维护信息(root)</li>
+</ul></li>
+</ul>
+<h1 id="linux基本范式">linux基本范式</h1>
+<ul>
+<li>命令关键字</li>
+<li>选项</li>
+<li>命令参数 格式：命令关键字[选项][命令参数]</li>
+</ul>
+<p><strong>可以通过输入</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">命令关键字 --help <br>//或者 help 命令关键字<br></code></pre></td></tr></table></figure>
+<p><strong>查看命令格式</strong></p>
+<h1 id="目录命令">目录命令</h1>
+<ul>
+<li>pwd:打印当前工作目录</li>
+<li>cd:
+<ul>
+<li>访问绝对路径：cd /home/.../dev</li>
+<li>访问相对路径：cd dev</li>
+<li>返回上一个所在目录：cd -</li>
+<li>返回当前目录的父一级目录：cd ../</li>
+<li>切换到用户家目录：cd ~</li>
+</ul></li>
+<li>ls[选项][目录路径]:
+<ul>
+<li>查看当前目录内容</li>
+<li>l：长格式显示</li>
+<li>a：显示所有内容（包括隐藏文件）</li>
+<li>无选项：仅显示非隐藏文件</li>
+</ul></li>
+<li>mkdir [目录名]：新建目录</li>
+</ul>
+<h1 id="文件">文件</h1>
+<h2 id="查看编辑">查看/编辑</h2>
+<ul>
+<li>vi/vim [文件名]：
+<ul>
+<li>文件存在-编辑文件</li>
+<li>文件不存在-新建并编辑文件</li>
+<li>vi编辑规则[[]]</li>
+</ul></li>
+<li>cat [文件路径]:查看文件所有信息（内容长度有限）</li>
+<li>less [文件路径]: 分页查看文件内容</li>
+<li>echo "内容" [命令] [文件名]：
+<ul>
+<li>命令：&gt; 清空文件并写入内容</li>
+<li>命令：&gt;&gt; 追加写入内容</li>
+</ul></li>
+<li>cp[选项][源文件路径][目标文件路径]:
+<ul>
+<li>-a 保留复制前目录和文件的所有属性</li>
+<li>-r 若给出的源文件是一个目录文件，复制该目录下的所有子目录和文件</li>
+</ul></li>
+<li>mv[选项][源文件][目标文件]：
+<ul>
+<li>-i 若指定文件夹有同名文件先询问是否覆盖</li>
+<li>-f 直接覆盖已有的文件</li>
+<li>在移动时可以进行重命名操作</li>
+</ul></li>
+<li>rm[选项][文件访问目录]：
+<ul>
+<li>-f 强制删除文件且不提示信息</li>
+<li>-r 用于删除目录</li>
+</ul></li>
+<li>rmdir 文件访问路径：
+<ul>
+<li>仅删除空目录，有提示信息</li>
+</ul></li>
+</ul>
+<h2 id="权限">权限</h2>
+<ul>
+<li>用户身份：所有者，所属组，其他人</li>
+<li>访问权限：可读，可写，可执行</li>
+<li>权限编码：
+<ul>
+<li>第1个字母，文件类型</li>
+<li>第2，3，4分别表示所有者的可读，可写，可执行文件</li>
+<li>第5，6，7分别表示所属组的可读，可写，可执行文件</li>
+<li>第8，9，10分别表示其他人的可读，可写，可执行文件</li>
+</ul></li>
+<li>sudo
+<ul>
+<li>路径：/ect/sudoers</li>
+<li>root用户用visudo或vi /ect/sudoers修改可用sudo命令的用户</li>
+<li></li>
+</ul></li>
+</ul>
+<h2 id="设置不同用户的权限">设置不同用户的权限</h2>
+<ul>
+<li>权限掩码
+<ul>
+<li>由三个数字组成</li>
+<li>计算方式为6.6.6-x.x.x=y.y.y,分别转化为二进制表示三个用户身份的权限</li>
+<li>对于文件来说现有存取权限最大为6，无执行权限</li>
+<li>对于目录来说现有存取权限最大为7</li>
+<li>用法：umask [-S][权限掩码]</li>
+</ul></li>
+<li>永久设置
+<ul>
+<li>修改.bash_profile文件</li>
+</ul></li>
+<li>chomd文件分配权限 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ll  参看文件权限<br>chmod  o=rwx  a1   将a1的其他人其他人权限设置为满权限  // 属主用u表示，属组用g表示<br>chmode o-x a1  在a1其他人权限中去掉可执行权限   //增加权限是用<br>chmod 747  a1   权限用数字表式<br>chmod o-x,u-x  a1   同时对属主和其他人做减权限<br>[root@localhost home]# chmod -R 777 . 给所有权限<br>chown root a1   将a1的属主改成root<br>chgrp root a1   将a1的属组改成root    chown :root   a1<br> chown root:root  a1   属主和属组一起改   chown a1.root  a1  //中间一个冒号和一个点都可以  chown .a1 a1 只改属组一个  a1下面的属性或目录没有改<br>chown -R  root:root  a1/  将a下面的文件或目录属主和属组全部改成root,-R表示递归修改<br></code></pre></td></tr></table></figure></li>
+<li>chown [user][file]:
+<ul>
+<li>修改文件所有者</li>
+</ul></li>
+<li>chgrp [user][file]:
+<ul>
+<li>修改文件所属组</li>
+</ul></li>
+</ul>
+<h1 id="设置快捷方式">设置快捷方式</h1>
+<ul>
+<li>创建文件xxx.desktop(一定要在Desktop文件夹或usr/share/application文件夹中)
+<ul>
+<li>通过vim写入设置 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[Desktop Entry]<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序名称</span><br>Name=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">描述信息</span><br>Comment=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序的执行命令(可执行文件路径)</span><br>Exec=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">快捷图标位置</span><br>Icon=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">是否在终端中运行</span><br>Terminal=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">desktop的类型,常见值有“Application”和“Link”。</span><br>Type=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">菜单所属分类</span><br>Categories=<br></code></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h1 id="用户和用户组">用户和用户组</h1>
+<ul>
+<li>groupadd[选项][参数][组名]
+<ul>
+<li>-g 指定组的GID</li>
+<li>-f 若指定组已经存在则以成功状态退出</li>
+</ul></li>
+<li>groupmod[选项][修改后的新参数]
+<ul>
+<li>-g 修改组GID</li>
+<li>-n 修改组名称</li>
+</ul></li>
+<li>groupdel [待删除组的名称]</li>
+<li>useradd</li>
+<li>usermod</li>
+<li>userdel</li>
+</ul>
+<h1 id="shell编程">shell编程</h1>
+<h2 id="类型">类型</h2>
+<ul>
+<li>bash,zsh,csh,sh等</li>
+<li>查看环境：cat /etc/shells</li>
+</ul>
+<p>自动补全命令，参数：双击tab 用<span
+class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名:
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.bashrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>alias desktop=&#x27;cd /home/user/Desktop&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.bashrc<br></code></pre></td></tr></table></figure> 设置环境变量： <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.porfile<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>export PATH=$PATH:$Home/usr...<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.profile<br></code></pre></td></tr></table></figure></p>
+<h1 id="命令集合">命令集合</h1>
+<p>ctrl+z:<strong>将一个正在前台执行的命令放在后台并暂停</strong>。</p>
+<p>用jobs命令可将所有在后台运行的程序列出来。 fg + 进程号 打开进程</p>
+<h1 id="查看ip端口">查看IP，端口</h1>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">nmap 127.0.0.1<span class="hljs-comment"># 本地端口</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>ubuntu</span></figcaption><table><tr><td class="code"><pre><code class="hljs bash">sudo ufw allow 1077<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++与postgres连接</title>
+    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/</url>
+    <content><![CDATA[<h2 id="需要安装的库">需要安装的库</h2>
+<p><a href="https://github.com/jtv/libpqxx/tree/master">jtv/libpqxx: The
+official C++ client API for PostgreSQL. (github.com)</a></p>
+<p>libpqxx编译安装之前要求安装libpq</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo apt install libpq-dev<br></code></pre></td></tr></table></figure>
+<p>接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。</p>
+<h3 id="静态库">静态库</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">./configure --prefix=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
+<h3 id="动态库">动态库</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake -DBUILD_SHARED_LIBS=ON ..<br>sudo make install DESTDIR=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br></code></pre></td></tr></table></figure>
+<p>使用Cmake构建程序示例。其中要注意的是C++一定要使用17以上的版本，否则编译会报错。</p>
+<p>CMakeLists.txt <figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.22</span>)<br><span class="hljs-keyword">project</span>(template)<br><br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD <span class="hljs-number">17</span>)<br><br><span class="hljs-keyword">set</span>(PostgreSQL_ROOT /var/lib/postgresql/<span class="hljs-number">16</span>)<br><span class="hljs-keyword">include_directories</span> (<span class="hljs-variable">$&#123;PostgreSQL_INCLUDE_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/<span class="hljs-keyword">include</span>)<br><br><br><span class="hljs-keyword">set</span>(libpqxx_ROOT /home/zhang/libpqxx)<br><span class="hljs-keyword">link_directories</span>(<span class="hljs-variable">$&#123;PostgreSQL_LIBRARY_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/lib)<br><br><span class="hljs-keyword">find_package</span>(PostgreSQL REQUIRED)<br><br><br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> pqxx <span class="hljs-variable">$&#123;PostgreSQL_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure></p>
+<p>main.c <figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;pqxx/pqxx&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; std::endl;<br>        std::string conn_string = <span class="hljs-string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;<br>        <span class="hljs-function">pqxx::connection <span class="hljs-title">conn</span><span class="hljs-params">(conn_string)</span></span>;<br>        <span class="hljs-function">pqxx::work <span class="hljs-title">txn</span><span class="hljs-params">(conn)</span></span>;<br>        txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="hljs-comment">//进入schema</span><br>        pqxx::result result = txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);<br>        txn.<span class="hljs-built_in">commit</span>();<br> <span class="hljs-comment">// Process results</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> row_it = result.<span class="hljs-built_in">begin</span>(); row_it != result.<span class="hljs-built_in">end</span>(); row_it++)&#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="hljs-number">0</span>].<span class="hljs-built_in">as</span>&lt;<span class="hljs-type">int</span>&gt;() &lt;&lt; std::endl;<br>        &#125;<br>        conn.<span class="hljs-built_in">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>postgres实践</category>
+      </categories>
+      <tags>
+        <tag>技术文档</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Postgress 安装与初体验</title>
+    <url>/blog/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    <content><![CDATA[<h2 id="下载">下载</h2>
+<p><a href="https://www.postgresql.org/download/">官网下载</a></p>
+<p>官网有详细的教程，这里就不多赘述。</p>
+<h2 id="创建用户分配权限">创建用户&amp;分配权限</h2>
+<p>部署完成后，登录postgres用户，并且进入数据库。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo -i -u postgres<br>psql<br></code></pre></td></tr></table></figure>
+<p>这里先创建一个管理员用户(超级用户)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> password <span class="hljs-string">&#x27;&lt;password&gt;&#x27;</span>; <span class="hljs-comment">--创建用户</span><br>\du <span class="hljs-comment">--查看所有用户</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> superuser; <span class="hljs-comment">--分配权限</span><br></code></pre></td></tr></table></figure>
+<h2 id="数据库创建">数据库创建</h2>
+<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database <span class="hljs-operator">&lt;</span>database_name<span class="hljs-operator">&gt;</span> owner <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br>\q <span class="hljs-comment">--退出数据库</span><br></code></pre></td></tr></table></figure>
+<h2 id="用户登录">用户登录</h2>
+<p>注意postgres提供peer认证，当unix用户名和创建的用户名相同的时候才可以登录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">psql -U &lt;user_name&gt; -d &lt;database_name&gt;<span class="hljs-comment">#peer认证</span><br></code></pre></td></tr></table></figure>
+<h2 id="创建schema">创建schema</h2>
+<p>schema实际上可以认为是一个数据库中承载表，关系等对象的容器。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> schema <span class="hljs-operator">&lt;</span>schema_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">authorization</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>postgres实践</category>
+      </categories>
+      <tags>
+        <tag>技术文档</tag>
       </tags>
   </entry>
 </search>
