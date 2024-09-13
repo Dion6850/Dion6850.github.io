@@ -6,3 +6,8 @@
         font-family: "kaishu";
         src: url("../fonts/kaishu.TTF")format("truetype");
     }
+	
+@font-face {
+        font-family: "siyuansongti";
+        src: url("../fonts/SourceHanSansSC-VF.TTF")format("truetype");
+    }
