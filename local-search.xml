@@ -168,33 +168,6 @@
   
   
   <entry>
-    <title>Postgress 安装与初体验</title>
-    <link href="/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/"/>
-    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-    
-    <content type="html"><![CDATA[<h2 id="下载">下载</h2><p><a href="https://www.postgresql.org/download/">官网下载</a></p><p>官网有详细的教程，这里就不多赘述。</p><h2 id="创建用户分配权限">创建用户&amp;分配权限</h2><p>部署完成后，登录postgres用户，并且进入数据库。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo -i -u postgres<br>psql<br></code></pre></td></tr></table></figure><p>这里先创建一个管理员用户(超级用户)</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> password <span class="hljs-string">&#x27;&lt;password&gt;&#x27;</span>; <span class="hljs-comment">--创建用户</span><br>\du <span class="hljs-comment">--查看所有用户</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> superuser; <span class="hljs-comment">--分配权限</span><br></code></pre></td></tr></table></figure><h2 id="数据库创建">数据库创建</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database <span class="hljs-operator">&lt;</span>database_name<span class="hljs-operator">&gt;</span> owner <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br>\q <span class="hljs-comment">--退出数据库</span><br></code></pre></td></tr></table></figure><h2 id="用户登录">用户登录</h2><p>注意postgres提供peer认证，当unix用户名和创建的用户名相同的时候才可以登录。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">psql -U &lt;user_name&gt; -d &lt;database_name&gt;<span class="hljs-comment">#peer认证</span><br></code></pre></td></tr></table></figure><h2 id="创建schema">创建schema</h2><p>schema实际上可以认为是一个数据库中承载表，关系等对象的容器。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> schema <span class="hljs-operator">&lt;</span>schema_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">authorization</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <categories>
-      
-      <category>计算机</category>
-      
-      <category>postgres实践</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>技术文档</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>C++与postgres连接</title>
     <link href="/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/"/>
     <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/</url>
@@ -241,6 +214,33 @@
     <tags>
       
       <tag>linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Postgress 安装与初体验</title>
+    <link href="/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/"/>
+    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    
+    <content type="html"><![CDATA[<h2 id="下载">下载</h2><p><a href="https://www.postgresql.org/download/">官网下载</a></p><p>官网有详细的教程，这里就不多赘述。</p><h2 id="创建用户分配权限">创建用户&amp;分配权限</h2><p>部署完成后，登录postgres用户，并且进入数据库。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo -i -u postgres<br>psql<br></code></pre></td></tr></table></figure><p>这里先创建一个管理员用户(超级用户)</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> password <span class="hljs-string">&#x27;&lt;password&gt;&#x27;</span>; <span class="hljs-comment">--创建用户</span><br>\du <span class="hljs-comment">--查看所有用户</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> superuser; <span class="hljs-comment">--分配权限</span><br></code></pre></td></tr></table></figure><h2 id="数据库创建">数据库创建</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database <span class="hljs-operator">&lt;</span>database_name<span class="hljs-operator">&gt;</span> owner <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br>\q <span class="hljs-comment">--退出数据库</span><br></code></pre></td></tr></table></figure><h2 id="用户登录">用户登录</h2><p>注意postgres提供peer认证，当unix用户名和创建的用户名相同的时候才可以登录。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">psql -U &lt;user_name&gt; -d &lt;database_name&gt;<span class="hljs-comment">#peer认证</span><br></code></pre></td></tr></table></figure><h2 id="创建schema">创建schema</h2><p>schema实际上可以认为是一个数据库中承载表，关系等对象的容器。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> schema <span class="hljs-operator">&lt;</span>schema_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">authorization</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机</category>
+      
+      <category>postgres实践</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术文档</tag>
       
     </tags>
     

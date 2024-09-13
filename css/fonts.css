@@ -1,4 +1,8 @@
 @font-face {
         font-family: "guochao";
-        src: url("../fonts/guochao.TTF");
+        src: url("../fonts/guochao.TTF")format("truetype");
+    }
+@font-face {
+        font-family: "kaishu";
+        src: url("../fonts/kaishu.TTF")format("truetype");
     }
