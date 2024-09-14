@@ -1,18 +1,5 @@
 @font-face {
-        font-family: "guochao";
-        src: url("../fonts/guochao.TTF")format("truetype");
-    }
-@font-face {
         font-family: "kaishu";
         src: url("../fonts/kaishu.TTF")format("truetype");
     }
-	
-@font-face {
-        font-family: "siyuansongti";
-        src: url("../fonts/SourceHanSansSC-VF.TTF")format("truetype");
-    }
-	
-@font-face {
-        font-family: "ALI";
-        src: url("../fonts/ALI.tff")format("truetype");
-    }
+
