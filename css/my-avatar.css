@@ -1,0 +1,13 @@
+@import 'animate.css';
+.my-avatar:hover {
+  transform: rotate(360deg); /* 鼠标悬停时旋转 */
+}
+
+.my-avatar {
+  width: 250px;
+  height:250px;
+  border-radius: 50%;   /* 将图片圆形化 */
+  border : 5px solid;
+  transition: transform 1s; /* 过渡效果 */
+  margin-bottom: 50px;  /* 与下面的文字对齐 */
+}
