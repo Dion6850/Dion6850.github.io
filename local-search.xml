@@ -4,33 +4,6 @@
   
   
   <entry>
-    <title>Zenko-S3安装教程</title>
-    <link href="/2024/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/Zenko-S3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
-    <url>/2024/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/Zenko-S3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</url>
-    
-    <content type="html"><![CDATA[<h2 id="安装yarn和node.js">安装yarn和node.js</h2><h3 id="安装环境">安装环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install g++ gnupg curl<br></code></pre></td></tr></table></figure><p>导入软件源的 GPG key 并且添加 Yarn APT软件源到你的系统，通过NodeSource更新nodejs软件源，运行下面的命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | sudo <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/yarn.list<br>curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash<br></code></pre></td></tr></table></figure><h3 id="通过apt安装yarn和nodejs">通过apt安装yarn和nodejs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt update<br>sudo apt install yarn<br></code></pre></td></tr></table></figure><p>注意如上命令会安装node.js如果已经通过nvm安装了Node可以采用如下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install --no-install-recommends yarn<br></code></pre></td></tr></table></figure><p>检查yarn和nodejs版本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">yarn --version<br>nodejs --version<br></code></pre></td></tr></table></figure><h2 id="安装zenko-s3">安装Zenko-S3</h2><p>命令集合，直接复制即可完成安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/scality/S3.git<br><span class="hljs-built_in">cd</span> S3<br>yarn install --frozen-lockfile<br></code></pre></td></tr></table></figure><h2 id="运行测试">运行测试</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yarn start<br></code></pre></td></tr></table></figure><p>这将在端口 8000 上启动 Zenko CloudServer。两个额外的端口 9990 和 9991也在本地开放，用于元数据和数据的内部传输， 分别。</p><p>默认访问密钥为 accessKey1，其中 一个 verySecretKey1 的密钥。</p><p>默认情况下，元数据文件将保存在 localMetadata 目录下，数据文件将被保存在 ./S3 目录下的 localData 目录中 机器。这些目录已在 存储库。如果要将数据或元数据保存在您选择的不同位置，则必须使用绝对路径指定它们。因此，在启动服务器时：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -m 700 $(<span class="hljs-built_in">pwd</span>)/myFavoriteDataPath<br><span class="hljs-built_in">mkdir</span> -m 700 $(<span class="hljs-built_in">pwd</span>)/myFavoriteMetadataPath<br><span class="hljs-built_in">export</span> S3DATAPATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(pwd)</span>/myFavoriteDataPath&quot;</span><br><span class="hljs-built_in">export</span> S3METADATAPATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(pwd)</span>/myFavoriteMetadataPath&quot;</span><br>yarn start<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <categories>
-      
-      <category>计算机</category>
-      
-      <category>linux</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>linux</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>verilator环境配置和初步使用</title>
     <link href="/2024/09/15/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF/verilator%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/"/>
     <url>/2024/09/15/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF/verilator%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/</url>

@@ -99,6 +99,380 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
       </tags>
   </entry>
   <entry>
+    <title>STM32流水灯</title>
+    <url>/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/</url>
+    <content><![CDATA[<h2 id="stm32cubemx的配置">STM32CubeMX的配置</h2>
+<ul>
+<li>创建STM32CubeMX工程</li>
+</ul>
+<p><img src="img20230913152634.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>打开外部晶振 <img src="img20230913152746.png" srcset="/img/loading.gif" lazyload></p></li>
+<li><p>时钟树设置
+注意外部晶振的频率是由硬件决定的，选择与硬件相匹配的频率 <img src="img20230913152822.png" srcset="/img/loading.gif" lazyload></p></li>
+<li><p>配置IO引脚 <img src="img20230913152948.png" srcset="/img/loading.gif" lazyload></p></li>
+<li><p>配置文件路径和代码生成 <img src="img20230913153027.png" srcset="/img/loading.gif" lazyload></p></li>
+</ul>
+<p><img src="img20230913153117.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>生成代码 <img src="img20230913153155.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+<h2 id="keil配置">KEIL配置</h2>
+<p>下面的工具栏在页面的左上角</p>
+<p><img src="img20230913153352.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击红色方框中的按钮</p>
+<p><img src="img20230913153428.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="img20230913153449.png" srcset="/img/loading.gif" lazyload></p>
+<p>选择你用的烧录器，点击右边的setting后可以看到芯片是否连接成功</p>
+<p><img src="img20230913153556.png" srcset="/img/loading.gif" lazyload></p>
+<p>由于hal库函数中HAL_Delay()函数使用的是系统时钟的中断来实现的，容易进入死循环或者程序卡死，因此使用非中断实现延时，在工程中加入delay.c和delay.h定义了函数Delay_ms()和Delay_us()来实现。下面是在工程中加入文件的指南。</p>
+<p>将Delay文件夹加入文件目录</p>
+<p><img src="img20230913154550.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="img20230913154136.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="img20230913154209.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击add file将delay.c文件加入，并将delay文件夹加入include路径</p>
+<p><img src="img20230913154759.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="img20230913154818.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>编写程序</li>
+</ul>
+<p>注意自己的代码都要写在USER_CODE_BEGIN...和USER_CODE_END...注释之间，否则使用STM32CubeMX重新generate的时候自己的代码会被清除。</p>
+<p>自己定义的端口名称会在main.h中生成(STM32CubeMX自动生成)，这里是我定义的端口</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* Private defines -----------------------------------------------------------*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED1_Pin GPIO_PIN_6</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED1_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED2_Pin GPIO_PIN_7</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED2_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED3_Pin GPIO_PIN_8</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED3_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED4_Pin GPIO_PIN_9</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED4_GPIO_Port GPIOB</span><br></code></pre></td></tr></table></figure>
+<p>为了方便找到位置这里将main.c都列出，加上的代码边上都有注释</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Header */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  * @file           : main.c</span><br><span class="hljs-comment">  * @brief          : Main program body</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  * @attention</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  * Copyright (c) 2023 STMicroelectronics.</span><br><span class="hljs-comment">  * All rights reserved.</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  * This software is licensed under terms that can be found in the LICENSE file</span><br><span class="hljs-comment">  * in the root directory of this software component.</span><br><span class="hljs-comment">  * If no LICENSE file comes with this software, it is provided AS-IS.</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  */</span><br><span class="hljs-comment">/* USER CODE END Header */</span><br><span class="hljs-comment">/* Includes ------------------------------------------------------------------*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"main.h"</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"gpio.h"</span></span><br><br><span class="hljs-comment">/* Private includes ----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN Includes */</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"delay.h"</span></span><br><span class="hljs-comment">/* USER CODE END Includes */</span><br><br><span class="hljs-comment">/* Private typedef -----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PTD */</span><br><br><span class="hljs-comment">/* USER CODE END PTD */</span><br><br><span class="hljs-comment">/* Private define ------------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PD */</span><br><span class="hljs-comment">/* USER CODE END PD */</span><br><br><span class="hljs-comment">/* Private macro -------------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PM */</span><br><br><span class="hljs-comment">/* USER CODE END PM */</span><br><br><span class="hljs-comment">/* Private variables ---------------------------------------------------------*/</span><br><br><span class="hljs-comment">/* USER CODE BEGIN PV */</span><br><br><span class="hljs-comment">/* USER CODE END PV */</span><br><br><span class="hljs-comment">/* Private function prototypes -----------------------------------------------*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SystemClock_Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br><span class="hljs-comment">/* USER CODE BEGIN PFP */</span><br><br><span class="hljs-comment">/* USER CODE END PFP */</span><br><br><span class="hljs-comment">/* Private user code ---------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN 0 */</span><br><br><span class="hljs-comment">/* USER CODE END 0 */</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  The application entry point.</span><br><span class="hljs-comment">  * @retval int</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN 1 */</span><br><br>  <span class="hljs-comment">/* USER CODE END 1 */</span><br><br>  <span class="hljs-comment">/* MCU Configuration--------------------------------------------------------*/</span><br><br>  <span class="hljs-comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span><br>  HAL_Init();<br><br>  <span class="hljs-comment">/* USER CODE BEGIN Init */</span><br>	delay_init(<span class="hljs-number">180</span>);<span class="hljs-comment">// 配置延时函数，参数是系统时钟频率</span><br>  <span class="hljs-comment">/* USER CODE END Init */</span><br><br>  <span class="hljs-comment">/* Configure the system clock */</span><br>  SystemClock_Config();<br><br>  <span class="hljs-comment">/* USER CODE BEGIN SysInit */</span><br><br>  <span class="hljs-comment">/* USER CODE END SysInit */</span><br><br>  <span class="hljs-comment">/* Initialize all configured peripherals */</span><br>  MX_GPIO_Init();<br>  <span class="hljs-comment">/* USER CODE BEGIN 2 */</span><br>  <span class="hljs-comment">// 在测试板中IO引脚输出高电平LED不亮，其他板子请参照原理图</span><br>  HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);<br>  <span class="hljs-comment">/* USER CODE END 2 */</span><br><br>  <span class="hljs-comment">/* Infinite loop */</span><br>  <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span><br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  {<br>	  <span class="hljs-comment">//流水灯begin</span><br>	  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);<br>	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  <span class="hljs-comment">//流水灯end</span><br>    <span class="hljs-comment">/* USER CODE END WHILE */</span><br>	  <br>    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span><br>  }<br>  <span class="hljs-comment">/* USER CODE END 3 */</span><br>}<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief System Clock Configuration</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SystemClock_Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  RCC_OscInitTypeDef RCC_OscInitStruct = {<span class="hljs-number">0</span>};<br>  RCC_ClkInitTypeDef RCC_ClkInitStruct = {<span class="hljs-number">0</span>};<br><br>  <span class="hljs-comment">/** Configure the main internal regulator output voltage</span><br><span class="hljs-comment">  */</span><br>  __HAL_RCC_PWR_CLK_ENABLE();<br>  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);<br><br>  <span class="hljs-comment">/** Initializes the RCC Oscillators according to the specified parameters</span><br><span class="hljs-comment">  * in the RCC_OscInitTypeDef structure.</span><br><span class="hljs-comment">  */</span><br>  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;<br>  RCC_OscInitStruct.HSIState = RCC_HSI_ON;<br>  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;<br>  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;<br>  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;<br>  RCC_OscInitStruct.PLL.PLLM = <span class="hljs-number">8</span>;<br>  RCC_OscInitStruct.PLL.PLLN = <span class="hljs-number">180</span>;<br>  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;<br>  RCC_OscInitStruct.PLL.PLLQ = <span class="hljs-number">2</span>;<br>  RCC_OscInitStruct.PLL.PLLR = <span class="hljs-number">2</span>;<br>  <span class="hljs-keyword">if</span> (HAL_RCC_OscConfig(&amp;RCC_OscInitStruct) != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br><br>  <span class="hljs-comment">/** Activate the Over-Drive mode</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-keyword">if</span> (HAL_PWREx_EnableOverDrive() != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br><br>  <span class="hljs-comment">/** Initializes the CPU, AHB and APB buses clocks</span><br><span class="hljs-comment">  */</span><br>  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK<br>                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;<br>  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;<br>  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;<br>  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;<br>  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;<br><br>  <span class="hljs-keyword">if</span> (HAL_RCC_ClockConfig(&amp;RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br>}<br><br><span class="hljs-comment">/* USER CODE BEGIN 4 */</span><br><br><span class="hljs-comment">/* USER CODE END 4 */</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  This function is executed in case of error occurrence.</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">Error_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN Error_Handler_Debug */</span><br>  <span class="hljs-comment">/* User can add his own implementation to report the HAL error return state */</span><br>  __disable_irq();<br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  {<br>  }<br>  <span class="hljs-comment">/* USER CODE END Error_Handler_Debug */</span><br>}<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span>  USE_FULL_ASSERT</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  Reports the name of the source file and the source line number</span><br><span class="hljs-comment">  *         where the assert_param error has occurred.</span><br><span class="hljs-comment">  * @param  file: pointer to the source file name</span><br><span class="hljs-comment">  * @param  line: assert_param error line source number</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">assert_failed</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> *file, <span class="hljs-type">uint32_t</span> line)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN 6 */</span><br>  <span class="hljs-comment">/* User can add his own implementation to report the file name and line number,</span><br><span class="hljs-comment">     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */</span><br>  <span class="hljs-comment">/* USER CODE END 6 */</span><br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">/* USE_FULL_ASSERT */</span></span><br><br></code></pre></td></tr></table></figure>
+<p>编译通过后烧录即可。</p>
+<p>delay的实现参考正点原子的例程。</p>
+<p>delay.c</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"delay.h"</span></span><br><span class="hljs-comment">////////////////////////////////////////////////////////////////////////////////// 	 </span><br><span class="hljs-comment">//如果使用ucos,则包括下面的头文件即可.</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"includes.h"</span>					<span class="hljs-comment">//ucos 使用	  </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-comment">//////////////////////////////////////////////////////////////////////////////////  </span><br><span class="hljs-comment">//本程序只供学习使用，未经作者许可，不得用于其它任何用途</span><br><span class="hljs-comment">//ALIENTEK STM32F407开发板</span><br><span class="hljs-comment">//使用SysTick的普通计数模式对延迟进行管理(支持ucosii/ucosiii)</span><br><span class="hljs-comment">//包括delay_us,delay_ms</span><br><span class="hljs-comment">//正点原子@ALIENTEK</span><br><span class="hljs-comment">//技术论坛:www.openedv.com</span><br><span class="hljs-comment">//创建日期:2017/4/6</span><br><span class="hljs-comment">//版本：V1.1</span><br><span class="hljs-comment">//版权所有，盗版必究。</span><br><span class="hljs-comment">//Copyright(C) 广州市星翼电子科技有限公司 2014-2024</span><br><span class="hljs-comment">//All rights reserved</span><br><span class="hljs-comment">//********************************************************************************</span><br><span class="hljs-comment">//修改说明</span><br><span class="hljs-comment">////////////////////////////////////////////////////////////////////////////////// </span><br><br><span class="hljs-type">static</span> <span class="hljs-type">uint32_t</span> fac_us=<span class="hljs-number">0</span>;							<span class="hljs-comment">//us延时倍乘数</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS		</span><br>    <span class="hljs-type">static</span> <span class="hljs-type">uint16_t</span> fac_ms=<span class="hljs-number">0</span>;				        <span class="hljs-comment">//ms延时倍乘数,在os下,代表每个节拍的ms数</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS							<span class="hljs-comment">//如果SYSTEM_SUPPORT_OS定义了,说明要支持OS了(不限于UCOS).</span></span><br><span class="hljs-comment">//当delay_us/delay_ms需要支持OS的时候需要三个与OS相关的宏定义和函数来支持</span><br><span class="hljs-comment">//首先是3个宏定义:</span><br><span class="hljs-comment">//delay_osrunning:用于表示OS当前是否正在运行,以决定是否可以使用相关函数</span><br><span class="hljs-comment">//delay_ostickspersec:用于表示OS设定的时钟节拍,delay_init将根据这个参数来初始哈systick</span><br><span class="hljs-comment">//delay_osintnesting:用于表示OS中断嵌套级别,因为中断里面不可以调度,delay_ms使用该参数来决定如何运行</span><br><span class="hljs-comment">//然后是3个函数:</span><br><span class="hljs-comment">//delay_osschedlock:用于锁定OS任务调度,禁止调度</span><br><span class="hljs-comment">//delay_osschedunlock:用于解锁OS任务调度,重新开启调度</span><br><span class="hljs-comment">//delay_ostimedly:用于OS延时,可以引起任务调度.</span><br><br><span class="hljs-comment">//本例程仅作UCOSII和UCOSIII的支持,其他OS,请自行参考着移植</span><br><span class="hljs-comment">//支持UCOSII</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 	OS_CRITICAL_METHOD						<span class="hljs-comment">//OS_CRITICAL_METHOD定义了,说明要支持UCOSII				</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osrunning		OSRunning			<span class="hljs-comment">//OS是否运行标记,0,不运行;1,在运行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_ostickspersec	OS_TICKS_PER_SEC	<span class="hljs-comment">//OS时钟节拍,即每秒调度次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osintnesting 	OSIntNesting		<span class="hljs-comment">//中断嵌套级别,即中断嵌套次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-comment">//支持UCOSIII</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 	CPU_CFG_CRITICAL_METHOD					<span class="hljs-comment">//CPU_CFG_CRITICAL_METHOD定义了,说明要支持UCOSIII	</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osrunning		OSRunning			<span class="hljs-comment">//OS是否运行标记,0,不运行;1,在运行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_ostickspersec	OSCfg_TickRate_Hz	<span class="hljs-comment">//OS时钟节拍,即每秒调度次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osintnesting 	OSIntNestingCtr		<span class="hljs-comment">//中断嵌套级别,即中断嵌套次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br><span class="hljs-comment">//us级延时时,关闭任务调度(防止打断us级延迟)</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_osschedlock</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD   			<span class="hljs-comment">//使用UCOSIII</span></span><br>	OS_ERR err; <br>	OSSchedLock(&amp;err);						<span class="hljs-comment">//UCOSIII的方式,禁止调度，防止打断us延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>										<span class="hljs-comment">//否则UCOSII</span></span><br>	OSSchedLock();							<span class="hljs-comment">//UCOSII的方式,禁止调度，防止打断us延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}<br><br><span class="hljs-comment">//us级延时时,恢复任务调度</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_osschedunlock</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{	<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD   			<span class="hljs-comment">//使用UCOSIII</span></span><br>	OS_ERR err; <br>	OSSchedUnlock(&amp;err);					<span class="hljs-comment">//UCOSIII的方式,恢复调度</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>										<span class="hljs-comment">//否则UCOSII</span></span><br>	OSSchedUnlock();						<span class="hljs-comment">//UCOSII的方式,恢复调度</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}<br><br><span class="hljs-comment">//调用OS自带的延时函数延时</span><br><span class="hljs-comment">//ticks:延时的节拍数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ostimedly</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> ticks)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD</span><br>	OS_ERR err; <br>	OSTimeDly(ticks,OS_OPT_TIME_PERIODIC,&amp;err); <span class="hljs-comment">//UCOSIII延时采用周期模式</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>	OSTimeDly(ticks);						    <span class="hljs-comment">//UCOSII延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> </span><br>}<br> <br><span class="hljs-comment">//systick中断服务函数,使用OS时用到</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SysTick_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{	<br>    HAL_IncTick();<br>	<span class="hljs-keyword">if</span>(delay_osrunning==<span class="hljs-number">1</span>)					<span class="hljs-comment">//OS开始跑了,才执行正常的调度处理</span><br>	{<br>		OSIntEnter();						<span class="hljs-comment">//进入中断</span><br>		OSTimeTick();       				<span class="hljs-comment">//调用ucos的时钟服务程序               </span><br>		OSIntExit();       	 				<span class="hljs-comment">//触发任务切换软中断</span><br>	}<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>			   <br><span class="hljs-comment">//初始化延迟函数</span><br><span class="hljs-comment">//当使用ucos的时候,此函数会初始化ucos的时钟节拍</span><br><span class="hljs-comment">//SYSTICK的时钟固定为AHB时钟</span><br><span class="hljs-comment">//SYSCLK:系统时钟频率</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_init</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> SYSCLK)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br>	<span class="hljs-type">uint32_t</span> reload;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>    HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);<span class="hljs-comment">//SysTick频率为HCLK</span><br>	fac_us=SYSCLK;						<span class="hljs-comment">//不论是否使用OS,fac_us都需要使用</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br>	reload=SYSCLK;					    <span class="hljs-comment">//每秒钟的计数次数 单位为K	   </span><br>	reload*=<span class="hljs-number">1000000</span>/delay_ostickspersec;	<span class="hljs-comment">//根据delay_ostickspersec设定溢出时间</span><br>											<span class="hljs-comment">//reload为24位寄存器,最大值:16777216,在180M下,约合0.745s左右	</span><br>	fac_ms=<span class="hljs-number">1000</span>/delay_ostickspersec;		<span class="hljs-comment">//代表OS可以延时的最少单位	   </span><br>	SysTick-&gt;CTRL|=SysTick_CTRL_TICKINT_Msk;<span class="hljs-comment">//开启SYSTICK中断</span><br>	SysTick-&gt;LOAD=reload; 					<span class="hljs-comment">//每1/OS_TICKS_PER_SEC秒中断一次	</span><br>	SysTick-&gt;CTRL|=SysTick_CTRL_ENABLE_Msk; <span class="hljs-comment">//开启SYSTICK</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}								    <br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br><span class="hljs-comment">//延时nus</span><br><span class="hljs-comment">//nus:要延时的us数.	</span><br><span class="hljs-comment">//nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	    								   </span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span><br>{		<br>	<span class="hljs-type">uint32_t</span> ticks;<br>	<span class="hljs-type">uint32_t</span> told,tnow,tcnt=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">uint32_t</span> reload=SysTick-&gt;LOAD;				<span class="hljs-comment">//LOAD的值	    	 </span><br>	ticks=nus*fac_us; 						<span class="hljs-comment">//需要的节拍数 </span><br>	delay_osschedlock();					<span class="hljs-comment">//阻止OS调度，防止打断us延时</span><br>	told=SysTick-&gt;VAL;        				<span class="hljs-comment">//刚进入时的计数器值</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	{<br>		tnow=SysTick-&gt;VAL;	<br>		<span class="hljs-keyword">if</span>(tnow!=told)<br>		{	    <br>			<span class="hljs-keyword">if</span>(tnow&lt;told)tcnt+=told-tnow;	<span class="hljs-comment">//这里注意一下SYSTICK是一个递减的计数器就可以了.</span><br>			<span class="hljs-keyword">else</span> tcnt+=reload-tnow+told;	    <br>			told=tnow;<br>			<span class="hljs-keyword">if</span>(tcnt&gt;=ticks)<span class="hljs-keyword">break</span>;			<span class="hljs-comment">//时间超过/等于要延迟的时间,则退出.</span><br>		}  <br>	};<br>	delay_osschedunlock();					<span class="hljs-comment">//恢复OS调度											    </span><br>}  <br><span class="hljs-comment">//延时nms</span><br><span class="hljs-comment">//nms:要延时的ms数</span><br><span class="hljs-comment">//nms:0~65535</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span><br>{	<br>	<span class="hljs-keyword">if</span>(delay_osrunning&amp;&amp;delay_osintnesting==<span class="hljs-number">0</span>)<span class="hljs-comment">//如果OS已经在跑了,并且不是在中断里面(中断里面不能任务调度)	    </span><br>	{		 <br>		<span class="hljs-keyword">if</span>(nms&gt;=fac_ms)						<span class="hljs-comment">//延时的时间大于OS的最少时间周期 </span><br>		{ <br>   			delay_ostimedly(nms/fac_ms);	<span class="hljs-comment">//OS延时</span><br>		}<br>		nms%=fac_ms;						<span class="hljs-comment">//OS已经无法提供这么小的延时了,采用普通方式延时    </span><br>	}<br>	delay_us((<span class="hljs-type">uint32_t</span>)(nms*<span class="hljs-number">1000</span>));				<span class="hljs-comment">//普通方式延时</span><br>}<br><span class="hljs-meta">#<span class="hljs-keyword">else</span>  <span class="hljs-comment">//不用ucos时</span></span><br><br><span class="hljs-comment">//延时nus</span><br><span class="hljs-comment">//nus为要延时的us数.	</span><br><span class="hljs-comment">//nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	 </span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span><br>{		<br>	<span class="hljs-type">uint32_t</span> ticks;<br>	<span class="hljs-type">uint32_t</span> told,tnow,tcnt=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">uint32_t</span> reload=SysTick-&gt;LOAD;				<span class="hljs-comment">//LOAD的值	    	 </span><br>	ticks=nus*fac_us; 						<span class="hljs-comment">//需要的节拍数 </span><br>	told=SysTick-&gt;VAL;        				<span class="hljs-comment">//刚进入时的计数器值</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	{<br>		tnow=SysTick-&gt;VAL;	<br>		<span class="hljs-keyword">if</span>(tnow!=told)<br>		{	    <br>			<span class="hljs-keyword">if</span>(tnow&lt;told)tcnt+=told-tnow;	<span class="hljs-comment">//这里注意一下SYSTICK是一个递减的计数器就可以了.</span><br>			<span class="hljs-keyword">else</span> tcnt+=reload-tnow+told;	    <br>			told=tnow;<br>			<span class="hljs-keyword">if</span>(tcnt&gt;=ticks)<span class="hljs-keyword">break</span>;			<span class="hljs-comment">//时间超过/等于要延迟的时间,则退出.</span><br>		}  <br>	};<br>}<br><br><span class="hljs-comment">//延时nms</span><br><span class="hljs-comment">//nms:要延时的ms数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span><br>{<br>	<span class="hljs-type">uint32_t</span> i;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;nms;i++) delay_us(<span class="hljs-number">1000</span>);<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+<p>delay.h</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> _DELAY_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _DELAY_H	  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"main.h"</span></span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_init</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> SYSCLK)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span>;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br></code></pre></td></tr></table></figure>
+<h2 id="工程源码内附stm32f446的原理图">工程源码（内附stm32f446的原理图）</h2>
+<p>百度网盘</p>
+<p>链接：https://pan.baidu.com/s/1enfsIci683wCs_zBuYtJSw?pwd=nxet</p>
+<p>提取码：nxet</p>
+<h2 id="实践任务">实践任务</h2>
+<ol type="1">
+<li>在源代码的基础上使得流水灯来回流动而不是单向流动</li>
+<li>通过控制灯亮与灭的持续时间来控制灯的亮度，实现四个不同亮度的灯（原理与PWM相同）</li>
+<li>(拓展)使用定时器中断来实现流水灯的效果</li>
+</ol>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>单片机入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>keil和STM32的部署</title>
+    <url>/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h1 id="keil的部署">keil的部署</h1>
+<h2 id="软件下载">软件下载</h2>
+<p>百度网盘</p>
+<p>链接：https://pan.baidu.com/s/18IuTqzBIFJONlUo6LtuCWw?pwd=9e6n
+提取码：9e6n</p>
+<h2 id="使用说明">使用说明</h2>
+<p>先安装keil本体，基本上选个安装路径，一路下一步就行。</p>
+<p>使用管理员模式打开keil，点击file-&gt;license
+Management,看到如下界面（这是已经激活成功的）</p>
+<p><img src="img20231025203844.png" srcset="/img/loading.gif" lazyload></p>
+<p>打开Keygen.exe,将CID填入，将target设置为ARM,点击Generate，获得License
+Code。</p>
+<p><img src="img20231025203008.png" srcset="/img/loading.gif" lazyload></p>
+<p>回到keil的License Management界面，把License Code 填入，点击Add
+License，Product下面有MDK-ARM Plus为激活成功。</p>
+<h1 id="stm32cubemx的部署">STM32CubeMX的部署</h1>
+<h2 id="java环境安装">Java环境安装</h2>
+<p>1.安装jdk 由于STM32CubeMX是Java实现的，需要安装jdk环境。
+jdk官网下载链接：
+https://www.oracle.com/java/technologies/javase-downloads.html</p>
+<h2 id="软件下载-1">软件下载</h2>
+<p>理论上来说STM32CubeMX为免费软件，但是官网下载是要求注册的，我这里给出我的镜像地址，官网可以直接在网上下载，请自行选择。</p>
+<p>百度网盘</p>
+<p>V6.0.0</p>
+<p>链接：https://pan.baidu.com/s/1vChvLd9r6J1ioNnKridX5g?pwd=dqsu
+提取码：dqsu</p>
+<hr>
+<p>部分电脑无法兼容旧版，给出新版下载资源，但是新版部分配置和算法有BUG，旧版更稳定些。</p>
+<p>百度网盘</p>
+<p>V6.9.0</p>
+<p>链接：https://pan.baidu.com/s/1oLdQGMQ3ISI066AuKFmDBg?pwd=w27z
+提取码：w27z</p>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>单片机入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Qt-Cmake</title>
+    <url>/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/Qt-Cmake/</url>
+    <content><![CDATA[<h1 id="使用i18n国际化支持">使用I18N国际化支持</h1>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-comment"># set是可以用前面的标识来表示后面的数据，可以类比一下c的define</span><br><span class="hljs-keyword">set</span>(QT_VERSION <span class="hljs-number">5</span>)  <br><span class="hljs-keyword">set</span>(REQUIRED_LIBS Core Gui Widgets)  <br><span class="hljs-keyword">set</span>(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets) <br><span class="hljs-comment"># 填lupdate和lrelease的路径</span><br><span class="hljs-keyword">set</span>(LUPDATE_PATH <span class="hljs-string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lupdate.exe&quot;</span>)  <br><span class="hljs-keyword">set</span>(LRELEASE_PATH <span class="hljs-string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lrelease.exe&quot;</span>)  <br><span class="hljs-keyword">set</span>(TS_FILES  <br>        <span class="hljs-variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/zh_CN.ts  <br>        <span class="hljs-variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/ja_JP.ts)<br><span class="hljs-comment"># 这里不使用LinguistTools</span><br><span class="hljs-keyword">find_package</span>(Qt<span class="hljs-variable">$&#123;QT_VERSION&#125;</span> COMPONENTS <span class="hljs-variable">$&#123;REQUIRED_LIBS&#125;</span> REQUIRED)<br><span class="hljs-comment"># 创建生成ts文件和qm文件的目标  </span><br><span class="hljs-comment"># ALL指定加入make all  </span><br><span class="hljs-keyword">add_custom_target</span>(update_all_ts_files ALL)  <br><span class="hljs-keyword">add_custom_target</span>(create_all_qm_files ALL)<br><span class="hljs-comment"># 对每一个ts文件进行操作</span><br><span class="hljs-keyword">foreach</span>(TS_FILE <span class="hljs-variable">$&#123;TS_FILES&#125;</span>)  <br>    <span class="hljs-comment"># 把zh_CN.ts中的zh_CN提取出来  </span><br>    <span class="hljs-keyword">get_filename_component</span>(I18N_NAME <span class="hljs-variable">$&#123;TS_FILE&#125;</span> NAME_WE)  <br>    <span class="hljs-keyword">set</span>(TS_TARGET_NAME <span class="hljs-string">&quot;update_ts_file_$&#123;I18N_NAME&#125;&quot;</span>)  <br>    <span class="hljs-keyword">add_custom_target</span>(<span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>  <br>            <span class="hljs-keyword">COMMAND</span> <span class="hljs-variable">$&#123;LUPDATE_PATH&#125;</span> <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span> -ts <span class="hljs-variable">$&#123;TS_FILE&#125;</span>  <br>            VERBATIM)  <br>    <span class="hljs-comment"># 将update_ts_file_&lt;NAME&gt;添加为update_all_ts_files的依赖，下同  </span><br>    <span class="hljs-keyword">add_dependencies</span>(update_all_ts_files <span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>)  <br>    <span class="hljs-keyword">set</span>(QM_TARGET_NAME <span class="hljs-string">&quot;create_qm_file_$&#123;I18N_NAME&#125;&quot;</span>)  <br>    <span class="hljs-keyword">set</span>(QM_FILE <span class="hljs-string">&quot;$&#123;CMAKE_CURRENT_BINARY_DIR&#125;/$&#123;I18N_NAME&#125;.qm&quot;</span>)  <br>    <span class="hljs-keyword">add_custom_target</span>(<span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span>  <br>            <span class="hljs-keyword">COMMAND</span> <span class="hljs-variable">$&#123;LRELEASE_PATH&#125;</span> <span class="hljs-variable">$&#123;TS_FILE&#125;</span> -qm <span class="hljs-variable">$&#123;QM_FILE&#125;</span>  <br>            VERBATIM)  <br>    <span class="hljs-comment"># 因为得先有ts文件才能生成qm文件，所以把构建ts文件的目标作为自己的依赖  </span><br>    <span class="hljs-keyword">add_dependencies</span>(<span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span> <span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>)  <br>    <span class="hljs-keyword">add_dependencies</span>(create_all_qm_files <span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span>)  <br><span class="hljs-keyword">endforeach</span>()<br><span class="hljs-comment"># 将.qrc文件拷贝到编译目录</span><br><span class="hljs-keyword">configure_file</span>(translations.qrc <span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span> COPYONLY)<br> <br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp <span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br><span class="hljs-comment"># 因为qrc依赖qm文件，所以需要先让qm文件创建完成</span><br><span class="hljs-keyword">add_dependencies</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> create_all_qm_files)<br></code></pre></td></tr></table></figure>
+<p>这里的translations.qrc代码格式如下(也可使用rcc自动生成)：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs qrc">&lt;RCC&gt;  <br>    &lt;qresource&gt;  <br>        &lt;file&gt;zh_CN.qm&lt;/file&gt;  <br>        &lt;file&gt;ja_JP.qm&lt;/file&gt;  <br>    &lt;/qresource&gt;  <br>&lt;/RCC&gt;<br></code></pre></td></tr></table></figure>
+<p>以上代码可以更改lupdate和lrelease的路径后直接使用。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_executable</span>(\<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp\<span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br><span class="hljs-comment"># 将上面代码改为下面代码可以去掉运行时的命令行</span><br><span class="hljs-keyword">add_executable</span>(\<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> WIN32 main.cpp\<span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br></code></pre></td></tr></table></figure>
+<p>qt中的使用： <figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++">QTranslator trans;  <br><span class="hljs-keyword">if</span> (trans.<span class="hljs-built_in">load</span>(<span class="hljs-string">&quot;:/ja_JP.qm&quot;</span>)) &#123;  <br>    QCoreApplication::<span class="hljs-built_in">installTranslator</span>(&amp;trans);  <br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>也可以使用QT自带的翻译: 在Qt的安装目录
+C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
+中有名为qt_zh_CN.qm翻译文件，QLineEdit等通过加载该翻译文件就能实现右键中文菜单，如下所示：</p>
+<p>QApplication a(argc, argv);<br />
+ <br />
+//加载Qt中的资源文件，使Qt显示中文（包括QMessageBox、QLineEdit右键菜单等）<br />
+ </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs cobol">QTranslator translator;	  translator.load(&quot;:/translations/qt_zh_CN.qm&quot;);<br>a.installTranslator(&amp;translator);<br></code></pre></td></tr></table></figure>
+<p><img src="Pasted_image_20230414155659.png" srcset="/img/loading.gif" lazyload /></p>
+<p>这个图很好地解释了使用qrc来实现实际上是将资源直接集成到exe中了，这里提供用rcc的外部动态库</p>
+<h1 id="add_coustom_command使用">add_coustom_command使用</h1>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_custom_command</span>(OUTPUT <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-keyword">COMMAND</span> touch <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-comment"># Display the given message before the commands are executed at build time</span><br><br>COMMENT <span class="hljs-string">&quot;Creating $&#123;TEST_FILE&#125;&quot;</span><br><br><span class="hljs-comment"># to make quotes printable,for example</span><br><br>VERBATIM<br>)<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>CMake</category>
+      </categories>
+      <tags>
+        <tag>CMake</tag>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>连接第三方库</title>
+    <url>/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="连接第三方库">连接第三方库</h1>
+<h2 id="cpp引用">cpp引用</h2>
+<p>对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#cmake为project的名称</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br></code></pre></td></tr></table></figure>
+<p>即可建立连接，这时只需在main.cpp添加</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++">include<span class="hljs-string">&quot;longint.cpp&quot;</span><br></code></pre></td></tr></table></figure>
+<p>就可以使用“longint.cpp”中定义的函数和全局变量</p>
+<h2 id="头文件引用">头文件引用</h2>
+<p>头文件引用我们需要准备“longint.h”的头文件，并确保“longint.cpp”中的函数都在“longint.h”中声明。
+注意：如果声明全局变量请在longint.h中声明。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#先生成可执行文件</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br><span class="hljs-comment">#引入库</span><br><span class="hljs-keyword">include_directories</span>(<span class="hljs-keyword">include</span>)<br><span class="hljs-comment">#创建静态库(生成在build文件下)</span><br><span class="hljs-keyword">add_library</span>(TEST_LIBRARY longint.cpp)<br><span class="hljs-comment">#连接文件</span><br><span class="hljs-keyword">target_link_libraries</span>(cmake LINK_PUBLIC TEST_LIBRARY)<br></code></pre></td></tr></table></figure>
+<p>调用库</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(lib,<span class="hljs-string">&quot;xx.lib&quot;</span>)</span><br></code></pre></td></tr></table></figure>
+<p>在"main.cpp"引入“longint.h”就可以使用其中的函数了。</p>
+<h1 id="二进制文件位置">二进制文件位置</h1>
+<p>设置单独的.exe，.dll，.lib在bin,lib目录</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">set</span>(dir <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_ARCHIVE_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_LIBRARY_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/bin&quot;</span>)  <br></code></pre></td></tr></table></figure>
+<h1 id="一键连接">一键连接</h1>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">aux_source_directory</span>(./Src CPP_LIST) <span class="hljs-comment">#搜集所有在指定路径下的源文件的文件名，并将输出结果列表储存在指定的变量中。  </span><br><span class="hljs-keyword">aux_source_directory</span>(./Inc H_LIST)  <br><span class="hljs-comment"># FILE(GLOB SC_FILES &quot;./Src/*.cpp&quot; &quot;./Inc/*.h&quot;)  </span><br><span class="hljs-keyword">add_executable</span>(CIntCalculate <span class="hljs-variable">$&#123;CPP_LIST&#125;</span> <span class="hljs-variable">$&#123;H_LIST&#125;</span>)  <br><span class="hljs-keyword">include_directories</span>(./Inc)<br><span class="hljs-keyword">add_library</span>(LIB_TEXT <span class="hljs-variable">$&#123;CPP_LIST&#125;</span>)  <br><span class="hljs-keyword">target_link_libraries</span>(CIntCalculate LINK_PUBLIC <span class="hljs-variable">$&#123;LIB&#125;</span>)<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>CMake</category>
+      </categories>
+      <tags>
+        <tag>CMake</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++与postgres连接</title>
+    <url>/2024/09/15/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/</url>
+    <content><![CDATA[<h2 id="需要安装的库">需要安装的库</h2>
+<p><a href="https://github.com/jtv/libpqxx/tree/master">jtv/libpqxx: The
+official C++ client API for PostgreSQL. (github.com)</a></p>
+<p>libpqxx编译安装之前要求安装libpq</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo apt install libpq-dev<br></code></pre></td></tr></table></figure>
+<p>接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。</p>
+<h3 id="静态库">静态库</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">./configure --prefix=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
+<h3 id="动态库">动态库</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake -DBUILD_SHARED_LIBS=ON ..<br>sudo make install DESTDIR=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br></code></pre></td></tr></table></figure>
+<p>使用Cmake构建程序示例。其中要注意的是C++一定要使用17以上的版本，否则编译会报错。</p>
+<p>CMakeLists.txt <figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.22</span>)<br><span class="hljs-keyword">project</span>(template)<br><br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD <span class="hljs-number">17</span>)<br><br><span class="hljs-keyword">set</span>(PostgreSQL_ROOT /var/lib/postgresql/<span class="hljs-number">16</span>)<br><span class="hljs-keyword">include_directories</span> (<span class="hljs-variable">$&#123;PostgreSQL_INCLUDE_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/<span class="hljs-keyword">include</span>)<br><br><br><span class="hljs-keyword">set</span>(libpqxx_ROOT /home/zhang/libpqxx)<br><span class="hljs-keyword">link_directories</span>(<span class="hljs-variable">$&#123;PostgreSQL_LIBRARY_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/lib)<br><br><span class="hljs-keyword">find_package</span>(PostgreSQL REQUIRED)<br><br><br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> pqxx <span class="hljs-variable">$&#123;PostgreSQL_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure></p>
+<p>main.c <figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;pqxx/pqxx&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; std::endl;<br>        std::string conn_string = <span class="hljs-string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;<br>        <span class="hljs-function">pqxx::connection <span class="hljs-title">conn</span><span class="hljs-params">(conn_string)</span></span>;<br>        <span class="hljs-function">pqxx::work <span class="hljs-title">txn</span><span class="hljs-params">(conn)</span></span>;<br>        txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="hljs-comment">//进入schema</span><br>        pqxx::result result = txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);<br>        txn.<span class="hljs-built_in">commit</span>();<br> <span class="hljs-comment">// Process results</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> row_it = result.<span class="hljs-built_in">begin</span>(); row_it != result.<span class="hljs-built_in">end</span>(); row_it++)&#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="hljs-number">0</span>].<span class="hljs-built_in">as</span>&lt;<span class="hljs-type">int</span>&gt;() &lt;&lt; std::endl;<br>        &#125;<br>        conn.<span class="hljs-built_in">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>postgres实践</category>
+      </categories>
+      <tags>
+        <tag>技术文档</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux基础</title>
+    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/linux%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="linux-二级目录结构">linux 二级目录结构</h1>
+<ul>
+<li>/boot:存放Linux启动所需内核文件和镜像文件</li>
+<li>/root:管理用户的主目录</li>
+<li>/home:每一个用户都有自己的目录</li>
+<li>/bin:存放最经常使用的命令</li>
+<li>/dev:存放linux的外部设备</li>
+<li>/etc:存放所有的系统管理所需要的配置文件和子目录
+<ul>
+<li>passwd:用户信息</li>
+<li>shadow:用户密码(root)</li>
+<li>group:用户组信息</li>
+<li>gshadow:密码维护信息(root)</li>
+</ul></li>
+</ul>
+<h1 id="linux基本范式">linux基本范式</h1>
+<ul>
+<li>命令关键字</li>
+<li>选项</li>
+<li>命令参数 格式：命令关键字[选项][命令参数]</li>
+</ul>
+<p><strong>可以通过输入</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">命令关键字 --help <br>//或者 help 命令关键字<br></code></pre></td></tr></table></figure>
+<p><strong>查看命令格式</strong></p>
+<h1 id="目录命令">目录命令</h1>
+<ul>
+<li>pwd:打印当前工作目录</li>
+<li>cd:
+<ul>
+<li>访问绝对路径：cd /home/.../dev</li>
+<li>访问相对路径：cd dev</li>
+<li>返回上一个所在目录：cd -</li>
+<li>返回当前目录的父一级目录：cd ../</li>
+<li>切换到用户家目录：cd ~</li>
+</ul></li>
+<li>ls[选项][目录路径]:
+<ul>
+<li>查看当前目录内容</li>
+<li>l：长格式显示</li>
+<li>a：显示所有内容（包括隐藏文件）</li>
+<li>无选项：仅显示非隐藏文件</li>
+</ul></li>
+<li>mkdir [目录名]：新建目录</li>
+</ul>
+<h1 id="文件">文件</h1>
+<h2 id="查看编辑">查看/编辑</h2>
+<ul>
+<li>vi/vim [文件名]：
+<ul>
+<li>文件存在-编辑文件</li>
+<li>文件不存在-新建并编辑文件</li>
+<li>vi编辑规则[[]]</li>
+</ul></li>
+<li>cat [文件路径]:查看文件所有信息（内容长度有限）</li>
+<li>less [文件路径]: 分页查看文件内容</li>
+<li>echo "内容" [命令] [文件名]：
+<ul>
+<li>命令：&gt; 清空文件并写入内容</li>
+<li>命令：&gt;&gt; 追加写入内容</li>
+</ul></li>
+<li>cp[选项][源文件路径][目标文件路径]:
+<ul>
+<li>-a 保留复制前目录和文件的所有属性</li>
+<li>-r 若给出的源文件是一个目录文件，复制该目录下的所有子目录和文件</li>
+</ul></li>
+<li>mv[选项][源文件][目标文件]：
+<ul>
+<li>-i 若指定文件夹有同名文件先询问是否覆盖</li>
+<li>-f 直接覆盖已有的文件</li>
+<li>在移动时可以进行重命名操作</li>
+</ul></li>
+<li>rm[选项][文件访问目录]：
+<ul>
+<li>-f 强制删除文件且不提示信息</li>
+<li>-r 用于删除目录</li>
+</ul></li>
+<li>rmdir 文件访问路径：
+<ul>
+<li>仅删除空目录，有提示信息</li>
+</ul></li>
+</ul>
+<h2 id="权限">权限</h2>
+<ul>
+<li>用户身份：所有者，所属组，其他人</li>
+<li>访问权限：可读，可写，可执行</li>
+<li>权限编码：
+<ul>
+<li>第1个字母，文件类型</li>
+<li>第2，3，4分别表示所有者的可读，可写，可执行文件</li>
+<li>第5，6，7分别表示所属组的可读，可写，可执行文件</li>
+<li>第8，9，10分别表示其他人的可读，可写，可执行文件</li>
+</ul></li>
+<li>sudo
+<ul>
+<li>路径：/ect/sudoers</li>
+<li>root用户用visudo或vi /ect/sudoers修改可用sudo命令的用户</li>
+<li></li>
+</ul></li>
+</ul>
+<h2 id="设置不同用户的权限">设置不同用户的权限</h2>
+<ul>
+<li>权限掩码
+<ul>
+<li>由三个数字组成</li>
+<li>计算方式为6.6.6-x.x.x=y.y.y,分别转化为二进制表示三个用户身份的权限</li>
+<li>对于文件来说现有存取权限最大为6，无执行权限</li>
+<li>对于目录来说现有存取权限最大为7</li>
+<li>用法：umask [-S][权限掩码]</li>
+</ul></li>
+<li>永久设置
+<ul>
+<li>修改.bash_profile文件</li>
+</ul></li>
+<li>chomd文件分配权限 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ll  参看文件权限<br>chmod  o=rwx  a1   将a1的其他人其他人权限设置为满权限  // 属主用u表示，属组用g表示<br>chmode o-x a1  在a1其他人权限中去掉可执行权限   //增加权限是用<br>chmod 747  a1   权限用数字表式<br>chmod o-x,u-x  a1   同时对属主和其他人做减权限<br>[root@localhost home]# chmod -R 777 . 给所有权限<br>chown root a1   将a1的属主改成root<br>chgrp root a1   将a1的属组改成root    chown :root   a1<br> chown root:root  a1   属主和属组一起改   chown a1.root  a1  //中间一个冒号和一个点都可以  chown .a1 a1 只改属组一个  a1下面的属性或目录没有改<br>chown -R  root:root  a1/  将a下面的文件或目录属主和属组全部改成root,-R表示递归修改<br></code></pre></td></tr></table></figure></li>
+<li>chown [user][file]:
+<ul>
+<li>修改文件所有者</li>
+</ul></li>
+<li>chgrp [user][file]:
+<ul>
+<li>修改文件所属组</li>
+</ul></li>
+</ul>
+<h1 id="设置快捷方式">设置快捷方式</h1>
+<ul>
+<li>创建文件xxx.desktop(一定要在Desktop文件夹或usr/share/application文件夹中)
+<ul>
+<li>通过vim写入设置 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[Desktop Entry]<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序名称</span><br>Name=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">描述信息</span><br>Comment=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序的执行命令(可执行文件路径)</span><br>Exec=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">快捷图标位置</span><br>Icon=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">是否在终端中运行</span><br>Terminal=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">desktop的类型,常见值有“Application”和“Link”。</span><br>Type=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">菜单所属分类</span><br>Categories=<br></code></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h1 id="用户和用户组">用户和用户组</h1>
+<ul>
+<li>groupadd[选项][参数][组名]
+<ul>
+<li>-g 指定组的GID</li>
+<li>-f 若指定组已经存在则以成功状态退出</li>
+</ul></li>
+<li>groupmod[选项][修改后的新参数]
+<ul>
+<li>-g 修改组GID</li>
+<li>-n 修改组名称</li>
+</ul></li>
+<li>groupdel [待删除组的名称]</li>
+<li>useradd</li>
+<li>usermod</li>
+<li>userdel</li>
+</ul>
+<h1 id="shell编程">shell编程</h1>
+<h2 id="类型">类型</h2>
+<ul>
+<li>bash,zsh,csh,sh等</li>
+<li>查看环境：cat /etc/shells</li>
+</ul>
+<p>自动补全命令，参数：双击tab 用<span
+class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名:
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.bashrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>alias desktop=&#x27;cd /home/user/Desktop&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.bashrc<br></code></pre></td></tr></table></figure> 设置环境变量： <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.porfile<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>export PATH=$PATH:$Home/usr...<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.profile<br></code></pre></td></tr></table></figure></p>
+<h1 id="命令集合">命令集合</h1>
+<p>ctrl+z:<strong>将一个正在前台执行的命令放在后台并暂停</strong>。</p>
+<p>用jobs命令可将所有在后台运行的程序列出来。 fg + 进程号 打开进程</p>
+<h1 id="查看ip端口">查看IP，端口</h1>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">nmap 127.0.0.1<span class="hljs-comment"># 本地端口</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>ubuntu</span></figcaption><table><tr><td class="code"><pre><code class="hljs bash">sudo ufw allow 1077<br></code></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>KMP字符串匹配</title>
     <url>/2022/11/25/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/</url>
     <content><![CDATA[<h1 id="kmp字符串匹配">KMP字符串匹配</h1>
@@ -207,181 +581,6 @@ Transmission 无线传输 - 洛谷 | 计算机科学教育新生态
       </categories>
       <tags>
         <tag>算法学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STM32流水灯</title>
-    <url>/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/</url>
-    <content><![CDATA[<h2 id="stm32cubemx的配置">STM32CubeMX的配置</h2>
-<ul>
-<li>创建STM32CubeMX工程</li>
-</ul>
-<p><img src="img20230913152634.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li><p>打开外部晶振 <img src="img20230913152746.png" srcset="/img/loading.gif" lazyload></p></li>
-<li><p>时钟树设置
-注意外部晶振的频率是由硬件决定的，选择与硬件相匹配的频率 <img src="img20230913152822.png" srcset="/img/loading.gif" lazyload></p></li>
-<li><p>配置IO引脚 <img src="img20230913152948.png" srcset="/img/loading.gif" lazyload></p></li>
-<li><p>配置文件路径和代码生成 <img src="img20230913153027.png" srcset="/img/loading.gif" lazyload></p></li>
-</ul>
-<p><img src="img20230913153117.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li>生成代码 <img src="img20230913153155.png" srcset="/img/loading.gif" lazyload></li>
-</ul>
-<h2 id="keil配置">KEIL配置</h2>
-<p>下面的工具栏在页面的左上角</p>
-<p><img src="img20230913153352.png" srcset="/img/loading.gif" lazyload></p>
-<p>点击红色方框中的按钮</p>
-<p><img src="img20230913153428.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="img20230913153449.png" srcset="/img/loading.gif" lazyload></p>
-<p>选择你用的烧录器，点击右边的setting后可以看到芯片是否连接成功</p>
-<p><img src="img20230913153556.png" srcset="/img/loading.gif" lazyload></p>
-<p>由于hal库函数中HAL_Delay()函数使用的是系统时钟的中断来实现的，容易进入死循环或者程序卡死，因此使用非中断实现延时，在工程中加入delay.c和delay.h定义了函数Delay_ms()和Delay_us()来实现。下面是在工程中加入文件的指南。</p>
-<p>将Delay文件夹加入文件目录</p>
-<p><img src="img20230913154550.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="img20230913154136.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="img20230913154209.png" srcset="/img/loading.gif" lazyload></p>
-<p>点击add file将delay.c文件加入，并将delay文件夹加入include路径</p>
-<p><img src="img20230913154759.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="img20230913154818.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li>编写程序</li>
-</ul>
-<p>注意自己的代码都要写在USER_CODE_BEGIN...和USER_CODE_END...注释之间，否则使用STM32CubeMX重新generate的时候自己的代码会被清除。</p>
-<p>自己定义的端口名称会在main.h中生成(STM32CubeMX自动生成)，这里是我定义的端口</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* Private defines -----------------------------------------------------------*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED1_Pin GPIO_PIN_6</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED1_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED2_Pin GPIO_PIN_7</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED2_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED3_Pin GPIO_PIN_8</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED3_GPIO_Port GPIOB</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED4_Pin GPIO_PIN_9</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LED4_GPIO_Port GPIOB</span><br></code></pre></td></tr></table></figure>
-<p>为了方便找到位置这里将main.c都列出，加上的代码边上都有注释</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* USER CODE BEGIN Header */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  * @file           : main.c</span><br><span class="hljs-comment">  * @brief          : Main program body</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  * @attention</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  * Copyright (c) 2023 STMicroelectronics.</span><br><span class="hljs-comment">  * All rights reserved.</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  * This software is licensed under terms that can be found in the LICENSE file</span><br><span class="hljs-comment">  * in the root directory of this software component.</span><br><span class="hljs-comment">  * If no LICENSE file comes with this software, it is provided AS-IS.</span><br><span class="hljs-comment">  *</span><br><span class="hljs-comment">  ******************************************************************************</span><br><span class="hljs-comment">  */</span><br><span class="hljs-comment">/* USER CODE END Header */</span><br><span class="hljs-comment">/* Includes ------------------------------------------------------------------*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"main.h"</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"gpio.h"</span></span><br><br><span class="hljs-comment">/* Private includes ----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN Includes */</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"delay.h"</span></span><br><span class="hljs-comment">/* USER CODE END Includes */</span><br><br><span class="hljs-comment">/* Private typedef -----------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PTD */</span><br><br><span class="hljs-comment">/* USER CODE END PTD */</span><br><br><span class="hljs-comment">/* Private define ------------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PD */</span><br><span class="hljs-comment">/* USER CODE END PD */</span><br><br><span class="hljs-comment">/* Private macro -------------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN PM */</span><br><br><span class="hljs-comment">/* USER CODE END PM */</span><br><br><span class="hljs-comment">/* Private variables ---------------------------------------------------------*/</span><br><br><span class="hljs-comment">/* USER CODE BEGIN PV */</span><br><br><span class="hljs-comment">/* USER CODE END PV */</span><br><br><span class="hljs-comment">/* Private function prototypes -----------------------------------------------*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SystemClock_Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br><span class="hljs-comment">/* USER CODE BEGIN PFP */</span><br><br><span class="hljs-comment">/* USER CODE END PFP */</span><br><br><span class="hljs-comment">/* Private user code ---------------------------------------------------------*/</span><br><span class="hljs-comment">/* USER CODE BEGIN 0 */</span><br><br><span class="hljs-comment">/* USER CODE END 0 */</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  The application entry point.</span><br><span class="hljs-comment">  * @retval int</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN 1 */</span><br><br>  <span class="hljs-comment">/* USER CODE END 1 */</span><br><br>  <span class="hljs-comment">/* MCU Configuration--------------------------------------------------------*/</span><br><br>  <span class="hljs-comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span><br>  HAL_Init();<br><br>  <span class="hljs-comment">/* USER CODE BEGIN Init */</span><br>	delay_init(<span class="hljs-number">180</span>);<span class="hljs-comment">// 配置延时函数，参数是系统时钟频率</span><br>  <span class="hljs-comment">/* USER CODE END Init */</span><br><br>  <span class="hljs-comment">/* Configure the system clock */</span><br>  SystemClock_Config();<br><br>  <span class="hljs-comment">/* USER CODE BEGIN SysInit */</span><br><br>  <span class="hljs-comment">/* USER CODE END SysInit */</span><br><br>  <span class="hljs-comment">/* Initialize all configured peripherals */</span><br>  MX_GPIO_Init();<br>  <span class="hljs-comment">/* USER CODE BEGIN 2 */</span><br>  <span class="hljs-comment">// 在测试板中IO引脚输出高电平LED不亮，其他板子请参照原理图</span><br>  HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);<br>  <span class="hljs-comment">/* USER CODE END 2 */</span><br><br>  <span class="hljs-comment">/* Infinite loop */</span><br>  <span class="hljs-comment">/* USER CODE BEGIN WHILE */</span><br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  {<br>	  <span class="hljs-comment">//流水灯begin</span><br>	  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_SET);<br>	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_SET);<br>	  HAL_GPIO_WritePin(LED4_GPIO_Port,LED4_Pin,GPIO_PIN_RESET);<br>	  delay_ms(<span class="hljs-number">200</span>);<br>	  <span class="hljs-comment">//流水灯end</span><br>    <span class="hljs-comment">/* USER CODE END WHILE */</span><br>	  <br>    <span class="hljs-comment">/* USER CODE BEGIN 3 */</span><br>  }<br>  <span class="hljs-comment">/* USER CODE END 3 */</span><br>}<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief System Clock Configuration</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SystemClock_Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  RCC_OscInitTypeDef RCC_OscInitStruct = {<span class="hljs-number">0</span>};<br>  RCC_ClkInitTypeDef RCC_ClkInitStruct = {<span class="hljs-number">0</span>};<br><br>  <span class="hljs-comment">/** Configure the main internal regulator output voltage</span><br><span class="hljs-comment">  */</span><br>  __HAL_RCC_PWR_CLK_ENABLE();<br>  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);<br><br>  <span class="hljs-comment">/** Initializes the RCC Oscillators according to the specified parameters</span><br><span class="hljs-comment">  * in the RCC_OscInitTypeDef structure.</span><br><span class="hljs-comment">  */</span><br>  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;<br>  RCC_OscInitStruct.HSIState = RCC_HSI_ON;<br>  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;<br>  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;<br>  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;<br>  RCC_OscInitStruct.PLL.PLLM = <span class="hljs-number">8</span>;<br>  RCC_OscInitStruct.PLL.PLLN = <span class="hljs-number">180</span>;<br>  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;<br>  RCC_OscInitStruct.PLL.PLLQ = <span class="hljs-number">2</span>;<br>  RCC_OscInitStruct.PLL.PLLR = <span class="hljs-number">2</span>;<br>  <span class="hljs-keyword">if</span> (HAL_RCC_OscConfig(&amp;RCC_OscInitStruct) != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br><br>  <span class="hljs-comment">/** Activate the Over-Drive mode</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-keyword">if</span> (HAL_PWREx_EnableOverDrive() != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br><br>  <span class="hljs-comment">/** Initializes the CPU, AHB and APB buses clocks</span><br><span class="hljs-comment">  */</span><br>  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK<br>                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;<br>  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;<br>  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;<br>  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;<br>  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;<br><br>  <span class="hljs-keyword">if</span> (HAL_RCC_ClockConfig(&amp;RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)<br>  {<br>    Error_Handler();<br>  }<br>}<br><br><span class="hljs-comment">/* USER CODE BEGIN 4 */</span><br><br><span class="hljs-comment">/* USER CODE END 4 */</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  This function is executed in case of error occurrence.</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">Error_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN Error_Handler_Debug */</span><br>  <span class="hljs-comment">/* User can add his own implementation to report the HAL error return state */</span><br>  __disable_irq();<br>  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>  {<br>  }<br>  <span class="hljs-comment">/* USER CODE END Error_Handler_Debug */</span><br>}<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span>  USE_FULL_ASSERT</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @brief  Reports the name of the source file and the source line number</span><br><span class="hljs-comment">  *         where the assert_param error has occurred.</span><br><span class="hljs-comment">  * @param  file: pointer to the source file name</span><br><span class="hljs-comment">  * @param  line: assert_param error line source number</span><br><span class="hljs-comment">  * @retval None</span><br><span class="hljs-comment">  */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">assert_failed</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> *file, <span class="hljs-type">uint32_t</span> line)</span><br>{<br>  <span class="hljs-comment">/* USER CODE BEGIN 6 */</span><br>  <span class="hljs-comment">/* User can add his own implementation to report the file name and line number,</span><br><span class="hljs-comment">     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */</span><br>  <span class="hljs-comment">/* USER CODE END 6 */</span><br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">/* USE_FULL_ASSERT */</span></span><br><br></code></pre></td></tr></table></figure>
-<p>编译通过后烧录即可。</p>
-<p>delay的实现参考正点原子的例程。</p>
-<p>delay.c</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"delay.h"</span></span><br><span class="hljs-comment">////////////////////////////////////////////////////////////////////////////////// 	 </span><br><span class="hljs-comment">//如果使用ucos,则包括下面的头文件即可.</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"includes.h"</span>					<span class="hljs-comment">//ucos 使用	  </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-comment">//////////////////////////////////////////////////////////////////////////////////  </span><br><span class="hljs-comment">//本程序只供学习使用，未经作者许可，不得用于其它任何用途</span><br><span class="hljs-comment">//ALIENTEK STM32F407开发板</span><br><span class="hljs-comment">//使用SysTick的普通计数模式对延迟进行管理(支持ucosii/ucosiii)</span><br><span class="hljs-comment">//包括delay_us,delay_ms</span><br><span class="hljs-comment">//正点原子@ALIENTEK</span><br><span class="hljs-comment">//技术论坛:www.openedv.com</span><br><span class="hljs-comment">//创建日期:2017/4/6</span><br><span class="hljs-comment">//版本：V1.1</span><br><span class="hljs-comment">//版权所有，盗版必究。</span><br><span class="hljs-comment">//Copyright(C) 广州市星翼电子科技有限公司 2014-2024</span><br><span class="hljs-comment">//All rights reserved</span><br><span class="hljs-comment">//********************************************************************************</span><br><span class="hljs-comment">//修改说明</span><br><span class="hljs-comment">////////////////////////////////////////////////////////////////////////////////// </span><br><br><span class="hljs-type">static</span> <span class="hljs-type">uint32_t</span> fac_us=<span class="hljs-number">0</span>;							<span class="hljs-comment">//us延时倍乘数</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS		</span><br>    <span class="hljs-type">static</span> <span class="hljs-type">uint16_t</span> fac_ms=<span class="hljs-number">0</span>;				        <span class="hljs-comment">//ms延时倍乘数,在os下,代表每个节拍的ms数</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS							<span class="hljs-comment">//如果SYSTEM_SUPPORT_OS定义了,说明要支持OS了(不限于UCOS).</span></span><br><span class="hljs-comment">//当delay_us/delay_ms需要支持OS的时候需要三个与OS相关的宏定义和函数来支持</span><br><span class="hljs-comment">//首先是3个宏定义:</span><br><span class="hljs-comment">//delay_osrunning:用于表示OS当前是否正在运行,以决定是否可以使用相关函数</span><br><span class="hljs-comment">//delay_ostickspersec:用于表示OS设定的时钟节拍,delay_init将根据这个参数来初始哈systick</span><br><span class="hljs-comment">//delay_osintnesting:用于表示OS中断嵌套级别,因为中断里面不可以调度,delay_ms使用该参数来决定如何运行</span><br><span class="hljs-comment">//然后是3个函数:</span><br><span class="hljs-comment">//delay_osschedlock:用于锁定OS任务调度,禁止调度</span><br><span class="hljs-comment">//delay_osschedunlock:用于解锁OS任务调度,重新开启调度</span><br><span class="hljs-comment">//delay_ostimedly:用于OS延时,可以引起任务调度.</span><br><br><span class="hljs-comment">//本例程仅作UCOSII和UCOSIII的支持,其他OS,请自行参考着移植</span><br><span class="hljs-comment">//支持UCOSII</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 	OS_CRITICAL_METHOD						<span class="hljs-comment">//OS_CRITICAL_METHOD定义了,说明要支持UCOSII				</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osrunning		OSRunning			<span class="hljs-comment">//OS是否运行标记,0,不运行;1,在运行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_ostickspersec	OS_TICKS_PER_SEC	<span class="hljs-comment">//OS时钟节拍,即每秒调度次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osintnesting 	OSIntNesting		<span class="hljs-comment">//中断嵌套级别,即中断嵌套次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-comment">//支持UCOSIII</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 	CPU_CFG_CRITICAL_METHOD					<span class="hljs-comment">//CPU_CFG_CRITICAL_METHOD定义了,说明要支持UCOSIII	</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osrunning		OSRunning			<span class="hljs-comment">//OS是否运行标记,0,不运行;1,在运行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_ostickspersec	OSCfg_TickRate_Hz	<span class="hljs-comment">//OS时钟节拍,即每秒调度次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delay_osintnesting 	OSIntNestingCtr		<span class="hljs-comment">//中断嵌套级别,即中断嵌套次数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br><span class="hljs-comment">//us级延时时,关闭任务调度(防止打断us级延迟)</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_osschedlock</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD   			<span class="hljs-comment">//使用UCOSIII</span></span><br>	OS_ERR err; <br>	OSSchedLock(&amp;err);						<span class="hljs-comment">//UCOSIII的方式,禁止调度，防止打断us延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>										<span class="hljs-comment">//否则UCOSII</span></span><br>	OSSchedLock();							<span class="hljs-comment">//UCOSII的方式,禁止调度，防止打断us延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}<br><br><span class="hljs-comment">//us级延时时,恢复任务调度</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_osschedunlock</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{	<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD   			<span class="hljs-comment">//使用UCOSIII</span></span><br>	OS_ERR err; <br>	OSSchedUnlock(&amp;err);					<span class="hljs-comment">//UCOSIII的方式,恢复调度</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>										<span class="hljs-comment">//否则UCOSII</span></span><br>	OSSchedUnlock();						<span class="hljs-comment">//UCOSII的方式,恢复调度</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}<br><br><span class="hljs-comment">//调用OS自带的延时函数延时</span><br><span class="hljs-comment">//ticks:延时的节拍数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ostimedly</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> ticks)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CPU_CFG_CRITICAL_METHOD</span><br>	OS_ERR err; <br>	OSTimeDly(ticks,OS_OPT_TIME_PERIODIC,&amp;err); <span class="hljs-comment">//UCOSIII延时采用周期模式</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>	OSTimeDly(ticks);						    <span class="hljs-comment">//UCOSII延时</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> </span><br>}<br> <br><span class="hljs-comment">//systick中断服务函数,使用OS时用到</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SysTick_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>{	<br>    HAL_IncTick();<br>	<span class="hljs-keyword">if</span>(delay_osrunning==<span class="hljs-number">1</span>)					<span class="hljs-comment">//OS开始跑了,才执行正常的调度处理</span><br>	{<br>		OSIntEnter();						<span class="hljs-comment">//进入中断</span><br>		OSTimeTick();       				<span class="hljs-comment">//调用ucos的时钟服务程序               </span><br>		OSIntExit();       	 				<span class="hljs-comment">//触发任务切换软中断</span><br>	}<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>			   <br><span class="hljs-comment">//初始化延迟函数</span><br><span class="hljs-comment">//当使用ucos的时候,此函数会初始化ucos的时钟节拍</span><br><span class="hljs-comment">//SYSTICK的时钟固定为AHB时钟</span><br><span class="hljs-comment">//SYSCLK:系统时钟频率</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_init</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> SYSCLK)</span><br>{<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br>	<span class="hljs-type">uint32_t</span> reload;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>    HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);<span class="hljs-comment">//SysTick频率为HCLK</span><br>	fac_us=SYSCLK;						<span class="hljs-comment">//不论是否使用OS,fac_us都需要使用</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br>	reload=SYSCLK;					    <span class="hljs-comment">//每秒钟的计数次数 单位为K	   </span><br>	reload*=<span class="hljs-number">1000000</span>/delay_ostickspersec;	<span class="hljs-comment">//根据delay_ostickspersec设定溢出时间</span><br>											<span class="hljs-comment">//reload为24位寄存器,最大值:16777216,在180M下,约合0.745s左右	</span><br>	fac_ms=<span class="hljs-number">1000</span>/delay_ostickspersec;		<span class="hljs-comment">//代表OS可以延时的最少单位	   </span><br>	SysTick-&gt;CTRL|=SysTick_CTRL_TICKINT_Msk;<span class="hljs-comment">//开启SYSTICK中断</span><br>	SysTick-&gt;LOAD=reload; 					<span class="hljs-comment">//每1/OS_TICKS_PER_SEC秒中断一次	</span><br>	SysTick-&gt;CTRL|=SysTick_CTRL_ENABLE_Msk; <span class="hljs-comment">//开启SYSTICK</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>}								    <br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> SYSTEM_SUPPORT_OS 						<span class="hljs-comment">//如果需要支持OS.</span></span><br><span class="hljs-comment">//延时nus</span><br><span class="hljs-comment">//nus:要延时的us数.	</span><br><span class="hljs-comment">//nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	    								   </span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span><br>{		<br>	<span class="hljs-type">uint32_t</span> ticks;<br>	<span class="hljs-type">uint32_t</span> told,tnow,tcnt=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">uint32_t</span> reload=SysTick-&gt;LOAD;				<span class="hljs-comment">//LOAD的值	    	 </span><br>	ticks=nus*fac_us; 						<span class="hljs-comment">//需要的节拍数 </span><br>	delay_osschedlock();					<span class="hljs-comment">//阻止OS调度，防止打断us延时</span><br>	told=SysTick-&gt;VAL;        				<span class="hljs-comment">//刚进入时的计数器值</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	{<br>		tnow=SysTick-&gt;VAL;	<br>		<span class="hljs-keyword">if</span>(tnow!=told)<br>		{	    <br>			<span class="hljs-keyword">if</span>(tnow&lt;told)tcnt+=told-tnow;	<span class="hljs-comment">//这里注意一下SYSTICK是一个递减的计数器就可以了.</span><br>			<span class="hljs-keyword">else</span> tcnt+=reload-tnow+told;	    <br>			told=tnow;<br>			<span class="hljs-keyword">if</span>(tcnt&gt;=ticks)<span class="hljs-keyword">break</span>;			<span class="hljs-comment">//时间超过/等于要延迟的时间,则退出.</span><br>		}  <br>	};<br>	delay_osschedunlock();					<span class="hljs-comment">//恢复OS调度											    </span><br>}  <br><span class="hljs-comment">//延时nms</span><br><span class="hljs-comment">//nms:要延时的ms数</span><br><span class="hljs-comment">//nms:0~65535</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span><br>{	<br>	<span class="hljs-keyword">if</span>(delay_osrunning&amp;&amp;delay_osintnesting==<span class="hljs-number">0</span>)<span class="hljs-comment">//如果OS已经在跑了,并且不是在中断里面(中断里面不能任务调度)	    </span><br>	{		 <br>		<span class="hljs-keyword">if</span>(nms&gt;=fac_ms)						<span class="hljs-comment">//延时的时间大于OS的最少时间周期 </span><br>		{ <br>   			delay_ostimedly(nms/fac_ms);	<span class="hljs-comment">//OS延时</span><br>		}<br>		nms%=fac_ms;						<span class="hljs-comment">//OS已经无法提供这么小的延时了,采用普通方式延时    </span><br>	}<br>	delay_us((<span class="hljs-type">uint32_t</span>)(nms*<span class="hljs-number">1000</span>));				<span class="hljs-comment">//普通方式延时</span><br>}<br><span class="hljs-meta">#<span class="hljs-keyword">else</span>  <span class="hljs-comment">//不用ucos时</span></span><br><br><span class="hljs-comment">//延时nus</span><br><span class="hljs-comment">//nus为要延时的us数.	</span><br><span class="hljs-comment">//nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	 </span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span><br>{		<br>	<span class="hljs-type">uint32_t</span> ticks;<br>	<span class="hljs-type">uint32_t</span> told,tnow,tcnt=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">uint32_t</span> reload=SysTick-&gt;LOAD;				<span class="hljs-comment">//LOAD的值	    	 </span><br>	ticks=nus*fac_us; 						<span class="hljs-comment">//需要的节拍数 </span><br>	told=SysTick-&gt;VAL;        				<span class="hljs-comment">//刚进入时的计数器值</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	{<br>		tnow=SysTick-&gt;VAL;	<br>		<span class="hljs-keyword">if</span>(tnow!=told)<br>		{	    <br>			<span class="hljs-keyword">if</span>(tnow&lt;told)tcnt+=told-tnow;	<span class="hljs-comment">//这里注意一下SYSTICK是一个递减的计数器就可以了.</span><br>			<span class="hljs-keyword">else</span> tcnt+=reload-tnow+told;	    <br>			told=tnow;<br>			<span class="hljs-keyword">if</span>(tcnt&gt;=ticks)<span class="hljs-keyword">break</span>;			<span class="hljs-comment">//时间超过/等于要延迟的时间,则退出.</span><br>		}  <br>	};<br>}<br><br><span class="hljs-comment">//延时nms</span><br><span class="hljs-comment">//nms:要延时的ms数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span><br>{<br>	<span class="hljs-type">uint32_t</span> i;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;nms;i++) delay_us(<span class="hljs-number">1000</span>);<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
-<p>delay.h</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> _DELAY_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _DELAY_H	  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"main.h"</span></span><br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_init</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> SYSCLK)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_ms</span><span class="hljs-params">(<span class="hljs-type">uint16_t</span> nms)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">delay_us</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> nus)</span>;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br></code></pre></td></tr></table></figure>
-<h2 id="工程源码内附stm32f446的原理图">工程源码（内附stm32f446的原理图）</h2>
-<p>百度网盘</p>
-<p>链接：https://pan.baidu.com/s/1enfsIci683wCs_zBuYtJSw?pwd=nxet</p>
-<p>提取码：nxet</p>
-<h2 id="实践任务">实践任务</h2>
-<ol type="1">
-<li>在源代码的基础上使得流水灯来回流动而不是单向流动</li>
-<li>通过控制灯亮与灭的持续时间来控制灯的亮度，实现四个不同亮度的灯（原理与PWM相同）</li>
-<li>(拓展)使用定时器中断来实现流水灯的效果</li>
-</ol>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-        <category>STM32</category>
-      </categories>
-      <tags>
-        <tag>单片机入门</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>连接第三方库</title>
-    <url>/2022/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="连接第三方库">连接第三方库</h1>
-<h2 id="cpp引用">cpp引用</h2>
-<p>对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#cmake为project的名称</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br></code></pre></td></tr></table></figure>
-<p>即可建立连接，这时只需在main.cpp添加</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++">include<span class="hljs-string">&quot;longint.cpp&quot;</span><br></code></pre></td></tr></table></figure>
-<p>就可以使用“longint.cpp”中定义的函数和全局变量</p>
-<h2 id="头文件引用">头文件引用</h2>
-<p>头文件引用我们需要准备“longint.h”的头文件，并确保“longint.cpp”中的函数都在“longint.h”中声明。
-注意：如果声明全局变量请在longint.h中声明。</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#先生成可执行文件</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br><span class="hljs-comment">#引入库</span><br><span class="hljs-keyword">include_directories</span>(<span class="hljs-keyword">include</span>)<br><span class="hljs-comment">#创建静态库(生成在build文件下)</span><br><span class="hljs-keyword">add_library</span>(TEST_LIBRARY longint.cpp)<br><span class="hljs-comment">#连接文件</span><br><span class="hljs-keyword">target_link_libraries</span>(cmake LINK_PUBLIC TEST_LIBRARY)<br></code></pre></td></tr></table></figure>
-<p>调用库</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(lib,<span class="hljs-string">&quot;xx.lib&quot;</span>)</span><br></code></pre></td></tr></table></figure>
-<p>在"main.cpp"引入“longint.h”就可以使用其中的函数了。</p>
-<h1 id="二进制文件位置">二进制文件位置</h1>
-<p>设置单独的.exe，.dll，.lib在bin,lib目录</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">set</span>(dir <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_ARCHIVE_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_LIBRARY_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/bin&quot;</span>)  <br></code></pre></td></tr></table></figure>
-<h1 id="一键连接">一键连接</h1>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">aux_source_directory</span>(./Src CPP_LIST) <span class="hljs-comment">#搜集所有在指定路径下的源文件的文件名，并将输出结果列表储存在指定的变量中。  </span><br><span class="hljs-keyword">aux_source_directory</span>(./Inc H_LIST)  <br><span class="hljs-comment"># FILE(GLOB SC_FILES &quot;./Src/*.cpp&quot; &quot;./Inc/*.h&quot;)  </span><br><span class="hljs-keyword">add_executable</span>(CIntCalculate <span class="hljs-variable">$&#123;CPP_LIST&#125;</span> <span class="hljs-variable">$&#123;H_LIST&#125;</span>)  <br><span class="hljs-keyword">include_directories</span>(./Inc)<br><span class="hljs-keyword">add_library</span>(LIB_TEXT <span class="hljs-variable">$&#123;CPP_LIST&#125;</span>)  <br><span class="hljs-keyword">target_link_libraries</span>(CIntCalculate LINK_PUBLIC <span class="hljs-variable">$&#123;LIB&#125;</span>)<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>CMake</category>
-      </categories>
-      <tags>
-        <tag>CMake</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>keil和STM32的部署</title>
-    <url>/2023/10/25/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h1 id="keil的部署">keil的部署</h1>
-<h2 id="软件下载">软件下载</h2>
-<p>百度网盘</p>
-<p>链接：https://pan.baidu.com/s/18IuTqzBIFJONlUo6LtuCWw?pwd=9e6n
-提取码：9e6n</p>
-<h2 id="使用说明">使用说明</h2>
-<p>先安装keil本体，基本上选个安装路径，一路下一步就行。</p>
-<p>使用管理员模式打开keil，点击file-&gt;license
-Management,看到如下界面（这是已经激活成功的）</p>
-<p><img src="img20231025203844.png" srcset="/img/loading.gif" lazyload></p>
-<p>打开Keygen.exe,将CID填入，将target设置为ARM,点击Generate，获得License
-Code。</p>
-<p><img src="img20231025203008.png" srcset="/img/loading.gif" lazyload></p>
-<p>回到keil的License Management界面，把License Code 填入，点击Add
-License，Product下面有MDK-ARM Plus为激活成功。</p>
-<h1 id="stm32cubemx的部署">STM32CubeMX的部署</h1>
-<h2 id="java环境安装">Java环境安装</h2>
-<p>1.安装jdk 由于STM32CubeMX是Java实现的，需要安装jdk环境。
-jdk官网下载链接：
-https://www.oracle.com/java/technologies/javase-downloads.html</p>
-<h2 id="软件下载-1">软件下载</h2>
-<p>理论上来说STM32CubeMX为免费软件，但是官网下载是要求注册的，我这里给出我的镜像地址，官网可以直接在网上下载，请自行选择。</p>
-<p>百度网盘</p>
-<p>V6.0.0</p>
-<p>链接：https://pan.baidu.com/s/1vChvLd9r6J1ioNnKridX5g?pwd=dqsu
-提取码：dqsu</p>
-<hr>
-<p>部分电脑无法兼容旧版，给出新版下载资源，但是新版部分配置和算法有BUG，旧版更稳定些。</p>
-<p>百度网盘</p>
-<p>V6.9.0</p>
-<p>链接：https://pan.baidu.com/s/1oLdQGMQ3ISI066AuKFmDBg?pwd=w27z
-提取码：w27z</p>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-        <category>STM32</category>
-      </categories>
-      <tags>
-        <tag>单片机入门</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Qt-Cmake</title>
-    <url>/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA/Cmake/Qt-Cmake/</url>
-    <content><![CDATA[<h1 id="使用i18n国际化支持">使用I18N国际化支持</h1>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-comment"># set是可以用前面的标识来表示后面的数据，可以类比一下c的define</span><br><span class="hljs-keyword">set</span>(QT_VERSION <span class="hljs-number">5</span>)  <br><span class="hljs-keyword">set</span>(REQUIRED_LIBS Core Gui Widgets)  <br><span class="hljs-keyword">set</span>(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets) <br><span class="hljs-comment"># 填lupdate和lrelease的路径</span><br><span class="hljs-keyword">set</span>(LUPDATE_PATH <span class="hljs-string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lupdate.exe&quot;</span>)  <br><span class="hljs-keyword">set</span>(LRELEASE_PATH <span class="hljs-string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lrelease.exe&quot;</span>)  <br><span class="hljs-keyword">set</span>(TS_FILES  <br>        <span class="hljs-variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/zh_CN.ts  <br>        <span class="hljs-variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/ja_JP.ts)<br><span class="hljs-comment"># 这里不使用LinguistTools</span><br><span class="hljs-keyword">find_package</span>(Qt<span class="hljs-variable">$&#123;QT_VERSION&#125;</span> COMPONENTS <span class="hljs-variable">$&#123;REQUIRED_LIBS&#125;</span> REQUIRED)<br><span class="hljs-comment"># 创建生成ts文件和qm文件的目标  </span><br><span class="hljs-comment"># ALL指定加入make all  </span><br><span class="hljs-keyword">add_custom_target</span>(update_all_ts_files ALL)  <br><span class="hljs-keyword">add_custom_target</span>(create_all_qm_files ALL)<br><span class="hljs-comment"># 对每一个ts文件进行操作</span><br><span class="hljs-keyword">foreach</span>(TS_FILE <span class="hljs-variable">$&#123;TS_FILES&#125;</span>)  <br>    <span class="hljs-comment"># 把zh_CN.ts中的zh_CN提取出来  </span><br>    <span class="hljs-keyword">get_filename_component</span>(I18N_NAME <span class="hljs-variable">$&#123;TS_FILE&#125;</span> NAME_WE)  <br>    <span class="hljs-keyword">set</span>(TS_TARGET_NAME <span class="hljs-string">&quot;update_ts_file_$&#123;I18N_NAME&#125;&quot;</span>)  <br>    <span class="hljs-keyword">add_custom_target</span>(<span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>  <br>            <span class="hljs-keyword">COMMAND</span> <span class="hljs-variable">$&#123;LUPDATE_PATH&#125;</span> <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span> -ts <span class="hljs-variable">$&#123;TS_FILE&#125;</span>  <br>            VERBATIM)  <br>    <span class="hljs-comment"># 将update_ts_file_&lt;NAME&gt;添加为update_all_ts_files的依赖，下同  </span><br>    <span class="hljs-keyword">add_dependencies</span>(update_all_ts_files <span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>)  <br>    <span class="hljs-keyword">set</span>(QM_TARGET_NAME <span class="hljs-string">&quot;create_qm_file_$&#123;I18N_NAME&#125;&quot;</span>)  <br>    <span class="hljs-keyword">set</span>(QM_FILE <span class="hljs-string">&quot;$&#123;CMAKE_CURRENT_BINARY_DIR&#125;/$&#123;I18N_NAME&#125;.qm&quot;</span>)  <br>    <span class="hljs-keyword">add_custom_target</span>(<span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span>  <br>            <span class="hljs-keyword">COMMAND</span> <span class="hljs-variable">$&#123;LRELEASE_PATH&#125;</span> <span class="hljs-variable">$&#123;TS_FILE&#125;</span> -qm <span class="hljs-variable">$&#123;QM_FILE&#125;</span>  <br>            VERBATIM)  <br>    <span class="hljs-comment"># 因为得先有ts文件才能生成qm文件，所以把构建ts文件的目标作为自己的依赖  </span><br>    <span class="hljs-keyword">add_dependencies</span>(<span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span> <span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>)  <br>    <span class="hljs-keyword">add_dependencies</span>(create_all_qm_files <span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span>)  <br><span class="hljs-keyword">endforeach</span>()<br><span class="hljs-comment"># 将.qrc文件拷贝到编译目录</span><br><span class="hljs-keyword">configure_file</span>(translations.qrc <span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span> COPYONLY)<br> <br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp <span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br><span class="hljs-comment"># 因为qrc依赖qm文件，所以需要先让qm文件创建完成</span><br><span class="hljs-keyword">add_dependencies</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> create_all_qm_files)<br></code></pre></td></tr></table></figure>
-<p>这里的translations.qrc代码格式如下(也可使用rcc自动生成)：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs qrc">&lt;RCC&gt;  <br>    &lt;qresource&gt;  <br>        &lt;file&gt;zh_CN.qm&lt;/file&gt;  <br>        &lt;file&gt;ja_JP.qm&lt;/file&gt;  <br>    &lt;/qresource&gt;  <br>&lt;/RCC&gt;<br></code></pre></td></tr></table></figure>
-<p>以上代码可以更改lupdate和lrelease的路径后直接使用。</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_executable</span>(\<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp\<span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br><span class="hljs-comment"># 将上面代码改为下面代码可以去掉运行时的命令行</span><br><span class="hljs-keyword">add_executable</span>(\<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> WIN32 main.cpp\<span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br></code></pre></td></tr></table></figure>
-<p>qt中的使用： <figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++">QTranslator trans;  <br><span class="hljs-keyword">if</span> (trans.<span class="hljs-built_in">load</span>(<span class="hljs-string">&quot;:/ja_JP.qm&quot;</span>)) &#123;  <br>    QCoreApplication::<span class="hljs-built_in">installTranslator</span>(&amp;trans);  <br>&#125;<br></code></pre></td></tr></table></figure></p>
-<p>也可以使用QT自带的翻译: 在Qt的安装目录
-C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
-中有名为qt_zh_CN.qm翻译文件，QLineEdit等通过加载该翻译文件就能实现右键中文菜单，如下所示：</p>
-<p>QApplication a(argc, argv);<br />
- <br />
-//加载Qt中的资源文件，使Qt显示中文（包括QMessageBox、QLineEdit右键菜单等）<br />
- </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs cobol">QTranslator translator;	  translator.load(&quot;:/translations/qt_zh_CN.qm&quot;);<br>a.installTranslator(&amp;translator);<br></code></pre></td></tr></table></figure>
-<p><img src="Pasted_image_20230414155659.png" srcset="/img/loading.gif" lazyload /></p>
-<p>这个图很好地解释了使用qrc来实现实际上是将资源直接集成到exe中了，这里提供用rcc的外部动态库</p>
-<h1 id="add_coustom_command使用">add_coustom_command使用</h1>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_custom_command</span>(OUTPUT <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-keyword">COMMAND</span> touch <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-comment"># Display the given message before the commands are executed at build time</span><br><br>COMMENT <span class="hljs-string">&quot;Creating $&#123;TEST_FILE&#125;&quot;</span><br><br><span class="hljs-comment"># to make quotes printable,for example</span><br><br>VERBATIM<br>)<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>CMake</category>
-      </categories>
-      <tags>
-        <tag>CMake</tag>
-        <tag>Qt</tag>
       </tags>
   </entry>
   <entry>
@@ -569,27 +768,31 @@ int，因为在后面的计算可能会超出int范围。</p>
       </tags>
   </entry>
   <entry>
-    <title>宽度优先搜索-BFS</title>
-    <url>/2022/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
-    <content><![CDATA[<h1 id="队列">队列</h1>
-<h2 id="特点">特点</h2>
-<p>队列是先进先出（First In First Out）的线性表，简称FIFO表。</p>
-<p><img src="Snipaste_2022-12-13_15-08-12.png" srcset="/img/loading.gif" lazyload /></p>
-<p>在C++中有库函数帮助实现，但为了更加直观，我用c语言进行说明。</p>
-<h2 id="例子">例子</h2>
-<h3 id="快速排序非递归算法实现">快速排序非递归算法实现</h3>
-<p>快速排序的了解可以到我另一个帖子[[排序算法]]中看看。</p>
-<p>这里本质上是通过在队列中用入队列和出队列来模拟函数递归中的参数传递，每次传入的参数包括需要排序区间的头和尾。</p>
-<p>我是通过线性表来实现队列操作，当然选择用数组也是可以实现的。</p>
-<h4 id="代码">代码</h4>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-type">int</span> p[<span class="hljs-number">10000009</span>];  <br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>&#123;</span>  <br>    <span class="hljs-type">int</span>*head;  <br>    <span class="hljs-type">int</span>*tail;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>* <span class="hljs-title">next</span>;</span>  <br>&#125;;  <br><span class="hljs-comment">//随机数生成</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">random</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span>  <br>&#123;  <br>	srand(time(<span class="hljs-literal">NULL</span>));<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123; <br>        p[i<span class="hljs-number">-1</span>] = rand() % <span class="hljs-number">100</span>;  <br>    &#125;  <br>&#125; <br><span class="hljs-comment">//入队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls,<span class="hljs-type">int</span>*h,<span class="hljs-type">int</span>*t)</span>&#123;  <br>    <span class="hljs-keyword">if</span>(t-h&lt;<span class="hljs-number">1</span>)<span class="hljs-keyword">return</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">addin</span>;</span>  <br>    addin=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    (*ls)-&gt;next=addin;  <br>    addin-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    addin-&gt;head=h;  <br>    addin-&gt;tail=t;  <br>    *ls=addin;  <br>&#125;  <br><span class="hljs-comment">//出队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">del</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls)</span>&#123;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">tmp</span>=</span>(*ls)-&gt;next;  <br>    <span class="hljs-built_in">free</span>(*ls);  <br>    *ls=tmp;  <br>&#125;  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    random(n);  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">ltail</span>;</span>  <br>    ltail=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    ltail-&gt;head=p;  <br>    ltail-&gt;tail=p+n<span class="hljs-number">-1</span>;  <br>    ltail-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">lhead</span>=</span>ltail;  <br>    <span class="hljs-comment">//判断队列是否为空</span><br>    <span class="hljs-keyword">while</span>(lhead!=<span class="hljs-literal">NULL</span>) &#123;  <br>        <span class="hljs-type">int</span> *i = lhead-&gt;head, *j = lhead-&gt;tail;  <br>        <span class="hljs-type">int</span> <span class="hljs-built_in">std</span> = *i;  <br>        i++;  <br>        <span class="hljs-keyword">while</span> (i &lt;= j) &#123;  <br>            <span class="hljs-type">int</span> f=<span class="hljs-number">1</span>;  <br>            <span class="hljs-keyword">while</span> (f &amp;&amp; *i &lt; <span class="hljs-built_in">std</span>) &#123;  <br>                i++;  <br>                <span class="hljs-keyword">if</span> (i &gt; j)f = <span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">while</span> (f&amp;&amp;*j&gt;=<span class="hljs-built_in">std</span>)&#123;  <br>                j--;  <br>                <span class="hljs-keyword">if</span>(i &gt; j)f=<span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span>(f)&#123;  <br>                <span class="hljs-type">int</span> tmp=*i;*i=*j;*j=tmp;  <br>            &#125;  <br>            <span class="hljs-keyword">else</span> &#123;  <br>                <span class="hljs-type">int</span> tmp=*j;*j=<span class="hljs-built_in">std</span>;*lhead-&gt;head=tmp;  <br>            &#125;  <br>        &#125;  <br>        add(&amp;ltail,lhead-&gt;head,j);  <br>        add(&amp;ltail,i,lhead-&gt;tail);  <br>        del(&amp;lhead);  <br>    &#125;  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,p[i]);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+    <title>Postgress 安装与初体验</title>
+    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    <content><![CDATA[<h2 id="下载">下载</h2>
+<p><a href="https://www.postgresql.org/download/">官网下载</a></p>
+<p>官网有详细的教程，这里就不多赘述。</p>
+<h2 id="创建用户分配权限">创建用户&amp;分配权限</h2>
+<p>部署完成后，登录postgres用户，并且进入数据库。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo -i -u postgres<br>psql<br></code></pre></td></tr></table></figure>
+<p>这里先创建一个管理员用户(超级用户)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> password <span class="hljs-string">&#x27;&lt;password&gt;&#x27;</span>; <span class="hljs-comment">--创建用户</span><br>\du <span class="hljs-comment">--查看所有用户</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> superuser; <span class="hljs-comment">--分配权限</span><br></code></pre></td></tr></table></figure>
+<h2 id="数据库创建">数据库创建</h2>
+<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database <span class="hljs-operator">&lt;</span>database_name<span class="hljs-operator">&gt;</span> owner <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br>\q <span class="hljs-comment">--退出数据库</span><br></code></pre></td></tr></table></figure>
+<h2 id="用户登录">用户登录</h2>
+<p>注意postgres提供peer认证，当unix用户名和创建的用户名相同的时候才可以登录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">psql -U &lt;user_name&gt; -d &lt;database_name&gt;<span class="hljs-comment">#peer认证</span><br></code></pre></td></tr></table></figure>
+<h2 id="创建schema">创建schema</h2>
+<p>schema实际上可以认为是一个数据库中承载表，关系等对象的容器。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> schema <span class="hljs-operator">&lt;</span>schema_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">authorization</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>计算机</category>
-        <category>C语言</category>
+        <category>postgres实践</category>
       </categories>
       <tags>
-        <tag>算法学习</tag>
+        <tag>技术文档</tag>
       </tags>
   </entry>
   <entry>
@@ -699,6 +902,30 @@ class="math inline">\(2^{64}\)</span>取模，因此就不手动取模了。</p>
 <p>密码的长度越长，密码越复杂，就越难以猜正确。如果有一种方法能够提高猜中密码的可能，那么可以算是哈希算法被破解了。</p>
 <p>开阔视野内容转载自<a
 href="https://www.cnblogs.com/zfss/p/11065234.html">紫天峰的博客</a></p>
+]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>算法学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宽度优先搜索-BFS</title>
+    <url>/2022/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</url>
+    <content><![CDATA[<h1 id="队列">队列</h1>
+<h2 id="特点">特点</h2>
+<p>队列是先进先出（First In First Out）的线性表，简称FIFO表。</p>
+<p><img src="Snipaste_2022-12-13_15-08-12.png" srcset="/img/loading.gif" lazyload /></p>
+<p>在C++中有库函数帮助实现，但为了更加直观，我用c语言进行说明。</p>
+<h2 id="例子">例子</h2>
+<h3 id="快速排序非递归算法实现">快速排序非递归算法实现</h3>
+<p>快速排序的了解可以到我另一个帖子[[排序算法]]中看看。</p>
+<p>这里本质上是通过在队列中用入队列和出队列来模拟函数递归中的参数传递，每次传入的参数包括需要排序区间的头和尾。</p>
+<p>我是通过线性表来实现队列操作，当然选择用数组也是可以实现的。</p>
+<h4 id="代码">代码</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-type">int</span> p[<span class="hljs-number">10000009</span>];  <br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>&#123;</span>  <br>    <span class="hljs-type">int</span>*head;  <br>    <span class="hljs-type">int</span>*tail;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>* <span class="hljs-title">next</span>;</span>  <br>&#125;;  <br><span class="hljs-comment">//随机数生成</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">random</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span>  <br>&#123;  <br>	srand(time(<span class="hljs-literal">NULL</span>));<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123; <br>        p[i<span class="hljs-number">-1</span>] = rand() % <span class="hljs-number">100</span>;  <br>    &#125;  <br>&#125; <br><span class="hljs-comment">//入队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls,<span class="hljs-type">int</span>*h,<span class="hljs-type">int</span>*t)</span>&#123;  <br>    <span class="hljs-keyword">if</span>(t-h&lt;<span class="hljs-number">1</span>)<span class="hljs-keyword">return</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">addin</span>;</span>  <br>    addin=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    (*ls)-&gt;next=addin;  <br>    addin-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    addin-&gt;head=h;  <br>    addin-&gt;tail=t;  <br>    *ls=addin;  <br>&#125;  <br><span class="hljs-comment">//出队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">del</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls)</span>&#123;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">tmp</span>=</span>(*ls)-&gt;next;  <br>    <span class="hljs-built_in">free</span>(*ls);  <br>    *ls=tmp;  <br>&#125;  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    random(n);  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">ltail</span>;</span>  <br>    ltail=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    ltail-&gt;head=p;  <br>    ltail-&gt;tail=p+n<span class="hljs-number">-1</span>;  <br>    ltail-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">lhead</span>=</span>ltail;  <br>    <span class="hljs-comment">//判断队列是否为空</span><br>    <span class="hljs-keyword">while</span>(lhead!=<span class="hljs-literal">NULL</span>) &#123;  <br>        <span class="hljs-type">int</span> *i = lhead-&gt;head, *j = lhead-&gt;tail;  <br>        <span class="hljs-type">int</span> <span class="hljs-built_in">std</span> = *i;  <br>        i++;  <br>        <span class="hljs-keyword">while</span> (i &lt;= j) &#123;  <br>            <span class="hljs-type">int</span> f=<span class="hljs-number">1</span>;  <br>            <span class="hljs-keyword">while</span> (f &amp;&amp; *i &lt; <span class="hljs-built_in">std</span>) &#123;  <br>                i++;  <br>                <span class="hljs-keyword">if</span> (i &gt; j)f = <span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">while</span> (f&amp;&amp;*j&gt;=<span class="hljs-built_in">std</span>)&#123;  <br>                j--;  <br>                <span class="hljs-keyword">if</span>(i &gt; j)f=<span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span>(f)&#123;  <br>                <span class="hljs-type">int</span> tmp=*i;*i=*j;*j=tmp;  <br>            &#125;  <br>            <span class="hljs-keyword">else</span> &#123;  <br>                <span class="hljs-type">int</span> tmp=*j;*j=<span class="hljs-built_in">std</span>;*lhead-&gt;head=tmp;  <br>            &#125;  <br>        &#125;  <br>        add(&amp;ltail,lhead-&gt;head,j);  <br>        add(&amp;ltail,i,lhead-&gt;tail);  <br>        del(&amp;lhead);  <br>    &#125;  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,p[i]);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>计算机</category>
@@ -920,205 +1147,6 @@ class="math inline">\(\dots\)</span>+数字+回车； <figure class="highlight c
       </tags>
   </entry>
   <entry>
-    <title>linux基础</title>
-    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/linux%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="linux-二级目录结构">linux 二级目录结构</h1>
-<ul>
-<li>/boot:存放Linux启动所需内核文件和镜像文件</li>
-<li>/root:管理用户的主目录</li>
-<li>/home:每一个用户都有自己的目录</li>
-<li>/bin:存放最经常使用的命令</li>
-<li>/dev:存放linux的外部设备</li>
-<li>/etc:存放所有的系统管理所需要的配置文件和子目录
-<ul>
-<li>passwd:用户信息</li>
-<li>shadow:用户密码(root)</li>
-<li>group:用户组信息</li>
-<li>gshadow:密码维护信息(root)</li>
-</ul></li>
-</ul>
-<h1 id="linux基本范式">linux基本范式</h1>
-<ul>
-<li>命令关键字</li>
-<li>选项</li>
-<li>命令参数 格式：命令关键字[选项][命令参数]</li>
-</ul>
-<p><strong>可以通过输入</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">命令关键字 --help <br>//或者 help 命令关键字<br></code></pre></td></tr></table></figure>
-<p><strong>查看命令格式</strong></p>
-<h1 id="目录命令">目录命令</h1>
-<ul>
-<li>pwd:打印当前工作目录</li>
-<li>cd:
-<ul>
-<li>访问绝对路径：cd /home/.../dev</li>
-<li>访问相对路径：cd dev</li>
-<li>返回上一个所在目录：cd -</li>
-<li>返回当前目录的父一级目录：cd ../</li>
-<li>切换到用户家目录：cd ~</li>
-</ul></li>
-<li>ls[选项][目录路径]:
-<ul>
-<li>查看当前目录内容</li>
-<li>l：长格式显示</li>
-<li>a：显示所有内容（包括隐藏文件）</li>
-<li>无选项：仅显示非隐藏文件</li>
-</ul></li>
-<li>mkdir [目录名]：新建目录</li>
-</ul>
-<h1 id="文件">文件</h1>
-<h2 id="查看编辑">查看/编辑</h2>
-<ul>
-<li>vi/vim [文件名]：
-<ul>
-<li>文件存在-编辑文件</li>
-<li>文件不存在-新建并编辑文件</li>
-<li>vi编辑规则[[]]</li>
-</ul></li>
-<li>cat [文件路径]:查看文件所有信息（内容长度有限）</li>
-<li>less [文件路径]: 分页查看文件内容</li>
-<li>echo "内容" [命令] [文件名]：
-<ul>
-<li>命令：&gt; 清空文件并写入内容</li>
-<li>命令：&gt;&gt; 追加写入内容</li>
-</ul></li>
-<li>cp[选项][源文件路径][目标文件路径]:
-<ul>
-<li>-a 保留复制前目录和文件的所有属性</li>
-<li>-r 若给出的源文件是一个目录文件，复制该目录下的所有子目录和文件</li>
-</ul></li>
-<li>mv[选项][源文件][目标文件]：
-<ul>
-<li>-i 若指定文件夹有同名文件先询问是否覆盖</li>
-<li>-f 直接覆盖已有的文件</li>
-<li>在移动时可以进行重命名操作</li>
-</ul></li>
-<li>rm[选项][文件访问目录]：
-<ul>
-<li>-f 强制删除文件且不提示信息</li>
-<li>-r 用于删除目录</li>
-</ul></li>
-<li>rmdir 文件访问路径：
-<ul>
-<li>仅删除空目录，有提示信息</li>
-</ul></li>
-</ul>
-<h2 id="权限">权限</h2>
-<ul>
-<li>用户身份：所有者，所属组，其他人</li>
-<li>访问权限：可读，可写，可执行</li>
-<li>权限编码：
-<ul>
-<li>第1个字母，文件类型</li>
-<li>第2，3，4分别表示所有者的可读，可写，可执行文件</li>
-<li>第5，6，7分别表示所属组的可读，可写，可执行文件</li>
-<li>第8，9，10分别表示其他人的可读，可写，可执行文件</li>
-</ul></li>
-<li>sudo
-<ul>
-<li>路径：/ect/sudoers</li>
-<li>root用户用visudo或vi /ect/sudoers修改可用sudo命令的用户</li>
-<li></li>
-</ul></li>
-</ul>
-<h2 id="设置不同用户的权限">设置不同用户的权限</h2>
-<ul>
-<li>权限掩码
-<ul>
-<li>由三个数字组成</li>
-<li>计算方式为6.6.6-x.x.x=y.y.y,分别转化为二进制表示三个用户身份的权限</li>
-<li>对于文件来说现有存取权限最大为6，无执行权限</li>
-<li>对于目录来说现有存取权限最大为7</li>
-<li>用法：umask [-S][权限掩码]</li>
-</ul></li>
-<li>永久设置
-<ul>
-<li>修改.bash_profile文件</li>
-</ul></li>
-<li>chomd文件分配权限 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ll  参看文件权限<br>chmod  o=rwx  a1   将a1的其他人其他人权限设置为满权限  // 属主用u表示，属组用g表示<br>chmode o-x a1  在a1其他人权限中去掉可执行权限   //增加权限是用<br>chmod 747  a1   权限用数字表式<br>chmod o-x,u-x  a1   同时对属主和其他人做减权限<br>[root@localhost home]# chmod -R 777 . 给所有权限<br>chown root a1   将a1的属主改成root<br>chgrp root a1   将a1的属组改成root    chown :root   a1<br> chown root:root  a1   属主和属组一起改   chown a1.root  a1  //中间一个冒号和一个点都可以  chown .a1 a1 只改属组一个  a1下面的属性或目录没有改<br>chown -R  root:root  a1/  将a下面的文件或目录属主和属组全部改成root,-R表示递归修改<br></code></pre></td></tr></table></figure></li>
-<li>chown [user][file]:
-<ul>
-<li>修改文件所有者</li>
-</ul></li>
-<li>chgrp [user][file]:
-<ul>
-<li>修改文件所属组</li>
-</ul></li>
-</ul>
-<h1 id="设置快捷方式">设置快捷方式</h1>
-<ul>
-<li>创建文件xxx.desktop(一定要在Desktop文件夹或usr/share/application文件夹中)
-<ul>
-<li>通过vim写入设置 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[Desktop Entry]<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序名称</span><br>Name=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">描述信息</span><br>Comment=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">程序的执行命令(可执行文件路径)</span><br>Exec=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">快捷图标位置</span><br>Icon=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">是否在终端中运行</span><br>Terminal=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">desktop的类型,常见值有“Application”和“Link”。</span><br>Type=<br><span class="hljs-meta prompt_">#</span><span class="language-bash">菜单所属分类</span><br>Categories=<br></code></pre></td></tr></table></figure></li>
-</ul></li>
-</ul>
-<h1 id="用户和用户组">用户和用户组</h1>
-<ul>
-<li>groupadd[选项][参数][组名]
-<ul>
-<li>-g 指定组的GID</li>
-<li>-f 若指定组已经存在则以成功状态退出</li>
-</ul></li>
-<li>groupmod[选项][修改后的新参数]
-<ul>
-<li>-g 修改组GID</li>
-<li>-n 修改组名称</li>
-</ul></li>
-<li>groupdel [待删除组的名称]</li>
-<li>useradd</li>
-<li>usermod</li>
-<li>userdel</li>
-</ul>
-<h1 id="shell编程">shell编程</h1>
-<h2 id="类型">类型</h2>
-<ul>
-<li>bash,zsh,csh,sh等</li>
-<li>查看环境：cat /etc/shells</li>
-</ul>
-<p>自动补全命令，参数：双击tab 用<span
-class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名:
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.bashrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>alias desktop=&#x27;cd /home/user/Desktop&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.bashrc<br></code></pre></td></tr></table></figure> 设置环境变量： <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim ~/.porfile<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加命令</span><br>export PATH=$PATH:$Home/usr...<br><span class="hljs-meta prompt_">#</span><span class="language-bash">更新设置</span><br>source ~/.profile<br></code></pre></td></tr></table></figure></p>
-<h1 id="命令集合">命令集合</h1>
-<p>ctrl+z:<strong>将一个正在前台执行的命令放在后台并暂停</strong>。</p>
-<p>用jobs命令可将所有在后台运行的程序列出来。 fg + 进程号 打开进程</p>
-<h1 id="查看ip端口">查看IP，端口</h1>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">nmap 127.0.0.1<span class="hljs-comment"># 本地端口</span><br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><figcaption><span>ubuntu</span></figcaption><table><tr><td class="code"><pre><code class="hljs bash">sudo ufw allow 1077<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++与postgres连接</title>
-    <url>/2024/09/15/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/</url>
-    <content><![CDATA[<h2 id="需要安装的库">需要安装的库</h2>
-<p><a href="https://github.com/jtv/libpqxx/tree/master">jtv/libpqxx: The
-official C++ client API for PostgreSQL. (github.com)</a></p>
-<p>libpqxx编译安装之前要求安装libpq</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo apt install libpq-dev<br></code></pre></td></tr></table></figure>
-<p>接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。</p>
-<h3 id="静态库">静态库</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">./configure --prefix=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
-<h3 id="动态库">动态库</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake -DBUILD_SHARED_LIBS=ON ..<br>sudo make install DESTDIR=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br></code></pre></td></tr></table></figure>
-<p>使用Cmake构建程序示例。其中要注意的是C++一定要使用17以上的版本，否则编译会报错。</p>
-<p>CMakeLists.txt <figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs CMake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.22</span>)<br><span class="hljs-keyword">project</span>(template)<br><br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD <span class="hljs-number">17</span>)<br><br><span class="hljs-keyword">set</span>(PostgreSQL_ROOT /var/lib/postgresql/<span class="hljs-number">16</span>)<br><span class="hljs-keyword">include_directories</span> (<span class="hljs-variable">$&#123;PostgreSQL_INCLUDE_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/<span class="hljs-keyword">include</span>)<br><br><br><span class="hljs-keyword">set</span>(libpqxx_ROOT /home/zhang/libpqxx)<br><span class="hljs-keyword">link_directories</span>(<span class="hljs-variable">$&#123;PostgreSQL_LIBRARY_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/lib)<br><br><span class="hljs-keyword">find_package</span>(PostgreSQL REQUIRED)<br><br><br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> pqxx <span class="hljs-variable">$&#123;PostgreSQL_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure></p>
-<p>main.c <figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;pqxx/pqxx&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; std::endl;<br>        std::string conn_string = <span class="hljs-string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;<br>        <span class="hljs-function">pqxx::connection <span class="hljs-title">conn</span><span class="hljs-params">(conn_string)</span></span>;<br>        <span class="hljs-function">pqxx::work <span class="hljs-title">txn</span><span class="hljs-params">(conn)</span></span>;<br>        txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="hljs-comment">//进入schema</span><br>        pqxx::result result = txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);<br>        txn.<span class="hljs-built_in">commit</span>();<br> <span class="hljs-comment">// Process results</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> row_it = result.<span class="hljs-built_in">begin</span>(); row_it != result.<span class="hljs-built_in">end</span>(); row_it++)&#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="hljs-number">0</span>].<span class="hljs-built_in">as</span>&lt;<span class="hljs-type">int</span>&gt;() &lt;&lt; std::endl;<br>        &#125;<br>        conn.<span class="hljs-built_in">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>postgres实践</category>
-      </categories>
-      <tags>
-        <tag>技术文档</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>排序算法</title>
     <url>/2022/11/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<div class="note note-warning">
@@ -1326,72 +1354,6 @@ alt="结果" />
       </categories>
       <tags>
         <tag>算法学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Postgress 安装与初体验</title>
-    <url>/2022/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/Postgress%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-    <content><![CDATA[<h2 id="下载">下载</h2>
-<p><a href="https://www.postgresql.org/download/">官网下载</a></p>
-<p>官网有详细的教程，这里就不多赘述。</p>
-<h2 id="创建用户分配权限">创建用户&amp;分配权限</h2>
-<p>部署完成后，登录postgres用户，并且进入数据库。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo -i -u postgres<br>psql<br></code></pre></td></tr></table></figure>
-<p>这里先创建一个管理员用户(超级用户)</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> password <span class="hljs-string">&#x27;&lt;password&gt;&#x27;</span>; <span class="hljs-comment">--创建用户</span><br>\du <span class="hljs-comment">--查看所有用户</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> superuser; <span class="hljs-comment">--分配权限</span><br></code></pre></td></tr></table></figure>
-<h2 id="数据库创建">数据库创建</h2>
-<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database <span class="hljs-operator">&lt;</span>database_name<span class="hljs-operator">&gt;</span> owner <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br>\q <span class="hljs-comment">--退出数据库</span><br></code></pre></td></tr></table></figure>
-<h2 id="用户登录">用户登录</h2>
-<p>注意postgres提供peer认证，当unix用户名和创建的用户名相同的时候才可以登录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">psql -U &lt;user_name&gt; -d &lt;database_name&gt;<span class="hljs-comment">#peer认证</span><br></code></pre></td></tr></table></figure>
-<h2 id="创建schema">创建schema</h2>
-<p>schema实际上可以认为是一个数据库中承载表，关系等对象的容器。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> schema <span class="hljs-operator">&lt;</span>schema_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">authorization</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>postgres实践</category>
-      </categories>
-      <tags>
-        <tag>技术文档</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Zenko-S3安装教程</title>
-    <url>/2024/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/Zenko-S3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="安装yarn和node.js">安装yarn和node.js</h2>
-<h3 id="安装环境">安装环境</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo apt install g++ gnupg curl<br></code></pre></td></tr></table></figure>
-<p>导入软件源的 GPG key 并且添加 Yarn APT
-软件源到你的系统，通过NodeSource更新nodejs软件源，运行下面的命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | sudo <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/yarn.list<br>curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash<br></code></pre></td></tr></table></figure>
-<h3 id="通过apt安装yarn和nodejs">通过apt安装yarn和nodejs</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo apt update<br>sudo apt install yarn<br></code></pre></td></tr></table></figure>
-<p>注意如上命令会安装node.js如果已经通过nvm安装了Node可以采用如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo apt install --no-install-recommends yarn<br></code></pre></td></tr></table></figure>
-<p>检查yarn和nodejs版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">yarn --version<br>nodejs --version<br></code></pre></td></tr></table></figure>
-<h2 id="安装zenko-s3">安装Zenko-S3</h2>
-<p>命令集合，直接复制即可完成安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/scality/S3.git<br><span class="hljs-built_in">cd</span> S3<br>yarn install --frozen-lockfile<br></code></pre></td></tr></table></figure>
-<h2 id="运行测试">运行测试</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">yarn start<br></code></pre></td></tr></table></figure>
-<p>这将在端口 8000 上启动 Zenko CloudServer。两个额外的端口 9990 和 9991
-也在本地开放，用于元数据和数据的内部传输， 分别。</p>
-<p>默认访问密钥为 accessKey1，其中 一个 verySecretKey1 的密钥。</p>
-<p>默认情况下，元数据文件将保存在 localMetadata 目录下，数据文件将被保存
-在 ./S3 目录下的 localData 目录中 机器。这些目录已在 存储
-库。如果要将数据或元数据保存在
-您选择的不同位置，则必须使用绝对路径指定它们。
-因此，在启动服务器时：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -m 700 $(<span class="hljs-built_in">pwd</span>)/myFavoriteDataPath<br><span class="hljs-built_in">mkdir</span> -m 700 $(<span class="hljs-built_in">pwd</span>)/myFavoriteMetadataPath<br><span class="hljs-built_in">export</span> S3DATAPATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(pwd)</span>/myFavoriteDataPath&quot;</span><br><span class="hljs-built_in">export</span> S3METADATAPATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(pwd)</span>/myFavoriteMetadataPath&quot;</span><br>yarn start<br></code></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>计算机</category>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
       </tags>
   </entry>
 </search>
