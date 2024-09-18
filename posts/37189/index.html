@@ -19,24 +19,24 @@
   <meta name="author" content="晓寒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="verilator 配置 verilator github仓库 必要环境 1sudo apt install g++ flex bison make help2man perl-doc cmake autoconf verilator安装 12345git clone https:&#x2F;&#x2F;github.com&#x2F;verilator&#x2F;verilatorautoconf.&#x2F;configurema">
+    <meta name="description" content="基础的Cmake编译c&#x2F;c++语言工程操作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="verilator环境配置和初步使用">
-<meta property="og:url" content="http://example.com/posts/verilator%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="连接第三方库">
+<meta property="og:url" content="http://example.com/posts/37189/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
-<meta property="og:description" content="verilator 配置 verilator github仓库 必要环境 1sudo apt install g++ flex bison make help2man perl-doc cmake autoconf verilator安装 12345git clone https:&#x2F;&#x2F;github.com&#x2F;verilator&#x2F;verilatorautoconf.&#x2F;configurema">
+<meta property="og:description" content="基础的Cmake编译c&#x2F;c++语言工程操作">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-15T13:29:46.000Z">
-<meta property="article:modified_time" content="2024-09-17T16:42:14.749Z">
+<meta property="article:published_time" content="2022-12-24T10:10:15.000Z">
+<meta property="article:modified_time" content="2024-09-18T15:11:17.002Z">
 <meta property="article:author" content="晓寒">
-<meta property="article:tag" content="一生一芯">
+<meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>verilator环境配置和初步使用 - Xiaohan`s Blog</title>
+  <title>连接第三方库 - Xiaohan`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -98,119 +98,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
@@ -289,6 +177,18 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
@@ -325,7 +225,7 @@ mjx-container[display="true"] + br {
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="verilator环境配置和初步使用"></span>
+            <span id="subtitle" data-typed-text="连接第三方库"></span>
           
         </div>
 
@@ -336,8 +236,8 @@ mjx-container[display="true"] + br {
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-15 21:29" pubdate>
-          2024年9月15日 晚上
+        <time datetime="2022-12-24 18:10" pubdate>
+          2022年12月24日 晚上
         </time>
       </span>
     
@@ -348,7 +248,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          100 字
+          329 字
         
       </span>
     
@@ -359,7 +259,7 @@ mjx-container[display="true"] + br {
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -396,24 +296,30 @@ mjx-container[display="true"] + br {
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">verilator环境配置和初步使用</h1>
+            <h1 id="seo-header">连接第三方库</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="verilator-配置">verilator 配置</h2>
-<p><a href="%5Bverilator/verilator:%20Verilator%20open-source%20SystemVerilog%20simulator%20and%20lint%20system%20(github.com)%5D(https://github.com/verilator/verilator)">verilator
-github仓库</a></p>
-<h3 id="必要环境">必要环境</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install g++ flex bison make help2man perl-doc cmake autoconf<br></code></pre></td></tr></table></figure>
-<h3 id="verilator安装">verilator安装</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/verilator/verilator<br>autoconf<br>./configure<br>make <span class="hljs-comment"># 如果想快点可以-j18，使用线程数取决于你的机器性能</span><br>sudo make install<br></code></pre></td></tr></table></figure>
-<h3 id="exmple演示">exmple演示</h3>
-<p>进入example目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> cmake_hello_c<br>cmake -S . -B build<br>make -C build<br>./build/example<br></code></pre></td></tr></table></figure>
-<p>建议在这里学习下cmake的用法，便于以后的学习使用</p>
-<p>下面给出verlatior项目的解析</p>
-<p>这里给出我仿照example在本地的测试项目文件树</p>
+                <h1 id="连接第三方库">连接第三方库</h1>
+<h2 id="cpp引用">cpp引用</h2>
+<p>对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#cmake为project的名称</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br></code></pre></td></tr></table></figure>
+<p>即可建立连接，这时只需在main.cpp添加</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">include<span class="hljs-string">&quot;longint.cpp&quot;</span><br></code></pre></td></tr></table></figure>
+<p>就可以使用“longint.cpp”中定义的函数和全局变量</p>
+<h2 id="头文件引用">头文件引用</h2>
+<p>头文件引用我们需要准备“longint.h”的头文件，并确保“longint.cpp”中的函数都在“longint.h”中声明。
+注意：如果声明全局变量请在longint.h中声明。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#先生成可执行文件</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br><span class="hljs-comment">#引入库</span><br><span class="hljs-keyword">include_directories</span>(<span class="hljs-keyword">include</span>)<br><span class="hljs-comment">#创建静态库(生成在build文件下)</span><br><span class="hljs-keyword">add_library</span>(TEST_LIBRARY longint.cpp)<br><span class="hljs-comment">#连接文件</span><br><span class="hljs-keyword">target_link_libraries</span>(cmake LINK_PUBLIC TEST_LIBRARY)<br></code></pre></td></tr></table></figure>
+<p>调用库</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(lib,<span class="hljs-string">&quot;xx.lib&quot;</span>)</span><br></code></pre></td></tr></table></figure>
+<p>在"main.cpp"引入“longint.h”就可以使用其中的函数了。</p>
+<h1 id="二进制文件位置">二进制文件位置</h1>
+<p>设置单独的.exe，.dll，.lib在bin,lib目录</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">set</span>(dir <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_ARCHIVE_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_LIBRARY_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/bin&quot;</span>)  <br></code></pre></td></tr></table></figure>
+<h1 id="一键连接">一键连接</h1>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">aux_source_directory</span>(./Src CPP_LIST) <span class="hljs-comment">#搜集所有在指定路径下的源文件的文件名，并将输出结果列表储存在指定的变量中。  </span><br><span class="hljs-keyword">aux_source_directory</span>(./Inc H_LIST)  <br><span class="hljs-comment"># FILE(GLOB SC_FILES &quot;./Src/*.cpp&quot; &quot;./Inc/*.h&quot;)  </span><br><span class="hljs-keyword">add_executable</span>(CIntCalculate <span class="hljs-variable">$&#123;CPP_LIST&#125;</span> <span class="hljs-variable">$&#123;H_LIST&#125;</span>)  <br><span class="hljs-keyword">include_directories</span>(./Inc)<br><span class="hljs-keyword">add_library</span>(LIB_TEXT <span class="hljs-variable">$&#123;CPP_LIST&#125;</span>)  <br><span class="hljs-keyword">target_link_libraries</span>(CIntCalculate LINK_PUBLIC <span class="hljs-variable">$&#123;LIB&#125;</span>)<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -432,8 +338,15 @@ github仓库</a></p>
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF/" class="category-chain-item">一生一芯</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/CMake/" class="category-chain-item">CMake</a>
+  
+  
+
   
 
       </span>
@@ -447,7 +360,7 @@ github仓库</a></p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF/" class="print-no-link">#一生一芯</a>
+        <a href="/tags/CMake/" class="print-no-link">#CMake</a>
       
     </div>
   
@@ -459,8 +372,8 @@ github仓库</a></p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>verilator环境配置和初步使用</div>
-      <div>http://example.com/posts/verilator环境配置和初步使用/</div>
+      <div>连接第三方库</div>
+      <div>http://example.com/posts/37189/</div>
     </div>
     <div class="license-meta">
       
@@ -472,7 +385,7 @@ github仓库</a></p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月15日</div>
+          <div>2022年12月24日</div>
         </div>
       
       
@@ -504,12 +417,18 @@ github仓库</a></p>
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/43167/" title="git">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">git</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/" title="C++与postgres连接">
-                        <span class="hidden-mobile">C++与postgres连接</span>
+                      <a href="/posts/34982/" title="linux基础">
+                        <span class="hidden-mobile">linux基础</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

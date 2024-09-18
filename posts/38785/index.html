@@ -19,24 +19,27 @@
   <meta name="author" content="晓寒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="需要安装的库 jtv&#x2F;libpqxx: The official C++ client API for PostgreSQL. (github.com) libpqxx编译安装之前要求安装libpq 1sudo apt install libpq-dev 接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。 静态库 123.&#x2F;configure --pref">
+    <meta name="description" content="STM32开发环境安装">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++与postgres连接">
-<meta property="og:url" content="http://example.com/posts/C++%E4%B8%8Epostgres%E8%BF%9E%E6%8E%A5/index.html">
+<meta property="og:title" content="keil和STM32的部署">
+<meta property="og:url" content="http://example.com/posts/38785/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
-<meta property="og:description" content="需要安装的库 jtv&#x2F;libpqxx: The official C++ client API for PostgreSQL. (github.com) libpqxx编译安装之前要求安装libpq 1sudo apt install libpq-dev 接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。 静态库 123.&#x2F;configure --pref">
+<meta property="og:description" content="STM32开发环境安装">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-15T11:24:40.000Z">
-<meta property="article:modified_time" content="2024-09-17T16:39:22.703Z">
+<meta property="og:image" content="http://example.com/posts/38785/img20231025203844.png">
+<meta property="og:image" content="http://example.com/posts/38785/img20231025203008.png">
+<meta property="article:published_time" content="2023-10-25T12:08:15.000Z">
+<meta property="article:modified_time" content="2024-09-18T15:11:16.999Z">
 <meta property="article:author" content="晓寒">
-<meta property="article:tag" content="技术文档">
+<meta property="article:tag" content="单片机入门">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/posts/38785/img20231025203844.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>C++与postgres连接 - Xiaohan`s Blog</title>
+  <title>keil和STM32的部署 - Xiaohan`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -98,7 +101,119 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
@@ -177,6 +292,18 @@
           
           
             <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
@@ -213,7 +340,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="C++与postgres连接"></span>
+            <span id="subtitle" data-typed-text="keil和STM32的部署"></span>
           
         </div>
 
@@ -224,8 +351,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-15 19:24" pubdate>
-          2024年9月15日 晚上
+        <time datetime="2023-10-25 20:08" pubdate>
+          2023年10月25日 晚上
         </time>
       </span>
     
@@ -236,7 +363,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          291 字
+          295 字
         
       </span>
     
@@ -284,24 +411,43 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">C++与postgres连接</h1>
+            <h1 id="seo-header">keil和STM32的部署</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="需要安装的库">需要安装的库</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/jtv/libpqxx/tree/master">jtv/libpqxx: The
-official C++ client API for PostgreSQL. (github.com)</a></p>
-<p>libpqxx编译安装之前要求安装libpq</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install libpq-dev<br></code></pre></td></tr></table></figure>
-<p>接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。</p>
-<h3 id="静态库">静态库</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
-<h3 id="动态库">动态库</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake -DBUILD_SHARED_LIBS=ON ..<br>sudo make install DESTDIR=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br></code></pre></td></tr></table></figure>
-<p>使用Cmake构建程序示例。其中要注意的是C++一定要使用17以上的版本，否则编译会报错。</p>
-<p>CMakeLists.txt <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.22</span>)<br><span class="hljs-keyword">project</span>(template)<br><br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD <span class="hljs-number">17</span>)<br><br><span class="hljs-keyword">set</span>(PostgreSQL_ROOT /var/lib/postgresql/<span class="hljs-number">16</span>)<br><span class="hljs-keyword">include_directories</span> (<span class="hljs-variable">$&#123;PostgreSQL_INCLUDE_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/<span class="hljs-keyword">include</span>)<br><br><br><span class="hljs-keyword">set</span>(libpqxx_ROOT /home/zhang/libpqxx)<br><span class="hljs-keyword">link_directories</span>(<span class="hljs-variable">$&#123;PostgreSQL_LIBRARY_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/lib)<br><br><span class="hljs-keyword">find_package</span>(PostgreSQL REQUIRED)<br><br><br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> pqxx <span class="hljs-variable">$&#123;PostgreSQL_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure></p>
-<p>main.c <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;pqxx/pqxx&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; std::endl;<br>        std::string conn_string = <span class="hljs-string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;<br>        <span class="hljs-function">pqxx::connection <span class="hljs-title">conn</span><span class="hljs-params">(conn_string)</span></span>;<br>        <span class="hljs-function">pqxx::work <span class="hljs-title">txn</span><span class="hljs-params">(conn)</span></span>;<br>        txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="hljs-comment">//进入schema</span><br>        pqxx::result result = txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);<br>        txn.<span class="hljs-built_in">commit</span>();<br> <span class="hljs-comment">// Process results</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> row_it = result.<span class="hljs-built_in">begin</span>(); row_it != result.<span class="hljs-built_in">end</span>(); row_it++)&#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="hljs-number">0</span>].<span class="hljs-built_in">as</span>&lt;<span class="hljs-type">int</span>&gt;() &lt;&lt; std::endl;<br>        &#125;<br>        conn.<span class="hljs-built_in">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+                <h1 id="keil的部署">keil的部署</h1>
+<h2 id="软件下载">软件下载</h2>
+<p>百度网盘</p>
+<p>链接：https://pan.baidu.com/s/18IuTqzBIFJONlUo6LtuCWw?pwd=9e6n
+提取码：9e6n</p>
+<h2 id="使用说明">使用说明</h2>
+<p>先安装keil本体，基本上选个安装路径，一路下一步就行。</p>
+<p>使用管理员模式打开keil，点击file-&gt;license
+Management,看到如下界面（这是已经激活成功的）</p>
+<p><img src="img20231025203844.png" srcset="/img/loading.gif" lazyload></p>
+<p>打开Keygen.exe,将CID填入，将target设置为ARM,点击Generate，获得License
+Code。</p>
+<p><img src="img20231025203008.png" srcset="/img/loading.gif" lazyload></p>
+<p>回到keil的License Management界面，把License Code 填入，点击Add
+License，Product下面有MDK-ARM Plus为激活成功。</p>
+<h1 id="stm32cubemx的部署">STM32CubeMX的部署</h1>
+<h2 id="java环境安装">Java环境安装</h2>
+<p>1.安装jdk 由于STM32CubeMX是Java实现的，需要安装jdk环境。
+jdk官网下载链接：
+https://www.oracle.com/java/technologies/javase-downloads.html</p>
+<h2 id="软件下载-1">软件下载</h2>
+<p>理论上来说STM32CubeMX为免费软件，但是官网下载是要求注册的，我这里给出我的镜像地址，官网可以直接在网上下载，请自行选择。</p>
+<p>百度网盘</p>
+<p>V6.0.0</p>
+<p>链接：https://pan.baidu.com/s/1vChvLd9r6J1ioNnKridX5g?pwd=dqsu
+提取码：dqsu</p>
+<hr>
+<p>部分电脑无法兼容旧版，给出新版下载资源，但是新版部分配置和算法有BUG，旧版更稳定些。</p>
+<p>百度网盘</p>
+<p>V6.9.0</p>
+<p>链接：https://pan.baidu.com/s/1oLdQGMQ3ISI066AuKFmDBg?pwd=w27z
+提取码：w27z</p>
 
                 
               </div>
@@ -320,12 +466,12 @@ official C++ client API for PostgreSQL. (github.com)</a></p>
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="category-chain-item">嵌入式</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/" class="category-chain-item">postgres实践</a>
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/" class="category-chain-item">STM32</a>
   
   
 
@@ -342,7 +488,7 @@ official C++ client API for PostgreSQL. (github.com)</a></p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="print-no-link">#技术文档</a>
+        <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA%E5%85%A5%E9%97%A8/" class="print-no-link">#单片机入门</a>
       
     </div>
   
@@ -354,8 +500,8 @@ official C++ client API for PostgreSQL. (github.com)</a></p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>C++与postgres连接</div>
-      <div>http://example.com/posts/C++与postgres连接/</div>
+      <div>keil和STM32的部署</div>
+      <div>http://example.com/posts/38785/</div>
     </div>
     <div class="license-meta">
       
@@ -367,7 +513,7 @@ official C++ client API for PostgreSQL. (github.com)</a></p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月15日</div>
+          <div>2023年10月25日</div>
         </div>
       
       
@@ -399,9 +545,9 @@ official C++ client API for PostgreSQL. (github.com)</a></p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/verilator%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" title="verilator环境配置和初步使用">
+                      <a href="/posts/2680/" title="STM32流水灯">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">verilator环境配置和初步使用</span>
+                        <span class="hidden-mobile">STM32流水灯</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -409,8 +555,8 @@ official C++ client API for PostgreSQL. (github.com)</a></p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/" title="STM32定时器中断">
-                        <span class="hidden-mobile">STM32定时器中断</span>
+                      <a href="/posts/11281/" title="Qt-Cmake">
+                        <span class="hidden-mobile">Qt-Cmake</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

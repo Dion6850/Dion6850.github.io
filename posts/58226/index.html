@@ -19,24 +19,24 @@
   <meta name="author" content="晓寒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="git分支操作，打标签，版本管理，栈应用，连接远程库等">
+    <meta name="description" content="下载 官网下载 官网有详细的教程，这里就不多赘述。 创建用户&amp;分配权限 部署完成后，登录postgres用户，并且进入数据库。 12sudo -i -u postgrespsql 这里先创建一个管理员用户(超级用户) 123create user &lt;user_name&gt; with password &amp;#x27;&lt;password&gt;&amp;#x27;; --创">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git">
-<meta property="og:url" content="http://example.com/posts/git/index.html">
+<meta property="og:title" content="Postgress 安装与初体验">
+<meta property="og:url" content="http://example.com/posts/58226/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
-<meta property="og:description" content="git分支操作，打标签，版本管理，栈应用，连接远程库等">
+<meta property="og:description" content="下载 官网下载 官网有详细的教程，这里就不多赘述。 创建用户&amp;分配权限 部署完成后，登录postgres用户，并且进入数据库。 12sudo -i -u postgrespsql 这里先创建一个管理员用户(超级用户) 123create user &lt;user_name&gt; with password &amp;#x27;&lt;password&gt;&amp;#x27;; --创">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-24T10:10:15.000Z">
-<meta property="article:modified_time" content="2024-09-17T16:38:53.686Z">
+<meta property="article:published_time" content="2022-12-17T11:24:40.000Z">
+<meta property="article:modified_time" content="2024-09-18T15:11:17.011Z">
 <meta property="article:author" content="晓寒">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="技术文档">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>git - Xiaohan`s Blog</title>
+  <title>Postgress 安装与初体验 - Xiaohan`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -177,6 +177,18 @@
           
           
             <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
@@ -213,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="git"></span>
+            <span id="subtitle" data-typed-text="Postgress 安装与初体验"></span>
           
         </div>
 
@@ -224,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-24 18:10" pubdate>
-          2023年4月24日 晚上
+        <time datetime="2022-12-17 19:24" pubdate>
+          2022年12月17日 晚上
         </time>
       </span>
     
@@ -236,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          195 字
         
       </span>
     
@@ -247,7 +259,7 @@
         
         
         
-          10 分钟
+          2 分钟
         
       </span>
     
@@ -284,98 +296,27 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">git</h1>
+            <h1 id="seo-header">Postgress 安装与初体验</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="git-flow-的常用分支">Git Flow 的常用分支</h1>
-<h2 id="生产分支master">生产分支（master）‌</h2>
-<p>Master分支是仓库的主分支，这个分支包含最近发布到生产环境的代码，最近发布的Release，
-这个分支只能从其他分支合并，不能在这个分支直接修改‌</p>
-<h2 id="补丁分支hotfix">补丁分支（hotfix）</h2>
-<p>当我们在生产环境发现新的Bug时候，我们需要基于master分支创建一个Hotfix分支，然后在Hotfix分支上修复bug，完成Hotfix后，我们要把hotfix分支合并回Master和Develop分支‌</p>
-<h2 id="发布分支release">发布分支（release)‌</h2>
-<p>当你需要发布一个新功能的时候，要基于Develop分支创建一个Release分支，在Release分支测试并修复bug，完成release后，把release合并到master和develop分支‌
-## 开发分支（develop）‌</p>
-<p>这个分支是我们的主开发分支，包含所有要发布到下一个Release的代码，这个主要合并与其他分支，比如Feature分支‌</p>
-<h2 id="功能分支feature">功能分支（feature）‌</h2>
-<p>feature分支主要是用来开发一个新的功能，一旦开发完成，我们合并回Develop分支进入下一个Release‌</p>
-<h1 id="文件">文件</h1>
-<p>这里一部分与linux终端下的命令相同。</p>
-<h2 id="创建文件">创建文件</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 单个创建</span><br><span class="hljs-built_in">touch</span> File1Name File2Name <br><span class="hljs-comment"># 批量创建（touch 文件名&#123;最小数值…最大数值&#125;.扩展名）</span><br><span class="hljs-built_in">touch</span> text&#123; 0001..2000 &#125;.txt <br></code></pre></td></tr></table></figure>
-<h2 id="删除文件">删除文件</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 删除当前文件</span><br><span class="hljs-built_in">rm</span> &lt;文件名&gt;<br><span class="hljs-comment"># 删除版本库中的文件</span><br>git <span class="hljs-built_in">rm</span> &lt;文件名&gt;<br><span class="hljs-comment"># 删除文件夹（可不为空）</span><br><span class="hljs-built_in">rm</span> -r &lt;目录名&gt;<br><span class="hljs-comment"># 删除文件夹（必须为空)</span><br><span class="hljs-built_in">rmdir</span> &lt;目录名&gt;<br></code></pre></td></tr></table></figure>
-<h1 id="git文件状态">git文件状态</h1>
-<h2 id="显示当前状态">显示当前状态</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git status<br></code></pre></td></tr></table></figure>
-<h2 id="加入文件到缓存区">加入文件到缓存区</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git add &lt;文件名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="将版本更迭">将版本更迭</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -m 后面是这个版本的相关信息</span><br>git commit -m <span class="hljs-string">&quot;&lt;相关信息&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<h2 id="查看日志">查看日志</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这个命令实则是git reflog show HEAD 的简化写法</span><br>git reflog<br><span class="hljs-comment"># 查看所有日志</span><br>git reflog show --all<br><span class="hljs-comment"># 查看特定的分支</span><br>git reflog show &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-<h1 id="分支管理">分支管理</h1>
-<h2 id="创建分支命令">创建分支命令</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="切换分支命令">切换分支命令</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git switch &lt;分支名&gt;<br>git checkout &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="查看分支">查看分支</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git banch<br></code></pre></td></tr></table></figure>
-<h2 id="合并分支">合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这里要注意在主分支</span><br>git merge &lt;副分支名&gt;<br><span class="hljs-comment"># 合并没有历史记录相同的分支</span><br>git merge &lt;副分支名&gt; --allow-unrelated-histories<br></code></pre></td></tr></table></figure>
-<h2 id="删除分支">删除分支</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -d &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-<h1 id="标签管理">标签管理</h1>
-<h2 id="增加本地标签">增加本地标签</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 不带说明的标签</span><br>git tag <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br><span class="hljs-comment"># 带说明的标签</span><br>git tag -a &lt;标签名&gt; -m <span class="hljs-string">&quot;&lt;说明信息&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<h2 id="增加远程标签">增加远程标签</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push origin <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<p>因为这个用的少，就不深入说明了。</p>
-<h2 id="查看标签">查看标签</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出所有标签（字母顺序）</span><br>git tag<br><span class="hljs-comment"># 查看标签信息</span><br>git show &lt;标签名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="删除标签">删除标签</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git tag -d <span class="hljs-string">&quot;&lt;标签名&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<h1 id="暂存栈管理">暂存栈管理</h1>
-<h2 id="创建暂存栈">创建暂存栈</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 直接创建</span><br>git stash<br><span class="hljs-comment"># 加注释创建</span><br>git stash save <span class="hljs-string">&quot;&lt;注释&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<p>这个命令会将所有未递交的修改保存起来。</p>
-<h2 id="重新应用缓存">重新应用缓存</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash pop<br></code></pre></td></tr></table></figure>
-<p>这个指令将缓存堆栈中的第一个stash删除，并将对应修改应用到当前的工作目录下。</p>
-<h2 id="查看现有stash">查看现有stash</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash list<br></code></pre></td></tr></table></figure>
-<p>在使用<code>git stash apply</code>命令时可以通过名字指定使用哪个stash，默认使用最近的stash（即stash@{0}）。</p>
-<h2 id="移除stash">移除stash</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 这里的下标是从0开始由第一个向下递增的</span><br>git stash drop stash@&#123;&lt;下标&gt;&#125;<br><span class="hljs-comment"># 利用注释删除指定栈</span><br>git stash drop <span class="hljs-string">&quot;&lt;注释&gt;&quot;</span><br></code></pre></td></tr></table></figure>
-<h2 id="查看指定stash的diff">查看指定stash的diff</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash show<br></code></pre></td></tr></table></figure>
-<h1 id="版本管理">版本管理</h1>
-<h2 id="还原">还原</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使某个文件回到add缓存区的版本</span><br>git checkout &lt;文件名&gt;<br><span class="hljs-comment"># 回退指定版本</span><br>git reset [--soft | --mixed | --hard] &lt;指定版本编号&gt;<br></code></pre></td></tr></table></figure>
-<p>下面说明参数的意义：</p>
-<ul>
-<li>--soft:将HEAD指向指定的版本上。但是工作区的文件和暂存区的文件都不改变，仅仅退回commit的信息。</li>
-<li>--mixed:git
-reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也改变，但是工作区的文件不改变。</li>
-<li>--hard:彻底回退到指定的版本。</li>
-</ul>
-<h1 id="远程库github">远程库（github）</h1>
-<h2 id="创建远程仓库">创建远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 添加远程仓库</span><br>git remote add &lt;远程仓库名&gt; &lt;地址&gt;<br><span class="hljs-comment"># 第一次推送</span><br>git push -u &lt;远程仓库名&gt; &lt;地址&gt;  <br><span class="hljs-comment"># 之后推送</span><br>git push &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="查看远程仓库">查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git remote -v<br></code></pre></td></tr></table></figure>
-<h2 id="修改远程仓库">修改远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git remote set-url &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="克隆远程库">克隆远程库</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 克隆</span><br>git <span class="hljs-built_in">clone</span> &lt;地址&gt;<br><span class="hljs-comment"># 拉取最新递交</span><br>git pull<br></code></pre></td></tr></table></figure>
-<h2 id="删除远程仓库">删除远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git remote <span class="hljs-built_in">rm</span> &lt;仓库名&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="初始化本地项目">初始化本地项目</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;&lt;你的名字或昵称&gt;&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;&lt;你的邮箱&gt;&quot;</span><br>git init <br>git remote add &lt;远程仓库名&gt; &lt;地址&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="创建分支到本地">创建分支到本地</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b &lt;本地仓库名&gt; &lt;远程仓库名&gt;/&lt;分支名&gt;<br></code></pre></td></tr></table></figure>
+                <h2 id="下载">下载</h2>
+<p><a target="_blank" rel="noopener" href="https://www.postgresql.org/download/">官网下载</a></p>
+<p>官网有详细的教程，这里就不多赘述。</p>
+<h2 id="创建用户分配权限">创建用户&amp;分配权限</h2>
+<p>部署完成后，登录postgres用户，并且进入数据库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo -i -u postgres<br>psql<br></code></pre></td></tr></table></figure>
+<p>这里先创建一个管理员用户(超级用户)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> password <span class="hljs-string">&#x27;&lt;password&gt;&#x27;</span>; <span class="hljs-comment">--创建用户</span><br>\du <span class="hljs-comment">--查看所有用户</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">with</span> superuser; <span class="hljs-comment">--分配权限</span><br></code></pre></td></tr></table></figure>
+<h2 id="数据库创建">数据库创建</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database <span class="hljs-operator">&lt;</span>database_name<span class="hljs-operator">&gt;</span> owner <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br>\q <span class="hljs-comment">--退出数据库</span><br></code></pre></td></tr></table></figure>
+<h2 id="用户登录">用户登录</h2>
+<p>注意postgres提供peer认证，当unix用户名和创建的用户名相同的时候才可以登录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">psql -U &lt;user_name&gt; -d &lt;database_name&gt;<span class="hljs-comment">#peer认证</span><br></code></pre></td></tr></table></figure>
+<h2 id="创建schema">创建schema</h2>
+<p>schema实际上可以认为是一个数据库中承载表，关系等对象的容器。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> schema <span class="hljs-operator">&lt;</span>schema_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">authorization</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -399,7 +340,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/git/" class="category-chain-item">git</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/" class="category-chain-item">postgres实践</a>
   
   
 
@@ -416,7 +357,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/git/" class="print-no-link">#git</a>
+        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="print-no-link">#技术文档</a>
       
     </div>
   
@@ -428,8 +369,8 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>git</div>
-      <div>http://example.com/posts/git/</div>
+      <div>Postgress 安装与初体验</div>
+      <div>http://example.com/posts/58226/</div>
     </div>
     <div class="license-meta">
       
@@ -441,7 +382,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月24日</div>
+          <div>2022年12月17日</div>
         </div>
       
       
@@ -473,9 +414,9 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/Qt-Cmake/" title="Qt-Cmake">
+                      <a href="/posts/34982/" title="linux基础">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Qt-Cmake</span>
+                        <span class="hidden-mobile">linux基础</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -483,8 +424,8 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/" title="连接第三方库">
-                        <span class="hidden-mobile">连接第三方库</span>
+                      <a href="/posts/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" title="宽度优先搜索-BFS">
+                        <span class="hidden-mobile">宽度优先搜索-BFS</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

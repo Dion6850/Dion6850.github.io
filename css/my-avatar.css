@@ -1,4 +1,3 @@
-@import 'animate.css';
 .my-avatar:hover {
   transform: rotate(360deg); /* 鼠标悬停时旋转 */
 }

@@ -19,24 +19,24 @@
   <meta name="author" content="晓寒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基础的Cmake编译c&#x2F;c++语言工程操作">
+    <meta name="description" content="需要安装的库 jtv&#x2F;libpqxx: The official C++ client API for PostgreSQL. (github.com) libpqxx编译安装之前要求安装libpq 1sudo apt install libpq-dev 接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。 静态库 123.&#x2F;configure --pref">
 <meta property="og:type" content="article">
-<meta property="og:title" content="连接第三方库">
-<meta property="og:url" content="http://example.com/posts/%E9%93%BE%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/index.html">
+<meta property="og:title" content="C++与postgres连接">
+<meta property="og:url" content="http://example.com/posts/26452/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
-<meta property="og:description" content="基础的Cmake编译c&#x2F;c++语言工程操作">
+<meta property="og:description" content="需要安装的库 jtv&#x2F;libpqxx: The official C++ client API for PostgreSQL. (github.com) libpqxx编译安装之前要求安装libpq 1sudo apt install libpq-dev 接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。 静态库 123.&#x2F;configure --pref">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-24T10:10:15.000Z">
-<meta property="article:modified_time" content="2024-09-17T16:38:37.846Z">
+<meta property="article:published_time" content="2024-09-15T11:24:40.000Z">
+<meta property="article:modified_time" content="2024-09-18T15:11:17.004Z">
 <meta property="article:author" content="晓寒">
-<meta property="article:tag" content="CMake">
+<meta property="article:tag" content="技术文档">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>连接第三方库 - Xiaohan`s Blog</title>
+  <title>C++与postgres连接 - Xiaohan`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -177,6 +177,18 @@
           
           
             <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
@@ -213,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="连接第三方库"></span>
+            <span id="subtitle" data-typed-text="C++与postgres连接"></span>
           
         </div>
 
@@ -224,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-24 18:10" pubdate>
-          2022年12月24日 晚上
+        <time datetime="2024-09-15 19:24" pubdate>
+          2024年9月15日 晚上
         </time>
       </span>
     
@@ -236,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          329 字
+          291 字
         
       </span>
     
@@ -284,30 +296,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">连接第三方库</h1>
+            <h1 id="seo-header">C++与postgres连接</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="连接第三方库">连接第三方库</h1>
-<h2 id="cpp引用">cpp引用</h2>
-<p>对于想直接通过引用.cpp文件来使用文件中定义的函数，我们只需要通过命令</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#cmake为project的名称</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br></code></pre></td></tr></table></figure>
-<p>即可建立连接，这时只需在main.cpp添加</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">include<span class="hljs-string">&quot;longint.cpp&quot;</span><br></code></pre></td></tr></table></figure>
-<p>就可以使用“longint.cpp”中定义的函数和全局变量</p>
-<h2 id="头文件引用">头文件引用</h2>
-<p>头文件引用我们需要准备“longint.h”的头文件，并确保“longint.cpp”中的函数都在“longint.h”中声明。
-注意：如果声明全局变量请在longint.h中声明。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#先生成可执行文件</span><br><span class="hljs-keyword">add_executable</span>(cmake main.cpp longint.cpp)<br><span class="hljs-comment">#引入库</span><br><span class="hljs-keyword">include_directories</span>(<span class="hljs-keyword">include</span>)<br><span class="hljs-comment">#创建静态库(生成在build文件下)</span><br><span class="hljs-keyword">add_library</span>(TEST_LIBRARY longint.cpp)<br><span class="hljs-comment">#连接文件</span><br><span class="hljs-keyword">target_link_libraries</span>(cmake LINK_PUBLIC TEST_LIBRARY)<br></code></pre></td></tr></table></figure>
-<p>调用库</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment(lib,<span class="hljs-string">&quot;xx.lib&quot;</span>)</span><br></code></pre></td></tr></table></figure>
-<p>在"main.cpp"引入“longint.h”就可以使用其中的函数了。</p>
-<h1 id="二进制文件位置">二进制文件位置</h1>
-<p>设置单独的.exe，.dll，.lib在bin,lib目录</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">set</span>(dir <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_ARCHIVE_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_LIBRARY_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/lib&quot;</span>)  <br><br><span class="hljs-keyword">set</span>(CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="hljs-string">&quot;$&#123;dir&#125;/bin&quot;</span>)  <br></code></pre></td></tr></table></figure>
-<h1 id="一键连接">一键连接</h1>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">aux_source_directory</span>(./Src CPP_LIST) <span class="hljs-comment">#搜集所有在指定路径下的源文件的文件名，并将输出结果列表储存在指定的变量中。  </span><br><span class="hljs-keyword">aux_source_directory</span>(./Inc H_LIST)  <br><span class="hljs-comment"># FILE(GLOB SC_FILES &quot;./Src/*.cpp&quot; &quot;./Inc/*.h&quot;)  </span><br><span class="hljs-keyword">add_executable</span>(CIntCalculate <span class="hljs-variable">$&#123;CPP_LIST&#125;</span> <span class="hljs-variable">$&#123;H_LIST&#125;</span>)  <br><span class="hljs-keyword">include_directories</span>(./Inc)<br><span class="hljs-keyword">add_library</span>(LIB_TEXT <span class="hljs-variable">$&#123;CPP_LIST&#125;</span>)  <br><span class="hljs-keyword">target_link_libraries</span>(CIntCalculate LINK_PUBLIC <span class="hljs-variable">$&#123;LIB&#125;</span>)<br></code></pre></td></tr></table></figure>
+                <h2 id="需要安装的库">需要安装的库</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/jtv/libpqxx/tree/master">jtv/libpqxx: The
+official C++ client API for PostgreSQL. (github.com)</a></p>
+<p>libpqxx编译安装之前要求安装libpq</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install libpq-dev<br></code></pre></td></tr></table></figure>
+<p>接下来可以利用源代码编译出动态库或者静态库，一下操作默认当前目录为项目目录内。</p>
+<h3 id="静态库">静态库</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
+<h3 id="动态库">动态库</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake -DBUILD_SHARED_LIBS=ON ..<br>sudo make install DESTDIR=/home/... <span class="hljs-comment">#编译出的文件存放目录</span><br></code></pre></td></tr></table></figure>
+<p>使用Cmake构建程序示例。其中要注意的是C++一定要使用17以上的版本，否则编译会报错。</p>
+<p>CMakeLists.txt <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.22</span>)<br><span class="hljs-keyword">project</span>(template)<br><br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD <span class="hljs-number">17</span>)<br><br><span class="hljs-keyword">set</span>(PostgreSQL_ROOT /var/lib/postgresql/<span class="hljs-number">16</span>)<br><span class="hljs-keyword">include_directories</span> (<span class="hljs-variable">$&#123;PostgreSQL_INCLUDE_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/<span class="hljs-keyword">include</span>)<br><br><br><span class="hljs-keyword">set</span>(libpqxx_ROOT /home/zhang/libpqxx)<br><span class="hljs-keyword">link_directories</span>(<span class="hljs-variable">$&#123;PostgreSQL_LIBRARY_DIR&#125;</span> <span class="hljs-variable">$&#123;libpqxx_ROOT&#125;</span>/lib)<br><br><span class="hljs-keyword">find_package</span>(PostgreSQL REQUIRED)<br><br><br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> pqxx <span class="hljs-variable">$&#123;PostgreSQL_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure></p>
+<p>main.c <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;pqxx/pqxx&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; std::endl;<br>        std::string conn_string = <span class="hljs-string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;<br>        <span class="hljs-function">pqxx::connection <span class="hljs-title">conn</span><span class="hljs-params">(conn_string)</span></span>;<br>        <span class="hljs-function">pqxx::work <span class="hljs-title">txn</span><span class="hljs-params">(conn)</span></span>;<br>        txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="hljs-comment">//进入schema</span><br>        pqxx::result result = txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);<br>        txn.<span class="hljs-built_in">commit</span>();<br> <span class="hljs-comment">// Process results</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> row_it = result.<span class="hljs-built_in">begin</span>(); row_it != result.<span class="hljs-built_in">end</span>(); row_it++)&#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="hljs-number">0</span>].<span class="hljs-built_in">as</span>&lt;<span class="hljs-type">int</span>&gt;() &lt;&lt; std::endl;<br>        &#125;<br>        conn.<span class="hljs-built_in">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -331,7 +337,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/CMake/" class="category-chain-item">CMake</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/postgres%E5%AE%9E%E8%B7%B5/" class="category-chain-item">postgres实践</a>
   
   
 
@@ -348,7 +354,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/CMake/" class="print-no-link">#CMake</a>
+        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="print-no-link">#技术文档</a>
       
     </div>
   
@@ -360,8 +366,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>连接第三方库</div>
-      <div>http://example.com/posts/链接第三方库/</div>
+      <div>C++与postgres连接</div>
+      <div>http://example.com/posts/26452/</div>
     </div>
     <div class="license-meta">
       
@@ -373,7 +379,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月24日</div>
+          <div>2024年9月15日</div>
         </div>
       
       
@@ -405,9 +411,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/git/" title="git">
+                      <a href="/posts/35126/" title="使用PyCharm部署verilog一键仿真环境">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">git</span>
+                        <span class="hidden-mobile">使用PyCharm部署verilog一键仿真环境</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -415,8 +421,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/linux%E5%9F%BA%E7%A1%80/" title="linux基础">
-                        <span class="hidden-mobile">linux基础</span>
+                      <a href="/posts/46409/" title="STM32定时器中断">
+                        <span class="hidden-mobile">STM32定时器中断</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

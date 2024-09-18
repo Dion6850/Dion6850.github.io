@@ -19,27 +19,28 @@
   <meta name="author" content="晓寒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="STM32开发环境安装">
+    <meta name="description" content="选择verliog的仿真器 网上有很多仿真器供我们选择，像verilator，icarus等。 这里我使用的是icarus，其他仿真器配置类似。 环境搭建 这里只进行linux环境搭建的介绍，windows的一键下载应该没有人不会用吧。 icarus安装 1sudo apt install verilog python环境 我使用的是python3.10.x版本，其他版本的使用不做">
 <meta property="og:type" content="article">
-<meta property="og:title" content="keil和STM32的部署">
-<meta property="og:url" content="http://example.com/posts/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:title" content="使用PyCharm部署verilog一键仿真环境">
+<meta property="og:url" content="http://example.com/posts/35126/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
-<meta property="og:description" content="STM32开发环境安装">
+<meta property="og:description" content="选择verliog的仿真器 网上有很多仿真器供我们选择，像verilator，icarus等。 这里我使用的是icarus，其他仿真器配置类似。 环境搭建 这里只进行linux环境搭建的介绍，windows的一键下载应该没有人不会用吧。 icarus安装 1sudo apt install verilog python环境 我使用的是python3.10.x版本，其他版本的使用不做">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/posts/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/img20231025203844.png">
-<meta property="og:image" content="http://example.com/posts/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/img20231025203008.png">
-<meta property="article:published_time" content="2023-10-25T12:08:15.000Z">
-<meta property="article:modified_time" content="2024-09-17T16:39:46.323Z">
+<meta property="og:image" content="http://example.com/posts/35126/Pasted%20image%2020240918234145.png">
+<meta property="og:image" content="http://example.com/posts/35126/Pasted%20image%2020240919003023.png">
+<meta property="og:image" content="http://example.com/posts/35126/Pasted%20image%2020240919003041.png">
+<meta property="article:published_time" content="2024-09-18T15:17:00.000Z">
+<meta property="article:modified_time" content="2024-09-18T16:31:43.964Z">
 <meta property="article:author" content="晓寒">
-<meta property="article:tag" content="单片机入门">
+<meta property="article:tag" content="fpga">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/posts/keil%E5%92%8CSTM32%E7%9A%84%E9%83%A8%E7%BD%B2/img20231025203844.png">
+<meta name="twitter:image" content="http://example.com/posts/35126/Pasted%20image%2020240918234145.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>keil和STM32的部署 - Xiaohan`s Blog</title>
+  <title>使用PyCharm部署verilog一键仿真环境 - Xiaohan`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -292,6 +293,18 @@ mjx-container[display="true"] + br {
           
           
             <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
@@ -328,7 +341,7 @@ mjx-container[display="true"] + br {
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="keil和STM32的部署"></span>
+            <span id="subtitle" data-typed-text="使用PyCharm部署verilog一键仿真环境"></span>
           
         </div>
 
@@ -339,8 +352,8 @@ mjx-container[display="true"] + br {
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-25 20:08" pubdate>
-          2023年10月25日 晚上
+        <time datetime="2024-09-18 23:17" pubdate>
+          2024年9月18日 晚上
         </time>
       </span>
     
@@ -351,7 +364,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          295 字
+          734 字
         
       </span>
     
@@ -362,7 +375,7 @@ mjx-container[display="true"] + br {
         
         
         
-          3 分钟
+          7 分钟
         
       </span>
     
@@ -399,43 +412,47 @@ mjx-container[display="true"] + br {
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">keil和STM32的部署</h1>
+            <h1 id="seo-header">使用PyCharm部署verilog一键仿真环境</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="keil的部署">keil的部署</h1>
-<h2 id="软件下载">软件下载</h2>
-<p>百度网盘</p>
-<p>链接：https://pan.baidu.com/s/18IuTqzBIFJONlUo6LtuCWw?pwd=9e6n
-提取码：9e6n</p>
-<h2 id="使用说明">使用说明</h2>
-<p>先安装keil本体，基本上选个安装路径，一路下一步就行。</p>
-<p>使用管理员模式打开keil，点击file-&gt;license
-Management,看到如下界面（这是已经激活成功的）</p>
-<p><img src="img20231025203844.png" srcset="/img/loading.gif" lazyload></p>
-<p>打开Keygen.exe,将CID填入，将target设置为ARM,点击Generate，获得License
-Code。</p>
-<p><img src="img20231025203008.png" srcset="/img/loading.gif" lazyload></p>
-<p>回到keil的License Management界面，把License Code 填入，点击Add
-License，Product下面有MDK-ARM Plus为激活成功。</p>
-<h1 id="stm32cubemx的部署">STM32CubeMX的部署</h1>
-<h2 id="java环境安装">Java环境安装</h2>
-<p>1.安装jdk 由于STM32CubeMX是Java实现的，需要安装jdk环境。
-jdk官网下载链接：
-https://www.oracle.com/java/technologies/javase-downloads.html</p>
-<h2 id="软件下载-1">软件下载</h2>
-<p>理论上来说STM32CubeMX为免费软件，但是官网下载是要求注册的，我这里给出我的镜像地址，官网可以直接在网上下载，请自行选择。</p>
-<p>百度网盘</p>
-<p>V6.0.0</p>
-<p>链接：https://pan.baidu.com/s/1vChvLd9r6J1ioNnKridX5g?pwd=dqsu
-提取码：dqsu</p>
-<hr>
-<p>部分电脑无法兼容旧版，给出新版下载资源，但是新版部分配置和算法有BUG，旧版更稳定些。</p>
-<p>百度网盘</p>
-<p>V6.9.0</p>
-<p>链接：https://pan.baidu.com/s/1oLdQGMQ3ISI066AuKFmDBg?pwd=w27z
-提取码：w27z</p>
+                <h2 id="选择verliog的仿真器">选择verliog的仿真器</h2>
+<p>网上有很多仿真器供我们选择，像verilator，icarus等。
+这里我使用的是icarus，其他仿真器配置类似。</p>
+<h2 id="环境搭建">环境搭建</h2>
+<p>这里只进行linux环境搭建的介绍，windows的一键下载应该没有人不会用吧。</p>
+<h3 id="icarus安装">icarus安装</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install verilog<br></code></pre></td></tr></table></figure>
+<h3 id="python环境">python环境</h3>
+<p>我使用的是python3.10.x版本，其他版本的使用不做保证</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install cocotb-test<br>pip install pytest<br></code></pre></td></tr></table></figure>
+<p>这里构建主要依赖于cocotb-test包，如果想要详细了解，这里是它的<a target="_blank" rel="noopener" href="https://pypi.org/project/cocotb-test/">文档</a></p>
+<h2 id="pycharm设置">PyCharm设置</h2>
+<h3 id="推荐的插件">推荐的插件</h3>
+<p>编程的高亮对于程序员来说直接影响编程的体验，推荐使用免费插件verilog
+support，当然有钱购买官方的systemverilog可以获得更好的体验。</p>
+<h3 id="文件结构">文件结构</h3>
+<p>正常创建项目以后，我们先确定文件的存放路径。</p>
+<p>我将用于module都放置于项目目录下的src文件夹中，顶层modlule文件放置于wrapper文件夹中。使用python来写testbench，放在test文件中，我们最后生成的结果记录和vcd波形文件都会生成在test文件夹中。</p>
+<p><strong>注意：这里的顶层文件其实只是将moudule相应的接口引出</strong></p>
+<p>示例</p>
+<p><img src="Pasted%20image%2020240918234145.png" srcset="/img/loading.gif" lazyload></p>
+<p>这里提供一个加法器的verilog程序作为例子</p>
+<h4 id="add.v">add.v</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-comment">// 四位全加器</span><br><span class="hljs-keyword">module</span> adder4(cout,sum,ina,inb,cin);<br>	<span class="hljs-keyword">output</span>[<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] sum;<br>	<span class="hljs-keyword">output</span> cout;<br>	<span class="hljs-keyword">input</span>[<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] ina,inb;<br>	<span class="hljs-keyword">input</span> cin;<br>	<span class="hljs-keyword">assign</span> {cout,sum}=ina+inb;<br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
+<h4 id="add_wrapper.v">add_wrapper.v</h4>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-meta">`<span class="hljs-keyword">timescale</span> 1ns/1ns</span><br><br><span class="hljs-keyword">module</span> add_wrapper #(<br>    <span class="hljs-keyword">parameter</span> digit4 = <span class="hljs-number">4</span><br>)(<br>    <span class="hljs-keyword">output</span> [digit4-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] res,<br>    <span class="hljs-keyword">output</span> cout,<br>    <span class="hljs-keyword">input</span> [digit4-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] a,b,<br>    <span class="hljs-keyword">input</span> cin<br>);<br><br>adder4 adder (<br>    <span class="hljs-variable">.sum</span>(res),<br>    <span class="hljs-variable">.cout</span>(cout),<br>    <span class="hljs-variable">.ina</span>(a),<br>    <span class="hljs-variable">.inb</span>(b),<br>    <span class="hljs-variable">.cin</span>(cin)<br>);<br><span class="hljs-keyword">initial</span> <span class="hljs-keyword">begin</span><br>    <span class="hljs-built_in">$dumpfile</span>(<span class="hljs-string">"vcd/async_add.vcd"</span>); <span class="hljs-comment">// 把当前和子模块的所有数据波形保存到该文件中</span><br>    <span class="hljs-built_in">$dumpvars</span>();<br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
+<h4 id="async_add_wrapper.py">async_add_wrapper.py</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> logging<br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-keyword">import</span> pytest<br><span class="hljs-keyword">import</span> cocotb_test.simulator<br><br><span class="hljs-keyword">import</span> cocotb<br><span class="hljs-keyword">from</span> cocotb.clock <span class="hljs-keyword">import</span> Clock<br><span class="hljs-keyword">from</span> cocotb.triggers <span class="hljs-keyword">import</span> RisingEdge, FallingEdge, Timer<br><span class="hljs-keyword">from</span> cocotb.utils <span class="hljs-keyword">import</span> get_sim_steps<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">async_add</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,dut</span>):<br>        self.dut=dut<br>        self.log=logging.getLogger(<span class="hljs-string">"cocotb.tb"</span>)<br>        self.log.setLevel(logging.INFO)<br>        self.dut.a.setimmediatevalue(<span class="hljs-number">0</span>)<br>        self.dut.b.setimmediatevalue(<span class="hljs-number">0</span>)<br>        self.dut.cin.setimmediatevalue(<span class="hljs-number">0</span>)<br>        self.log.info(<span class="hljs-string">"Starting asynchronous add test..."</span>)<br>        cocotb.start_soon(Clock(dut.cin,<span class="hljs-number">2</span>,units=<span class="hljs-string">"ns"</span>).start())<br><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">ichange</span>(<span class="hljs-params">self</span>):<br>        self.log.info(<span class="hljs-string">"Running ichange..."</span>)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">16</span>):<br>            <span class="hljs-keyword">await</span> RisingEdge(self.dut.cin)<br>            self.dut.a.setimmediatevalue(i)<br><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">jchange</span>(<span class="hljs-params">self</span>):<br>        self.log.info(<span class="hljs-string">"Running jchange..."</span>)<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">16</span>):<br>            <span class="hljs-keyword">await</span> RisingEdge(self.dut.cin)<br>            self.dut.b.setimmediatevalue(j)<br><span class="hljs-meta">@cocotb.test()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">run_test</span>(<span class="hljs-params">dut</span>):<br>    async_add_tb= async_add(dut)<br>    <span class="hljs-keyword">await</span> async_add_tb.ichange()<br>    <span class="hljs-keyword">await</span> async_add_tb.jchange()<br></code></pre></td></tr></table></figure>
+<h4 id="build.py">build.py</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> cocotb_test.simulator <span class="hljs-keyword">import</span> run<br><span class="hljs-keyword">import</span> pytest<br><span class="hljs-keyword">import</span> os<br><br>project_dir = os.path.abspath(<span class="hljs-string">"."</span>)<br>test_path = os.path.join(project_dir, <span class="hljs-string">"test"</span>)<br>src_path = os.path.join(project_dir, <span class="hljs-string">"src"</span>)<br>wrapper_path = os.path.join(project_dir, <span class="hljs-string">"wrapper"</span>)<br>parameters = {}<br><br><br><span class="hljs-meta">@pytest.mark.skipif(<span class="hljs-params">os.getenv(<span class="hljs-params"><span class="hljs-string">"SIM"</span></span>) == <span class="hljs-string">"ghdl"</span>, reason=<span class="hljs-string">"Verilog not suported"</span></span>)</span><br><span class="hljs-comment"># @pytest.mark.parametrize("parameters", [</span><br><span class="hljs-comment">#     {"DATA_WIDTH":"8", "ADDR_WIDTH":"8"}</span><br><span class="hljs-comment"># ])</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">async_bubblesort_verilog_test</span>(<span class="hljs-params">parameters</span>):<br>	<span class="hljs-comment"># 参与编译的所有文件路径要写入verilog_source</span><br>    verilog_sources = [<br>        os.path.join(wrapper_path, <span class="hljs-string">"add_wrapper.v"</span>),<br>        os.path.join(src_path, <span class="hljs-string">"add.v"</span>)<br>    ]<br><br>    sim_build = os.path.join(test_path, <span class="hljs-string">"sim_build"</span>, <span class="hljs-string">"_"</span>.join((<span class="hljs-string">"{}={}"</span>.<span class="hljs-built_in">format</span>(*i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> parameters.items())))<br>	<span class="hljs-comment"># toplevel和module根据项目修改</span><br>    run(<br>        python_search = [test_path],<br>        verilog_sources = verilog_sources,<br>        toplevel = <span class="hljs-string">"add_wrapper"</span>,<br>        module = <span class="hljs-string">"async_add_tb"</span>,<br>        <span class="hljs-comment"># parameters = parameters,</span><br>        <span class="hljs-comment"># extra_env = parameters,</span><br>        waves = <span class="hljs-literal">True</span>,<br>        sim_build = sim_build<br>    )  <span class="hljs-comment"># sources  # top level HDL  # name of cocotb test module</span><br><br><br><span class="hljs-comment"># @pytest.mark.skipif(os.getenv("SIM") == "verilator", reason="VHDL not suported")</span><br><span class="hljs-comment"># @pytest.mark.skipif(os.getenv("SIM") == "icarus", reason="VHDL not suported")</span><br><span class="hljs-comment"># def test_dff_vhdl():</span><br><span class="hljs-comment">#     run(vhdl_sources=[os.path.join(tests_dir, "dff.vhdl")], toplevel="dff_test_vhdl", module="dff_cocotb", toplevel_lang="vhdl")</span><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    async_bubblesort_verilog_test(parameters)<br></code></pre></td></tr></table></figure>
+<p>程序运行默认的verilog仿真器是iverilog，要更改需要在.bashrc上增加环境变量SIM=icarus，然后运行程序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 build.py<br></code></pre></td></tr></table></figure>
+<p>对于PyCharm的终端，用户的环境变量无法被读出，因此我们要创建一个配置去执行我们的程序。</p>
+<p><img src="Pasted%20image%2020240919003023.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="Pasted%20image%2020240919003041.png" srcset="/img/loading.gif" lazyload></p>
+<p>运行之后会发现波形文件被生成在sim_build目录中。</p>
 
                 
               </div>
@@ -454,12 +471,12 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="category-chain-item">嵌入式</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32/" class="category-chain-item">STM32</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/fpga/" class="category-chain-item">fpga</a>
   
   
 
@@ -476,7 +493,7 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA%E5%85%A5%E9%97%A8/" class="print-no-link">#单片机入门</a>
+        <a href="/tags/fpga/" class="print-no-link">#fpga</a>
       
     </div>
   
@@ -488,8 +505,8 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>keil和STM32的部署</div>
-      <div>http://example.com/posts/keil和STM32的部署/</div>
+      <div>使用PyCharm部署verilog一键仿真环境</div>
+      <div>http://example.com/posts/35126/</div>
     </div>
     <div class="license-meta">
       
@@ -501,7 +518,7 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月25日</div>
+          <div>2024年9月18日</div>
         </div>
       
       
@@ -533,18 +550,12 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/STM32%E6%B5%81%E6%B0%B4%E7%81%AF/" title="STM32流水灯">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">STM32流水灯</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/Qt-Cmake/" title="Qt-Cmake">
-                        <span class="hidden-mobile">Qt-Cmake</span>
+                      <a href="/posts/26452/" title="C++与postgres连接">
+                        <span class="hidden-mobile">C++与postgres连接</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

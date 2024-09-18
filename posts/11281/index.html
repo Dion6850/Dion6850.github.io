@@ -19,26 +19,27 @@
   <meta name="author" content="晓寒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="深度优先搜索的解析与实践">
+    <meta name="description" content="Qt-Cmake配置，设置用户构建目标，生成二进制动态资源，i18n国际化配置等">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度优先搜索-DFS">
-<meta property="og:url" content="http://example.com/posts/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/index.html">
+<meta property="og:title" content="Qt-Cmake">
+<meta property="og:url" content="http://example.com/posts/11281/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
-<meta property="og:description" content="深度优先搜索的解析与实践">
+<meta property="og:description" content="Qt-Cmake配置，设置用户构建目标，生成二进制动态资源，i18n国际化配置等">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/posts/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/Snipaste_2022-12-13_23-49-18.png">
-<meta property="article:published_time" content="2022-11-13T14:52:35.000Z">
-<meta property="article:modified_time" content="2024-09-17T16:38:25.552Z">
+<meta property="og:image" content="http://example.com/posts/11281/Pasted_image_20230414155659.png">
+<meta property="article:published_time" content="2023-04-24T10:10:15.000Z">
+<meta property="article:modified_time" content="2024-09-18T15:11:17.003Z">
 <meta property="article:author" content="晓寒">
-<meta property="article:tag" content="算法学习">
+<meta property="article:tag" content="CMake">
+<meta property="article:tag" content="Qt">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/posts/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/Snipaste_2022-12-13_23-49-18.png">
+<meta name="twitter:image" content="http://example.com/posts/11281/Pasted_image_20230414155659.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>深度优先搜索-DFS - Xiaohan`s Blog</title>
+  <title>Qt-Cmake - Xiaohan`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +228,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="深度优先搜索-DFS"></span>
+            <span id="subtitle" data-typed-text="Qt-Cmake"></span>
           
         </div>
 
@@ -238,8 +239,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-13 22:52" pubdate>
-          2022年11月13日 晚上
+        <time datetime="2023-04-24 18:10" pubdate>
+          2023年4月24日 晚上
         </time>
       </span>
     
@@ -250,7 +251,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          770 字
+          615 字
         
       </span>
     
@@ -261,7 +262,7 @@
         
         
         
-          7 分钟
+          6 分钟
         
       </span>
     
@@ -298,25 +299,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">深度优先搜索-DFS</h1>
+            <h1 id="seo-header">Qt-Cmake</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="栈">栈</h1>
-<h2 id="特点">特点</h2>
-<p>栈是后进先出（Last In First Out）的线性表，简称LIFO表</p>
-<p><img src="Snipaste_2022-12-13_23-49-18.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="例子">例子</h2>
-<h3 id="迷宫最短路问题">迷宫最短路问题</h3>
-<p>这个问题实际上使用DFS和BFS都可以实现,而且就找最短路来说，队列的时间复杂度更小，但是为了符合回溯这个主题，我们尝试使用DFS来做。</p>
-<h4 id="原理">原理</h4>
-<pre><code class="hljs">每走一次就入栈一次，每一次都走到无路可走或走到终点时退栈，找下一条路。</code></pre>
-<h4 id="代码">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;windows.h&gt;</span></span><br><span class="hljs-type">char</span> ch[<span class="hljs-number">10</span>][<span class="hljs-number">10</span>];<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pos</span>&#123;</span><br>    <span class="hljs-type">int</span> dir;<br>    <span class="hljs-type">int</span> row;<br>    <span class="hljs-type">int</span> col;<br>&#125;poss[<span class="hljs-number">101</span>];<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pos</span> <span class="hljs-title">res</span>[101];</span><br><span class="hljs-comment">//入栈</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">forward</span><span class="hljs-params">(<span class="hljs-type">int</span>* row, <span class="hljs-type">int</span>* col, <span class="hljs-type">int</span>* type)</span><br>&#123;<br>	<span class="hljs-comment">//这里运用了二进制减少变量</span><br>    <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">1</span>)ch[*row][++ * col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">2</span>)ch[++ * row][*col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">4</span>)ch[*row][-- * col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">4</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*type &amp; <span class="hljs-number">8</span>)ch[-- * row][*col] = <span class="hljs-string">&#x27;@&#x27;</span>, * type ^= <span class="hljs-number">8</span>;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">print</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; j++) &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c &quot;</span>, ch[i][j]);<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">judge</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> col,<span class="hljs-type">int</span> tmp)</span><br>&#123;<br>    <span class="hljs-type">int</span> f = <span class="hljs-number">0</span>;<br>    poss[tmp].col = col;<br>    poss[tmp].row = row;<br>    <span class="hljs-keyword">if</span> (col + <span class="hljs-number">1</span> &lt; <span class="hljs-number">10</span> &amp;&amp; ch[row][col + <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">1</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (col - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; ch[row][col - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">4</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (row + <span class="hljs-number">1</span> &lt; <span class="hljs-number">10</span> &amp;&amp; ch[row + <span class="hljs-number">1</span>][col] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">2</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (row - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; ch[row - <span class="hljs-number">1</span>][col] == <span class="hljs-string">&#x27; &#x27;</span>)poss[tmp].dir += <span class="hljs-number">8</span>, f = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span> f;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-type">int</span> startr, startc;<br>    <span class="hljs-type">int</span> endr, endc;<br>    <span class="hljs-type">int</span> min=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; j++) &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%c%*c&quot;</span>, &amp;ch[i][j]);<br>            <span class="hljs-comment">//起点</span><br>            <span class="hljs-keyword">if</span> (ch[i][j] == <span class="hljs-string">&#x27;@&#x27;</span>) &#123;<br>                startr = i; startc = j;<br>            &#125;<br>            <span class="hljs-comment">//终点</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ch[i][j] == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                endr = i; endc = j;<br>                ch[i][j] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>    print();<br>    Sleep(<span class="hljs-number">500</span>);<br>    <span class="hljs-type">int</span> tmp = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-type">int</span> f = judge(startr, startc, tmp);<br>        system(<span class="hljs-string">&quot;cls&quot;</span>);<br>        forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>        print();<br>        Sleep(<span class="hljs-number">500</span>);<br>        <span class="hljs-keyword">if</span> (startr == endr &amp;&amp; startc == endc) &#123;<br>            <span class="hljs-comment">//记录最短路</span><br>            <span class="hljs-keyword">if</span> (min == <span class="hljs-number">0</span>) &#123;<br>                min = tmp + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>; k &lt; min; k++)res[k] = poss[k];<br>                res[min].row = endr;<br>                res[min].col = endc;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (min &gt; tmp)&#123;<br>	            min = tmp+<span class="hljs-number">1</span>;<br>	            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>; k &lt; min; k++)res[k] = poss[k];<br>                res[min].row = endr;<br>                res[min].col = endc;<br>            &#125;<br>            ch[endr][endc] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            <span class="hljs-keyword">while</span> (poss[tmp].dir == <span class="hljs-number">0</span> &amp;&amp; tmp &gt;= <span class="hljs-number">0</span>)&#123; <br>                ch[poss[tmp].row][poss[tmp].col] = <span class="hljs-string">&#x27; &#x27;</span>;<br>                tmp--;<br>                system(<span class="hljs-string">&quot;cls&quot;</span>);<br>                print();<br>                Sleep(<span class="hljs-number">100</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (tmp &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">//输出最短路</span><br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= min; i++) &#123;<br>			        ch[res[i].row][res[i].col] = <span class="hljs-string">&#x27;@&#x27;</span>;<br>			    &#125;<br>			    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>			    print();<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,min);<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            startr = poss[tmp].row;<br>            startc = poss[tmp].col;<br>            forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">500</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (f == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">while</span> (poss[tmp].dir == <span class="hljs-number">0</span> &amp;&amp; tmp &gt;= <span class="hljs-number">0</span>)&#123;<br>            ch[poss[tmp].row][poss[tmp].col] = <span class="hljs-string">&#x27; &#x27;</span>;<br>            tmp--;<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">100</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (tmp &lt; <span class="hljs-number">0</span>) &#123;<br>	            <span class="hljs-comment">//输出最短路</span><br>	            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= min; i++) &#123;<br>			        ch[res[i].row][res[i].col] = <span class="hljs-string">&#x27;@&#x27;</span>;<br>			    &#125;<br>			    system(<span class="hljs-string">&quot;cls&quot;</span>);<br>			    print();<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,min);<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            startr = poss[tmp].row;<br>            startc = poss[tmp].col;<br>            forward(&amp;startr, &amp;startc, &amp;poss[tmp].dir);<br>            system(<span class="hljs-string">&quot;cls&quot;</span>);<br>            print();<br>            Sleep(<span class="hljs-number">500</span>);<br>        &#125;<br>        tmp++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h4 id="输入实例">输入实例</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs input"># # #   # #   # # #<br># @               #<br># #   # # # # #   #<br>#                 #<br># #   # # #   #   #<br># #   #   #   #   #<br># #   #   #   #   #<br># #       #   #   #<br># # # # # #   #   #<br># # # # # # * #   #<br></code></pre></td></tr></table></figure>
-<p>其实可以发现上面的很多代码都是重复的，主要是因为我们不是只要找到一条通向终点的路，而是要找到最短路，所以我们要将所有的路都走一遍。</p>
+                <h1 id="使用i18n国际化支持">使用I18N国际化支持</h1>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs Cmake"><span class="hljs-comment"># set是可以用前面的标识来表示后面的数据，可以类比一下c的define</span><br><span class="hljs-keyword">set</span>(QT_VERSION <span class="hljs-number">5</span>)  <br><span class="hljs-keyword">set</span>(REQUIRED_LIBS Core Gui Widgets)  <br><span class="hljs-keyword">set</span>(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets) <br><span class="hljs-comment"># 填lupdate和lrelease的路径</span><br><span class="hljs-keyword">set</span>(LUPDATE_PATH <span class="hljs-string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lupdate.exe&quot;</span>)  <br><span class="hljs-keyword">set</span>(LRELEASE_PATH <span class="hljs-string">&quot;E:/Qt/5.15.2/msvc2019_64/bin/lrelease.exe&quot;</span>)  <br><span class="hljs-keyword">set</span>(TS_FILES  <br>        <span class="hljs-variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/zh_CN.ts  <br>        <span class="hljs-variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/lang/ja_JP.ts)<br><span class="hljs-comment"># 这里不使用LinguistTools</span><br><span class="hljs-keyword">find_package</span>(Qt<span class="hljs-variable">$&#123;QT_VERSION&#125;</span> COMPONENTS <span class="hljs-variable">$&#123;REQUIRED_LIBS&#125;</span> REQUIRED)<br><span class="hljs-comment"># 创建生成ts文件和qm文件的目标  </span><br><span class="hljs-comment"># ALL指定加入make all  </span><br><span class="hljs-keyword">add_custom_target</span>(update_all_ts_files ALL)  <br><span class="hljs-keyword">add_custom_target</span>(create_all_qm_files ALL)<br><span class="hljs-comment"># 对每一个ts文件进行操作</span><br><span class="hljs-keyword">foreach</span>(TS_FILE <span class="hljs-variable">$&#123;TS_FILES&#125;</span>)  <br>    <span class="hljs-comment"># 把zh_CN.ts中的zh_CN提取出来  </span><br>    <span class="hljs-keyword">get_filename_component</span>(I18N_NAME <span class="hljs-variable">$&#123;TS_FILE&#125;</span> NAME_WE)  <br>    <span class="hljs-keyword">set</span>(TS_TARGET_NAME <span class="hljs-string">&quot;update_ts_file_$&#123;I18N_NAME&#125;&quot;</span>)  <br>    <span class="hljs-keyword">add_custom_target</span>(<span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>  <br>            <span class="hljs-keyword">COMMAND</span> <span class="hljs-variable">$&#123;LUPDATE_PATH&#125;</span> <span class="hljs-variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span> -ts <span class="hljs-variable">$&#123;TS_FILE&#125;</span>  <br>            VERBATIM)  <br>    <span class="hljs-comment"># 将update_ts_file_&lt;NAME&gt;添加为update_all_ts_files的依赖，下同  </span><br>    <span class="hljs-keyword">add_dependencies</span>(update_all_ts_files <span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>)  <br>    <span class="hljs-keyword">set</span>(QM_TARGET_NAME <span class="hljs-string">&quot;create_qm_file_$&#123;I18N_NAME&#125;&quot;</span>)  <br>    <span class="hljs-keyword">set</span>(QM_FILE <span class="hljs-string">&quot;$&#123;CMAKE_CURRENT_BINARY_DIR&#125;/$&#123;I18N_NAME&#125;.qm&quot;</span>)  <br>    <span class="hljs-keyword">add_custom_target</span>(<span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span>  <br>            <span class="hljs-keyword">COMMAND</span> <span class="hljs-variable">$&#123;LRELEASE_PATH&#125;</span> <span class="hljs-variable">$&#123;TS_FILE&#125;</span> -qm <span class="hljs-variable">$&#123;QM_FILE&#125;</span>  <br>            VERBATIM)  <br>    <span class="hljs-comment"># 因为得先有ts文件才能生成qm文件，所以把构建ts文件的目标作为自己的依赖  </span><br>    <span class="hljs-keyword">add_dependencies</span>(<span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span> <span class="hljs-variable">$&#123;TS_TARGET_NAME&#125;</span>)  <br>    <span class="hljs-keyword">add_dependencies</span>(create_all_qm_files <span class="hljs-variable">$&#123;QM_TARGET_NAME&#125;</span>)  <br><span class="hljs-keyword">endforeach</span>()<br><span class="hljs-comment"># 将.qrc文件拷贝到编译目录</span><br><span class="hljs-keyword">configure_file</span>(translations.qrc <span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span> COPYONLY)<br> <br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp <span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br><span class="hljs-comment"># 因为qrc依赖qm文件，所以需要先让qm文件创建完成</span><br><span class="hljs-keyword">add_dependencies</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> create_all_qm_files)<br></code></pre></td></tr></table></figure>
+<p>这里的translations.qrc代码格式如下(也可使用rcc自动生成)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs qrc">&lt;RCC&gt;  <br>    &lt;qresource&gt;  <br>        &lt;file&gt;zh_CN.qm&lt;/file&gt;  <br>        &lt;file&gt;ja_JP.qm&lt;/file&gt;  <br>    &lt;/qresource&gt;  <br>&lt;/RCC&gt;<br></code></pre></td></tr></table></figure>
+<p>以上代码可以更改lupdate和lrelease的路径后直接使用。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_executable</span>(\<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> main.cpp\<span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br><span class="hljs-comment"># 将上面代码改为下面代码可以去掉运行时的命令行</span><br><span class="hljs-keyword">add_executable</span>(\<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> WIN32 main.cpp\<span class="hljs-variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/translations.qrc)<br></code></pre></td></tr></table></figure>
+<p>qt中的使用： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++">QTranslator trans;  <br><span class="hljs-keyword">if</span> (trans.<span class="hljs-built_in">load</span>(<span class="hljs-string">&quot;:/ja_JP.qm&quot;</span>)) &#123;  <br>    QCoreApplication::<span class="hljs-built_in">installTranslator</span>(&amp;trans);  <br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>也可以使用QT自带的翻译: 在Qt的安装目录
+C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
+中有名为qt_zh_CN.qm翻译文件，QLineEdit等通过加载该翻译文件就能实现右键中文菜单，如下所示：</p>
+<p>QApplication a(argc, argv);<br />
+ <br />
+//加载Qt中的资源文件，使Qt显示中文（包括QMessageBox、QLineEdit右键菜单等）<br />
+ </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cobol">QTranslator translator;	  translator.load(&quot;:/translations/qt_zh_CN.qm&quot;);<br>a.installTranslator(&amp;translator);<br></code></pre></td></tr></table></figure>
+<p><img src="Pasted_image_20230414155659.png" srcset="/img/loading.gif" lazyload /></p>
+<p>这个图很好地解释了使用qrc来实现实际上是将资源直接集成到exe中了，这里提供用rcc的外部动态库</p>
+<h1 id="add_coustom_command使用">add_coustom_command使用</h1>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_custom_command</span>(OUTPUT <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-keyword">COMMAND</span> touch <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-comment"># Display the given message before the commands are executed at build time</span><br><br>COMMENT <span class="hljs-string">&quot;Creating $&#123;TEST_FILE&#125;&quot;</span><br><br><span class="hljs-comment"># to make quotes printable,for example</span><br><br>VERBATIM<br>)<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -340,7 +346,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/C%E8%AF%AD%E8%A8%80/" class="category-chain-item">C语言</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/CMake/" class="category-chain-item">CMake</a>
   
   
 
@@ -357,7 +363,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="print-no-link">#算法学习</a>
+        <a href="/tags/CMake/" class="print-no-link">#CMake</a>
+      
+        <a href="/tags/Qt/" class="print-no-link">#Qt</a>
       
     </div>
   
@@ -369,8 +377,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>深度优先搜索-DFS</div>
-      <div>http://example.com/posts/深度优先搜索/</div>
+      <div>Qt-Cmake</div>
+      <div>http://example.com/posts/11281/</div>
     </div>
     <div class="license-meta">
       
@@ -382,7 +390,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月13日</div>
+          <div>2023年4月24日</div>
         </div>
       
       
@@ -414,9 +422,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/" title="KMP字符串匹配">
+                      <a href="/posts/38785/" title="keil和STM32的部署">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">KMP字符串匹配</span>
+                        <span class="hidden-mobile">keil和STM32的部署</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -424,8 +432,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E5%8D%95%E8%B0%83%E6%A0%88/" title="单调栈">
-                        <span class="hidden-mobile">单调栈</span>
+                      <a href="/posts/43167/" title="git">
+                        <span class="hidden-mobile">git</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
