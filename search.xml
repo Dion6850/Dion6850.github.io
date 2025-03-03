@@ -1511,4 +1511,50 @@ alt="结果" />
         <tag>算法学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>WSL内核模块编译与安装</title>
+    <url>/posts/59779/</url>
+    <content><![CDATA[<h2 id="源码下载">源码下载</h2>
+<p>在<a
+href="https://github.com/microsoft/WSL2-Linux-Kernel">microsoft/WSL2-Linux-Kernel:
+The source for the Linux kernel used in Windows Subsystem for Linux 2
+(WSL2)</a>下载源码</p>
+<p>选择你需要的内核版本</p>
+<h2 id="源码编译">源码编译</h2>
+<p>编译工具安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo apt update<br>sudo apt install build-essential flex bison dwarves libssl-dev libelf-dev bc pkg-config<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> Microsoft/config-wsl .config <br>make -j$(<span class="hljs-built_in">nproc</span>) <br>make modules -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="源码安装">源码安装</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo make modules_install -j$(<span class="hljs-built_in">nproc</span>) <br>sudo make install -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+<p>检查目录<code>\lib\modules\$(uname -r)\build</code>是否存在</p>
+<p>若该目录存在，则代表该内核的安装完毕</p>
+<h2 id="切换内核">切换内核</h2>
+<p>进入源码
+复制<code>arch/x86_64/boot/bzImage</code>放入windows目录下</p>
+<p>例子 <figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> <span class="hljs-built_in">arch</span>/x86_64/boot/bzImage /mnt/d/bzImage<br></code></pre></td></tr></table></figure></p>
+<p>在用户目录下的.wslconig文件中输入（若没有则可以自己创建）
+<figure class="highlight ini"><table><tr><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[wsl2]</span><br><span class="hljs-attr">kernel</span>=D:\\bzImage<br></code></pre></td></tr></table></figure></p>
+<p>重启wsl</p>
+<p>在windows命令行中输入<code>wsl --shutdown</code>关机再次打开wsl</p>
+<p>使用<code>uname -r</code>查看新内核</p>
+<h2 id="模块编译">模块编译</h2>
+<p>这里给出测试案例</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs C"><span class="hljs-comment">//myhello.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;linux/init.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;linux/module.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;linux/kernel.h&gt;</span></span><br><br><span class="hljs-type">static</span> <span class="hljs-type">int</span> __init <span class="hljs-title function_">hello_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>&#123;<br>        printk(KERN_ALERT<span class="hljs-string">&quot;hello,world\n&quot;</span>);<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-type">static</span> <span class="hljs-type">void</span> __exit <span class="hljs-title function_">hello_exit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>&#123;<br>        printk(KERN_ALERT<span class="hljs-string">&quot;goodbye\n&quot;</span>);<br>&#125;<br>module_init(hello_init);<br>module_exit(hello_exit);<br>MODULE_LICENSE(<span class="hljs-string">&quot;GPL&quot;</span>);<br>~                        <br></code></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><code class="hljs makefile">obj-m :=hello.o<br>hello-objs :=myhello.o<br>KDIR :=/lib/modules/<span class="hljs-variable">$(<span class="hljs-built_in">shell</span> uname -r)</span>/build<br>PWD := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> pwd)</span><br><span class="hljs-section">default:</span><br>        make -C <span class="hljs-variable">$(KDIR)</span> M=<span class="hljs-variable">$(PWD)</span> modules<br><span class="hljs-section">clean:</span><br>        make -C <span class="hljs-variable">$(KDIR)</span> M=<span class="hljs-variable">$(PWD)</span> clean<br></code></pre></td></tr></table></figure>
+<h3 id="装载模块与卸载模块">装载模块与卸载模块</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo insmod hello.ko<br>sudo rmmod hello<br></code></pre></td></tr></table></figure>
+<h3 id="查看输出">查看输出</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo dmesg<br></code></pre></td></tr></table></figure>
+<p>结果如下： <img src="Pasted%20image%2020250303194810.png" srcset="/img/loading.gif" lazyload /></p>
+<p>至此就可以愉快地在wsl下<del>完成操作系统实践的作业啦</del>进行内核模块编写啦</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+        <category>WSL</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>WSL</tag>
+      </tags>
+  </entry>
 </search>
