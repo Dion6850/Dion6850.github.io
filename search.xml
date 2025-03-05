@@ -36,7 +36,7 @@ href="https://github.com/pgaskin/kepubify/releases/tag/v4.0.4">Release
 v4.0.4 · pgaskin/kepubify (github.com)</a>中选择合适的版本</p>
 ]]></content>
       <categories>
-        <category>实用</category>
+        <category>项目部署</category>
       </categories>
       <tags>
         <tag>实用</tag>
@@ -66,8 +66,7 @@ C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
 <figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs Cmake"><span class="hljs-keyword">add_custom_command</span>(OUTPUT <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-keyword">COMMAND</span> touch <span class="hljs-variable">$&#123;TEST_FILE&#125;</span><br><br><span class="hljs-comment"># Display the given message before the commands are executed at build time</span><br><br>COMMENT <span class="hljs-string">&quot;Creating $&#123;TEST_FILE&#125;&quot;</span><br><br><span class="hljs-comment"># to make quotes printable,for example</span><br><br>VERBATIM<br>)<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>CMake</category>
+        <category>工具集锦</category>
       </categories>
       <tags>
         <tag>CMake</tag>
@@ -98,8 +97,7 @@ C:\Qt\Qt5.7.0VS2015\5.7\msvc2015\translations
 <figure class="highlight cmake"><table><tr><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">aux_source_directory</span>(./Src CPP_LIST) <span class="hljs-comment">#搜集所有在指定路径下的源文件的文件名，并将输出结果列表储存在指定的变量中。  </span><br><span class="hljs-keyword">aux_source_directory</span>(./Inc H_LIST)  <br><span class="hljs-comment"># FILE(GLOB SC_FILES &quot;./Src/*.cpp&quot; &quot;./Inc/*.h&quot;)  </span><br><span class="hljs-keyword">add_executable</span>(CIntCalculate <span class="hljs-variable">$&#123;CPP_LIST&#125;</span> <span class="hljs-variable">$&#123;H_LIST&#125;</span>)  <br><span class="hljs-keyword">include_directories</span>(./Inc)<br><span class="hljs-keyword">add_library</span>(LIB_TEXT <span class="hljs-variable">$&#123;CPP_LIST&#125;</span>)  <br><span class="hljs-keyword">target_link_libraries</span>(CIntCalculate LINK_PUBLIC <span class="hljs-variable">$&#123;LIB&#125;</span>)<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>CMake</category>
+        <category>工具集锦</category>
       </categories>
       <tags>
         <tag>CMake</tag>
@@ -209,8 +207,7 @@ Transmission 无线传输 - 洛谷 | 计算机科学教育新生态
 <p>代码如下： <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-type">char</span> s2[<span class="hljs-number">1000006</span>];<br><span class="hljs-type">int</span> p[<span class="hljs-number">1000006</span>];<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>{<br>    <span class="hljs-type">int</span> m;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%s"</span>,&amp;m,s2+<span class="hljs-number">1</span>);<br>    <span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i&lt;=m;i++){<br>        <span class="hljs-keyword">while</span>(j&amp;&amp;s2[i]!=s2[j+<span class="hljs-number">1</span>])j=p[j];<br>        <span class="hljs-keyword">if</span>(s2[i]==s2[j+<span class="hljs-number">1</span>])j++;<br>        p[i]=j;<br>    }<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,m-p[m]);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>C语言</category>
+        <category>算法专栏</category>
       </categories>
       <tags>
         <tag>算法学习</tag>
@@ -270,8 +267,7 @@ Preemptible Kernel(Real-Time)</p>
 <p><img src="Pasted%20image%2020241206212121.png" srcset="/img/loading.gif" lazyload /></p>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>ethercat</category>
+        <category>ethercat专栏</category>
       </categories>
       <tags>
         <tag>ethercat</tag>
@@ -300,8 +296,7 @@ RT补丁可以参照同分类下另一篇文章。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">cp</span> -r etherlab/ /opt  <br>sudo <span class="hljs-built_in">ln</span> -fs /opt/etherlab/etc/init.d/ethercat /etc/init.d/<br>sudo <span class="hljs-built_in">ln</span> -fs /opt/etherlab/bin/ethercat /usr/local/bin/<br>sudo <span class="hljs-built_in">mkdir</span> /etc/sysconfig<br>sudo <span class="hljs-built_in">ln</span> -fs /opt/etherlab/etc/sysconfig/ethercat /etc/sysconfig/<br>sudo su<br>sudo <span class="hljs-built_in">echo</span> KERNEL==\&quot;EtherCAT[0-9]*\&quot;, MODE=\&quot;0664\&quot; &gt; /etc/udev/rules.d/99-EtherCAT.rules<br><span class="hljs-built_in">exit</span><br>sudo <span class="hljs-built_in">cp</span> /opt/etherlab/modules/ec_master.ko /lib/modules/&lt;your_version&gt; <span class="hljs-comment"># 注意改成你自己使用的版本</span><br>sudo depmod<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>ethercat</category>
+        <category>ethercat专栏</category>
       </categories>
       <tags>
         <tag>ethercat</tag>
@@ -311,7 +306,7 @@ RT补丁可以参照同分类下另一篇文章。</p>
   <entry>
     <title>哈希算法</title>
     <url>/posts/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="前言">前言</h1>
+    <content><![CDATA[<p>s# 前言</p>
 <p>对于字符串的比较，如果我们想要判断这两个字符串是否相同，我们需要对字符串的每一个字符进行比较，但这实在是太费时了。那么有没有一种方法能让字符串的比较和数字的比较一样容易呢？哈希算法我为我们提供了思路。</p>
 <hr />
 <h1 id="单模哈希">单模哈希</h1>
@@ -417,8 +412,7 @@ class="math inline">\(2^{64}\)</span>取模，因此就不手动取模了。</p>
 href="https://www.cnblogs.com/zfss/p/11065234.html">紫天峰的博客</a></p>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>C语言</category>
+        <category>算法专栏</category>
       </categories>
       <tags>
         <tag>算法学习</tag>
@@ -441,8 +435,7 @@ href="https://www.cnblogs.com/zfss/p/11065234.html">紫天峰的博客</a></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-type">int</span> p[<span class="hljs-number">10000009</span>];  <br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>&#123;</span>  <br>    <span class="hljs-type">int</span>*head;  <br>    <span class="hljs-type">int</span>*tail;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>* <span class="hljs-title">next</span>;</span>  <br>&#125;;  <br><span class="hljs-comment">//随机数生成</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">random</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span>  <br>&#123;  <br>	srand(time(<span class="hljs-literal">NULL</span>));<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123; <br>        p[i<span class="hljs-number">-1</span>] = rand() % <span class="hljs-number">100</span>;  <br>    &#125;  <br>&#125; <br><span class="hljs-comment">//入队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls,<span class="hljs-type">int</span>*h,<span class="hljs-type">int</span>*t)</span>&#123;  <br>    <span class="hljs-keyword">if</span>(t-h&lt;<span class="hljs-number">1</span>)<span class="hljs-keyword">return</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">addin</span>;</span>  <br>    addin=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    (*ls)-&gt;next=addin;  <br>    addin-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    addin-&gt;head=h;  <br>    addin-&gt;tail=t;  <br>    *ls=addin;  <br>&#125;  <br><span class="hljs-comment">//出队列</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">del</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>**ls)</span>&#123;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">tmp</span>=</span>(*ls)-&gt;next;  <br>    <span class="hljs-built_in">free</span>(*ls);  <br>    *ls=tmp;  <br>&#125;  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    random(n);  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">ltail</span>;</span>  <br>    ltail=(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> <span class="hljs-built_in">queue</span>));  <br>    ltail-&gt;head=p;  <br>    ltail-&gt;tail=p+n<span class="hljs-number">-1</span>;  <br>    ltail-&gt;next=<span class="hljs-literal">NULL</span>;  <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>*<span class="hljs-title">lhead</span>=</span>ltail;  <br>    <span class="hljs-comment">//判断队列是否为空</span><br>    <span class="hljs-keyword">while</span>(lhead!=<span class="hljs-literal">NULL</span>) &#123;  <br>        <span class="hljs-type">int</span> *i = lhead-&gt;head, *j = lhead-&gt;tail;  <br>        <span class="hljs-type">int</span> <span class="hljs-built_in">std</span> = *i;  <br>        i++;  <br>        <span class="hljs-keyword">while</span> (i &lt;= j) &#123;  <br>            <span class="hljs-type">int</span> f=<span class="hljs-number">1</span>;  <br>            <span class="hljs-keyword">while</span> (f &amp;&amp; *i &lt; <span class="hljs-built_in">std</span>) &#123;  <br>                i++;  <br>                <span class="hljs-keyword">if</span> (i &gt; j)f = <span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">while</span> (f&amp;&amp;*j&gt;=<span class="hljs-built_in">std</span>)&#123;  <br>                j--;  <br>                <span class="hljs-keyword">if</span>(i &gt; j)f=<span class="hljs-number">0</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span>(f)&#123;  <br>                <span class="hljs-type">int</span> tmp=*i;*i=*j;*j=tmp;  <br>            &#125;  <br>            <span class="hljs-keyword">else</span> &#123;  <br>                <span class="hljs-type">int</span> tmp=*j;*j=<span class="hljs-built_in">std</span>;*lhead-&gt;head=tmp;  <br>            &#125;  <br>        &#125;  <br>        add(&amp;ltail,lhead-&gt;head,j);  <br>        add(&amp;ltail,i,lhead-&gt;tail);  <br>        del(&amp;lhead);  <br>    &#125;  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,p[i]);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>C语言</category>
+        <category>算法专栏</category>
       </categories>
       <tags>
         <tag>算法学习</tag>
@@ -625,8 +618,7 @@ DIFERENCIJA</h2>
 int，因为在后面的计算可能会超出int范围。</p>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>C语言</category>
+        <category>算法专栏</category>
       </categories>
       <tags>
         <tag>算法学习</tag>
@@ -724,8 +716,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
 <figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git checkout -b &lt;本地仓库名&gt; &lt;远程仓库名&gt;/&lt;分支名&gt;<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>git</category>
+        <category>工具集锦</category>
       </categories>
       <tags>
         <tag>git</tag>
@@ -750,8 +741,7 @@ reset的默认方式将HEAD指向指定的版本，同时暂存区的文件也�
 <p>其实可以发现上面的很多代码都是重复的，主要是因为我们不是只要找到一条通向终点的路，而是要找到最短路，所以我们要将所有的路都走一遍。</p>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>C语言</category>
+        <category>算法专栏</category>
       </categories>
       <tags>
         <tag>算法学习</tag>
@@ -798,8 +788,7 @@ support，当然有钱购买官方的systemverilog可以获得更好的体验。
 <p>运行之后会发现波形文件被生成在sim_build目录中。</p>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>fpga</category>
+        <category>fpga专栏</category>
       </categories>
       <tags>
         <tag>fpga</tag>
@@ -872,11 +861,11 @@ END之间写上我们想要在触发中断时要执行的操作。</p>
 </ol>
 ]]></content>
       <categories>
-        <category>嵌入式</category>
-        <category>STM32</category>
+        <category>嵌入式专栏</category>
       </categories>
       <tags>
         <tag>单片机入门</tag>
+        <tag>STM32</tag>
       </tags>
   </entry>
   <entry>
@@ -958,8 +947,7 @@ class="math inline">\(\dots\)</span>+数字+回车； <figure class="highlight c
 <p>这里再补充说明一下实数除法的实现，统一的数据结构在加减乘上非常容易，但是由于我的除法是在整数除法的基础上实现的，因此在除法时反而要破坏我实现的统一的数据结构，不是很令人满意，但目前没有想到在不改变数据结构的情况下的算法，如果有好的想法，欢迎留言。</p>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>C语言</category>
+        <category>算法专栏</category>
       </categories>
       <tags>
         <tag>算法学习</tag>
@@ -1002,11 +990,11 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
 提取码：w27z</p>
 ]]></content>
       <categories>
-        <category>嵌入式</category>
-        <category>STM32</category>
+        <category>嵌入式专栏</category>
       </categories>
       <tags>
         <tag>单片机入门</tag>
+        <tag>STM32</tag>
       </tags>
   </entry>
   <entry>
@@ -1070,11 +1058,11 @@ https://www.oracle.com/java/technologies/javase-downloads.html</p>
 </ol>
 ]]></content>
       <categories>
-        <category>嵌入式</category>
-        <category>STM32</category>
+        <category>嵌入式专栏</category>
       </categories>
       <tags>
         <tag>单片机入门</tag>
+        <tag>STM32</tag>
       </tags>
   </entry>
   <entry>
@@ -1095,8 +1083,7 @@ official C++ client API for PostgreSQL. (github.com)</a></p>
 <p>main.c <figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;pqxx/pqxx&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; std::endl;<br>        std::string conn_string = <span class="hljs-string">&quot;hostaddr=127.0.0.1 port=5432 dbname=&lt;database_name&gt; user=&lt;user_name&gt; password=&lt;password&gt;&quot;</span>;<br>        <span class="hljs-function">pqxx::connection <span class="hljs-title">conn</span><span class="hljs-params">(conn_string)</span></span>;<br>        <span class="hljs-function">pqxx::work <span class="hljs-title">txn</span><span class="hljs-params">(conn)</span></span>;<br>        txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;set search_path = \&quot;&lt;schema_name&gt;\&quot;&quot;</span>); <span class="hljs-comment">//进入schema</span><br>        pqxx::result result = txn.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT * FROM &lt;table_name&gt;&quot;</span>);<br>        txn.<span class="hljs-built_in">commit</span>();<br> <span class="hljs-comment">// Process results</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> row_it = result.<span class="hljs-built_in">begin</span>(); row_it != result.<span class="hljs-built_in">end</span>(); row_it++)&#123;<br>                std::cout &lt;&lt; <span class="hljs-string">&quot;id: &quot;</span> &lt;&lt; row_it[<span class="hljs-number">0</span>].<span class="hljs-built_in">as</span>&lt;<span class="hljs-type">int</span>&gt;() &lt;&lt; std::endl;<br>        &#125;<br>        conn.<span class="hljs-built_in">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>postgres实践</category>
+        <category>数据库专栏</category>
       </categories>
       <tags>
         <tag>技术文档</tag>
@@ -1266,8 +1253,7 @@ class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名
 <figure class="highlight bash"><figcaption><span>ubuntu</span></figcaption><table><tr><td class="code"><pre><code class="hljs bash">sudo ufw allow 1077<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>linux</category>
+        <category>linux专栏</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -1294,8 +1280,7 @@ class="math inline">\(\uparrow\downarrow\)</span>查看历史命令 设置别名
 <figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> schema <span class="hljs-operator">&lt;</span>schema_name<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">authorization</span> <span class="hljs-operator">&lt;</span>user_name<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>postgres实践</category>
+        <category>数据库专栏</category>
       </categories>
       <tags>
         <tag>技术文档</tag>
@@ -1504,8 +1489,7 @@ alt="结果" />
 <hr />
 ]]></content>
       <categories>
-        <category>计算机</category>
-        <category>C语言</category>
+        <category>算法专栏</category>
       </categories>
       <tags>
         <tag>算法学习</tag>
@@ -1549,8 +1533,7 @@ The source for the Linux kernel used in Windows Subsystem for Linux 2
 <p>至此就可以愉快地在wsl下<del>完成操作系统实践的作业啦</del>进行内核模块编写啦</p>
 ]]></content>
       <categories>
-        <category>linux</category>
-        <category>WSL</category>
+        <category>WSL专栏</category>
       </categories>
       <tags>
         <tag>linux</tag>

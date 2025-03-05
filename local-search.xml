@@ -13,9 +13,7 @@
     
     <categories>
       
-      <category>linux</category>
-      
-      <category>WSL</category>
+      <category>WSL专栏</category>
       
     </categories>
     
@@ -42,9 +40,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>ethercat</category>
+      <category>ethercat专栏</category>
       
     </categories>
     
@@ -71,9 +67,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>ethercat</category>
+      <category>ethercat专栏</category>
       
     </categories>
     
@@ -100,7 +94,7 @@
     
     <categories>
       
-      <category>实用</category>
+      <category>项目部署</category>
       
     </categories>
     
@@ -125,9 +119,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>fpga</category>
+      <category>fpga专栏</category>
       
     </categories>
     
@@ -152,9 +144,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>postgres实践</category>
+      <category>数据库专栏</category>
       
     </categories>
     
@@ -179,9 +169,7 @@
     
     <categories>
       
-      <category>嵌入式</category>
-      
-      <category>STM32</category>
+      <category>嵌入式专栏</category>
       
     </categories>
     
@@ -189,6 +177,8 @@
     <tags>
       
       <tag>单片机入门</tag>
+      
+      <tag>STM32</tag>
       
     </tags>
     
@@ -206,9 +196,7 @@
     
     <categories>
       
-      <category>嵌入式</category>
-      
-      <category>STM32</category>
+      <category>嵌入式专栏</category>
       
     </categories>
     
@@ -216,6 +204,8 @@
     <tags>
       
       <tag>单片机入门</tag>
+      
+      <tag>STM32</tag>
       
     </tags>
     
@@ -233,9 +223,7 @@
     
     <categories>
       
-      <category>嵌入式</category>
-      
-      <category>STM32</category>
+      <category>嵌入式专栏</category>
       
     </categories>
     
@@ -243,6 +231,8 @@
     <tags>
       
       <tag>单片机入门</tag>
+      
+      <tag>STM32</tag>
       
     </tags>
     
@@ -260,9 +250,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>CMake</category>
+      <category>工具集锦</category>
       
     </categories>
     
@@ -289,9 +277,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>git</category>
+      <category>工具集锦</category>
       
     </categories>
     
@@ -316,9 +302,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>CMake</category>
+      <category>工具集锦</category>
       
     </categories>
     
@@ -343,9 +327,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>linux</category>
+      <category>linux专栏</category>
       
     </categories>
     
@@ -370,9 +352,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>postgres实践</category>
+      <category>数据库专栏</category>
       
     </categories>
     
@@ -397,9 +377,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>C语言</category>
+      <category>算法专栏</category>
       
     </categories>
     
@@ -424,9 +402,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>C语言</category>
+      <category>算法专栏</category>
       
     </categories>
     
@@ -446,14 +422,12 @@
     <link href="/posts/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"/>
     <url>/posts/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</url>
     
-    <content type="html"><![CDATA[<h1 id="前言">前言</h1><p>对于字符串的比较，如果我们想要判断这两个字符串是否相同，我们需要对字符串的每一个字符进行比较，但这实在是太费时了。那么有没有一种方法能让字符串的比较和数字的比较一样容易呢？哈希算法我为我们提供了思路。</p><hr /><h1 id="单模哈希">单模哈希</h1><h2 id="原理">原理</h2><p>将字符串的ASCII码分别乘上a求和后再对b取模，最后得出Hash值，我们比较这两个字符串只需要比较它们的Hash值即可。说明：a,b是任意设置的数，不过我们一般让b尽量大，因为b越大Hash值的情况越多，出现两个不同字符串的Hash值越小，而a是为了防止不同位数的字符串Hash值相同。</p><h2 id="缺点">缺点</h2><p>看完原理我们就会发现哈希算法其实并不算完全严谨的算法，它是通过使不同字符串Hash值相同的概率趋近于0来保证字符串比较的正确性。</p><h2 id="例题1hdoj-1004">例题1：HDOJ 1004</h2><h3 id="题目">题目</h3><h4 id="problem-description">Problem Description</h4><p>Contest time again! How excited it is to see balloons floatingaround. But to tell you a secret, the judges' favorite time is guessingthe most popular problem. When the contest is over, they will count theballoons of each color and find the result.</p><p>This year, they decide to leave this lovely job to you.</p><h4 id="input">Input</h4><p>Input contains multiple test cases. Each test case starts with anumber N (0 &lt; N &lt;= 1000) -- the total number of balloonsdistributed. The next N lines contain one color each. The color of aballoon is a string of up to 15 lower-case letters.</p><p>A test case with N = 0 terminates the input and this test case is notto be processed.</p><h4 id="output">Output</h4><p>For each case, print the color of balloon for the most popularproblem on a single line. It is guaranteed that there is a uniquesolution for each test case.</p><h4 id="sample-input">Sample Input</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs input">5<br>green<br>red<br>blue<br>red<br>red<br>3<br>pink<br>orange<br>pink<br>0<br></code></pre></td></tr></table></figure><h4 id="sample-output">Sample Output</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs output">red<br>pink<br></code></pre></td></tr></table></figure><h3 id="题解">题解</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> m;  <br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;  <br>        <span class="hljs-type">int</span> n;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);  <br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> &#123;</span>  <br>            <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> sum;  <br>            <span class="hljs-type">int</span> count;  <br>            <span class="hljs-type">char</span> arr1[<span class="hljs-number">16</span>];  <br>        &#125;;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> <span class="hljs-title">color</span>[1003];</span><br>        <span class="hljs-comment">//初始化结构体  </span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">1001</span>;i++)&#123;  <br>            color[i].sum=<span class="hljs-number">0</span>;  <br>            color[i].count=<span class="hljs-number">0</span>;  <br>        &#125;  <br>        <span class="hljs-type">int</span> st=<span class="hljs-number">0</span>,max1=<span class="hljs-number">1</span>;  <br>        <span class="hljs-type">char</span> arr[<span class="hljs-number">16</span>];  <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;  <br>            m = <span class="hljs-number">0</span>;  <br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, arr);  <br>            <span class="hljs-type">char</span> *t = arr;  <br>            <span class="hljs-comment">//将不同的颜色转化为长整型进行计数（哈希）</span><br>            <span class="hljs-keyword">while</span> (*t != <span class="hljs-string">&#x27;\0&#x27;</span>) &#123;  <br>                m += *t + <span class="hljs-number">133331</span>;  <br>                t++;  <br>            &#125;  <br>            <span class="hljs-type">int</span> j;  <br>            <span class="hljs-keyword">for</span> (j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].sum == m) &#123;  <br>                    color[j].count++;  <br>                &#125;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span> (j == st + <span class="hljs-number">1</span>) &#123;  <br>                st++;  <br>                <span class="hljs-built_in">strcpy</span>(color[st].arr1, arr);  <br>                color[st].count++;  <br>                color[st].sum = m;  <br>            &#125;  <br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].count &gt; color[max1].count)max1 = j;  <br>            &#125;  <br>        &#125;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, color[max1].arr1);  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <br>&#125;<br></code></pre></td></tr></table></figure><hr /><h2id="例题2p3370-模板字符串哈希---洛谷-计算机科学教育新生态-luogu.com.cn">例题2：<ahref="https://www.luogu.com.cn/problem/P3370">P3370 【模板】字符串哈希 -洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></h2><h3 id="题目描述">题目描述</h3><p>如题，给定 <span class="math inline">\(N\)</span> 个字符串（第 <spanclass="math inline">\(i\)</span> 个字符串长度为 <spanclass="math inline">\(M_i\)</span>，字符串内包含数字、大小写字母，大小写敏感），请求出<span class="math inline">\(N\)</span>个字符串中共有多少个不同的字符串。</p><p><strong>友情提醒：如果真的想好好练习哈希的话，请自觉。</strong></p><h3 id="输入格式">输入格式</h3><p>第一行包含一个整数 <spanclass="math inline">\(N\)</span>，为字符串的个数。</p><p>接下来 <span class="math inline">\(N\)</span>行每行包含一个字符串，为所提供的字符串。</p><h3 id="输出格式">输出格式</h3><p>输出包含一行，包含一个整数，为不同的字符串个数。</p><h3 id="样例-1">样例 #1</h3><h4 id="样例输入-1">样例输入 #1</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-number">5</span><br><span class="hljs-keyword">abc</span><br>aaaa<br><span class="hljs-keyword">abc</span><br>abcc<br><span class="hljs-number">12345</span><br></code></pre></td></tr></table></figure><h4 id="样例输出-1">样例输出 #1</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">4<br></code></pre></td></tr></table></figure><h3 id="提示">提示</h3><p>对于 <span class="math inline">\(30\%\)</span> 的数据：<spanclass="math inline">\(N\leq 10\)</span>，<spanclass="math inline">\(M_i≈6\)</span>，<spanclass="math inline">\(Mmax\leq 15\)</span>。</p><p>对于 <span class="math inline">\(70\%\)</span> 的数据：<spanclass="math inline">\(N\leq 1000\)</span>，<spanclass="math inline">\(M_i≈100\)</span>，<spanclass="math inline">\(Mmax\leq 150\)</span>。</p><p>对于 <span class="math inline">\(100\%\)</span> 的数据：<spanclass="math inline">\(N\leq 10000\)</span>，<spanclass="math inline">\(M_i≈1000\)</span>，<spanclass="math inline">\(Mmax\leq 1500\)</span>。</p><p>样例说明：</p><p>样例中第一个字符串(abc)和第三个字符串(abc)是一样的，所以所提供字符串的集合为{aaaa,abc,abcc,12345}，故共计4个不同的字符串。</p><h3 id="题解-1">题解</h3><p>根据哈希算法的原理构建代码。不过要注意的是，因为无符号长整型在数值溢出时会自动对<spanclass="math inline">\(2^{64}\)</span>取模，因此就不手动取模了。</p><p>代码如下： <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> arr[<span class="hljs-number">10003</span>];  <br><span class="hljs-type">char</span> ch[<span class="hljs-number">10003</span>];  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-type">int</span> count=<span class="hljs-number">0</span>;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,ch);  <br>        <span class="hljs-type">int</span> len=<span class="hljs-built_in">strlen</span>(ch);  <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;len;j++)&#123;  <br>            arr[i]=arr[i]*<span class="hljs-number">13331</span>+ch[j];  <br>        &#125;  <br>        count++;  <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">1</span>;k&lt;i;k++)&#123;  <br>            <span class="hljs-keyword">if</span>(arr[k]==arr[i])&#123;  <br>                count--;  <br>                <span class="hljs-keyword">break</span>;  <br>            &#125;  <br>        &#125;  <br>    &#125;  <br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,count);  <br>&#125;<br></code></pre></td></tr></table></figure></p><hr /><h1 id="双模哈希">双模哈希</h1><p>即使我们减少了两个不同字符串Hash值大小相同的概率，但是不排除偶然出现的情况，为了进一步使哈希算法能够达到我们的预期，我们可以分别对两个数取模，并认定同时满足的时候两个字符串是相等的，这样及基本上不会出现问题。</p><p>因为没有找到适合的题目，这里就用C++给出示范代码。（看懂就行，代码没有实际意义）</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">using</span> ll=<span class="hljs-type">long</span> <span class="hljs-type">long</span>;<br><span class="hljs-keyword">using</span> ull=<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">1e6</span>+<span class="hljs-number">6</span>,mod=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>ull kpow1[N],hs1[N];<span class="hljs-comment">//% 2^64</span><br>ll kpow2[N],hs2[N];<span class="hljs-comment">//% mod</span><br><span class="hljs-type">char</span> s[N];<span class="hljs-type">int</span> n;<br>pair&lt;ull,ll&gt;<span class="hljs-built_in">gethash</span>(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)&#123;<br>ull a=hs1[r]-hs1[l<span class="hljs-number">-1</span>]*kpow1[r-l+<span class="hljs-number">1</span>];<br>ll b=hs2[r]-hs2[l<span class="hljs-number">-1</span>]*kpow2[r-l+<span class="hljs-number">1</span>];<br>b=(b%mod+mod)%mod;<br><span class="hljs-keyword">return</span> &#123;a,b&#125;;<br>&#125;<span class="hljs-comment">//pair是C++中的配对，可以类比C语言中的结构体</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>kpow1[<span class="hljs-number">0</span>]=kpow2[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;N;++i)&#123;<br>kpow1[i]=kpow1[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>;<br>kpow2[i]=kpow2[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>%mod;<br>&#125;<br><span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,s+<span class="hljs-number">1</span>);n=<span class="hljs-built_in">strlen</span>(s+<span class="hljs-number">1</span>);<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)&#123;<br>hs1[i]=hs1[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>+s[i];<br>hs2[i]=(hs2[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>+s[i])%mod;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><hr /><h1 id="开阔视野哈希算法在密码学中">开阔视野（哈希算法在密码学中）</h1><p><strong>Hash的特点</strong></p><p>易压缩：对于任意大小的输入x，Hash值的长度很小，在实际应用中，函数H产生的Hash值其长度是固定的。</p><p>易计算：对于任意给定的消息，计算其Hash值比较容易。</p><p>单向性：对于给定的Hash值，要找到使得在计算上是不可行的，即求Hash的逆很困难。在给定某个哈希函数H和哈希值H（M）的情况下，得出M在计算上是不可行的。即从哈希输出无法倒推输入的原始数值。这是哈希函数安全性的基础。</p><p>抗碰撞性：理想的Hash函数是无碰撞的，但在实际算法的设计中很难做到这一点。</p><p>有两种抗碰撞性：一种是弱抗碰撞性，即对于给定的消息，要发现另一个消息，满足在计算上是不可行的；另一种是强抗碰撞性，即对于任意一对不同的消息，使得在计算上也是不可行的。</p><p>高灵敏性：这是从比特位角度出发的，指的是1比特位的输入变化会造成1/2的比特位发生变化。消息M的任何改变都会导致哈希值H（M）发生改变。即如果输入有微小不同，哈希运算后的输出一定不同。</p><p><strong>哈希算法有什么用途？</strong></p><p>哈希算法可以检验信息是否是相同的，这样的优势可以节省重复文件传送的时间。</p><p>举一个生活中很平常的例子，我们在生活工作中会使用一些软件给别人传送文件数据，如果有人传送了一份文件给一个人，然后又有一个人传送了相同的文件给了另外一个人，那么这个社交软件在第二次传送文件的时候会对比两次传送的哈希值，发现是相同的，该软件就不会再次上传文件给服务器了。</p><p>除此之外，哈希算法还可以检验信息的拥有者是否真实。</p><p>比如，我们在一个网站注册一个账号，如果网站把密码保存起来，那这个网站不论有多安全，也会有被盗取的风险。但是如果用保存密码的哈希值代替保存密码，就没有这个风险了，因为哈希值加密过程是不不可逆的。</p><p><strong>哈希算法会不会被破解？</strong></p><p>从理论上说，哈希值是可以被获得的，但是对应的用户密码很难获得。</p><p>假设一个网站被攻破，黑客获得了哈希值，但仅仅只有哈希值还不能登录网站，他还必须算出相应的账号密码。</p><p>计算密码的工作量是非常庞大且繁琐的，严格来讲，密码是有可能被破译的，但破译成本太大，被成功破译的几率很小，所以基本是不用担心密码泄露的。</p><p>当然，黑客们还可以采用一种物理方法，那就是猜密码。他可以随机一个一个的试密码，如果猜的密码算出的哈希值正好与真正的密码哈希值相同，那么就说明这个密码猜对了。</p><p>密码的长度越长，密码越复杂，就越难以猜正确。如果有一种方法能够提高猜中密码的可能，那么可以算是哈希算法被破解了。</p><p>开阔视野内容转载自<ahref="https://www.cnblogs.com/zfss/p/11065234.html">紫天峰的博客</a></p>]]></content>
+    <content type="html"><![CDATA[<p>s# 前言</p><p>对于字符串的比较，如果我们想要判断这两个字符串是否相同，我们需要对字符串的每一个字符进行比较，但这实在是太费时了。那么有没有一种方法能让字符串的比较和数字的比较一样容易呢？哈希算法我为我们提供了思路。</p><hr /><h1 id="单模哈希">单模哈希</h1><h2 id="原理">原理</h2><p>将字符串的ASCII码分别乘上a求和后再对b取模，最后得出Hash值，我们比较这两个字符串只需要比较它们的Hash值即可。说明：a,b是任意设置的数，不过我们一般让b尽量大，因为b越大Hash值的情况越多，出现两个不同字符串的Hash值越小，而a是为了防止不同位数的字符串Hash值相同。</p><h2 id="缺点">缺点</h2><p>看完原理我们就会发现哈希算法其实并不算完全严谨的算法，它是通过使不同字符串Hash值相同的概率趋近于0来保证字符串比较的正确性。</p><h2 id="例题1hdoj-1004">例题1：HDOJ 1004</h2><h3 id="题目">题目</h3><h4 id="problem-description">Problem Description</h4><p>Contest time again! How excited it is to see balloons floatingaround. But to tell you a secret, the judges' favorite time is guessingthe most popular problem. When the contest is over, they will count theballoons of each color and find the result.</p><p>This year, they decide to leave this lovely job to you.</p><h4 id="input">Input</h4><p>Input contains multiple test cases. Each test case starts with anumber N (0 &lt; N &lt;= 1000) -- the total number of balloonsdistributed. The next N lines contain one color each. The color of aballoon is a string of up to 15 lower-case letters.</p><p>A test case with N = 0 terminates the input and this test case is notto be processed.</p><h4 id="output">Output</h4><p>For each case, print the color of balloon for the most popularproblem on a single line. It is guaranteed that there is a uniquesolution for each test case.</p><h4 id="sample-input">Sample Input</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs input">5<br>green<br>red<br>blue<br>red<br>red<br>3<br>pink<br>orange<br>pink<br>0<br></code></pre></td></tr></table></figure><h4 id="sample-output">Sample Output</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs output">red<br>pink<br></code></pre></td></tr></table></figure><h3 id="题解">题解</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>  <br>&#123;  <br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> m;  <br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;  <br>        <span class="hljs-type">int</span> n;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);  <br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> &#123;</span>  <br>            <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span> sum;  <br>            <span class="hljs-type">int</span> count;  <br>            <span class="hljs-type">char</span> arr1[<span class="hljs-number">16</span>];  <br>        &#125;;  <br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colors</span> <span class="hljs-title">color</span>[1003];</span><br>        <span class="hljs-comment">//初始化结构体  </span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">1001</span>;i++)&#123;  <br>            color[i].sum=<span class="hljs-number">0</span>;  <br>            color[i].count=<span class="hljs-number">0</span>;  <br>        &#125;  <br>        <span class="hljs-type">int</span> st=<span class="hljs-number">0</span>,max1=<span class="hljs-number">1</span>;  <br>        <span class="hljs-type">char</span> arr[<span class="hljs-number">16</span>];  <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;  <br>            m = <span class="hljs-number">0</span>;  <br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, arr);  <br>            <span class="hljs-type">char</span> *t = arr;  <br>            <span class="hljs-comment">//将不同的颜色转化为长整型进行计数（哈希）</span><br>            <span class="hljs-keyword">while</span> (*t != <span class="hljs-string">&#x27;\0&#x27;</span>) &#123;  <br>                m += *t + <span class="hljs-number">133331</span>;  <br>                t++;  <br>            &#125;  <br>            <span class="hljs-type">int</span> j;  <br>            <span class="hljs-keyword">for</span> (j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].sum == m) &#123;  <br>                    color[j].count++;  <br>                &#125;  <br>            &#125;  <br>            <span class="hljs-keyword">if</span> (j == st + <span class="hljs-number">1</span>) &#123;  <br>                st++;  <br>                <span class="hljs-built_in">strcpy</span>(color[st].arr1, arr);  <br>                color[st].count++;  <br>                color[st].sum = m;  <br>            &#125;  <br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= st; j++) &#123;  <br>                <span class="hljs-keyword">if</span> (color[j].count &gt; color[max1].count)max1 = j;  <br>            &#125;  <br>        &#125;  <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, color[max1].arr1);  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  <br>&#125;<br></code></pre></td></tr></table></figure><hr /><h2id="例题2p3370-模板字符串哈希---洛谷-计算机科学教育新生态-luogu.com.cn">例题2：<ahref="https://www.luogu.com.cn/problem/P3370">P3370 【模板】字符串哈希 -洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></h2><h3 id="题目描述">题目描述</h3><p>如题，给定 <span class="math inline">\(N\)</span> 个字符串（第 <spanclass="math inline">\(i\)</span> 个字符串长度为 <spanclass="math inline">\(M_i\)</span>，字符串内包含数字、大小写字母，大小写敏感），请求出<span class="math inline">\(N\)</span>个字符串中共有多少个不同的字符串。</p><p><strong>友情提醒：如果真的想好好练习哈希的话，请自觉。</strong></p><h3 id="输入格式">输入格式</h3><p>第一行包含一个整数 <spanclass="math inline">\(N\)</span>，为字符串的个数。</p><p>接下来 <span class="math inline">\(N\)</span>行每行包含一个字符串，为所提供的字符串。</p><h3 id="输出格式">输出格式</h3><p>输出包含一行，包含一个整数，为不同的字符串个数。</p><h3 id="样例-1">样例 #1</h3><h4 id="样例输入-1">样例输入 #1</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-number">5</span><br><span class="hljs-keyword">abc</span><br>aaaa<br><span class="hljs-keyword">abc</span><br>abcc<br><span class="hljs-number">12345</span><br></code></pre></td></tr></table></figure><h4 id="样例输出-1">样例输出 #1</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">4<br></code></pre></td></tr></table></figure><h3 id="提示">提示</h3><p>对于 <span class="math inline">\(30\%\)</span> 的数据：<spanclass="math inline">\(N\leq 10\)</span>，<spanclass="math inline">\(M_i≈6\)</span>，<spanclass="math inline">\(Mmax\leq 15\)</span>。</p><p>对于 <span class="math inline">\(70\%\)</span> 的数据：<spanclass="math inline">\(N\leq 1000\)</span>，<spanclass="math inline">\(M_i≈100\)</span>，<spanclass="math inline">\(Mmax\leq 150\)</span>。</p><p>对于 <span class="math inline">\(100\%\)</span> 的数据：<spanclass="math inline">\(N\leq 10000\)</span>，<spanclass="math inline">\(M_i≈1000\)</span>，<spanclass="math inline">\(Mmax\leq 1500\)</span>。</p><p>样例说明：</p><p>样例中第一个字符串(abc)和第三个字符串(abc)是一样的，所以所提供字符串的集合为{aaaa,abc,abcc,12345}，故共计4个不同的字符串。</p><h3 id="题解-1">题解</h3><p>根据哈希算法的原理构建代码。不过要注意的是，因为无符号长整型在数值溢出时会自动对<spanclass="math inline">\(2^{64}\)</span>取模，因此就不手动取模了。</p><p>代码如下： <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span>  </span><br><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> arr[<span class="hljs-number">10003</span>];  <br><span class="hljs-type">char</span> ch[<span class="hljs-number">10003</span>];  <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;  <br>    <span class="hljs-type">int</span> n;  <br>    <span class="hljs-type">int</span> count=<span class="hljs-number">0</span>;  <br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);  <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;  <br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,ch);  <br>        <span class="hljs-type">int</span> len=<span class="hljs-built_in">strlen</span>(ch);  <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;len;j++)&#123;  <br>            arr[i]=arr[i]*<span class="hljs-number">13331</span>+ch[j];  <br>        &#125;  <br>        count++;  <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">1</span>;k&lt;i;k++)&#123;  <br>            <span class="hljs-keyword">if</span>(arr[k]==arr[i])&#123;  <br>                count--;  <br>                <span class="hljs-keyword">break</span>;  <br>            &#125;  <br>        &#125;  <br>    &#125;  <br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,count);  <br>&#125;<br></code></pre></td></tr></table></figure></p><hr /><h1 id="双模哈希">双模哈希</h1><p>即使我们减少了两个不同字符串Hash值大小相同的概率，但是不排除偶然出现的情况，为了进一步使哈希算法能够达到我们的预期，我们可以分别对两个数取模，并认定同时满足的时候两个字符串是相等的，这样及基本上不会出现问题。</p><p>因为没有找到适合的题目，这里就用C++给出示范代码。（看懂就行，代码没有实际意义）</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">using</span> ll=<span class="hljs-type">long</span> <span class="hljs-type">long</span>;<br><span class="hljs-keyword">using</span> ull=<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">1e6</span>+<span class="hljs-number">6</span>,mod=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;<br>ull kpow1[N],hs1[N];<span class="hljs-comment">//% 2^64</span><br>ll kpow2[N],hs2[N];<span class="hljs-comment">//% mod</span><br><span class="hljs-type">char</span> s[N];<span class="hljs-type">int</span> n;<br>pair&lt;ull,ll&gt;<span class="hljs-built_in">gethash</span>(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)&#123;<br>ull a=hs1[r]-hs1[l<span class="hljs-number">-1</span>]*kpow1[r-l+<span class="hljs-number">1</span>];<br>ll b=hs2[r]-hs2[l<span class="hljs-number">-1</span>]*kpow2[r-l+<span class="hljs-number">1</span>];<br>b=(b%mod+mod)%mod;<br><span class="hljs-keyword">return</span> &#123;a,b&#125;;<br>&#125;<span class="hljs-comment">//pair是C++中的配对，可以类比C语言中的结构体</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>kpow1[<span class="hljs-number">0</span>]=kpow2[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;N;++i)&#123;<br>kpow1[i]=kpow1[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>;<br>kpow2[i]=kpow2[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>%mod;<br>&#125;<br><span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,s+<span class="hljs-number">1</span>);n=<span class="hljs-built_in">strlen</span>(s+<span class="hljs-number">1</span>);<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)&#123;<br>hs1[i]=hs1[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>+s[i];<br>hs2[i]=(hs2[i<span class="hljs-number">-1</span>]*<span class="hljs-number">13331</span>+s[i])%mod;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><hr /><h1 id="开阔视野哈希算法在密码学中">开阔视野（哈希算法在密码学中）</h1><p><strong>Hash的特点</strong></p><p>易压缩：对于任意大小的输入x，Hash值的长度很小，在实际应用中，函数H产生的Hash值其长度是固定的。</p><p>易计算：对于任意给定的消息，计算其Hash值比较容易。</p><p>单向性：对于给定的Hash值，要找到使得在计算上是不可行的，即求Hash的逆很困难。在给定某个哈希函数H和哈希值H（M）的情况下，得出M在计算上是不可行的。即从哈希输出无法倒推输入的原始数值。这是哈希函数安全性的基础。</p><p>抗碰撞性：理想的Hash函数是无碰撞的，但在实际算法的设计中很难做到这一点。</p><p>有两种抗碰撞性：一种是弱抗碰撞性，即对于给定的消息，要发现另一个消息，满足在计算上是不可行的；另一种是强抗碰撞性，即对于任意一对不同的消息，使得在计算上也是不可行的。</p><p>高灵敏性：这是从比特位角度出发的，指的是1比特位的输入变化会造成1/2的比特位发生变化。消息M的任何改变都会导致哈希值H（M）发生改变。即如果输入有微小不同，哈希运算后的输出一定不同。</p><p><strong>哈希算法有什么用途？</strong></p><p>哈希算法可以检验信息是否是相同的，这样的优势可以节省重复文件传送的时间。</p><p>举一个生活中很平常的例子，我们在生活工作中会使用一些软件给别人传送文件数据，如果有人传送了一份文件给一个人，然后又有一个人传送了相同的文件给了另外一个人，那么这个社交软件在第二次传送文件的时候会对比两次传送的哈希值，发现是相同的，该软件就不会再次上传文件给服务器了。</p><p>除此之外，哈希算法还可以检验信息的拥有者是否真实。</p><p>比如，我们在一个网站注册一个账号，如果网站把密码保存起来，那这个网站不论有多安全，也会有被盗取的风险。但是如果用保存密码的哈希值代替保存密码，就没有这个风险了，因为哈希值加密过程是不不可逆的。</p><p><strong>哈希算法会不会被破解？</strong></p><p>从理论上说，哈希值是可以被获得的，但是对应的用户密码很难获得。</p><p>假设一个网站被攻破，黑客获得了哈希值，但仅仅只有哈希值还不能登录网站，他还必须算出相应的账号密码。</p><p>计算密码的工作量是非常庞大且繁琐的，严格来讲，密码是有可能被破译的，但破译成本太大，被成功破译的几率很小，所以基本是不用担心密码泄露的。</p><p>当然，黑客们还可以采用一种物理方法，那就是猜密码。他可以随机一个一个的试密码，如果猜的密码算出的哈希值正好与真正的密码哈希值相同，那么就说明这个密码猜对了。</p><p>密码的长度越长，密码越复杂，就越难以猜正确。如果有一种方法能够提高猜中密码的可能，那么可以算是哈希算法被破解了。</p><p>开阔视野内容转载自<ahref="https://www.cnblogs.com/zfss/p/11065234.html">紫天峰的博客</a></p>]]></content>
     
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>C语言</category>
+      <category>算法专栏</category>
       
     </categories>
     
@@ -478,9 +452,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>C语言</category>
+      <category>算法专栏</category>
       
     </categories>
     
@@ -505,9 +477,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>C语言</category>
+      <category>算法专栏</category>
       
     </categories>
     
@@ -532,9 +502,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>C语言</category>
+      <category>算法专栏</category>
       
     </categories>
     
@@ -559,9 +527,7 @@
     
     <categories>
       
-      <category>计算机</category>
-      
-      <category>C语言</category>
+      <category>算法专栏</category>
       
     </categories>
     
