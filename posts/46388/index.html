@@ -19,28 +19,26 @@
   <meta name="author" content="晓寒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="源码下载 在microsoft&#x2F;WSL2-Linux-Kernel: The source for the Linux kernel used in Windows Subsystem for Linux 2 (WSL2)下载源码 选择你需要的内核版本 源码编译 编译工具安装 12sudo apt updatesudo apt install build-essential flex">
+    <meta name="description" content="记录下智慧树平台的学习记录，可以忽略">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WSL内核模块编译与安装">
-<meta property="og:url" content="http://example.com/posts/59779/index.html">
+<meta property="og:title" content="大学军事智慧树答案">
+<meta property="og:url" content="http://example.com/posts/46388/index.html">
 <meta property="og:site_name" content="Xiaohan&#96;s Blog">
-<meta property="og:description" content="源码下载 在microsoft&#x2F;WSL2-Linux-Kernel: The source for the Linux kernel used in Windows Subsystem for Linux 2 (WSL2)下载源码 选择你需要的内核版本 源码编译 编译工具安装 12sudo apt updatesudo apt install build-essential flex">
+<meta property="og:description" content="记录下智慧树平台的学习记录，可以忽略">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/posts/59779/Pasted%20image%2020250303194810.png">
-<meta property="article:published_time" content="2025-03-03T11:24:00.000Z">
-<meta property="article:modified_time" content="2025-03-05T10:40:07.650Z">
+<meta property="og:image" content="http://example.com/img/cover/R.jpg">
+<meta property="article:published_time" content="2023-05-28T12:04:33.000Z">
+<meta property="article:modified_time" content="2025-03-17T15:16:22.900Z">
 <meta property="article:author" content="晓寒">
-<meta property="article:tag" content="技术文档">
-<meta property="article:tag" content="linux">
-<meta property="article:tag" content="WSL">
+<meta property="article:tag" content="杂物间">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/posts/59779/Pasted%20image%2020250303194810.png">
+<meta name="twitter:image" content="http://example.com/img/cover/R.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>WSL内核模块编译与安装 - Xiaohan`s Blog</title>
+  <title>大学军事智慧树答案 - Xiaohan`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="WSL内核模块编译与安装"></span>
+            <span id="subtitle" data-typed-text="大学军事智慧树答案"></span>
           
         </div>
 
@@ -240,8 +238,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-03 19:24" pubdate>
-          2025年3月3日 晚上
+        <time datetime="2023-05-28 20:04" pubdate>
+          2023年5月28日 晚上
         </time>
       </span>
     
@@ -252,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          305 字
+          1.6k 字
         
       </span>
     
@@ -263,7 +261,7 @@
         
         
         
-          3 分钟
+          14 分钟
         
       </span>
     
@@ -300,12 +298,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">WSL内核模块编译与安装</h1>
+            <h1 id="seo-header">大学军事智慧树答案</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2025年3月5日 晚上
+                    本文最后更新于 2025年3月17日 晚上
                   
                 
               </p>
@@ -313,39 +311,162 @@
             
               <div class="markdown-body">
                 
-                <h2 id="源码下载">源码下载</h2>
-<p>在<a
-target="_blank" rel="noopener" href="https://github.com/microsoft/WSL2-Linux-Kernel">microsoft/WSL2-Linux-Kernel:
-The source for the Linux kernel used in Windows Subsystem for Linux 2
-(WSL2)</a>下载源码</p>
-<p>选择你需要的内核版本</p>
-<h2 id="源码编译">源码编译</h2>
-<p>编译工具安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt update<br>sudo apt install build-essential flex bison dwarves libssl-dev libelf-dev bc pkg-config<br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> Microsoft/config-wsl .config <br>make -j$(<span class="hljs-built_in">nproc</span>) <br>make modules -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
-<h2 id="源码安装">源码安装</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo make modules_install -j$(<span class="hljs-built_in">nproc</span>) <br>sudo make install -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
-<p>检查目录<code>\lib\modules\$(uname -r)\build</code>是否存在</p>
-<p>若该目录存在，则代表该内核的安装完毕</p>
-<h2 id="切换内核">切换内核</h2>
-<p>进入源码
-复制<code>arch/x86_64/boot/bzImage</code>放入windows目录下</p>
-<p>例子 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> <span class="hljs-built_in">arch</span>/x86_64/boot/bzImage /mnt/d/bzImage<br></code></pre></td></tr></table></figure></p>
-<p>在用户目录下的.wslconig文件中输入（若没有则可以自己创建）
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[wsl2]</span><br><span class="hljs-attr">kernel</span>=D:\\bzImage<br></code></pre></td></tr></table></figure></p>
-<p>重启wsl</p>
-<p>在windows命令行中输入<code>wsl --shutdown</code>关机再次打开wsl</p>
-<p>使用<code>uname -r</code>查看新内核</p>
-<h2 id="模块编译">模块编译</h2>
-<p>这里给出测试案例</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">//myhello.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;linux/init.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;linux/module.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;linux/kernel.h&gt;</span></span><br><br><span class="hljs-type">static</span> <span class="hljs-type">int</span> __init <span class="hljs-title function_">hello_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>&#123;<br>        printk(KERN_ALERT<span class="hljs-string">&quot;hello,world\n&quot;</span>);<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-type">static</span> <span class="hljs-type">void</span> __exit <span class="hljs-title function_">hello_exit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>&#123;<br>        printk(KERN_ALERT<span class="hljs-string">&quot;goodbye\n&quot;</span>);<br>&#125;<br>module_init(hello_init);<br>module_exit(hello_exit);<br>MODULE_LICENSE(<span class="hljs-string">&quot;GPL&quot;</span>);<br>~                        <br></code></pre></td></tr></table></figure>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs makefile">obj-m :=hello.o<br>hello-objs :=myhello.o<br>KDIR :=/lib/modules/<span class="hljs-variable">$(<span class="hljs-built_in">shell</span> uname -r)</span>/build<br>PWD := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> pwd)</span><br><span class="hljs-section">default:</span><br>        make -C <span class="hljs-variable">$(KDIR)</span> M=<span class="hljs-variable">$(PWD)</span> modules<br><span class="hljs-section">clean:</span><br>        make -C <span class="hljs-variable">$(KDIR)</span> M=<span class="hljs-variable">$(PWD)</span> clean<br></code></pre></td></tr></table></figure>
-<h3 id="装载模块与卸载模块">装载模块与卸载模块</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo insmod hello.ko<br>sudo rmmod hello<br></code></pre></td></tr></table></figure>
-<h3 id="查看输出">查看输出</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo dmesg<br></code></pre></td></tr></table></figure>
-<p>结果如下： <img src="Pasted%20image%2020250303194810.png" srcset="/img/loading.gif" lazyload /></p>
-<p>至此就可以愉快地在wsl下<del>完成操作系统实践的作业啦</del>进行内核模块编写啦</p>
+                <p># 章节测试</p>
+<h2 id="第一章">第一章</h2>
+<div class="note note-success">
+            <p>公元13世纪上半叶征服基辅罗斯的游牧帝国是（）。</p><p>蒙古帝国</p>
+          </div>
+<div class="note note-success">
+            <p>依据联合国海洋法公约，一个远洋小岛最大可拥有的领海面积可达（）多平方公里。</p><p>1500</p>
+          </div>
+<div class="note note-success">
+            <p>中国战略地理的特点是：既是一个陆上大国，又是一个（）,是一个陆海兼备的大国。</p><p>海洋大国</p>
+          </div>
+<div class="note note-success">
+            <p>下列国家既是我国的陆上邻国又是海上邻国的是：</p><p>越南</p>
+          </div>
+<div class="note note-success">
+            <p>太空安全对下列哪些领域有影响？</p><p>文化</p><p>经济</p><p>军事</p><p>政治</p><p>科技</p>
+          </div>
+<div class="note note-success">
+            <p>习主席总体安全观的基本内容是？</p><p>以军事、文化、社会安全为保障</p><p>以人民安全为宗旨</p><p>以经济安全为基础</p><p>以政治安全为根本</p>
+          </div>
+<div class="note note-success">
+            <p>冷战以后美国发动的战争有？</p><p>伊拉克战争</p><p>海湾战争</p><p>科索沃战争</p>
+          </div>
+<div class="note note-success">
+            <p>东盟国家与我国有岛屿争端的国家有？</p><p>越南</p><p>马来西亚</p><p>菲律宾</p>
+          </div>
+<div class="note note-success">
+            <p>与我国陆地接壤的国家数量，下列选项错误的是？</p><p>12</p><p>13</p><p>11</p>
+          </div>
+<div class="note note-success">
+            <p>恐怖主义的发展趋势是？</p><p>分散化</p><p>全球化</p><p>网络化</p>
+          </div>
+<h2 id="第二章">第二章</h2>
+<div class="note note-success">
+            <p>中国国防的主体是(  )。</p><p>国家，包括全体国民</p>
+          </div>
+<div class="note note-success">
+            <p>国防的功能是和平时期威慑敌人，战争爆发后通过实战战胜敌人，保卫国家的主权统一、领土完整和安全。从这个意义上说，“养兵千日、用兵一时”已经过时了，应该是“养兵千日、用兵千日”。这个说法对不对？</p><p>对</p>
+          </div>
+<div class="note note-success">
+            <p>瑞士1815年宣布中立以来，已经200多年没有战争，但现在每年仍投入国防费54亿美元（人均655.7美元，中国人均105美元）。有人说必要，有人说不必要。你认为必要还是不必要？</p><p>必要</p>
+          </div>
+<div class="note note-success">
+            <p>国家的国防实力等于（  ）。</p><p>综合国力×民族精神</p>
+          </div>
+<div class="note note-success">
+            <p>全世界几乎一切大中小帝国主义国家都侵略过我国，其主要原因是（ ）。</p><p>中国社会制度腐败，经济技术落后</p>
+          </div>
+<div class="note note-success">
+            <p>对下列国家国防类型定性正确的有？</p><p>瑞士：中立型</p><p>中国：防御型</p><p>美国：扩张型</p><p>日本：联盟型</p>
+          </div>
+<div class="note note-success">
+            <p>下列选项不是我国成功爆炸第一颗原子弹的时间的是？</p><p>1965年10月16日</p><p>1965年11月16日</p><p>1964年11月16日</p>
+          </div>
+<div class="note note-success">
+            <p>国防动员的基本内容包括什么？</p><p>政治动员</p><p>武装力量动员</p><p>经济动员</p><p>人民防空动员</p>
+          </div>
+<div class="note note-success">
+            <p>公民在国防动员中应尽的责任和义务？</p><p>接受国防教育</p><p>依照法律服兵役</p><p>履行国防勤务义务</p>
+          </div>
+<div class="note note-success">
+            <p>中国武装力量整体是指什么，下列选项错误的是？</p><p>中国人民解放军和民兵</p><p>中国人民解放军和中国人民武装警察部队</p><p>中国人民解放军的陆军、海军、空军、火箭军</p>
+          </div>
+<h2 id="第三章">第三章</h2>
+<div class="note note-success">
+            <p>克劳塞维茨是哪个国家的军事思想家？</p><p>普鲁士</p>
+          </div>
+<div class="note note-success">
+            <p>创立海权论并成为世界最著名海军战略理论家的是（）海军上校马汉。</p><p>美国</p>
+          </div>
+<div class="note note-success">
+            <p>克劳塞维茨亲身经历了哪场伟大战争？</p><p>拿破仑战争</p>
+          </div>
+<div class="note note-success">
+            <p>在哪场战争之后，美国军事教育界开始重视学习《战争论》？</p><p>越南战争</p>
+          </div>
+<div class="note note-success">
+            <p>马汉最初是在对（）研究的基础上萌发了海权论思想。</p><p>布匿战争</p>
+          </div>
+<div class="note note-success">
+            <p>《战争论》提出的最精彩的思想有：</p><p>进攻顶点</p><p>打敌重心</p><p>战争是政治的继续</p>
+          </div>
+<div class="note note-success">
+            <p>马汉认为具有下列特性的民族有利于发展海权？</p><p>贸易的欲望</p><p>冒险精神</p>
+          </div>
+<div class="note note-success">
+            <p>克劳塞维茨的“攻势防御”思想是指()</p><p>要用巧妙的的打击构成防御的盾牌</p><p>要把进攻和防御紧密结合</p>
+          </div>
+<div class="note note-success">
+            <p>马汉认为下列因素影响“海权“的争夺？</p><p>方便进入海洋的地理位置</p><p>政府性质</p>
+          </div>
+<div class="note note-success">
+            <p>“海权“的主要内涵是哪些？</p><p>海上经济力量</p><p>海上武装力量</p><p>海洋方向的综合实力</p>
+          </div>
+<h2 id="第四章">第四章</h2>
+<div class="note note-success">
+            <p>以下哪项不属于我军政治工作的三大原则是</p><p>军政一致</p>
+          </div>
+<div class="note note-success">
+            <p>以下哪项不是我军三大民主</p><p>思想民主</p>
+          </div>
+<div class="note note-success">
+            <p>新时期强军目标中，“听党指挥”是( );“作风优良”是（ ）；“能打胜仗”是（）。</p><p>灵魂、保证、核心</p>
+          </div>
+<div class="note note-success">
+            <p>军队“三步走战略目标”的内容：（ ）基本实现机械化是在，实现国防现代化是在（），建设成为世界一流的军队是在（ ）。</p><p>2020年；2035年；本世纪中叶</p>
+          </div>
+<div class="note note-success">
+            <p>以下不属于军队现代化的内涵的是</p><p>战场建设现代化</p>
+          </div>
+<div class="note note-success">
+            <p>以下哪些是发生在井冈山时期的？</p><p>“支部建在连上”</p><p>三湾改编</p>
+          </div>
+<div class="note note-success">
+            <p>自建军以来，我军之所以能攻无不克、战无不胜，最根本的一条是</p><p>坚持了党对军队的绝对领导</p>
+          </div>
+<div class="note note-success">
+            <p>可以在中国人民解放军中建立组织的是：</p><p>共青团</p><p>中国共产党</p>
+          </div>
+<div class="note note-success">
+            <p>毛泽东主席给红军规定的“三大任务”是：</p><p>生产队</p><p>战斗队</p><p>工作队</p>
+          </div>
+<div class="note note-success">
+            <p>毛泽东军事思想的三个核心部分是:</p><p>人民战争的战略战术思想</p><p>人民战争思想</p><p>人民军队建设思想</p>
+          </div>
+<h2 id="第五章">第五章</h2>
+<div class="note note-success">
+            <p>以舰载机为主要武器并作为其海上活动基地的大型水面战斗舰艇是（  ）。</p><p>航空母舰</p>
+          </div>
+<div class="note note-success">
+            <p>以下哪一个不属于“宙斯盾”作战系统分系统的是（   ）</p><p>电子对抗分系统</p>
+          </div>
+<div class="note note-success">
+            <p>以下哪一个不属于舰载防空导弹系统的是（  ）</p><p>“白蛉”</p>
+          </div>
+<div class="note note-success">
+            <p>我国2015年“9.3胜利日”大阅兵，参阅装备中新型武器装备占＿＿＿,向世界展现了我国军事科技的最新成果和先进水平。</p><p>84%</p>
+          </div>
+<div class="note note-success">
+            <p>美国在＿＿＿年研制出世界上第一台电子计算机，主要用于计算弹道导弹参数。</p><p>1946</p>
+          </div>
+<div class="note note-success">
+            <p>美国福特级核动力航母的优势是？</p><p>需要的人员少</p><p>支持激光武器</p><p>电磁弹射</p>
+          </div>
+<div class="note note-success">
+            <p>以下哪一个选项的反舰导弹是不属于中国的？</p><p>“花岗岩”反舰导弹</p><p>“战斧”、“鱼叉”反舰导弹</p><p>“白蛉”、“红宝石”反舰导弹</p>
+          </div>
+<div class="note note-success">
+            <p>航母战斗群必须具备以下能力：</p><p>防空</p><p>综合补给</p><p>反潜</p>
+          </div>
+<div class="note note-success">
+            <p>下列哪个不是我国的舰载中远程防空导弹？</p><p>歼14</p><p>东26</p><p>歼20</p>
+          </div>
+<div class="note note-success">
+            <p>我军反航母利器和我军争夺制空权的利器分别（）和（），以下选项错误的是？</p><p>歼20、东26</p><p>海红9、歼20</p><p>东26、海红9</p>
+          </div>
 
                 
               </div>
@@ -364,7 +485,7 @@ The source for the Linux kernel used in Windows Subsystem for Linux 2
     
       <span class="category-chain">
         
-  <a href="/categories/WSL%E4%B8%93%E6%A0%8F/" class="category-chain-item">WSL专栏</a>
+  <a href="/categories/%E6%9D%82%E7%89%A9%E9%97%B4/" class="category-chain-item">杂物间</a>
   
   
 
@@ -379,11 +500,7 @@ The source for the Linux kernel used in Windows Subsystem for Linux 2
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="print-no-link">#技术文档</a>
-      
-        <a href="/tags/linux/" class="print-no-link">#linux</a>
-      
-        <a href="/tags/WSL/" class="print-no-link">#WSL</a>
+        <a href="/tags/%E6%9D%82%E7%89%A9%E9%97%B4/" class="print-no-link">#杂物间</a>
       
     </div>
   
@@ -395,8 +512,8 @@ The source for the Linux kernel used in Windows Subsystem for Linux 2
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>WSL内核模块编译与安装</div>
-      <div>http://example.com/posts/59779/</div>
+      <div>大学军事智慧树答案</div>
+      <div>http://example.com/posts/46388/</div>
     </div>
     <div class="license-meta">
       
@@ -408,7 +525,7 @@ The source for the Linux kernel used in Windows Subsystem for Linux 2
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年3月3日</div>
+          <div>2023年5月28日</div>
         </div>
       
       
@@ -440,12 +557,18 @@ The source for the Linux kernel used in Windows Subsystem for Linux 2
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/38785/" title="keil和STM32的部署">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">keil和STM32的部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/38038/" title="树莓派打preempt RT补丁（树莓派内编译）">
-                        <span class="hidden-mobile">树莓派打preempt RT补丁（树莓派内编译）</span>
+                      <a href="/posts/11281/" title="Qt-Cmake">
+                        <span class="hidden-mobile">Qt-Cmake</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
